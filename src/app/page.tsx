@@ -14,9 +14,9 @@ export default function Home() {
             İşi qısaldan pulsuz alətlər
           </h1>
           <p className="mt-5 max-w-2xl text-[18px] leading-8 text-ink-muted">
-            Faktura hazırla, əmək haqqını hesabla, sistemin yükünü ölç.
-            Hamısı brauzerdə işləyir — yazdığın məlumat heç bir serverə
-            göndərilmir, qeydiyyat istənmir.
+            Faktura hazırla, əmək haqqını hesabla. Hesablama brauzerdə aparılır
+            — yazdığın məlumat heç bir serverə göndərilmir, qeydiyyat istənmir,
+            nəticə reklamsız çıxır.
           </p>
           {live.length > 0 && (
             <div className="mt-8 flex flex-wrap gap-3">

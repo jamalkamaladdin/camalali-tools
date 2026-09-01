@@ -11,7 +11,7 @@ export const site = {
   locale: "az_AZ",
   lang: "az",
   description:
-    "Azərbaycan üçün pulsuz onlayn alətlər: hesab-faktura hazırlamaq, əmək haqqı hesablamaq və sistem layihələndirmə. Məlumat brauzerdən çıxmır.",
+    "Azərbaycan üçün pulsuz onlayn alətlər: hesab-faktura hazırlamaq və əmək haqqı hesablamaq. Hesablama brauzerdə aparılır, məlumat serverə göndərilmir.",
   author: {
     name: "Camal Əli",
     url: "https://camalali.com",
@@ -21,7 +21,8 @@ export const site = {
   },
 } as const;
 
-export type ToolAudience = "biznes" | "developer";
+/** Developer tooling lives in its own repository — this site is business tools. */
+export type ToolAudience = "biznes";
 export type ToolStatus = "live" | "planned";
 
 export type Tool = {
@@ -72,38 +73,6 @@ export const tools: Tool[] = [
       "gross net hesablama",
       "maaşdan tutulmalar",
       "vergi kalkulyatoru",
-    ],
-  },
-  {
-    slug: "miqyas",
-    name: "Miqyas",
-    title: "Yük və miqyas kalkulyatoru",
-    tagline: "Gündəlik sorğu sayından RPS, saxlama və server sayına.",
-    description:
-      "Gündəlik sorğu sayı, orta sənəd ölçüsü və saxlama müddətindən RPS, pik yük, aylıq trafik və təxmini node sayını hesablayır — sistem layihələndirməsinin ilk hesabı.",
-    audience: "developer",
-    status: "planned",
-    keywords: [
-      "rps hesablama",
-      "back of the envelope",
-      "capacity planning",
-      "sistem dizaynı hesabı",
-    ],
-  },
-  {
-    slug: "arxitektura",
-    name: "Arxitektura",
-    title: "Arxitektura seçim köməkçisi",
-    tagline: "Bir neçə sual — tarazlı tövsiyə və onun səbəbi.",
-    description:
-      "Yükünü, komanda ölçünü və məhdudiyyətlərini təsvir et: hansı verilənlər bazasının, keş qatının və yerləşdirmə modelinin sənin halına uyğun olduğunu səbəbi ilə göstərir.",
-    audience: "developer",
-    status: "planned",
-    keywords: [
-      "hansı verilənlər bazası",
-      "arxitektura seçimi",
-      "postgres yoxsa mongodb",
-      "sistem dizaynı",
     ],
   },
 ];

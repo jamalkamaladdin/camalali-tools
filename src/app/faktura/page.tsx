@@ -38,7 +38,7 @@ const faq: [string, string][] = [
   ],
   [
     "PDF necə alınır?",
-    "«Çap et / PDF kimi saxla» düyməsi brauzerin çap pəncərəsini açır; orada printer əvəzinə «PDF kimi saxla» seçilir. Bu yol xüsusi kitabxana tələb etmir və Azərbaycan hərflərini (ə, ğ, ş, ı, ö, ü) həmişə düzgün çıxarır.",
+    "«PDF endir» düyməsi sənədi brauzerdə PDF faylına çevirir və endirir. Fayl təmizdir: içində nə bu saytın adı, nə ünvanı, nə də hər hansı reklam olur — yalnız sənin fakturan. Mətn şəkil kimi deyil, əsl mətndir: seçilə, kopyalana və axtarıla bilir, Azərbaycan hərfləri (ə, ğ, ş, ı, ö, ü) düzgün çıxır.",
   ],
 ];
 

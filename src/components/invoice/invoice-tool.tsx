@@ -6,7 +6,7 @@ import { addDays, todayIso } from "@/lib/az-date";
 import { calculateInvoice } from "@/lib/invoice/calc";
 import { formatMoney } from "@/lib/invoice/money";
 import { emptyParty, UNITS, type Invoice, type LineItem, type Party } from "@/lib/invoice/types";
-import { Field, Select, TextArea, TextInput } from "./fields";
+import { Field, Section, Select, TextArea, TextButton, TextInput } from "./fields";
 import { InvoicePreview } from "./invoice-preview";
 
 const SELLER_KEY = "faktura.satici.v1";
@@ -46,8 +46,6 @@ const sampleSeller: Party = {
   swift: "NUMNAZ22",
 };
 
-type PartyKey = "seller" | "buyer";
-
 type ClientDefaults = { today: string; seller: Party | null };
 
 // Today's date and the remembered seller live outside React, so they are read
@@ -72,6 +70,25 @@ function readClientDefaults(): ClientDefaults {
 
 const subscribeToNothing = () => () => {};
 
+const partyIsFilled = (party: Party) =>
+  Object.values(party).some((value) => value.trim().length > 0);
+
+type PartyKey = "seller" | "buyer";
+
+const MAIN_FIELDS: [keyof Party, string][] = [
+  ["taxId", "VÖEN"],
+  ["address", "Ünvan"],
+  ["phone", "Telefon"],
+  ["email", "E-poçt"],
+];
+
+const BANK_FIELDS: [keyof Party, string][] = [
+  ["bankName", "Bank"],
+  ["iban", "IBAN"],
+  ["bankCode", "Bank kodu"],
+  ["swift", "SWIFT"],
+];
+
 export function InvoiceTool() {
   const defaults = useSyncExternalStore(
     subscribeToNothing,
@@ -80,6 +97,9 @@ export function InvoiceTool() {
   );
   const [edited, setEdited] = useState<Invoice | null>(null);
   const [justSaved, setJustSaved] = useState(false);
+  const [openParty, setOpenParty] = useState<PartyKey | null>("seller");
+  const [buyerBankOpen, setBuyerBankOpen] = useState(false);
+  const [busy, setBusy] = useState(false);
 
   const prefilled = useMemo<Invoice>(() => {
     if (!defaults) return baseInvoice;
@@ -141,7 +161,7 @@ export function InvoiceTool() {
       cachedDefaults = { ...readClientDefaults(), seller: invoice.seller };
       setJustSaved(true);
     } catch {
-      // Private mode or a full quota — the invoice still works, only the
+      // Private mode or a full quota: the invoice still works, only the
       // convenience of remembering the seller is lost.
     }
   };
@@ -149,7 +169,7 @@ export function InvoiceTool() {
   const fillSample = () =>
     setInvoice((current) => ({
       ...current,
-      seller: current.seller.name ? current.seller : sampleSeller,
+      seller: partyIsFilled(current.seller) ? current.seller : sampleSeller,
       buyer: {
         ...emptyParty(),
         name: 'MMC "Alıcı"',
@@ -174,33 +194,89 @@ export function InvoiceTool() {
       ],
     }));
 
-  const partyFields: [keyof Party, string, string?][] = [
-    ["name", "Ad / şirkət"],
-    ["taxId", "VÖEN"],
-    ["address", "Ünvan"],
-    ["phone", "Telefon"],
-    ["email", "E-poçt"],
-    ["bankName", "Bank"],
-    ["iban", "IBAN"],
-    ["bankCode", "Bank kodu"],
-    ["swift", "SWIFT"],
-  ];
+  const downloadPdf = async () => {
+    setBusy(true);
+    try {
+      // Loaded on demand: the PDF builder and its embedded font never enter the
+      // first page load.
+      const { buildInvoicePdf, invoicePdfFileName } = await import(
+        "@/lib/invoice/pdf"
+      );
+      const bytes = await buildInvoicePdf(invoice);
+      const blob = new Blob([bytes as BlobPart], { type: "application/pdf" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = invoicePdfFileName(invoice);
+      link.click();
+      URL.revokeObjectURL(url);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const partyForm = (key: PartyKey) => {
+    const party = invoice[key];
+    const showBank = key === "seller" || buyerBankOpen;
+
+    return (
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Field label="Ad / şirkət" className="sm:col-span-2">
+          <TextInput
+            value={party.name}
+            placeholder={key === "seller" ? "Sənin adın və ya şirkətin" : "Kimə göndərilir"}
+            onChange={(event) => setParty(key, "name", event.target.value)}
+          />
+        </Field>
+
+        {MAIN_FIELDS.map(([field, label]) => (
+          <Field key={field} label={label}>
+            <TextInput
+              value={party[field]}
+              onChange={(event) => setParty(key, field, event.target.value)}
+            />
+          </Field>
+        ))}
+
+        {showBank ? (
+          BANK_FIELDS.map(([field, label]) => (
+            <Field
+              key={field}
+              label={label}
+              className={field === "iban" || field === "bankName" ? "sm:col-span-2" : ""}
+            >
+              <TextInput
+                value={party[field]}
+                onChange={(event) => setParty(key, field, event.target.value)}
+              />
+            </Field>
+          ))
+        ) : (
+          <div className="sm:col-span-2">
+            <TextButton onClick={() => setBuyerBankOpen(true)}>
+              + Bank rekvizitləri
+            </TextButton>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const partySummary = (party: Party) => {
+    const parts = [party.name.trim(), party.taxId.trim() && `VÖEN ${party.taxId}`]
+      .filter(Boolean)
+      .join(" · ");
+    return parts || "doldurulmayıb";
+  };
 
   return (
-    <div className="print-shell grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
-      <div className="no-print space-y-6">
-        <section className="rounded-md border border-line bg-surface p-6">
-          <div className="flex items-center justify-between gap-3">
-            <h2 className="text-[16px] font-semibold">Faktura</h2>
-            <button
-              type="button"
-              onClick={fillSample}
-              className="text-[13px] font-medium text-accent hover:underline"
-            >
-              Nümunə ilə doldur
-            </button>
-          </div>
-          <div className="mt-4 grid gap-4 sm:grid-cols-3">
+    <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
+      <div className="no-print min-w-0 rounded-md border border-line bg-surface">
+        <Section
+          title="Faktura"
+          action={<TextButton onClick={fillSample}>Nümunə ilə doldur</TextButton>}
+        >
+          <div className="grid gap-3 sm:grid-cols-3">
             <Field label="Nömrə">
               <TextInput
                 value={invoice.number}
@@ -228,132 +304,116 @@ export function InvoiceTool() {
               />
             </Field>
           </div>
-        </section>
+        </Section>
 
-        {(["seller", "buyer"] as PartyKey[]).map((key) => (
-          <section
-            key={key}
-            className="rounded-md border border-line bg-surface p-6"
-          >
-            <div className="flex items-center justify-between gap-3">
-              <h2 className="text-[16px] font-semibold">
-                {key === "seller" ? "Satıcı" : "Alıcı"}
-              </h2>
-              {key === "seller" && (
+        {(["seller", "buyer"] as PartyKey[]).map((key) => {
+          const open = openParty === key;
+          const title = key === "seller" ? "Satıcı" : "Alıcı";
+
+          return (
+            <Section
+              key={key}
+              title={title}
+              action={
+                <div className="flex items-center gap-4">
+                  {key === "seller" && open && (
+                    <TextButton onClick={saveSeller}>
+                      {restored ? "Yadda saxlanılıb" : "Yadda saxla"}
+                    </TextButton>
+                  )}
+                  <TextButton onClick={() => setOpenParty(open ? null : key)}>
+                    {open ? "Yığ" : "Aç"}
+                  </TextButton>
+                </div>
+              }
+            >
+              {open ? (
+                partyForm(key)
+              ) : (
                 <button
                   type="button"
-                  onClick={saveSeller}
-                  className="text-[13px] font-medium text-accent hover:underline"
+                  onClick={() => setOpenParty(key)}
+                  className="w-full truncate text-left text-[14px] text-ink-muted hover:text-ink"
                 >
-                  {restored ? "Yadda saxlanılıb ✓" : "Bu brauzerdə yadda saxla"}
+                  {partySummary(invoice[key])}
                 </button>
               )}
-            </div>
-            <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              {partyFields.map(([field, label]) => (
-                <Field key={field} label={label}>
-                  <TextInput
-                    value={invoice[key][field]}
-                    onChange={(event) => setParty(key, field, event.target.value)}
-                  />
-                </Field>
-              ))}
-            </div>
-          </section>
-        ))}
+            </Section>
+          );
+        })}
 
-        <section className="rounded-md border border-line bg-surface p-6">
-          <h2 className="text-[16px] font-semibold">Sətirlər</h2>
-          <div className="mt-4 space-y-4">
+        <Section
+          title="Sətirlər"
+          action={<TextButton onClick={addItem}>+ Sətir</TextButton>}
+        >
+          <div className="space-y-4">
             {invoice.items.map((item, index) => (
               <div
                 key={item.id}
-                className="rounded-md border border-line bg-subtle/60 p-4"
+                className="space-y-2 border-b border-line pb-4 last:border-b-0 last:pb-0"
               >
-                <div className="flex items-center justify-between">
-                  <span className="text-[12px] font-medium text-ink-faint">
-                    {index + 1}. sətir
+                <TextInput
+                  value={item.description}
+                  placeholder="Xidmətin və ya malın adı"
+                  onChange={(event) =>
+                    setItem(item.id, "description", event.target.value)
+                  }
+                />
+                {/* Description gets its own row: in the two-column layout a
+                    single-row table squeezed it down to a few pixels. */}
+                <div className="grid min-w-0 grid-cols-2 items-center gap-2 sm:grid-cols-[4.5rem_1fr_7rem_6.5rem_1.5rem]">
+                  <TextInput
+                    inputMode="decimal"
+                    className="text-right"
+                    value={String(item.quantity)}
+                    placeholder="Miqdar"
+                    aria-label="Miqdar"
+                    onChange={(event) => setItem(item.id, "quantity", event.target.value)}
+                  />
+                  <Select
+                    value={item.unit}
+                    aria-label="Vahid"
+                    onChange={(event) => setItem(item.id, "unit", event.target.value)}
+                  >
+                    {UNITS.map((unit) => (
+                      <option key={unit} value={unit}>
+                        {unit}
+                      </option>
+                    ))}
+                  </Select>
+                  <TextInput
+                    inputMode="decimal"
+                    className="text-right"
+                    value={String(item.unitPrice)}
+                    placeholder="Qiymət"
+                    aria-label="Vahidin qiyməti"
+                    onChange={(event) => setItem(item.id, "unitPrice", event.target.value)}
+                  />
+                  <span className="text-right text-[14px] font-medium tabular-nums">
+                    {formatMoney(totals.lineTotals[index] ?? 0)}
                   </span>
-                  {invoice.items.length > 1 && (
-                    <button
-                      type="button"
-                      onClick={() => removeItem(item.id)}
-                      className="text-[13px] text-ink-faint transition-colors hover:text-danger"
-                    >
-                      Sil
-                    </button>
-                  )}
-                </div>
-                <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                  <div className="sm:col-span-2">
-                    <Field label="Təsvir">
-                      <TextInput
-                        value={item.description}
-                        placeholder="Xidmətin və ya malın adı"
-                        onChange={(event) =>
-                          setItem(item.id, "description", event.target.value)
-                        }
-                      />
-                    </Field>
-                  </div>
-                  <Field label="Miqdar">
-                    <TextInput
-                      inputMode="decimal"
-                      value={String(item.quantity)}
-                      onChange={(event) =>
-                        setItem(item.id, "quantity", event.target.value)
-                      }
-                    />
-                  </Field>
-                  <Field label="Vahid">
-                    <Select
-                      value={item.unit}
-                      onChange={(event) => setItem(item.id, "unit", event.target.value)}
-                    >
-                      {UNITS.map((unit) => (
-                        <option key={unit} value={unit}>
-                          {unit}
-                        </option>
-                      ))}
-                    </Select>
-                  </Field>
-                  <Field label="Vahidin qiyməti (₼)">
-                    <TextInput
-                      inputMode="decimal"
-                      value={String(item.unitPrice)}
-                      onChange={(event) =>
-                        setItem(item.id, "unitPrice", event.target.value)
-                      }
-                    />
-                  </Field>
-                  <div className="flex items-end">
-                    <p className="text-[13px] text-ink-muted">
-                      Sətrin məbləği:{" "}
-                      <span className="font-semibold text-ink tabular-nums">
-                        {formatMoney(totals.lineTotals[index] ?? 0)} ₼
-                      </span>
-                    </p>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => removeItem(item.id)}
+                    disabled={invoice.items.length === 1}
+                    aria-label="Sətri sil"
+                    className="justify-self-end text-[16px] leading-none text-ink-faint transition-colors hover:text-danger disabled:opacity-30"
+                  >
+                    ×
+                  </button>
                 </div>
               </div>
             ))}
           </div>
-          <Button
-            type="button"
-            variant="secondary"
-            className="mt-4"
-            onClick={addItem}
-          >
-            + Sətir əlavə et
-          </Button>
-        </section>
+        </Section>
 
-        <section className="rounded-md border border-line bg-surface p-6">
-          <h2 className="text-[16px] font-semibold">ƏDV və endirim</h2>
-          <div className="mt-4 grid gap-4 sm:grid-cols-3">
-            <Field label="ƏDV">
+        <Section title="ƏDV, endirim və qeyd">
+          <div className="grid gap-3 sm:grid-cols-3">
+            <Field label="ƏDV" className="sm:col-span-2">
               <Select
-                value={invoice.vatRate === 0 ? "yox" : invoice.vatIncluded ? "daxil" : "elave"}
+                value={
+                  invoice.vatRate === 0 ? "yox" : invoice.vatIncluded ? "daxil" : "elave"
+                }
                 onChange={(event) => {
                   const mode = event.target.value;
                   setInvoice((current) => ({
@@ -381,10 +441,10 @@ export function InvoiceTool() {
               />
             </Field>
           </div>
-          <div className="mt-4">
+          <div className="mt-3">
             <Field label="Qeyd" hint="Fakturanın altında görünür — ödəniş şərti, müqavilə nömrəsi.">
               <TextArea
-                rows={3}
+                rows={2}
                 value={invoice.note}
                 onChange={(event) =>
                   setInvoice((current) => ({ ...current, note: event.target.value }))
@@ -392,14 +452,19 @@ export function InvoiceTool() {
               />
             </Field>
           </div>
-        </section>
+        </Section>
       </div>
 
-      <div className="print-shell lg:sticky lg:top-24">
+      <div className="print-shell min-w-0 lg:sticky lg:top-24">
         <div className="no-print mb-3 flex items-center justify-between gap-3">
-          <p className="text-[13px] text-ink-muted">Önizləmə</p>
-          <Button type="button" onClick={() => window.print()}>
-            Çap et / PDF kimi saxla
+          <p className="text-[13px] text-ink-muted">
+            Ödəniləcək:{" "}
+            <span className="font-semibold text-ink tabular-nums">
+              {formatMoney(totals.total)} ₼
+            </span>
+          </p>
+          <Button type="button" onClick={downloadPdf} disabled={busy}>
+            {busy ? "Hazırlanır…" : "PDF endir"}
           </Button>
         </div>
         <div className="print-shell overflow-hidden rounded-md border border-line shadow-card">
