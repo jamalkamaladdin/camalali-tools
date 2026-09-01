@@ -47,3 +47,7 @@ docs/screenshots/impl-*.png
 docs/screenshots/diff-*.png
 docs/.notion-intent
 !.env.example
+
+# Agent instruction files stay local — they are not part of the published project.
+CLAUDE.md
+AGENTS.md
