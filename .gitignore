@@ -51,3 +51,7 @@ docs/.notion-intent
 # Agent instruction files stay local — they are not part of the published project.
 CLAUDE.md
 AGENTS.md
+
+# Internal working docs stay local: they carry server addresses, the work log
+# and the task list, none of which belong in a public repository.
+docs/
