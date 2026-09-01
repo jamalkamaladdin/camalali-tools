@@ -1,26 +1,122 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/*
+ * Design tokens. Light theme only — no dark variant by decision, the tools are
+ * documents (invoices, payslips) and read best on white.
+ * Values follow the Stripe marketing surface: white canvas, a very light second
+ * layer, deep navy ink instead of black, one indigo accent, layered soft shadows.
+ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-canvas: #ffffff;
+  --color-surface: #ffffff;
+  --color-subtle: #f6f9fc;
+  --color-ink: #0a2540;
+  --color-ink-muted: #425466;
+  --color-ink-faint: #8792a2;
+  --color-line: #e3e8ee;
+  --color-line-strong: #cfd7df;
+  --color-accent: #635bff;
+  --color-accent-hover: #7a73ff;
+  --color-accent-soft: #f0efff;
+  --color-on-accent: #ffffff;
+  --color-success: #1f9d55;
+  --color-warning: #b7791f;
+  --color-danger: #df1b41;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+
+  --shadow-card: 0 2px 5px -1px rgb(50 50 93 / 0.25), 0 1px 3px -1px rgb(0 0 0 / 0.3);
+  --shadow-soft: 0 1px 3px rgb(0 0 0 / 0.06), 0 1px 2px rgb(0 0 0 / 0.04);
+  --shadow-lift: 0 6px 14px -2px rgb(50 50 93 / 0.22), 0 3px 7px -3px rgb(0 0 0 / 0.28);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+
+  --container-page: 1080px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* Headings are tight and slightly negative-tracked — the single strongest
+   signal of this visual language. */
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Print: only the invoice sheet survives. Everything else — chrome, form,
+   buttons — is marked `no-print` and removed, so the browser's own "save as
+   PDF" produces a clean A4 document without a PDF library in the bundle. */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  html,
+  body {
+    background: #fff;
+  }
+
+  /* Site chrome disappears and every wrapper between <main> and the sheet is
+     flattened — otherwise their padding alone pushes an empty second page. */
+  body > header,
+  body > footer {
+    display: none !important;
+  }
+
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .print-shell {
+    display: block !important;
+    position: static !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  .print-root {
+    box-shadow: none !important;
+    border: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 16mm;
+  }
 }
