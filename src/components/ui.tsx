@@ -14,15 +14,16 @@ export function Container({
   );
 }
 
+// Measured: 4px radius, 48px tall, no shadow in either state, and a 0.3s
+// cubic-bezier(.25,1,.5,1) transition. The hover darkens the fill — an earlier
+// guess lightened it, which is the opposite of the reference.
 const buttonBase =
-  "inline-flex items-center justify-center gap-2 rounded-md px-4 h-10 text-[14px] font-medium transition-all duration-150 ease-out disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex items-center justify-center gap-2 rounded-sm px-6 h-12 text-[15px] font-medium transition-colors duration-300 [transition-timing-function:var(--ease-brand)] disabled:opacity-50 disabled:pointer-events-none";
 
 const buttonVariants = {
-  // The lift on hover is the signature move of this visual language.
-  primary:
-    "bg-accent text-on-accent shadow-soft hover:bg-accent-hover hover:shadow-lift hover:-translate-y-px",
+  primary: "bg-accent text-on-accent hover:bg-accent-hover",
   secondary:
-    "bg-surface text-ink border border-line shadow-soft hover:border-line-strong hover:shadow-card hover:-translate-y-px",
+    "bg-surface text-ink border border-line hover:border-line-strong hover:bg-subtle",
   ghost: "text-ink-muted hover:text-accent hover:bg-accent-soft",
 } as const;
 
@@ -63,7 +64,7 @@ export function Card({
 }) {
   return (
     <div
-      className={`rounded-lg border border-line bg-surface shadow-soft ${className}`}
+      className={`rounded-md border border-line bg-surface ${className}`}
     >
       {children}
     </div>

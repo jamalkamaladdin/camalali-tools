@@ -5,7 +5,7 @@ export function SiteFooter() {
   const shown = liveTools();
 
   return (
-    <footer className="mt-24 border-t border-line bg-subtle">
+    <footer className="border-t border-line bg-subtle">
       <div className="mx-auto grid max-w-(--container-page) gap-10 px-5 py-14 sm:grid-cols-3">
         <div>
           <p className="text-[15px] font-semibold text-ink">{site.shortName}</p>

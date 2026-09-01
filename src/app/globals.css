@@ -3,8 +3,10 @@
 /*
  * Design tokens. Light theme only — no dark variant by decision, the tools are
  * documents (invoices, payslips) and read best on white.
- * Values follow the Stripe marketing surface: white canvas, a very light second
- * layer, deep navy ink instead of black, one indigo accent, layered soft shadows.
+ * Values measured off stripe.com's marketing pages (payments, pricing) rather
+ * than eyeballed: #0a2540 ink, #425466 secondary, #e6ebf1 borders, the two-layer
+ * blue-tinted card shadow, 1080px container, 4px buttons / 8px cards, and a
+ * hover that DARKENS (#635bff → #4032c8) instead of lightening.
  */
 @theme inline {
   --color-canvas: #ffffff;
@@ -13,10 +15,10 @@
   --color-ink: #0a2540;
   --color-ink-muted: #425466;
   --color-ink-faint: #8792a2;
-  --color-line: #e3e8ee;
+  --color-line: #e6ebf1;
   --color-line-strong: #cfd7df;
   --color-accent: #635bff;
-  --color-accent-hover: #7a73ff;
+  --color-accent-hover: #4032c8;
   --color-accent-soft: #f0efff;
   --color-on-accent: #ffffff;
   --color-success: #1f9d55;
@@ -28,9 +30,10 @@
   --radius-lg: 12px;
   --radius-xl: 20px;
 
-  --shadow-card: 0 2px 5px -1px rgb(50 50 93 / 0.25), 0 1px 3px -1px rgb(0 0 0 / 0.3);
+  --shadow-card: 0 18px 36px -18px rgb(0 0 0 / 0.1), 0 30px 45px -30px rgb(50 50 93 / 0.25);
   --shadow-soft: 0 1px 3px rgb(0 0 0 / 0.06), 0 1px 2px rgb(0 0 0 / 0.04);
-  --shadow-lift: 0 6px 14px -2px rgb(50 50 93 / 0.22), 0 3px 7px -3px rgb(0 0 0 / 0.28);
+  --shadow-lift: 0 24px 48px -20px rgb(0 0 0 / 0.14), 0 36px 54px -32px rgb(50 50 93 / 0.3);
+  --ease-brand: cubic-bezier(0.25, 1, 0.5, 1);
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
@@ -55,8 +58,10 @@ h1,
 h2,
 h3 {
   letter-spacing: -0.02em;
-  line-height: 1.12;
-  font-weight: 600;
+  line-height: 1.16;
+  /* 500, not 600: the measured hierarchy is built on weight contrast against a
+     light body, and Inter at 600 reads heavier than the reference. */
+  font-weight: 500;
   text-wrap: balance;
 }
 

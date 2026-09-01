@@ -189,7 +189,7 @@ export function InvoiceTool() {
   return (
     <div className="print-shell grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
       <div className="no-print space-y-6">
-        <section className="rounded-lg border border-line bg-surface p-5 shadow-soft">
+        <section className="rounded-md border border-line bg-surface p-6">
           <div className="flex items-center justify-between gap-3">
             <h2 className="text-[16px] font-semibold">Faktura</h2>
             <button
@@ -233,7 +233,7 @@ export function InvoiceTool() {
         {(["seller", "buyer"] as PartyKey[]).map((key) => (
           <section
             key={key}
-            className="rounded-lg border border-line bg-surface p-5 shadow-soft"
+            className="rounded-md border border-line bg-surface p-6"
           >
             <div className="flex items-center justify-between gap-3">
               <h2 className="text-[16px] font-semibold">
@@ -262,7 +262,7 @@ export function InvoiceTool() {
           </section>
         ))}
 
-        <section className="rounded-lg border border-line bg-surface p-5 shadow-soft">
+        <section className="rounded-md border border-line bg-surface p-6">
           <h2 className="text-[16px] font-semibold">Sətirlər</h2>
           <div className="mt-4 space-y-4">
             {invoice.items.map((item, index) => (
@@ -348,7 +348,7 @@ export function InvoiceTool() {
           </Button>
         </section>
 
-        <section className="rounded-lg border border-line bg-surface p-5 shadow-soft">
+        <section className="rounded-md border border-line bg-surface p-6">
           <h2 className="text-[16px] font-semibold">ƏDV və endirim</h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-3">
             <Field label="ƏDV">
@@ -402,7 +402,7 @@ export function InvoiceTool() {
             Çap et / PDF kimi saxla
           </Button>
         </div>
-        <div className="print-shell overflow-hidden rounded-lg border border-line shadow-card">
+        <div className="print-shell overflow-hidden rounded-md border border-line shadow-card">
           <InvoicePreview invoice={invoice} />
         </div>
       </div>

@@ -32,7 +32,7 @@ export default function Home() {
         <div className="grid gap-5 sm:grid-cols-2">
           {live.map((tool) => (
             <Link key={tool.slug} href={toolPath(tool.slug)} className="group">
-              <Card className="h-full p-6 transition-all duration-150 ease-out group-hover:-translate-y-0.5 group-hover:shadow-card">
+              <Card className="h-full p-8 transition-shadow duration-300 [transition-timing-function:var(--ease-brand)] group-hover:shadow-card">
                 <h2 className="text-[20px]">{tool.title}</h2>
                 <p className="mt-2 text-[15px] leading-7 text-ink-muted">
                   {tool.tagline}
