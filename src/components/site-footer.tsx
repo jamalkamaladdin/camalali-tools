@@ -45,21 +45,19 @@ export function SiteFooter() {
               </div>
             )}
 
-            <div className="max-w-[34ch]">
+            <div>
               <p className="font-mono text-[11px] tracking-[0.08em] text-ink-faint">
-                Kim hazırlayıb
+                Yaxınlıqda
               </p>
-              <p className="mt-3 text-[13px] leading-[1.6] text-ink-muted">
-                Bu alətləri{" "}
-                <a
-                  href={site.author.about}
-                  className="text-accent-text underline decoration-line-strong underline-offset-2 transition-colors hover:decoration-accent"
-                >
-                  {site.author.name}
-                </a>{" "}
-                yazıb — proqram təminatı və sistem arxitekturası üzrə mühəndis.
-              </p>
-              <ul className="mt-3 flex gap-4">
+              <ul className="mt-3 space-y-2">
+                <li>
+                  <a
+                    href={site.author.url}
+                    className="text-[13px] text-ink-muted transition-colors hover:text-accent-text"
+                  >
+                    camalali.com
+                  </a>
+                </li>
                 <li>
                   <a
                     href={site.author.services}
