@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
-import { Container } from "@/components/ui";
+import Link from "next/link";
 import { InvoiceTool } from "@/components/invoice/invoice-tool";
+import { Tabs } from "@/components/tabs";
+import {
+  Accordion,
+  AccordionItem,
+  Container,
+  PageHead,
+  Prose,
+} from "@/components/ui";
 import { site, toolBySlug, toolUrl } from "@/lib/site";
 
 const tool = toolBySlug("faktura")!;
@@ -67,6 +75,55 @@ const structuredData = {
   ],
 };
 
+/* The explanation and the FAQ used to be two stacked bg-subtle bands under the
+   tool — most of the page's height for material that is read once. They are one
+   tab block now. Every panel stays in the served HTML (Tabs only sets `hidden`
+   on the inactive one), so the text a search engine reads is unchanged. */
+const infoTabs = [
+  {
+    id: "sened",
+    label: "Sənəd haqqında",
+    content: (
+      <Prose>
+        <h2>Hesab-fakturada nə göstərilir</h2>
+        <p>
+          Hesab-faktura ödənişin əsasını göstərən sənəddir: kim, kimə, nəyin
+          müqabilində və nə qədər ödəməlidir. Mübahisə yaranmasın deyə sənəddə
+          adətən bunlar olur — sənədin nömrəsi və tarixi, tərəflərin adı və
+          VÖEN-i, bank rekvizitləri, sətirlərin təsviri, miqdarı və qiyməti,
+          ƏDV-nin ayrıca göstərilməsi, ödəniləcək yekun məbləğ və həmin
+          məbləğin yazı ilə təkrarı.
+        </p>
+        <p>
+          Ən çox buraxılan yer bank rekvizitləridir: IBAN və bank kodu
+          yazılmayanda alıcının mühasibatlığı ödənişi edə bilmir və sənəd geri
+          qayıdır. İkinci yer isə ƏDV-dir — qiymətin ƏDV-li, yoxsa ƏDV-siz
+          olduğu yazılmayanda tərəflər fərqli rəqəm başa düşür.
+        </p>
+      </Prose>
+    ),
+  },
+  {
+    id: "suallar",
+    label: "Suallar",
+    hint: String(faq.length),
+    content: (
+      <div className="max-w-[68ch]">
+        <h2 className="text-[22px] text-ink">Tez-tez verilən suallar</h2>
+        {/* group="faq": one answer at a time, which is the browser's own
+            exclusive accordion — no JavaScript involved. */}
+        <Accordion className="mt-4 border-y border-line">
+          {faq.map(([question, answer]) => (
+            <AccordionItem key={question} summary={question} group="faq">
+              {answer}
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    ),
+  },
+];
+
 export default function FakturaPage() {
   return (
     <>
@@ -75,54 +132,35 @@ export default function FakturaPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      <section className="no-print border-b border-line bg-subtle">
-        <Container className="py-12 sm:py-16">
-          <h1 className="max-w-3xl text-[34px] sm:text-[44px]">{tool.title}</h1>
-          <p className="mt-4 max-w-2xl text-[17px] leading-8 text-ink-muted">
-            Satıcı və alıcı məlumatlarını yaz, sətirləri əlavə et, ƏDV variantını
-            seç — sənəd sağda anında yığılır. Məbləğ yazı ilə avtomatik göstərilir,
-            heç bir məlumat serverə göndərilmir.
-          </p>
-        </Container>
-      </section>
+      {/* PageHead takes no className, so the print exclusion is carried by the
+          wrapper: nothing above the sheet may reach the paper. */}
+      <div className="no-print">
+        <PageHead
+          breadcrumb={
+            <>
+              <Link
+                href="/"
+                className="transition-colors hover:text-accent-text"
+              >
+                {site.shortName}
+              </Link>
+              <span aria-hidden="true"> / </span>
+              <span>{tool.name}</span>
+            </>
+          }
+          title={tool.title}
+          lead="Satıcı və alıcı məlumatlarını yaz, sətirləri əlavə et, ƏDV variantını seç — sənəd anında yığılır. Məbləğ yazı ilə avtomatik göstərilir."
+          meta="brauzerdə · pulsuz · PDF"
+        />
+      </div>
 
-      <Container className="print-shell py-10 sm:py-14">
+      <Container className="print-shell pb-14">
         <InvoiceTool />
       </Container>
 
-      <section className="no-print border-t border-line bg-subtle">
-        <Container className="py-14">
-          <div className="max-w-2xl">
-            <h2 className="text-[26px]">Hesab-fakturada nə göstərilir</h2>
-            <p className="mt-4 text-[16px] leading-8 text-ink-muted">
-              Hesab-faktura ödənişin əsasını göstərən sənəddir: kim, kimə, nəyin
-              müqabilində və nə qədər ödəməlidir. Mübahisə yaranmasın deyə sənəddə
-              adətən bunlar olur — sənədin nömrəsi və tarixi, tərəflərin adı və
-              VÖEN-i, bank rekvizitləri, sətirlərin təsviri, miqdarı və qiyməti,
-              ƏDV-nin ayrıca göstərilməsi, ödəniləcək yekun məbləğ və həmin
-              məbləğin yazı ilə təkrarı.
-            </p>
-            <p className="mt-4 text-[16px] leading-8 text-ink-muted">
-              Ən çox buraxılan yer bank rekvizitləridir: IBAN və bank kodu
-              yazılmayanda alıcının mühasibatlığı ödənişi edə bilmir və sənəd geri
-              qayıdır. İkinci yer isə ƏDV-dir — qiymətin ƏDV-li, yoxsa ƏDV-siz
-              olduğu yazılmayanda tərəflər fərqli rəqəm başa düşür.
-            </p>
-
-            <h2 className="mt-12 text-[26px]">Tez-tez verilən suallar</h2>
-            <dl className="mt-6 space-y-6">
-              {faq.map(([question, answer]) => (
-                <div key={question}>
-                  <dt className="text-[16px] font-semibold">{question}</dt>
-                  <dd className="mt-2 text-[15px] leading-7 text-ink-muted">
-                    {answer}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </Container>
-      </section>
+      <Container className="no-print pb-16">
+        <Tabs items={infoTabs} idPrefix="faktura-info" />
+      </Container>
     </>
   );
 }

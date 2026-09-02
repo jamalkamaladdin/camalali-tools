@@ -1,12 +1,13 @@
 "use client";
 
 import { useMemo, useState, useSyncExternalStore } from "react";
-import { Button } from "@/components/ui";
-import { addDays, todayIso } from "@/lib/az-date";
+import { Accordion, AccordionItem, Button, Panel, PanelHeader } from "@/components/ui";
+import { SegmentedControl } from "@/components/tabs";
+import { addDays, formatAzDate, todayIso } from "@/lib/az-date";
 import { calculateInvoice } from "@/lib/invoice/calc";
 import { formatMoney } from "@/lib/invoice/money";
 import { emptyParty, UNITS, type Invoice, type LineItem, type Party } from "@/lib/invoice/types";
-import { Field, Section, Select, TextArea, TextButton, TextInput } from "./fields";
+import { Field, Select, TextArea, TextButton, TextInput } from "./fields";
 import { InvoicePreview } from "./invoice-preview";
 
 const SELLER_KEY = "faktura.satici.v1";
@@ -89,6 +90,18 @@ const BANK_FIELDS: [keyof Party, string][] = [
   ["swift", "SWIFT"],
 ];
 
+const PANES = [
+  { value: "forma", label: "Forma" },
+  { value: "onizleme", label: "Önizləmə" },
+];
+
+/** An accordion hint shares the row with its label. On a 390px screen a filled
+ *  party name would push the label out, so the hint is capped and truncated by
+ *  CSS rather than cut to a character count. */
+const hint = (text: string) => (
+  <span className="block max-w-[9rem] truncate sm:max-w-[18rem]">{text}</span>
+);
+
 export function InvoiceTool() {
   const defaults = useSyncExternalStore(
     subscribeToNothing,
@@ -97,9 +110,11 @@ export function InvoiceTool() {
   );
   const [edited, setEdited] = useState<Invoice | null>(null);
   const [justSaved, setJustSaved] = useState(false);
-  const [openParty, setOpenParty] = useState<PartyKey | null>("seller");
   const [buyerBankOpen, setBuyerBankOpen] = useState(false);
   const [busy, setBusy] = useState(false);
+  // Which of the two stacked columns is visible below lg. Purely a CSS switch —
+  // see the grid below.
+  const [pane, setPane] = useState("forma");
 
   const prefilled = useMemo<Invoice>(() => {
     if (!defaults) return baseInvoice;
@@ -198,7 +213,8 @@ export function InvoiceTool() {
     setBusy(true);
     try {
       // Loaded on demand: the PDF builder and its embedded font never enter the
-      // first page load.
+      // first page load. It draws from the invoice object, not from the DOM, so
+      // a collapsed accordion or a hidden column cannot change the file.
       const { buildInvoicePdf, invoicePdfFileName } = await import(
         "@/lib/invoice/pdf"
       );
@@ -269,197 +285,38 @@ export function InvoiceTool() {
     return parts || "doldurulmayıb";
   };
 
+  const invoiceSummary = `№ ${invoice.number.trim() || "—"} · ${formatAzDate(invoice.date)}`;
+
+  const itemsSummary = `${invoice.items.length} sətir · ${formatMoney(totals.subtotal)} ₼`;
+
+  const vatSummary = [
+    invoice.vatRate === 0
+      ? "ƏDV tutulmur"
+      : invoice.vatIncluded
+        ? `ƏDV ${invoice.vatRate}% daxil`
+        : `ƏDV ${invoice.vatRate}%`,
+    invoice.discountPercent > 0 && `endirim ${invoice.discountPercent}%`,
+    invoice.note.trim() && "qeyd var",
+  ]
+    .filter(Boolean)
+    .join(" · ");
+
   return (
-    <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
-      <div className="no-print min-w-0 rounded-md border border-line bg-surface">
-        <Section
-          title="Faktura"
-          action={<TextButton onClick={fillSample}>Nümunə ilə doldur</TextButton>}
-        >
-          <div className="grid gap-3 sm:grid-cols-3">
-            <Field label="Nömrə">
-              <TextInput
-                value={invoice.number}
-                onChange={(event) =>
-                  setInvoice((current) => ({ ...current, number: event.target.value }))
-                }
-              />
-            </Field>
-            <Field label="Tarix">
-              <TextInput
-                type="date"
-                value={invoice.date}
-                onChange={(event) =>
-                  setInvoice((current) => ({ ...current, date: event.target.value }))
-                }
-              />
-            </Field>
-            <Field label="Ödəniş tarixi">
-              <TextInput
-                type="date"
-                value={invoice.dueDate}
-                onChange={(event) =>
-                  setInvoice((current) => ({ ...current, dueDate: event.target.value }))
-                }
-              />
-            </Field>
-          </div>
-        </Section>
-
-        {(["seller", "buyer"] as PartyKey[]).map((key) => {
-          const open = openParty === key;
-          const title = key === "seller" ? "Satıcı" : "Alıcı";
-
-          return (
-            <Section
-              key={key}
-              title={title}
-              action={
-                <div className="flex items-center gap-4">
-                  {key === "seller" && open && (
-                    <TextButton onClick={saveSeller}>
-                      {restored ? "Yadda saxlanılıb" : "Yadda saxla"}
-                    </TextButton>
-                  )}
-                  <TextButton onClick={() => setOpenParty(open ? null : key)}>
-                    {open ? "Yığ" : "Aç"}
-                  </TextButton>
-                </div>
-              }
-            >
-              {open ? (
-                partyForm(key)
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => setOpenParty(key)}
-                  className="w-full truncate text-left text-[14px] text-ink-muted hover:text-ink"
-                >
-                  {partySummary(invoice[key])}
-                </button>
-              )}
-            </Section>
-          );
-        })}
-
-        <Section
-          title="Sətirlər"
-          action={<TextButton onClick={addItem}>+ Sətir</TextButton>}
-        >
-          <div className="space-y-4">
-            {invoice.items.map((item, index) => (
-              <div
-                key={item.id}
-                className="space-y-2 border-b border-line pb-4 last:border-b-0 last:pb-0"
-              >
-                <TextInput
-                  value={item.description}
-                  placeholder="Xidmətin və ya malın adı"
-                  onChange={(event) =>
-                    setItem(item.id, "description", event.target.value)
-                  }
-                />
-                {/* Description gets its own row: in the two-column layout a
-                    single-row table squeezed it down to a few pixels. */}
-                <div className="grid min-w-0 grid-cols-2 items-center gap-2 sm:grid-cols-[4.5rem_1fr_7rem_6.5rem_1.5rem]">
-                  <TextInput
-                    inputMode="decimal"
-                    className="text-right"
-                    value={String(item.quantity)}
-                    placeholder="Miqdar"
-                    aria-label="Miqdar"
-                    onChange={(event) => setItem(item.id, "quantity", event.target.value)}
-                  />
-                  <Select
-                    value={item.unit}
-                    aria-label="Vahid"
-                    onChange={(event) => setItem(item.id, "unit", event.target.value)}
-                  >
-                    {UNITS.map((unit) => (
-                      <option key={unit} value={unit}>
-                        {unit}
-                      </option>
-                    ))}
-                  </Select>
-                  <TextInput
-                    inputMode="decimal"
-                    className="text-right"
-                    value={String(item.unitPrice)}
-                    placeholder="Qiymət"
-                    aria-label="Vahidin qiyməti"
-                    onChange={(event) => setItem(item.id, "unitPrice", event.target.value)}
-                  />
-                  <span className="text-right text-[14px] font-medium tabular-nums">
-                    {formatMoney(totals.lineTotals[index] ?? 0)}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => removeItem(item.id)}
-                    disabled={invoice.items.length === 1}
-                    aria-label="Sətri sil"
-                    className="justify-self-end text-[16px] leading-none text-ink-faint transition-colors hover:text-danger disabled:opacity-30"
-                  >
-                    ×
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        <Section title="ƏDV, endirim və qeyd">
-          <div className="grid gap-3 sm:grid-cols-3">
-            <Field label="ƏDV" className="sm:col-span-2">
-              <Select
-                value={
-                  invoice.vatRate === 0 ? "yox" : invoice.vatIncluded ? "daxil" : "elave"
-                }
-                onChange={(event) => {
-                  const mode = event.target.value;
-                  setInvoice((current) => ({
-                    ...current,
-                    vatRate: mode === "yox" ? 0 : 18,
-                    vatIncluded: mode === "daxil",
-                  }));
-                }}
-              >
-                <option value="elave">18% — qiymətin üstünə əlavə olunur</option>
-                <option value="daxil">18% — qiymətə daxildir</option>
-                <option value="yox">ƏDV tutulmur</option>
-              </Select>
-            </Field>
-            <Field label="Endirim (%)">
-              <TextInput
-                inputMode="decimal"
-                value={String(invoice.discountPercent)}
-                onChange={(event) =>
-                  setInvoice((current) => ({
-                    ...current,
-                    discountPercent: Number(event.target.value.replace(",", ".")),
-                  }))
-                }
-              />
-            </Field>
-          </div>
-          <div className="mt-3">
-            <Field label="Qeyd" hint="Fakturanın altında görünür — ödəniş şərti, müqavilə nömrəsi.">
-              <TextArea
-                rows={2}
-                value={invoice.note}
-                onChange={(event) =>
-                  setInvoice((current) => ({ ...current, note: event.target.value }))
-                }
-              />
-            </Field>
-          </div>
-        </Section>
-      </div>
-
-      <div className="print-shell min-w-0 lg:sticky lg:top-24">
-        <div className="no-print mb-3 flex items-center justify-between gap-3">
+    <div>
+      {/* One toolbar for every width. It sits outside the two columns on
+          purpose: the PDF button has to stay reachable while the sheet itself
+          is the hidden pane. */}
+      <div className="no-print mb-4 flex flex-wrap items-center gap-3">
+        <SegmentedControl
+          className="lg:hidden"
+          options={PANES}
+          value={pane}
+          onChange={setPane}
+        />
+        <div className="ml-auto flex items-center gap-3">
           <p className="text-[13px] text-ink-muted">
             Ödəniləcək:{" "}
-            <span className="font-semibold text-ink tabular-nums">
+            <span className="font-mono font-medium tabular-nums text-ink">
               {formatMoney(totals.total)} ₼
             </span>
           </p>
@@ -467,8 +324,192 @@ export function InvoiceTool() {
             {busy ? "Hazırlanır…" : "PDF endir"}
           </Button>
         </div>
-        <div className="print-shell overflow-hidden rounded-md border border-line shadow-card">
-          <InvoicePreview invoice={invoice} />
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
+        {/* Below lg the two columns stack, which is where the page's height came
+            from; the segmented control picks one. Both stay mounted at every
+            width, and the sheet's `print-shell` is forced back to `display:block`
+            by the print stylesheet, so what gets printed never depends on the
+            selected pane. */}
+        <div
+          className={`no-print min-w-0 lg:block ${pane === "forma" ? "" : "hidden"}`}
+        >
+          <Panel>
+            <PanelHeader
+              title="Faktura məlumatları"
+              action={
+                <TextButton onClick={fillSample}>Nümunə ilə doldur</TextButton>
+              }
+            />
+            <Accordion className="px-4">
+              <AccordionItem summary="Faktura" hint={hint(invoiceSummary)} defaultOpen>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  <Field label="Nömrə">
+                    <TextInput
+                      value={invoice.number}
+                      onChange={(event) =>
+                        setInvoice((current) => ({ ...current, number: event.target.value }))
+                      }
+                    />
+                  </Field>
+                  <Field label="Tarix">
+                    <TextInput
+                      type="date"
+                      value={invoice.date}
+                      onChange={(event) =>
+                        setInvoice((current) => ({ ...current, date: event.target.value }))
+                      }
+                    />
+                  </Field>
+                  <Field label="Ödəniş tarixi">
+                    <TextInput
+                      type="date"
+                      value={invoice.dueDate}
+                      onChange={(event) =>
+                        setInvoice((current) => ({ ...current, dueDate: event.target.value }))
+                      }
+                    />
+                  </Field>
+                </div>
+              </AccordionItem>
+
+              <AccordionItem summary="Satıcı" hint={hint(partySummary(invoice.seller))}>
+                {partyForm("seller")}
+                <div className="mt-3">
+                  <TextButton onClick={saveSeller}>
+                    {restored ? "Yadda saxlanılıb" : "Yadda saxla"}
+                  </TextButton>
+                </div>
+              </AccordionItem>
+
+              <AccordionItem summary="Alıcı" hint={hint(partySummary(invoice.buyer))}>
+                {partyForm("buyer")}
+              </AccordionItem>
+
+              <AccordionItem summary="Sətirlər" hint={hint(itemsSummary)}>
+                <div className="space-y-4">
+                  {invoice.items.map((item, index) => (
+                    <div
+                      key={item.id}
+                      className="space-y-2 border-b border-line pb-4 last:border-b-0 last:pb-0"
+                    >
+                      <TextInput
+                        value={item.description}
+                        placeholder="Xidmətin və ya malın adı"
+                        onChange={(event) =>
+                          setItem(item.id, "description", event.target.value)
+                        }
+                      />
+                      {/* Description gets its own row: in the two-column layout a
+                          single-row table squeezed it down to a few pixels. */}
+                      <div className="grid min-w-0 grid-cols-2 items-center gap-2 sm:grid-cols-[4.5rem_1fr_7rem_6.5rem_1.5rem]">
+                        <TextInput
+                          inputMode="decimal"
+                          className="text-right"
+                          value={String(item.quantity)}
+                          placeholder="Miqdar"
+                          aria-label="Miqdar"
+                          onChange={(event) => setItem(item.id, "quantity", event.target.value)}
+                        />
+                        <Select
+                          value={item.unit}
+                          aria-label="Vahid"
+                          onChange={(event) => setItem(item.id, "unit", event.target.value)}
+                        >
+                          {UNITS.map((unit) => (
+                            <option key={unit} value={unit}>
+                              {unit}
+                            </option>
+                          ))}
+                        </Select>
+                        <TextInput
+                          inputMode="decimal"
+                          className="text-right"
+                          value={String(item.unitPrice)}
+                          placeholder="Qiymət"
+                          aria-label="Vahidin qiyməti"
+                          onChange={(event) => setItem(item.id, "unitPrice", event.target.value)}
+                        />
+                        <span className="text-right font-mono text-[13px] font-medium tabular-nums">
+                          {formatMoney(totals.lineTotals[index] ?? 0)}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => removeItem(item.id)}
+                          disabled={invoice.items.length === 1}
+                          aria-label="Sətri sil"
+                          className="justify-self-end text-[16px] leading-none text-ink-faint transition-colors hover:text-danger disabled:opacity-30"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-4">
+                  <TextButton onClick={addItem}>+ Sətir</TextButton>
+                </div>
+              </AccordionItem>
+
+              <AccordionItem summary="ƏDV və qeydlər" hint={hint(vatSummary)}>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  <Field label="ƏDV" className="sm:col-span-2">
+                    <Select
+                      value={
+                        invoice.vatRate === 0 ? "yox" : invoice.vatIncluded ? "daxil" : "elave"
+                      }
+                      onChange={(event) => {
+                        const mode = event.target.value;
+                        setInvoice((current) => ({
+                          ...current,
+                          vatRate: mode === "yox" ? 0 : 18,
+                          vatIncluded: mode === "daxil",
+                        }));
+                      }}
+                    >
+                      <option value="elave">18% — qiymətin üstünə əlavə olunur</option>
+                      <option value="daxil">18% — qiymətə daxildir</option>
+                      <option value="yox">ƏDV tutulmur</option>
+                    </Select>
+                  </Field>
+                  <Field label="Endirim (%)">
+                    <TextInput
+                      inputMode="decimal"
+                      value={String(invoice.discountPercent)}
+                      onChange={(event) =>
+                        setInvoice((current) => ({
+                          ...current,
+                          discountPercent: Number(event.target.value.replace(",", ".")),
+                        }))
+                      }
+                    />
+                  </Field>
+                </div>
+                <div className="mt-3">
+                  <Field label="Qeyd" hint="Fakturanın altında görünür — ödəniş şərti, müqavilə nömrəsi.">
+                    <TextArea
+                      rows={2}
+                      value={invoice.note}
+                      onChange={(event) =>
+                        setInvoice((current) => ({ ...current, note: event.target.value }))
+                      }
+                    />
+                  </Field>
+                </div>
+              </AccordionItem>
+            </Accordion>
+          </Panel>
+        </div>
+
+        <div
+          className={`print-shell min-w-0 lg:sticky lg:top-20 lg:block ${
+            pane === "onizleme" ? "" : "hidden"
+          }`}
+        >
+          <div className="print-shell overflow-hidden rounded-md border border-line">
+            <InvoicePreview invoice={invoice} />
+          </div>
         </div>
       </div>
     </div>

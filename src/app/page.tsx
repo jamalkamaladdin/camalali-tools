@@ -1,6 +1,11 @@
-import Link from "next/link";
-import { Container, Card, ButtonLink } from "@/components/ui";
-import { site, tools, toolPath } from "@/lib/site";
+import {
+  ButtonLink,
+  Container,
+  PageHead,
+  Panel,
+  SectionLabel,
+} from "@/components/ui";
+import { toolPath, tools } from "@/lib/site";
 
 export default function Home() {
   const live = tools.filter((t) => t.status === "live");
@@ -8,78 +13,55 @@ export default function Home() {
 
   return (
     <>
-      <section className="relative overflow-hidden border-b border-line bg-subtle">
-        <Container className="py-20 sm:py-28">
-          <h1 className="max-w-3xl text-[40px] sm:text-[56px]">
-            İşi qısaldan pulsuz alətlər
-          </h1>
-          <p className="mt-5 max-w-2xl text-[18px] leading-8 text-ink-muted">
-            Faktura hazırla, əmək haqqını hesabla. Hesablama brauzerdə aparılır
-            — yazdığın məlumat heç bir serverə göndərilmir, qeydiyyat istənmir,
-            nəticə reklamsız çıxır.
-          </p>
-          {live.length > 0 && (
-            <div className="mt-8 flex flex-wrap gap-3">
-              <ButtonLink href={toolPath(live[0].slug)}>
-                {live[0].title}
-              </ButtonLink>
-            </div>
-          )}
-        </Container>
-      </section>
+      {/* A masthead on the canvas, not a tinted hero band. The privacy line the
+          old hero carried is said once, in the footer. */}
+      <PageHead
+        title="İşi qısaldan pulsuz alətlər"
+        lead="Faktura hazırla, əmək haqqını hesabla — nəticə reklamsız çıxır."
+      />
 
-      <Container className="py-16 sm:py-20">
-        <div className="grid gap-5 sm:grid-cols-2">
+      <Container className="pb-14">
+        <SectionLabel>Alət</SectionLabel>
+        <div className="mt-4 space-y-4">
           {live.map((tool) => (
-            <Link key={tool.slug} href={toolPath(tool.slug)} className="group">
-              <Card className="h-full p-8 transition-shadow duration-300 [transition-timing-function:var(--ease-brand)] group-hover:shadow-card">
-                <h2 className="text-[20px]">{tool.title}</h2>
-                <p className="mt-2 text-[15px] leading-7 text-ink-muted">
-                  {tool.tagline}
-                </p>
-                <p className="mt-4 text-[14px] font-medium text-accent">
-                  Aç →
-                </p>
-              </Card>
-            </Link>
-          ))}
-
-          {planned.map((tool) => (
-            <Card key={tool.slug} className="h-full p-6 opacity-70">
-              <div className="flex items-start justify-between gap-4">
-                <h2 className="text-[20px]">{tool.title}</h2>
-                <span className="shrink-0 rounded-sm bg-accent-soft px-2 py-1 text-[12px] font-medium text-accent">
-                  hazırlanır
-                </span>
-              </div>
-              <p className="mt-2 text-[15px] leading-7 text-ink-muted">
+            <Panel key={tool.slug} className="p-5 sm:p-8">
+              <h2 className="text-[24px] sm:text-[26px]">{tool.title}</h2>
+              <p className="mt-3 max-w-[62ch] text-[16px] leading-[1.7] text-ink-muted">
                 {tool.tagline}
               </p>
-            </Card>
+              <div className="mt-6">
+                <ButtonLink href={toolPath(tool.slug)}>Alətə keç</ButtonLink>
+              </div>
+            </Panel>
           ))}
         </div>
       </Container>
 
-      <section className="border-t border-line bg-subtle">
-        <Container className="py-16">
-          <div className="max-w-2xl">
-            <h2 className="text-[28px]">Bu alətləri kim yazıb</h2>
-            <p className="mt-3 text-[17px] leading-8 text-ink-muted">
-              Mən {site.author.name} — proqram təminatı, sistem arxitekturası və
-              verilənlər bazası performansı üzrə işləyirəm. Bu alətlər gündəlik
-              işdə özümə lazım olduğu üçün yazılıb və pulsuz qalır.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <ButtonLink href={site.author.services} variant="secondary">
-                Xidmətlər
-              </ButtonLink>
-              <ButtonLink href={site.author.blog} variant="ghost">
-                Texniki yazılar
-              </ButtonLink>
-            </div>
-          </div>
+      {/* Planned tools are an index, not cards: a box with a "hazırlanır" pill
+          promises a page that does not exist. A muted row states the same fact
+          and costs a fifth of the height. */}
+      {planned.length > 0 && (
+        <Container className="pb-16">
+          <SectionLabel>Növbədə</SectionLabel>
+          <ul className="mt-1 divide-y divide-line border-b border-line">
+            {planned.map((tool, index) => (
+              <li key={tool.slug} className="flex items-baseline gap-4 py-3.5">
+                <span className="w-6 shrink-0 font-mono text-[12px] tabular-nums text-ink-faint">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div className="min-w-0">
+                  <p className="text-[15px] font-medium text-ink-muted">
+                    {tool.title}
+                  </p>
+                  <p className="mt-1 text-[14px] leading-[1.6] text-ink-faint">
+                    {tool.tagline}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </Container>
-      </section>
+      )}
     </>
   );
 }
