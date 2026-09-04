@@ -2,7 +2,7 @@
 
 Meta teqləri, sitemap, robots.txt və kanonik ünvanı qurur. Açar sözləri, linkləri və səhifənin axtarışda görünüşünü yoxlayır.
 
-19 alət.
+20 alət.
 
 | Alət | Nə edir | Fayllar | Xarici xidmət |
 |---|---|---|---|
@@ -25,5 +25,6 @@ Meta teqləri, sitemap, robots.txt və kanonik ünvanı qurur. Açar sözləri, 
 | [Sitemap və lent yoxlayıcısı](https://camalali.com/alet/sitemap-yoxlayici) | Canlı sitemap, RSS və ya Atom faylında ünvanlar, tarix aralığı, təkrarlar və XML qüsurları. | `lib/sitemap-yoxlayici.ts`, `components/sitemap-yoxlayici-tool.tsx`, `api/sitemap-yoxlayici/route.ts`, `tests/sitemap-yoxlayici.mts` | Yazdığın ünvanın öz saytı |
 | [Yönləndirmə zənciri](https://camalali.com/alet/yonlendirme-zenciri) | Yönləndirmə zəncirinin hər addımı, status kodu və son dayanacağı. | `lib/yonlendirme-zenciri.ts`, `components/yonlendirme-zenciri-tool.tsx`, `api/yonlendirme-zenciri/route.ts`, `tests/yonlendirme-zenciri.mts` | Yazdığın ünvanın öz saytı |
 | [Canlı robots.txt yoxlayıcısı](https://camalali.com/alet/robots-canli) | Canlı robots.txt-də yolu bloklayan qayda və həmin sətrin nömrəsi. | `lib/robots-canli.ts`, `components/robots-canli-tool.tsx`, `api/robots-canli/route.ts`, `tests/robots-canli.mts` | Yazdığın domenin öz saytı |
+| [Birləşik sayt hesabatı](https://camalali.com/alet/sayt-hesabati) | Bir ünvan yaz, təhlükəsizlik, sürət, meta və indeks bir hesabatda toplansın. | `components/sayt-hesabati-tool.tsx`, `api/sayt-hesabati/route.ts`, `tests/sayt-hesabati.mts` | Yazdığın ünvanın öz saytı |
 
 [← bütün kateqoriyalar](../README.md#kateqoriyalar)

@@ -4,7 +4,7 @@
   "private": false,
   "license": "MIT",
   "type": "module",
-  "description": "165 kiçik alət — camalali.com-dan generasiya olunub. JWT, DNS, hash, JSON, PDF və daha çoxu.",
+  "description": "166 small developer tools generated from camalali.com: JWT decoder, cron parser, regex tester, Base64, hash, UUID, JSON formatter, DNS lookup, SSL checker, CIDR calculator, colour converter, QR code and more.",
   "scripts": {
     "test": "tsx tests/run.mts"
   },
