@@ -36,18 +36,18 @@ export const groupLabels: Record<ToolGroup, string> = {
  * than praising them.
  */
 export const groupDescriptions: Record<ToolGroup, string> = {
-  seo: "Meta teq, sitemap, robots.txt, kanonik ünvan, açar söz və link analizi — səhifənin axtarışda necə göründüyünü qurmaq və yoxlamaq üçün.",
-  kod: "JWT açmaq, UUID yaratmaq, regex sınamaq, cron ifadəsini oxumaq, mətn fərqini görmək və SQL-i formatlamaq — gündəlik kod işi.",
-  shebeke: "Domenin DNS qeydləri, tapılan subdomenləri və IP alt şəbəkəsinin hesabı bir yerdə.",
-  tehlukesizlik: "Güclü parol, hash, saytın müdafiə başlıqları və parolun məlum sızmalarda olub-olmadığının yoxlanışı.",
-  cedvel: "Axtarılan cavabı bir cədvəldə verir: status kodu, HTTP başlığı, MIME tipi, port, əmr, icazə və simvol.",
-  format: "Bir formatı o birinə çevirən alətlər: JSON, YAML, Base64, URL kodlaşdırması və ad formatı.",
-  sistem: "Sistem dizaynının hesabı: gündəlik sorğu sayından RPS, saxlama və server sayı, üstəlik baza ilə arxitektura seçimi.",
-  metn: "Mətnin söz və simvol statistikası, azərbaycanca nümunə mətn və başlıqdan slug çıxarmaq.",
-  biznes: "Sənəd və pul tərəfi: hesab-faktura, layihənin müddət qiymətləndirməsi və valyuta məzənnəsi.",
-  fayl: "Şəkli brauzerdə sıxır, formatını dəyişir və bir ünvandan QR kod düzəldir.",
-  dizayn: "Rəng formatları arasında çevirmə və mətnlə fonun kontrastının ölçülməsi.",
-  ekosistem: "npm paketinin və GitHub profilinin canlı məlumatı — versiya, ölçü, asılılıq və fəaliyyət.",
+  seo: "Meta teqləri, sitemap, robots.txt və kanonik ünvanı qurur. Açar sözləri, linkləri və səhifənin axtarışda görünüşünü yoxlayır.",
+  kod: "JWT açır, UUID yaradır, regex sınayır və cron ifadəsini oxuyur. Mətn fərqini göstərir və SQL-i formatlayır.",
+  shebeke: "Domenin DNS qeydlərini və tapılan subdomenlərini göstərir. IP alt şəbəkəsini hesablayır.",
+  tehlukesizlik: "Parol və hash yaradır. Saytın müdafiə başlıqlarını və parolun məlum sızmalarda olub-olmadığını yoxlayır.",
+  cedvel: "Status kodları, HTTP başlıqları, MIME tipləri və portlar üçün arayış verir. Əmrlər, icazələr və simvollar da daxildir.",
+  format: "JSON, YAML, Base64, URL kodlaşdırması və ad formatları arasında çevirmə aparır.",
+  sistem: "Gündəlik sorğu sayına əsasən RPS, saxlama həcmi və server sayını hesablayır. Baza və arxitektura seçimini göstərir.",
+  metn: "Mətnin söz və simvol statistikasını hesablayır. Azərbaycanca nümunə mətn yaradır və başlıqdan slug çıxarır.",
+  biznes: "Hesab-faktura hazırlayır, layihənin müddətini qiymətləndirir və valyuta məzənnəsini göstərir.",
+  fayl: "Şəkli brauzerdə sıxır və formatını dəyişir. Verilən ünvandan QR kod yaradır.",
+  dizayn: "Rəng formatları arasında çevirmə aparır və mətnlə fonun kontrastını ölçür.",
+  ekosistem: "npm paketinin versiyasını, ölçüsünü və asılılıqlarını göstərir. GitHub profilinin fəaliyyət məlumatını da alır.",
 };
 
 /*

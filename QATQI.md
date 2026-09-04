@@ -1,47 +1,46 @@
 # Bu repo necə qurulub
 
-Bu repo **generasiya olunur.** Burada gördüyün hər fayl `camalali` adlı əsas
-layihədən avtomatik ixrac edilib — burada əl ilə fayl yazılmır və yazılmamalıdır.
-Bura etdiyin dəyişiklik saxlanmır: növbəti ixrac köhnə vəziyyəti tamamilə
-üstünə yazır və sənin dəyişikliyin izsiz gedir.
+Bu repo generasiya olunur. Buradakı hər fayl `camalali` adlı əsas layihədən
+avtomatik ixrac edilib. Burada fayllar əl ilə yazılmır və yazılmamalıdır.
+Etdiyin dəyişiklik saxlanmır. Növbəti ixrac köhnə vəziyyətin üstünə yazır və
+dəyişiklik itir.
 
 ## Baq tapdınsa
 
-camalali.com-dakı əlaqə formasından yaz. Baq burada düzəldilmir — mənbə
-alətdə düzəldilir, sonra növbəti ixracla bura düşür. Bu repoya birbaşa pull
-request göndərmə, o nəzərdən keçirilməyəcək.
+camalali.com-dakı əlaqə formasından yaz. Baq burada deyil, mənbə alətdə
+düzəldilir. Sonra növbəti ixracla bura düşür. Bu repoya birbaşa pull request
+göndərmə. O, nəzərdən keçirilməyəcək.
 
 ## Təklif varsa
 
-Yeni alət fikri, mövcud alətdə əskik funksiya, mətndə səhv — yenə eyni yol:
-camalali.com-dakı əlaqə formasından yaz. Bu repo öz təqviminə görə yenilənir,
-sənin təklifin bir sonrakı ixrac dalğasında görünə bilər.
+Yeni alət fikri, mövcud alətdə əskik funksiya və ya mətndə səhv üçün
+camalali.com-dakı əlaqə formasından yaz. Bu repo öz təqviminə görə yenilənir.
+Təklifin bir sonrakı ixrac dalğasında görünə bilər.
 
 ## Düzəliş göndərmək istəyirsənsə
 
-Kodu forkla, düzəlişini öz nüsxəndə saxla — bu, dəstəklənən bir iş axınıdır,
-çünki repo MIT lisenziyalıdır. Amma yuxarı axına (bu repoya və ya əsas
-`camalali` layihəsinə) PR gözləmə; mənbə dəyişikliyi yalnız layihə sahibi
-tərəfindən edilir.
+Kodu forkla və düzəlişi öz nüsxəndə saxla. Repo MIT lisenziyalı olduğu üçün bu
+iş axını dəstəklənir. Yuxarı axına (bu repoya və ya əsas `camalali` layihəsinə)
+PR gözləmə. Mənbə dəyişikliyini yalnız layihə sahibi edir.
 
 ## Bir alət necə qurulub
 
-Hər alət bir neçə fayldan ibarətdir, hamısı eyni `<slug>` adı ilə bağlanır:
+Hər alət bir neçə fayldan ibarətdir. Onlar eyni `<slug>` adı ilə bağlanır:
 
-- `lib/<slug>.ts` — asılılıqsız hesablama məntiqi (React-siz, DOM-suz).
-- `components/<slug>-tool.tsx` — React + Tailwind 4 widget-i, `lib/` faylını
+- `lib/<slug>.ts`: asılılıqsız hesablama məntiqi (React-siz, DOM-suz).
+- `components/<slug>-tool.tsx`: React + Tailwind 4 widget-i, `lib/` faylını
   çağırır və ortaq primitivlərdən (`ui.tsx`, `tabs.tsx`, `reference-table.tsx`,
   `inline-code.tsx`) istifadə edir.
-- `api/<slug>/route.ts` — yalnız kənar ünvana sorğu göndərən alətlərdə var;
+- `api/<slug>/route.ts`: yalnız kənar ünvana sorğu göndərən alətlərdə var.
   `safe-url.ts`, `safe-fetch.ts`, `api-route.ts`, `api-cache.ts`,
   (xam soket alətlərində) `socket-probe.ts` hasarlarına bağlıdır.
-- `tests/<slug>.mts` — `pnpm test` ilə işləyən, `lib/` faylının funksiyalarını
-  yoxlayan test dəsti. Bütün repoda 2339 test halı, 158 test faylı var —
-  götürdüyün alətin öz testi ilə gəlir, öz layihəndə eynilə işlədə bilərsən.
-- `kateqoriya/` altında reyestr girişi — alətin adı, təsviri, açar sözləri,
+- `tests/<slug>.mts`: `pnpm test` ilə işləyən və `lib/` faylının funksiyalarını
+  yoxlayan test dəsti. Bütün repoda 2339 test halı və 158 test faylı var.
+  Götürdüyün alət öz testi ilə gəlir. Onu öz layihəndə eynilə işlədə bilərsən.
+- `kateqoriya/` altında reyestr girişi: alətin adı, təsviri, açar sözləri və
   hansı kateqoriyaya düşdüyü.
 
-Bu quruluşun tam izahı və hər qatı necə götürəcəyin — bir başlığa, bir
-şəbəkə hasarına, bir Azərbaycan dili tələsinə qədər — `ISTIFADE.md`-dədir.
-Oranı oxumadan tək bir faylı köçürüb işlətməyə çalışma, xüsusən şəbəkə
-alətlərində: hasar faylları əskik qalsa, açıq proksi qurmuş olursan.
+Quruluşun tam izahı və hər qatın necə götürülməsi `ISTIFADE.md`-dədir. Buraya
+başlıq, şəbəkə hasarı və Azərbaycan dili tələsi də daxildir. Xüsusən şəbəkə
+alətlərində oranı oxumadan tək faylı köçürüb işlətmə. Hasar faylları əskik
+qalsa, açıq proksi qurmuş olursan.
