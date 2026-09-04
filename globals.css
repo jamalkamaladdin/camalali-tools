@@ -1,0 +1,1243 @@
+@import "tailwindcss";
+
+/*
+ * One system, not three costumes.
+ * ------------------------------
+ * The site used to ship an Ubuntu, a Windows XP and an iOS skin over the same
+ * markup, and the iOS one was the odd member out: it was the Ubuntu geometry
+ * with Apple colours poured into it, set in a monospace face iOS has never used
+ * for interface text. Both older skins are gone. What is left is a single
+ * design system built from Apple's own vocabulary — system colours, the SF type
+ * ramp, grouped-list surfaces, segmented controls, materials and the iOS
+ * spring — and every token below is stated once, in `:root`, with a dark half
+ * reached only by the explicit toggle.
+ *
+ * Anything measured is written down beside the value. A number here without a
+ * note is a design decision; a number with one is a contrast reading that must
+ * be re-measured before it changes (`pnpm contrast`).
+ */
+
+:root {
+  /* ---------- system colours ---------- */
+  /*
+   * `--paper` is systemGroupedBackground and `--surface` is the cell laid on
+   * it, which is the whole shape of an iOS screen: a grey ground carrying
+   * white cards. Nothing on this site paints a card and forgets its ground.
+   */
+  --paper: #f2f2f7;
+  --surface: #ffffff;
+  --window: #ffffff;
+  --window-ink: var(--ink);
+
+  --ink: #1c1c1e;
+  /*
+   * Apple's secondaryLabel is #8e8e93, which measures 3.26:1 on white — under
+   * the 4.5 AA line, and what made every page read as washed out. Darkened to
+   * the first value on the grey ramp that clears it.
+   */
+  --muted: #6b6b73;
+  /* tertiaryLabel: used only where the text is decorative or duplicated. */
+  --muted-2: #8e8e93;
+
+  /* separator / opaqueSeparator */
+  --rule: rgba(60, 60, 67, 0.29);
+  --rule-opaque: #c6c6c8;
+
+  /*
+   * systemBlue in three jobs, because one hex cannot do all three.
+   *
+   * `--accent` is the raw fill: a switch track, a selection tint, a progress
+   * bar — surfaces that carry no text. `--accent-text` is the ink twin, because
+   * the raw blue on white measures 3.9:1, under AA. `--accent-fill` is the
+   * ground a WHITE label sits on: white on systemBlue measures 3.99:1 and the
+   * filled button failed the gate at 4.02:1, so the fill steps one stop down to
+   * the blue Apple itself uses on the web. Measured: white on it, 4.80:1.
+   */
+  --accent: #007aff;
+  --accent-text: #0a5fc4;
+  --accent-fill: #0071e3;
+
+  /*
+   * systemRed, and the same split for the same reason: the fill colour on white
+   * measures 3.35:1, so a validation message set in it would fail AA. The
+   * darker twin is what error text uses; the raw one stays for fills and marks.
+   */
+  --danger: #ff3b30;
+  --danger-text: #c9271d;
+
+  /*
+   * The four system fills, in Apple's own order. Every unpainted control on
+   * the site — a segmented track, a plain button, a search field, a switch in
+   * its off state — is one of these over the surface beneath it, which is why
+   * none of them writes a colour of its own.
+   */
+  --fill-1: rgba(120, 120, 128, 0.2);
+  --fill-2: rgba(120, 120, 128, 0.16);
+  --fill-3: rgba(120, 120, 128, 0.12);
+  --fill-4: rgba(120, 120, 128, 0.08);
+
+  /*
+   * The lifted thumb inside a segmented control, and the ink of the segments
+   * that are NOT lifted.
+   *
+   * The off state needs its own value because `--muted` is measured against
+   * `--surface`, and a segment sits on neither: it sits on a system fill laid
+   * over whatever the control was dropped into. The worst of those grounds is
+   * a segmented control INSIDE a result panel — fill over `--result` — which
+   * measured rgb(209,214,225), and `--muted` reached only 4.4:1 there. This is
+   * picked against that ground: 4.82:1 on it, 5.95:1 on the ordinary track.
+   */
+  --seg-ink-off: #58585f;
+  --seg-thumb: #ffffff;
+  --seg-thumb-shadow: 0 3px 8px rgba(0, 0, 0, 0.12), 0 3px 1px rgba(0, 0, 0, 0.04);
+
+  /*
+   * Material: the translucent, blurred chrome iOS puts behind a navigation bar,
+   * a tab bar and a sheet. It is not a colour with opacity — the blur is half
+   * of it, which is why the two always travel together (`.ios-material`).
+   */
+  --material: rgba(249, 249, 249, 0.82);
+  /*
+   * The thick grade. iOS ships several material weights, and an alert takes a
+   * heavier one than a navigation bar for a reason: an alert is drawn over a
+   * dimmed screen, so a bar's translucency lets the scrim through and the card
+   * arrives grey instead of white. Measured on the 404 before this existed.
+   */
+  --material-thick: rgba(252, 252, 253, 0.94);
+  --material-blur: saturate(180%) blur(20px);
+
+  /*
+   * The result surface, and the ink pair that goes with it.
+   *
+   * A computed, read-only readout is a different material from a field the
+   * visitor types into. The phone puts white cells on grey; here the field is
+   * already the white one, so the readout takes the grey and the pair reads the
+   * way a Settings screen does. Measured: 1.29:1 on `--surface` (the point at
+   * which two large fields stop reading as one is 1.25), ink 13.2:1,
+   * `--result-muted` 4.98:1 on that ground.
+   */
+  --result: #dde3ee;
+  --result-rule: #b9c3d6;
+  --result-muted: #5e5e67;
+
+  --hover: rgba(120, 120, 128, 0.12);
+
+  /*
+   * Elevation. iOS lifts, it does not cut: three soft, wide rungs — panels on
+   * 1, windows on 2, the focused window and transient chrome on 3.
+   */
+  --elev-1: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --elev-2: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --elev-3: 0 12px 48px rgba(0, 0, 0, 0.18);
+
+  /* ---------- shape ---------- */
+  /*
+   * The iOS radius ladder. A grouped list is 10, a card or a sheet 14, a large
+   * surface 18, a window 20; a compact control is a capsule.
+   */
+  --r-sm: 0.375rem;
+  --r-md: 0.625rem;
+  --r-lg: 0.875rem;
+  --r-xl: 1.125rem;
+  --r-window: 1.25rem;
+  --r-capsule: 980px;
+
+  /* ---------- type ---------- */
+  /*
+   * SF Pro where it exists, the loaded web face everywhere else. `-apple-system`
+   * leads so an Apple device draws the real thing; the web font follows so a
+   * Windows or Android visitor still gets ONE consistent face rather than that
+   * machine's own UI font, which would make the site look like that machine.
+   */
+  --font-ui-stack: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+    var(--font-web-sans), system-ui, sans-serif;
+  /*
+   * Code, and only code. The web face leads here for a different reason: the
+   * system monospaces either lack ə or draw it in another hand, so the letter
+   * fell out of the line mid-word. Measured: in the loaded face e/ə/ğ/ş/İ are
+   * all the same width.
+   */
+  --font-code-stack: var(--font-web-mono), ui-monospace, SFMono-Regular, "SF Mono", Menlo,
+    monospace;
+
+  /* ---------- controls ---------- */
+  /*
+   * A compact button is a capsule filled with a system fill and no edge at all,
+   * which is the iOS control idiom. `--field-radius` is separate on purpose: a
+   * capsule on a 636x192 textarea is an ellipse that clips the first three
+   * characters of the first line.
+   */
+  --btn-face: var(--fill-3);
+  --btn-hover-face: var(--fill-1);
+  --btn-border: transparent;
+  --btn-radius: var(--r-capsule);
+  --btn-shadow: none;
+  --btn-sheen: none;
+  --field-radius: var(--r-md);
+  /*
+   * A field's edge is what tells a visitor where to type, and a fill alone does
+   * not carry it: systemFill over white resolves to #eeeef0, 1.11:1 against the
+   * page. WCAG 1.4.11 wants 3:1 for a control boundary; systemGray is the first
+   * value on Apple's own ramp that clears it (3.26:1 light, 5.18:1 dark).
+   */
+  --field-border: #8e8e93;
+
+  /* Keyboard focus. An outline, because the elevation ladder already owns
+     box-shadow on most of the chrome. */
+  --focus-color: var(--accent);
+  --focus-offset: 2px;
+
+  /* ---------- motion ---------- */
+  /*
+   * The iOS curve. Everything that moves on this site uses one of these two,
+   * so a window, a sheet, a segment thumb and a menu all decelerate alike.
+   */
+  --ease-ios: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-fast: 0.2s;
+  --dur-base: 0.35s;
+
+  /*
+   * Pointers. Drawn here rather than shipped as files so they take no request.
+   * Safari does not accept an SVG cursor and falls back to the keyword after
+   * the comma, which is the ordinary system pointer — a degradation, not a break.
+   */
+  --cursor-default: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2724%27%20height%3D%2724%27%20viewBox%3D%270%200%2024%2024%27%3E%3Cpath%20d%3D%27M3%201.5%203%2019.2%207.6%2014.9%2010.6%2021.5%2013.6%2020.1%2010.7%2013.7%2016.8%2013.4Z%27%20fill%3D%27%23000000%27%20stroke%3D%27%23ffffff%27%20stroke-width%3D%271.2%27%20stroke-linejoin%3D%27round%27%2F%3E%3C%2Fsvg%3E") 2 1, default;
+  --cursor-pointer: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2724%27%20height%3D%2724%27%20viewBox%3D%270%200%2024%2024%27%3E%3Cpath%20d%3D%27M9%2012.3V4.6a1.6%201.6%200%200%201%203.2%200v5.6h.9V6.6a1.5%201.5%200%200%201%203%200v3.6h.9V8.1a1.4%201.4%200%200%201%202.8%200v7.6c0%203.3-2.1%205.8-5.4%205.8h-1.6c-2%200-3.2-.8-4.2-2.4l-3-4.9a1.5%201.5%200%200%201%202.3-1.9Z%27%20fill%3D%27%23000000%27%20stroke%3D%27%23ffffff%27%20stroke-width%3D%271.2%27%20stroke-linejoin%3D%27round%27%2F%3E%3C%2Fsvg%3E") 8 2, pointer;
+  --cursor-text: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2716%27%20height%3D%2724%27%20viewBox%3D%270%200%2016%2024%27%3E%3Cpath%20d%3D%27M5%202h6M5%2022h6M8%202v20%27%20fill%3D%27none%27%20stroke%3D%27%23ffffff%27%20stroke-width%3D%273%27%20stroke-linecap%3D%27round%27%2F%3E%3Cpath%20d%3D%27M5%202h6M5%2022h6M8%202v20%27%20fill%3D%27none%27%20stroke%3D%27%23000000%27%20stroke-width%3D%271.4%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E") 8 12, text;
+}
+
+/*
+ * Dark is opt-in, not inherited from the OS: the site opens on the light
+ * screen whatever the machine prefers, and the choice is then remembered.
+ */
+:root[data-theme="dark"] {
+  --paper: #000000;
+  --surface: #1c1c1e;
+  --window: #1c1c1e;
+  --ink: #f2f2f7;
+  /*
+   * Lightened from Apple's #8e8e93, the mirror of the correction the light half
+   * carries. The dark control face — rgba(235,235,245,0.12) over #1c1c1e —
+   * resolves to #353538, and that grey on that face measured 3.75:1: every pill
+   * button, tab and chip read as switched off. This measures 5.17:1 there,
+   * 7.19:1 on the window and 8.88:1 on the black page.
+   */
+  --muted: #a8a8ae;
+  --muted-2: #8e8e93;
+  --rule: rgba(235, 235, 245, 0.18);
+  --rule-opaque: #38383a;
+  --accent: #0a84ff;
+  --accent-text: #64b5ff;
+  /* The dark half's fill is darker, not brighter: a white label on the lighter
+     dark-mode blue measured 3.65:1. This one measures 5.2:1. */
+  --accent-fill: #0a6cd4;
+  --danger: #ff453a;
+  --danger-text: #ff6961;
+
+  --fill-1: rgba(235, 235, 245, 0.2);
+  --fill-2: rgba(235, 235, 245, 0.16);
+  --fill-3: rgba(235, 235, 245, 0.12);
+  --fill-4: rgba(235, 235, 245, 0.08);
+
+  /* The same worst case on the dark half: fill over `--result` resolves to
+     rgb(71,72,80), where the lighter grey measured 4.22:1. This measures
+     4.82:1 there and 7.08:1 on the ordinary track. */
+  --seg-ink-off: #bcbcc4;
+  /* systemGray on black: the thumb has to be lighter than its track, not white. */
+  --seg-thumb: #636366;
+  --seg-thumb-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+
+  --material: rgba(30, 30, 32, 0.76);
+  --material-thick: rgba(44, 44, 46, 0.94);
+
+  /* iOS dark: systemGray5 with the same blue lean, one rung above the card the
+     fields sit on. 1.33:1 on `--surface`, ink 11.5:1, muted 7.29:1. */
+  --result: #30323a;
+  --result-rule: #4b4e59;
+  /*
+   * Lightened once more, and the ground that forced it is a fourth one: a
+   * BUTTON inside a readout. `--btn-face` lays rgba(235,235,245,0.12) over
+   * `--result`, which resolves to #474850, and #b2b2b8 measured 4.31:1 there —
+   * every switched-off segment in a result panel failed while the same grey
+   * passed on the panel itself. This measures 4.81:1 on that face and 7.29:1
+   * on `--result`, and is still inside the iOS grey ramp.
+   */
+  --result-muted: #bcbcc2;
+
+  --hover: rgba(235, 235, 245, 0.12);
+
+  /* A shadow alone is invisible on black, so each rung carries a hairline of
+     light on top of the drop — what the real dark system does. */
+  --elev-1: 0 0 0 1px rgba(235, 235, 245, 0.08), 0 1px 3px rgba(0, 0, 0, 0.6);
+  --elev-2: 0 0 0 1px rgba(235, 235, 245, 0.1), 0 8px 24px rgba(0, 0, 0, 0.65);
+  --elev-3: 0 0 0 1px rgba(235, 235, 245, 0.14), 0 20px 56px rgba(0, 0, 0, 0.8);
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-muted-2: var(--muted-2);
+  --color-rule: var(--rule);
+  --color-rule-opaque: var(--rule-opaque);
+  /* The edge of something you type into — a control boundary, not a hairline
+     between blocks. See the note beside `--field-border`. */
+  --color-field: var(--field-border);
+  --color-accent: var(--accent);
+  /* The accent as ink rather than as a fill. */
+  --color-accent-text: var(--accent-text, var(--accent));
+  /* The accent as a ground under white ink. See the note beside `--accent-fill`. */
+  --color-accent-fill: var(--accent-fill, var(--accent));
+  --color-danger: var(--danger);
+  --color-danger-text: var(--danger-text, var(--danger));
+  --color-surface: var(--surface);
+  --color-result: var(--result);
+  --color-result-rule: var(--result-rule);
+  --color-hover: var(--hover);
+  --color-window: var(--window);
+  /* The system fills, as `bg-fill-1` … `bg-fill-4`. */
+  --color-fill-1: var(--fill-1);
+  --color-fill-2: var(--fill-2);
+  --color-fill-3: var(--fill-3);
+  --color-fill-4: var(--fill-4);
+
+  /*
+   * Two faces, and the split between them is the whole typographic argument of
+   * this system: `font-ui` is interface text and `font-mono` is code. iOS has
+   * never set a label, a tab, a heading or a table header in a monospace, and
+   * the site used to set all four that way.
+   */
+  --font-sans: var(--font-ui-stack);
+  --font-ui: var(--font-ui-stack);
+  --font-mono: var(--font-code-stack);
+
+  /* Exposes the ladder as `shadow-elev-1|2|3`, so no component writes a shadow. */
+  --shadow-elev-1: var(--elev-1);
+  --shadow-elev-2: var(--elev-2);
+  --shadow-elev-3: var(--elev-3);
+
+  --radius-ios-sm: var(--r-sm);
+  --radius-ios: var(--r-md);
+  --radius-ios-lg: var(--r-lg);
+  --radius-ios-xl: var(--r-xl);
+}
+
+@layer base {
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-ui-stack);
+    /*
+     * 17px is the iOS body size, and the tracking is Apple's own for it. The
+     * root stays at 16px so every rem-based measurement in the layout keeps its
+     * meaning; only the text grows.
+     */
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /*
+   * Code keeps the monospace face wherever it appears, including inside MDX,
+   * so the split above needs no class at the call site.
+   */
+  code,
+  kbd,
+  samp,
+  pre {
+    font-family: var(--font-code-stack);
+    letter-spacing: 0;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--accent) 30%, transparent);
+    color: var(--ink);
+  }
+
+  /*
+   * One focus treatment for the whole interface. `:where` keeps the specificity
+   * at zero, so any component that needs a different ring simply says so.
+   */
+  :where(a, button, [role="button"], [tabindex], input, select, textarea, summary):focus-visible {
+    outline: 2px solid var(--focus-color);
+    outline-offset: var(--focus-offset);
+  }
+}
+
+/*
+ * The window column sits at the left edge on list pages and centres on an
+ * article, which the page declares and the frame stays unaware of.
+ */
+main > div:has([data-window="centered"]) {
+  margin-inline: auto;
+}
+
+@utility shell {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 44rem;
+  padding-inline: 1.25rem;
+}
+
+/*
+ * The iOS type ramp, as utilities. Sizes, leadings and tracking are Apple's
+ * published values; a component that needs "a heading" asks for the ramp step
+ * rather than picking a pixel size of its own.
+ */
+@utility text-ios-large-title {
+  font-size: 2.125rem;
+  line-height: 2.5625rem;
+  letter-spacing: 0.0074em;
+  font-weight: 700;
+}
+
+@utility text-ios-title1 {
+  font-size: 1.75rem;
+  line-height: 2.125rem;
+  letter-spacing: 0.0089em;
+  font-weight: 700;
+}
+
+@utility text-ios-title2 {
+  font-size: 1.375rem;
+  line-height: 1.75rem;
+  letter-spacing: 0.0116em;
+  font-weight: 700;
+}
+
+@utility text-ios-title3 {
+  font-size: 1.25rem;
+  line-height: 1.5625rem;
+  letter-spacing: 0.0145em;
+  font-weight: 600;
+}
+
+@utility text-ios-headline {
+  font-size: 1.0625rem;
+  line-height: 1.375rem;
+  letter-spacing: -0.0253em;
+  font-weight: 600;
+}
+
+@utility text-ios-body {
+  font-size: 1.0625rem;
+  line-height: 1.375rem;
+  letter-spacing: -0.0253em;
+}
+
+@utility text-ios-callout {
+  font-size: 1rem;
+  line-height: 1.3125rem;
+  letter-spacing: -0.02em;
+}
+
+@utility text-ios-subhead {
+  font-size: 0.9375rem;
+  line-height: 1.25rem;
+  letter-spacing: -0.0153em;
+}
+
+@utility text-ios-footnote {
+  font-size: 0.8125rem;
+  line-height: 1.125rem;
+  letter-spacing: -0.0062em;
+}
+
+@utility text-ios-caption {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0;
+}
+
+@utility text-ios-caption2 {
+  font-size: 0.6875rem;
+  line-height: 0.8125rem;
+  letter-spacing: 0.0044em;
+}
+
+/*
+ * Article body. The reading column is set by the page; the prose fills it.
+ */
+@layer components {
+  .prose-az {
+    max-width: none;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+  }
+
+  .prose-az > * + * {
+    margin-top: 1.25rem;
+  }
+
+  .prose-az h2 {
+    margin-top: 3.25rem;
+    font-size: 1.5rem;
+    line-height: 1.35;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+
+  .prose-az h3 {
+    margin-top: 2.25rem;
+    font-size: 1.1875rem;
+    line-height: 1.4;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+  }
+
+  .prose-az h2 + *,
+  .prose-az h3 + * {
+    margin-top: 0.85rem;
+  }
+
+  .prose-az h2 a,
+  .prose-az h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .prose-az a {
+    color: var(--accent-text, var(--accent));
+    text-underline-offset: 3px;
+    text-decoration-line: underline;
+    text-decoration-color: color-mix(in srgb, var(--accent-text) 35%, transparent);
+  }
+
+  .prose-az ul,
+  .prose-az ol {
+    padding-left: 1.25rem;
+    font-size: inherit;
+  }
+
+  .prose-az ul {
+    list-style: disc;
+  }
+
+  .prose-az ol {
+    list-style: decimal;
+  }
+
+  .prose-az li + li {
+    margin-top: 0.4rem;
+  }
+
+  .prose-az blockquote {
+    border-left: 3px solid var(--rule-opaque);
+    padding-left: 1rem;
+    color: var(--muted);
+  }
+
+  /*
+   * A table is a grouped list laid sideways: the header is interface text in
+   * the UI face, not a monospaced label.
+   */
+  .prose-az table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  .prose-az th,
+  .prose-az td {
+    border-bottom: 1px solid var(--rule);
+    padding: 0.55rem 0.75rem 0.55rem 0;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .prose-az th {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .prose-az :not(pre) > code {
+    background: var(--fill-4);
+    border-radius: 0.3125rem;
+    padding: 0.12em 0.35em;
+    font-size: 0.875em;
+  }
+
+  .prose-az pre {
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    border-radius: var(--r-md);
+    padding: 1rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+}
+
+/* Shiki emits both themes; pick one from the chosen theme, no JavaScript. */
+:root[data-theme="dark"] .shiki,
+:root[data-theme="dark"] .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}
+
+/*
+ * ============================================================
+ * The control layer
+ * ============================================================
+ * Each block below is one iOS control, written once. A component asks for the
+ * class; it never redraws the shape. That is what stops the site drifting back
+ * into "a rectangle with a border" for every control it needs.
+ *
+ * All of it lives in `@layer components`, which is not decoration: an unlayered
+ * rule outranks every Tailwind utility, so `.ios-btn-plain` would have swallowed
+ * a `hover:bg-*` and `.ios-segmented`'s `display` would have swallowed a
+ * `hidden`. Inside this layer a utility at the call site always wins, which is
+ * the precedence a component class needs.
+ */
+@layer components {
+  /* ---------- segmented control ---------- */
+  /*
+   * The track is a system fill, the chosen segment a lifted thumb. The selected
+   * state is a SHAPE, not a colour — a filled slab that casts a shadow, plus a
+   * heavier weight — so it survives greyscale and colour blindness without a
+   * contrast pair to fail.
+   */
+  .ios-segmented {
+    display: inline-flex;
+    align-items: stretch;
+    gap: 2px;
+    padding: 2px;
+    border-radius: 0.5625rem;
+    background: var(--fill-3);
+  }
+
+  .ios-segmented > * {
+    position: relative;
+    border: 0;
+    border-radius: 0.4375rem;
+    padding: 0.3125rem 0.75rem;
+    background: transparent;
+    color: var(--ink);
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    letter-spacing: -0.006em;
+    white-space: nowrap;
+    transition:
+      background-color var(--dur-fast) var(--ease-ios),
+      color var(--dur-fast) var(--ease-ios),
+      box-shadow var(--dur-fast) var(--ease-ios);
+  }
+
+  .ios-segmented
+    > *:not([aria-selected="true"], [aria-checked="true"], [aria-pressed="true"], [aria-current="page"]) {
+    color: var(--seg-ink-off);
+  }
+
+  .ios-segmented
+    > *:hover:not(
+      [aria-selected="true"],
+      [aria-checked="true"],
+      [aria-pressed="true"],
+      [aria-current="page"]
+    ) {
+    color: var(--ink);
+  }
+
+  /*
+   * Four ways of saying "this one". A tab strip built from buttons marks itself
+   * with `aria-selected`, a radiogroup with `aria-checked`, a toggle set with
+   * `aria-pressed` — and a strip built from real links has to use
+   * `aria-current="page"`, because `aria-selected` on an `<a>` is invalid ARIA.
+   * The look is one thing, so all four resolve here.
+   */
+  .ios-segmented > [aria-selected="true"],
+  .ios-segmented > [aria-checked="true"],
+  .ios-segmented > [aria-pressed="true"],
+  .ios-segmented > [aria-current="page"] {
+    background: var(--seg-thumb);
+    box-shadow: var(--seg-thumb-shadow);
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /*
+   * A hairline between two unselected segments, the way the phone draws it, and
+   * it disappears next to the thumb. Drawn on the element so no separator markup
+   * has to exist.
+   */
+  .ios-segmented > * + *::before {
+    content: "";
+    position: absolute;
+    left: -1.5px;
+    top: 20%;
+    bottom: 20%;
+    width: 1px;
+    background: var(--rule);
+    transition: opacity var(--dur-fast) var(--ease-ios);
+  }
+
+  .ios-segmented > [aria-selected="true"]::before,
+  .ios-segmented > [aria-checked="true"]::before,
+  .ios-segmented > [aria-pressed="true"]::before,
+  .ios-segmented > [aria-current="page"]::before,
+  .ios-segmented > [aria-selected="true"] + *::before,
+  .ios-segmented > [aria-checked="true"] + *::before,
+  .ios-segmented > [aria-pressed="true"] + *::before,
+  .ios-segmented > [aria-current="page"] + *::before {
+    opacity: 0;
+  }
+
+  /* Wide variant: the segments share the row equally, as they do on a phone. */
+  .ios-segmented-fill {
+    display: flex;
+    width: 100%;
+  }
+
+  .ios-segmented-fill > * {
+    flex: 1 1 0;
+    text-align: center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ios-segmented > * {
+      transition: none;
+    }
+  }
+
+  /* ---------- inset grouped list ---------- */
+  /*
+   * The single most iOS surface there is: a rounded white container on the grey
+   * ground, rows 44px tall, separators inset to where the row's text begins and
+   * never drawn under the last row.
+   */
+  .ios-list {
+    background: var(--surface);
+    border-radius: var(--r-md);
+    overflow: hidden;
+  }
+
+  .ios-list-plain {
+    background: transparent;
+    border-radius: 0;
+  }
+
+  .ios-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 2.75rem;
+    padding: 0.6875rem 1rem;
+    width: 100%;
+    text-align: left;
+    color: var(--ink);
+    transition: background-color var(--dur-fast) var(--ease-ios);
+  }
+
+  .ios-row::after {
+    content: "";
+    position: absolute;
+    left: 1rem;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--rule);
+    transform: scaleY(0.5);
+    transform-origin: bottom;
+  }
+
+  .ios-row:last-child::after,
+  .ios-list > *:last-child .ios-row::after {
+    display: none;
+  }
+
+  a.ios-row:hover,
+  button.ios-row:hover,
+  summary.ios-row:hover {
+    background: var(--fill-4);
+  }
+
+  a.ios-row:active,
+  button.ios-row:active,
+  summary.ios-row:active {
+    background: var(--fill-3);
+  }
+
+  /*
+   * The header above a group. Not `uppercase`: CSS upper-casing turns the
+   * Azerbaijani "i" into "I" instead of "İ", so weight and colour do the job the
+   * capitals would have done.
+   */
+  .ios-group-header {
+    padding: 0 1rem 0.4375rem;
+    color: var(--muted);
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+    letter-spacing: -0.006em;
+  }
+
+  .ios-group-footer {
+    padding: 0.4375rem 1rem 0;
+    color: var(--muted);
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+  }
+
+  /* The disclosure chevron a row carries on its trailing edge. */
+  .ios-chevron {
+    flex-shrink: 0;
+    color: var(--muted-2);
+    transition: transform var(--dur-fast) var(--ease-ios);
+  }
+
+  [open] > .ios-row > .ios-chevron,
+  [open] > summary > .ios-chevron {
+    transform: rotate(90deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ios-chevron,
+    .ios-row {
+      transition: none;
+    }
+  }
+
+  /* ---------- switch ---------- */
+  /*
+   * 51x31 with a 27px thumb, which is the real control's geometry. The off state
+   * is a system fill rather than a colour, so it reads as "empty" and not as a
+   * second colour competing with the on state.
+   */
+  .ios-switch {
+    position: relative;
+    flex-shrink: 0;
+    width: 3.1875rem;
+    height: 1.9375rem;
+    border-radius: 999px;
+    background: var(--fill-1);
+    transition: background-color var(--dur-base) var(--ease-ios);
+  }
+
+  .ios-switch[aria-checked="true"] {
+    background: var(--accent);
+  }
+
+  .ios-switch::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 1.6875rem;
+    height: 1.6875rem;
+    border-radius: 999px;
+    background: #ffffff;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15), 0 1px 1px rgba(0, 0, 0, 0.16);
+    transition: transform var(--dur-base) var(--ease-ios);
+  }
+
+  .ios-switch[aria-checked="true"]::after {
+    transform: translateX(1.25rem);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ios-switch,
+    .ios-switch::after {
+      transition: none;
+    }
+  }
+
+  /* ---------- material ---------- */
+  .ios-material {
+    background: var(--material);
+    -webkit-backdrop-filter: var(--material-blur);
+    backdrop-filter: var(--material-blur);
+  }
+
+  .ios-material-thick {
+    background: var(--material-thick);
+    -webkit-backdrop-filter: var(--material-blur);
+    backdrop-filter: var(--material-blur);
+  }
+
+  /*
+   * A browser without backdrop-filter would show the bar as a 82%-opaque wash and
+   * let the wallpaper read through the chrome, so it gets an opaque ground instead.
+   */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .ios-material,
+    .ios-material-thick {
+      background: var(--surface);
+    }
+  }
+
+  /* ---------- buttons ---------- */
+  /*
+   * The four iOS button roles. `filled` is the one call to action on a screen,
+   * `tinted` the secondary, `gray` the neutral, `plain` a bare blue word. All
+   * four are capsules, which is what the current system uses everywhere.
+   */
+  .ios-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    border-radius: var(--r-capsule);
+    padding: 0.4375rem 0.9375rem;
+    font-size: 0.9375rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    white-space: nowrap;
+    transition:
+      background-color var(--dur-fast) var(--ease-ios),
+      opacity var(--dur-fast) var(--ease-ios),
+      transform var(--dur-fast) var(--ease-ios);
+  }
+
+  .ios-btn:active:not(:disabled) {
+    transform: scale(0.97);
+    opacity: 0.8;
+  }
+
+  .ios-btn:disabled {
+    opacity: 0.45;
+  }
+
+  .ios-btn-filled {
+    background: var(--accent-fill);
+    color: #ffffff;
+  }
+
+  .ios-btn-tinted {
+    background: color-mix(in srgb, var(--accent) 15%, transparent);
+    color: var(--accent-text);
+  }
+
+  .ios-btn-gray {
+    background: var(--fill-3);
+    color: var(--ink);
+  }
+
+  .ios-btn-gray:hover:not(:disabled) {
+    background: var(--fill-1);
+  }
+
+  .ios-btn-plain {
+    background: transparent;
+    color: var(--accent-text);
+    padding-inline: 0.25rem;
+  }
+
+  /* A bare word has no fill to change, so the press reads as the ink dimming —
+     which is exactly what the real control does. */
+  .ios-btn-plain:hover:not(:disabled) {
+    opacity: 0.65;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ios-btn {
+      transition: none;
+    }
+
+    .ios-btn:active:not(:disabled) {
+      transform: none;
+    }
+  }
+
+  /* ---------- sliders ---------- */
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 1.75rem;
+    background: transparent;
+  }
+
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 999px;
+    background: var(--fill-1);
+  }
+
+  input[type="range"]::-moz-range-track {
+    height: 4px;
+    border-radius: 999px;
+    background: var(--fill-1);
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -8px;
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+    background: #ffffff;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15), 0 1px 1px rgba(0, 0, 0, 0.16);
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    border: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+    background: #ffffff;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15), 0 1px 1px rgba(0, 0, 0, 0.16);
+  }
+
+  /* ---------- checkboxes and radios ---------- */
+  /*
+   * iOS has no square checkbox in a list; it has a blue tick. Where a checkbox
+   * genuinely is a checkbox (a form, a filter), it at least takes the system
+   * accent instead of the browser's own blue.
+   */
+  input[type="checkbox"],
+  input[type="radio"] {
+    accent-color: var(--accent);
+  }
+}
+
+/*
+ * ============================================================
+ * Shape rules over the utility layer
+ * ============================================================
+ * The design asks Tailwind for a radius by name; the system decides what that
+ * name is worth. Buttons are excluded — they carry the capsule above, and a
+ * blanket radius here would eat it.
+ */
+:root .rounded:not(button),
+:root .rounded-md:not(button) {
+  border-radius: var(--r-md);
+}
+
+:root .rounded-lg:not(button) {
+  border-radius: var(--r-lg);
+}
+
+:root .rounded-xl:not(button),
+:root .rounded-2xl:not(button) {
+  border-radius: var(--r-xl);
+}
+
+/*
+ * A bordered block lifts instead of drawing a hard edge — this desktop lifts,
+ * it does not cut. In `components` so a surface that asks for a higher rung
+ * with `shadow-elev-2|3` gets it; unlayered, this rule silently won every one
+ * of those arguments. Floating windows are excluded outright: they state their
+ * own elevation.
+ *
+ * A panel also carries its own ground — a text-bearing surface never sits
+ * straight on the wallpaper.
+ */
+@layer components {
+  .border-rule:not([role="dialog"], button, [role="button"]) {
+    box-shadow: var(--elev-1);
+  }
+
+  section.border-rule {
+    background: var(--surface);
+  }
+}
+
+/*
+ * The result surface
+ * ------------------
+ * Marked with an attribute rather than a class so the contrast probe can find
+ * it by what it IS, not by which utility it happens to carry today.
+ *
+ * The secondary ink is restated here rather than at every call site: anything
+ * a tool drops into a readout asks for `text-muted`, and `--muted` is measured
+ * against `--surface`, not against this ground.
+ */
+[data-surface="result"] {
+  --muted: var(--result-muted);
+}
+
+/* A readout is a card that lifts, like every other surface here. Layered for
+   the same reason as the rule above: a panel that asks for a higher rung must
+   be able to get one. */
+@layer components {
+  section[data-surface="result"] {
+    box-shadow: var(--elev-1);
+  }
+}
+
+/* ---------- portrait ---------- */
+@layer components {
+  .portrait-photo {
+    display: block;
+    border-radius: var(--r-xl);
+  }
+}
+
+/*
+ * ============================================================
+ * Home screen and chrome
+ * ============================================================
+ */
+
+/*
+ * Icon labels sit on the wallpaper, not on a panel, so their colour answers to
+ * the ground — never to the palette. `wallpaper.ts` publishes how dark the
+ * chosen ground is; a `page` ground IS the page colour, so the ordinary ink is
+ * correct there by construction.
+ */
+:root[data-wallpaper-tone="dark"] nav[aria-label="Bölmələr"] span {
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/*
+ * A pale ground takes dark ink — and it takes it in BOTH themes. `var(--ink)`
+ * would be right only for grounds that follow the page colour; on the dark
+ * theme it turns white, which put white labels on a pale wallpaper at 1.19:1.
+ * `scripts/contrast-check.mjs` is what caught that.
+ */
+:root[data-wallpaper-tone="light"] nav[aria-label="Bölmələr"] span {
+  color: #1c1c1e;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+:root[data-wallpaper-tone="page"] nav[aria-label="Bölmələr"] span {
+  color: var(--ink);
+  text-shadow: none;
+}
+
+/*
+ * The app icon. A superellipse — the shape Apple actually uses — rather than a
+ * rounded rectangle: at this size the difference between the two is the single
+ * clearest tell that an interface is imitating iOS rather than being it. The
+ * clip path is in object-bounding-box units, so one definition fits every size.
+ */
+.ios-app-icon {
+  clip-path: url(#ios-squircle);
+  /* The fallback for a browser that ignores the reference. */
+  border-radius: 22.37%;
+}
+
+/*
+ * A window: a navigation bar over a client area, both inside one continuous
+ * corner. The bar is a material, so what scrolls under it stays faintly
+ * visible — which is how the system says "there is more above".
+ */
+[data-spec="window-titlebar"] {
+  background: var(--material);
+  -webkit-backdrop-filter: var(--material-blur);
+  backdrop-filter: var(--material-blur);
+  transition: opacity var(--dur-fast) var(--ease-ios);
+}
+
+/*
+ * An inactive window is told apart by its greyed-out text and controls, never
+ * by a tint on the bar — the tinted-titlebar idiom belongs to the desktops this
+ * site no longer imitates.
+ */
+[data-spec="window-titlebar"][data-active="false"] {
+  opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-spec="window-titlebar"] {
+    transition: none;
+  }
+}
+
+/*
+ * The top bar and the panel headers hanging off it are the same material as a
+ * navigation bar, so the chrome reads as one layer laid over the wallpaper.
+ *
+ * `data-spec` is a styling hook here and not only a test hook, which is worth
+ * knowing before renaming one: the portrait's header was called `panel-header`
+ * until the contract could no longer tell three identical names apart, and
+ * giving it its own name took its material away with it. Both names are listed
+ * rather than one, because they are two elements that happen to share a look.
+ */
+[data-spec="taskbar"],
+[data-spec="taskbar-panel"],
+[data-spec="panel-header"],
+[data-spec="portrait-header"] {
+  background: var(--material);
+  -webkit-backdrop-filter: var(--material-blur);
+  backdrop-filter: var(--material-blur);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  [data-spec="window-titlebar"],
+  [data-spec="taskbar"],
+  [data-spec="taskbar-panel"],
+  [data-spec="panel-header"],
+  [data-spec="portrait-header"] {
+    background: var(--surface);
+  }
+}
+
+/*
+ * ---------------
+ * Skinned buttons and pointers
+ * ---------------
+ * A button is the control a visitor touches most. The chrome is one rule and
+ * the tokens carry the look, so no component writes a face, a radius or a
+ * shadow. Scoped to buttons that already declare an edge or the accent fill —
+ * bare icon buttons in a title bar or the top bar are shapes, not slabs.
+ *
+ * The leading `:root` is not decoration: without it the blanket radius rule
+ * above outranks this one and a capsule comes back a 10px card. Measured.
+ */
+:root button.border-rule,
+:root [role="button"].border-rule {
+  background: var(--btn-face);
+  border-color: var(--btn-border);
+  border-radius: var(--btn-radius);
+  box-shadow: var(--btn-shadow);
+  transition:
+    background-color var(--dur-fast) var(--ease-ios),
+    transform var(--dur-fast) var(--ease-ios);
+}
+
+:root button.border-rule:hover:not(:disabled),
+:root [role="button"].border-rule:hover {
+  background: var(--btn-hover-face);
+}
+
+:root button.border-rule:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* The accent button keeps its fill and takes only the shape. */
+:root button.bg-accent {
+  border-radius: var(--btn-radius);
+  box-shadow: var(--btn-shadow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root button.border-rule,
+  :root [role="button"].border-rule {
+    transition: none;
+  }
+
+  :root button.border-rule:active:not(:disabled) {
+    transform: none;
+  }
+}
+
+/*
+ * The pointer is part of the costume too, but only where there is one: a touch
+ * screen has no cursor to change, and forcing an image cursor there costs a
+ * download for nothing.
+ */
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: var(--cursor-default);
+  }
+
+  a,
+  button,
+  summary,
+  label,
+  [role="button"],
+  [role="tab"] {
+    cursor: var(--cursor-pointer);
+  }
+
+  input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"]),
+  textarea {
+    cursor: var(--cursor-text);
+  }
+}
+

@@ -1,4 +1,2 @@
 allowBuilds:
-  esbuild: true  # tsx needs its platform binary; used only by the test runner
-  sharp: false
-  unrs-resolver: false
+  esbuild: true
