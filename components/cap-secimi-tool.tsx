@@ -49,12 +49,12 @@ const GEOGRAPHY_OPTIONS = [
 ] as const;
 
 const IRREVERSIBLE_OPTIONS = [
-  { value: "true", label: "Bəli — pul, sifariş, anbar kimi" },
+  { value: "true", label: "Bəli: pul, sifariş, anbar kimi" },
   { value: "false", label: "Xeyr" },
 ] as const;
 
 const LATENCY_OPTIONS = [
-  { value: "tight", label: "Sıx — sorğu millisaniyələrlə ölçülür" },
+  { value: "tight", label: "Sıx: sorğu millisaniyələrlə ölçülür" },
   { value: "relaxed", label: "Kritik deyil" },
 ] as const;
 

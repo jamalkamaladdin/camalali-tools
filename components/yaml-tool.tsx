@@ -144,13 +144,13 @@ function computeResult(input: string, mode: Mode, indent: IndentOption): ToolRes
     if (split.status === "missing") {
       return {
         ...EMPTY,
-        note: "Faylın başında «---» ilə açılan blok tapılmadı — frontmatter ilk sətirdən başlamalıdır.",
+        note: "Faylın başında «---» ilə açılan blok tapılmadı: frontmatter ilk sətirdən başlamalıdır.",
       };
     }
     if (split.status === "unterminated") {
       return {
         ...EMPTY,
-        note: "«---» ilə açılan blok bağlanmayıb — başlığın sonuna ikinci «---» sətrini əlavə et.",
+        note: "«---» ilə açılan blok bağlanmayıb: başlığın sonuna ikinci «---» sətrini əlavə et.",
       };
     }
 

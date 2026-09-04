@@ -369,13 +369,13 @@ export function auditRobots(
  */
 export const KNOWN_BOTS: { id: string; label: string }[] = [
   { id: "*", label: "Bütün botlar (*)" },
-  { id: "Googlebot", label: "Googlebot — Google axtarışı" },
-  { id: "Googlebot-Image", label: "Googlebot-Image — Google şəkillər" },
-  { id: "Bingbot", label: "Bingbot — Bing" },
-  { id: "YandexBot", label: "YandexBot — Yandex" },
-  { id: "GPTBot", label: "GPTBot — OpenAI" },
-  { id: "ClaudeBot", label: "ClaudeBot — Anthropic" },
-  { id: "PerplexityBot", label: "PerplexityBot — Perplexity" },
+  { id: "Googlebot", label: "Googlebot (Google axtarışı)" },
+  { id: "Googlebot-Image", label: "Googlebot-Image (Google şəkillər)" },
+  { id: "Bingbot", label: "Bingbot (Bing)" },
+  { id: "YandexBot", label: "YandexBot (Yandex)" },
+  { id: "GPTBot", label: "GPTBot (OpenAI)" },
+  { id: "ClaudeBot", label: "ClaudeBot (Anthropic)" },
+  { id: "PerplexityBot", label: "PerplexityBot (Perplexity)" },
 ];
 
 /** What the endpoint hands the widget. */

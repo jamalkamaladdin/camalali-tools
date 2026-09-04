@@ -77,7 +77,7 @@ export function AcarSozQruplasdirmaTool() {
           <ToolField
             label="açar söz, həcm"
             htmlFor="acar-soz-qruplasdirma-input"
-            note="Hər sətirdə bir açar söz. İstəyə görə vergül və ya tab ilə ayrılmış ikinci sütun — axtarış həcmi."
+            note="Hər sətirdə bir açar söz. İstəyə görə vergül və ya tab ilə ayrılmış ikinci sütun: axtarış həcmi."
           >
             <ToolTextArea
               id="acar-soz-qruplasdirma-input"

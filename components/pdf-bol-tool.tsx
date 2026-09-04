@@ -240,7 +240,7 @@ export function PdfBolTool() {
               <ToolField
                 label="Səhifə aralığı"
                 htmlFor="pdf-bol-ranges"
-                note="vergüllə ayır — hər hissə ya tək səhifə, ya da başlanğıc-son"
+                note="vergüllə ayır: hər hissə ya tək səhifə, ya da başlanğıc-son"
               >
                 <ToolInput
                   id="pdf-bol-ranges"

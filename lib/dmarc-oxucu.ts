@@ -356,7 +356,7 @@ export function buildDmarcFindings(record: DmarcRecord, domain?: string): DmarcF
     findings.push({
       id: "no-protection",
       severity: "critical",
-      text: "`p=none` heç bir qoruma vermir — bu, izləmə (monitoring) rejimidir. Uyğunsuz mesaj nə karantinə, nə də rədd siyahısına düşür, sadəcə hesabat toplanır. Bir çox domen elə burada dayanıb özünü qorunmuş sanır.",
+      text: "`p=none` heç bir qoruma vermir. Bu, izləmə (monitoring) rejimidir. Uyğunsuz mesaj nə karantinə, nə də rədd siyahısına düşür, sadəcə hesabat toplanır. Bir çox domen elə burada dayanıb özünü qorunmuş sanır.",
     });
   }
 
@@ -364,14 +364,14 @@ export function buildDmarcFindings(record: DmarcRecord, domain?: string): DmarcF
     findings.push({
       id: "pct-sample",
       severity: "warning",
-      text: `pct=${record.pct} siyasəti mesajların yalnız ${record.pct}%-nə tətbiq edir — qalanı, uyğunsuz olsa belə, bu qaydadan kənarda qalır.`,
+      text: `pct=${record.pct} siyasəti mesajların yalnız ${record.pct}%-nə tətbiq edir: qalanı, uyğunsuz olsa belə, bu qaydadan kənarda qalır.`,
     });
   }
   if (record.pct === 0 && record.p === "reject") {
     findings.push({
       id: "pct-zero-reject",
       severity: "critical",
-      text: "`pct=0` ilə `p=reject` birlikdə heç nəyi qorumur — siyasət yazılıb, amma tətbiq nisbəti sıfırdır.",
+      text: "`pct=0` ilə `p=reject` birlikdə heç nəyi qorumur: siyasət yazılıb, amma tətbiq nisbəti sıfırdır.",
     });
   }
 
@@ -379,7 +379,7 @@ export function buildDmarcFindings(record: DmarcRecord, domain?: string): DmarcF
     findings.push({
       id: "no-reporting",
       severity: "warning",
-      text: "`rua` yoxdur — heç bir hesabat gəlmir, deməli bu qeydin nə etdiyi heç vaxt öyrənilə bilmir. Ən çox rast gəlinən yarımçıq quraşdırma budur.",
+      text: "`rua` yoxdur: heç bir hesabat gəlmir, deməli bu qeydin nə etdiyi heç vaxt öyrənilə bilmir. Ən çox rast gəlinən yarımçıq quraşdırma budur.",
     });
   }
 
@@ -387,7 +387,7 @@ export function buildDmarcFindings(record: DmarcRecord, domain?: string): DmarcF
     findings.push({
       id: "ruf-privacy",
       severity: "info",
-      text: "`ruf` uğursuzluq hesabatları mesajın başlıqlarının bir hissəsini daşıyır — bu ünvanı kimin idarə etdiyi məxfilik baxımından əhəmiyyətlidir.",
+      text: "`ruf` uğursuzluq hesabatları mesajın başlıqlarının bir hissəsini daşıyır. Bu ünvanı kimin idarə etdiyi məxfilik baxımından əhəmiyyətlidir.",
     });
   }
 
@@ -404,7 +404,7 @@ export function buildDmarcFindings(record: DmarcRecord, domain?: string): DmarcF
     findings.push({
       id: "unknown-tag",
       severity: "info",
-      text: `Naməlum teq(lər) (${names}) alıcılar tərəfindən sadəcə nəzərə alınmır — qeydi etibarsız etmir.`,
+      text: `Naməlum teq(lər) (${names}) alıcılar tərəfindən sadəcə nəzərə alınmır, qeydi etibarsız etmir.`,
     });
   }
 
@@ -415,7 +415,7 @@ export function buildDmarcFindings(record: DmarcRecord, domain?: string): DmarcF
       findings.push({
         id: "cross-domain-rua",
         severity: "critical",
-        text: `${reportUriListText(crossDomain)} ünvanı ${domain}-dən başqa domendədir — həmin domen \`${domain}._report._dmarc.<onların domeni>\` altında v=DMARC1 daşıyan bir icazə qeydi saxlamasa, hesabatlar səssizcə dayanır.`,
+        text: `${reportUriListText(crossDomain)} ünvanı ${domain}-dən başqa domendədir. Həmin domen \`${domain}._report._dmarc.<onların domeni>\` altında v=DMARC1 daşıyan bir icazə qeydi saxlamasa, hesabatlar səssizcə dayanır.`,
       });
     }
   }
@@ -453,7 +453,7 @@ export function explainDmarcTags(record: DmarcRecord): DmarcTagExplanation[] {
   return [
     {
       tag: "v",
-      label: "v — versiya",
+      label: "v: versiya",
       meaning: "Qeydin DMARC olduğunu bildirir və protokolun versiyasını göstərir.",
       hereText: `"${record.v}" — düzgün DMARC qeydinin ilk teqi.`,
       defaultText: null,
@@ -461,7 +461,7 @@ export function explainDmarcTags(record: DmarcRecord): DmarcTagExplanation[] {
     },
     {
       tag: "p",
-      label: "p — siyasət",
+      label: "p: siyasət",
       meaning: "Alıcı server SPF/DKIM uyğunsuzluğu tapanda nə edəcəyini deyir: `none`, `quarantine` və ya `reject`.",
       hereText: `"${record.p}" — uyğunsuz mesaj ${policyLabel(record.p)}.`,
       defaultText: null,
@@ -469,7 +469,7 @@ export function explainDmarcTags(record: DmarcRecord): DmarcTagExplanation[] {
     },
     {
       tag: "sp",
-      label: "sp — subdomen siyasəti",
+      label: "sp: subdomen siyasəti",
       meaning: "Əsas domendən fərqli olaraq, yalnız subdomenlərdən gələn poçt üçün siyasəti göstərir.",
       hereText: record.spExplicit
         ? `"${record.sp}" — subdomen mesajı ${policyLabel(record.sp)}.`
@@ -479,7 +479,7 @@ export function explainDmarcTags(record: DmarcRecord): DmarcTagExplanation[] {
     },
     {
       tag: "pct",
-      label: "pct — faiz",
+      label: "pct: faiz",
       meaning: "Siyasətin uyğunsuz mesajların neçə faizinə tətbiq olunacağını göstərir.",
       hereText: record.pctExplicit
         ? `${record.pct}% — mesajların qalan ${100 - record.pct}%-i siyasətdən kənarda qalır.`
@@ -489,7 +489,7 @@ export function explainDmarcTags(record: DmarcRecord): DmarcTagExplanation[] {
     },
     {
       tag: "rua",
-      label: "rua — məcmu hesabat ünvanı",
+      label: "rua: məcmu hesabat ünvanı",
       meaning: "Gündəlik məcmu (aggregate) hesabatların göndəriləcəyi `mailto:` ünvan(lar)ı göstərir.",
       hereText: record.ruaExplicit ? ruaText : "Yazılmayıb — heç bir məcmu hesabat gəlmir.",
       defaultText: "Yoxdursa heç bir hesabat göndərilmir.",
@@ -497,7 +497,7 @@ export function explainDmarcTags(record: DmarcRecord): DmarcTagExplanation[] {
     },
     {
       tag: "ruf",
-      label: "ruf — uğursuzluq hesabat ünvanı",
+      label: "ruf: uğursuzluq hesabat ünvanı",
       meaning: "Hər bir uğursuz mesaj üçün ayrıca (forensic) hesabatın göndəriləcəyi ünvan(lar)ı göstərir.",
       hereText: record.rufExplicit ? rufText : "Yazılmayıb — heç bir uğursuzluq hesabatı göndərilmir.",
       defaultText: "Yoxdursa heç bir uğursuzluq hesabatı göndərilmir.",
@@ -505,7 +505,7 @@ export function explainDmarcTags(record: DmarcRecord): DmarcTagExplanation[] {
     },
     {
       tag: "adkim",
-      label: "adkim — DKIM uyğunlaşma rejimi",
+      label: "adkim: DKIM uyğunlaşma rejimi",
       meaning: "DKIM imzasının domeni ilə `From` başlığının domeninin necə üst-üstə düşməli olduğunu göstərir.",
       hereText: record.adkimExplicit
         ? `"${record.adkim}" — ${alignmentLabel(record.adkim)} uyğunlaşma.`
@@ -515,7 +515,7 @@ export function explainDmarcTags(record: DmarcRecord): DmarcTagExplanation[] {
     },
     {
       tag: "aspf",
-      label: "aspf — SPF uyğunlaşma rejimi",
+      label: "aspf: SPF uyğunlaşma rejimi",
       meaning: "SPF-də təsdiqlənən domenin `From` başlığının domeninə necə uyğun gəlməli olduğunu göstərir.",
       hereText: record.aspfExplicit
         ? `"${record.aspf}" — ${alignmentLabel(record.aspf)} uyğunlaşma.`
@@ -525,7 +525,7 @@ export function explainDmarcTags(record: DmarcRecord): DmarcTagExplanation[] {
     },
     {
       tag: "fo",
-      label: "fo — uğursuzluq hesabat seçimləri",
+      label: "fo: uğursuzluq hesabat seçimləri",
       meaning: "`ruf` hesabatının hansı halda göndəriləcəyini göstərir (`0` hər ikisi, `1` hər hansı biri uğursuz olanda).",
       hereText: record.foExplicit
         ? `"${record.fo}"`
@@ -535,7 +535,7 @@ export function explainDmarcTags(record: DmarcRecord): DmarcTagExplanation[] {
     },
     {
       tag: "rf",
-      label: "rf — hesabat formatı",
+      label: "rf: hesabat formatı",
       meaning: "Uğursuzluq hesabatının hansı formatda yazılacağını göstərir.",
       hereText: record.rfExplicit ? `"${record.rf}"` : `Yazılmayıb, defolt "${DMARC_DEFAULTS.rf}" qəbul edilir.`,
       defaultText: `Yoxdursa "${DMARC_DEFAULTS.rf}" qəbul edilir.`,
@@ -543,7 +543,7 @@ export function explainDmarcTags(record: DmarcRecord): DmarcTagExplanation[] {
     },
     {
       tag: "ri",
-      label: "ri — hesabat intervalı",
+      label: "ri: hesabat intervalı",
       meaning: "Məcmu hesabatların neçə saniyədən bir göndərilməsini istədiyini göstərir.",
       hereText: record.riExplicit
         ? `${record.ri} saniyə`

@@ -132,7 +132,7 @@ export function SshParmaqIziTool() {
       </ToolPanel>
 
       {inspection.refused ? (
-        <ToolNote tone="accent" title="Özəl açar — emal edilmədi">
+        <ToolNote tone="accent" title="Özəl açar: emal edilmədi">
           {inspection.reason}
         </ToolNote>
       ) : inspection.results.length === 0 ? (

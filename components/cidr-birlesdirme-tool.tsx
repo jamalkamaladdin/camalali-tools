@@ -269,7 +269,7 @@ function ExclusionPanel() {
           <ToolField
             label="Çıxarılacaq bloklar"
             htmlFor="cb-exclude-subs"
-            note="Hər sətirdə bir CIDR — əsas şəbəkənin içində olmalıdır."
+            note="Hər sətirdə bir CIDR: əsas şəbəkənin içində olmalıdır."
           >
             <ToolTextArea
               id="cb-exclude-subs"

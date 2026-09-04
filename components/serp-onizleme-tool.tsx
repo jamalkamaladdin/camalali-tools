@@ -42,9 +42,9 @@ type Fields = {
 const EMPTY_FIELDS: Fields = { title: "", description: "", url: "", siteName: "", date: "" };
 
 const SAMPLE: Fields = {
-  title: "WebSocket nədir və nə vaxt HTTP-dən yaxşıdır — praktik izah",
+  title: "WebSocket nədir və nə vaxt HTTP-dən yaxşıdır: praktik izah",
   description:
-    "WebSocket bağlantısının HTTP sorğusundan fərqi, əl sıxma mərhələsi, hansı hallarda long polling kifayət edir və hansı hallarda etmir — real layihə nümunələri ilə.",
+    "WebSocket bağlantısının HTTP sorğusundan fərqi, əl sıxma mərhələsi, hansı hallarda long polling kifayət edir və hansı hallarda etmir, real layihə nümunələri ilə.",
   url: "https://camalali.com/bloq/websocket-nedir",
   siteName: "camalali",
   date: "12 avqust 2026",
@@ -153,7 +153,7 @@ export function SerpOnizlemeTool() {
               label="Tarix"
               htmlFor="serp-date"
               hint="opsional"
-              note="Google bəzi nəticələrdə təsvirin əvvəlinə dərc tarixini qoyur — o da təsvirin yerindən yeyir."
+              note="Google bəzi nəticələrdə təsvirin əvvəlinə dərc tarixini qoyur: o da təsvirin yerindən yeyir."
             >
               <ToolInput
                 id="serp-date"
@@ -190,16 +190,16 @@ export function SerpOnizlemeTool() {
 
       <div className="@container">
         <div className="grid gap-3 @min-[30rem]:grid-cols-2 @min-[52rem]:grid-cols-4">
-          <ToolStat label="Başlıq — simvol" value={title.chars} note={`${SERP_DEVICE_LABELS[device]} ölçüsü`} />
+          <ToolStat label="Başlıq: simvol" value={title.chars} note={`${SERP_DEVICE_LABELS[device]} ölçüsü`} />
           <ToolStat
-            label="Başlıq — təxmini en"
+            label="Başlıq: təxmini en"
             value={`${title.px} px`}
             note={`${VERDICT_LABELS[title.verdict]} · hədd ${SERP_LIMITS[device].titlePx} px`}
             tone={toneFor(title.verdict)}
           />
-          <ToolStat label="Təsvir — simvol" value={description.chars} note={`${SERP_DEVICE_LABELS[device]} ölçüsü`} />
+          <ToolStat label="Təsvir: simvol" value={description.chars} note={`${SERP_DEVICE_LABELS[device]} ölçüsü`} />
           <ToolStat
-            label="Təsvir — təxmini en"
+            label="Təsvir: təxmini en"
             value={`${description.px} px`}
             note={`${VERDICT_LABELS[description.verdict]} · hədd ${descriptionBudgetPx(device)} px`}
             tone={toneFor(description.verdict)}

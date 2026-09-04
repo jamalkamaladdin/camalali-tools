@@ -305,7 +305,7 @@ function describeKeyType(type: SshKeyType, bits: number | null): { label: string
       return {
         label: "Ed25519",
         adequate: true,
-        note: "Ed25519 hazırkı defolt və tövsiyə olunan açar növüdür — sabit 256 bit təhlükəsizlik səviyyəsi verir və tətbiqi RSA-dan qat-qat sürətlidir.",
+        note: "Ed25519 hazırkı defolt və tövsiyə olunan açar növüdür: sabit 256 bit təhlükəsizlik səviyyəsi verir və tətbiqi RSA-dan qat-qat sürətlidir.",
       };
     case "ecdsa-sha2-nistp256":
     case "ecdsa-sha2-nistp384":
@@ -313,7 +313,7 @@ function describeKeyType(type: SshKeyType, bits: number | null): { label: string
       return {
         label: `ECDSA P-${bits}`,
         adequate: true,
-        note: `${bits} bitlik NIST əyrisi — bu gün üçün etibarlı sayılır, yeni açar üçün isə adətən Ed25519 tövsiyə olunur.`,
+        note: `${bits} bitlik NIST əyrisi: bu gün üçün etibarlı sayılır, yeni açar üçün isə adətən Ed25519 tövsiyə olunur.`,
       };
     case "ssh-rsa": {
       const safeBits = bits ?? 0;
@@ -330,7 +330,7 @@ function describeKeyType(type: SshKeyType, bits: number | null): { label: string
       return {
         label: bits !== null ? `DSA (${bits} bit)` : "DSA",
         adequate: false,
-        note: "DSA artıq etibarlı sayılmır — OpenSSH 7.0-dan (2015) bəri defolt olaraq söndürülüb və bir çox server onu ümumiyyətlə qəbul etmir.",
+        note: "DSA artıq etibarlı sayılmır: OpenSSH 7.0-dan (2015) bəri defolt olaraq söndürülüb və bir çox server onu ümumiyyətlə qəbul etmir.",
       };
   }
 }

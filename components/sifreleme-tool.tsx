@@ -89,7 +89,7 @@ export function SifrelemeTool() {
             <ToolField
               label="Paket"
               htmlFor="sifreleme-package"
-              note="Şifrələmə nəticəsi olan üç hissəli sətir — duz.iv.şifrmətn."
+              note="Şifrələmə nəticəsi olan üç hissəli sətir: duz.iv.şifrmətn."
             >
               <ToolTextArea
                 id="sifreleme-package"
@@ -105,7 +105,7 @@ export function SifrelemeTool() {
           <ToolField
             label="Parol"
             htmlFor="sifreleme-password"
-            note="PBKDF2 ilə 210 000 təkrarla açara çevrilir — heç yerə göndərilmir."
+            note="PBKDF2 ilə 210 000 təkrarla açara çevrilir, heç yerə göndərilmir."
           >
             <ToolInput
               id="sifreleme-password"

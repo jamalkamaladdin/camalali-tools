@@ -48,7 +48,7 @@ const WEAK_MAX_AGE = 86_400 * 180;
  * prints as a rounded-down zero of a much larger unit.
  */
 export function formatMaxAge(seconds: number): string {
-  if (seconds <= 0) return "0 saniyə — HSTS söndürülür";
+  if (seconds <= 0) return "0 saniyə: HSTS söndürülür";
   const days = Math.floor(seconds / 86_400);
   if (days >= 365) {
     const years = (days / 365).toFixed(1).replace(/\.0$/, "");
@@ -109,7 +109,7 @@ export function evaluateHsts(input: HstsCheckInput): HstsReport {
         { met: false, label: "includeSubDomains yazılmalıdır" },
         { met: false, label: "preload açar sözü yazılmalıdır" },
       ],
-      summary: "Strict-Transport-Security başlığı yoxdur — ilk müraciət http ilə gedərsə, araya girən şəbəkə onu oxuya bilər.",
+      summary: "Strict-Transport-Security başlığı yoxdur: ilk müraciət http ilə gedərsə, araya girən şəbəkə onu oxuya bilər.",
     };
   }
 
@@ -131,15 +131,15 @@ export function evaluateHsts(input: HstsCheckInput): HstsReport {
 
   let summary: string;
   if (maxAgeSeconds === null) {
-    summary = "Başlıq var, amma «max-age» oxunmadı — dəyər etibarsızdır və brauzer onu tətbiq etmir.";
+    summary = "Başlıq var, amma «max-age» oxunmadı. Dəyər etibarsızdır və brauzer onu tətbiq etmir.";
   } else if (maxAgeSeconds === 0) {
-    summary = "«max-age=0» yazılıb — bu HSTS-i söndürən dəyərdir, brauzer yaddaşındakı qaydanı dərhal silir.";
+    summary = "«max-age=0» yazılıb: bu HSTS-i söndürən dəyərdir, brauzer yaddaşındakı qaydanı dərhal silir.";
   } else if (maxAgeStrength === "zeif") {
-    summary = `max-age ${formatMaxAge(maxAgeSeconds)} — tövsiyə olunan minimum 180 gündür.`;
+    summary = `max-age ${formatMaxAge(maxAgeSeconds)}, tövsiyə olunan minimum 180 gündür.`;
   } else if (preloadEligible) {
-    summary = `max-age ${formatMaxAge(maxAgeSeconds)}, includeSubDomains və preload da var — preload siyahısına müraciət üçün bütün şərtlər ödənir.`;
+    summary = `max-age ${formatMaxAge(maxAgeSeconds)}, includeSubDomains və preload da var: preload siyahısına müraciət üçün bütün şərtlər ödənir.`;
   } else {
-    summary = `max-age ${formatMaxAge(maxAgeSeconds)} — adi qoruma kifayətdir, preload siyahısı üçün isə aşağıdakı şərtlər çatmır.`;
+    summary = `max-age ${formatMaxAge(maxAgeSeconds)}: adi qoruma kifayətdir, preload siyahısı üçün isə aşağıdakı şərtlər çatmır.`;
   }
 
   return {

@@ -205,7 +205,7 @@ export function RegexTool() {
           label="Əvəzetmə (opsional)"
           htmlFor="regex-replacement"
           hint="$1, $2… və ya adlandırılmış qrup üçün $<ad>."
-          note="Sahəni boşaltsan uyğunluqlar mətndən silinir — nəticə aşağıda qalır."
+          note="Sahəni boşaltsan uyğunluqlar mətndən silinir: nəticə aşağıda qalır."
         >
           <ToolInput
             id="regex-replacement"

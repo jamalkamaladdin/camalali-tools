@@ -92,7 +92,7 @@ export function SubdomainTool() {
           <ToolField
             label="Domen adı"
             htmlFor="subdomen-input"
-            note="Tam ünvan da yapışdıra bilərsən — sxem, port və yol özü kəsilir. «www.» hissəsi atılır, çünki axtarış bütün domen üzrədir."
+            note="Tam ünvan da yapışdıra bilərsən: sxem, port və yol özü kəsilir. «www.» hissəsi atılır, çünki axtarış bütün domen üzrədir."
           >
             <ToolInput
               id="subdomen-input"

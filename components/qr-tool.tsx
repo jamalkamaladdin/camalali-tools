@@ -192,7 +192,7 @@ export function QrTool() {
                   </span>
                 ) : undefined
               }
-              note="Boş sahə də etibarlı QR verir — sadəcə içində məlumat olmur."
+              note="Boş sahə də etibarlı QR verir, sadəcə içində məlumat olmur."
               suffix={
                 <span className="flex flex-wrap gap-1.5">
                   {SAMPLES.map((sample) => (

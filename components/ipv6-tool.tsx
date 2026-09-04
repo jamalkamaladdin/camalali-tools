@@ -68,7 +68,7 @@ export function Ipv6Tool() {
           <ToolField
             label="IPv6 ünvanı (prefikslə və ya prefikssiz)"
             htmlFor="ipv6-address"
-            note="Prefiks yazılmasa yalnız formatı, növü və tərs DNS adını göstərir. Sadə IPv4 ünvanı da qəbul olunur — ::ffff: formasına çevrilir."
+            note="Prefiks yazılmasa yalnız formatı, növü və tərs DNS adını göstərir. Sadə IPv4 ünvanı da qəbul olunur, ::ffff: formasına çevrilir."
           >
             <ToolInput
               id="ipv6-address"

@@ -227,7 +227,7 @@ export function ParolTool() {
         <ToolStat
           label="Seçmə ilə tapılma vaxtı"
           value={crackTimeLabel(bits)}
-          note="Saniyədə 10 milyard cəhd edən hücuma görə — sızmış bazadakı ən pis hal."
+          note="Saniyədə 10 milyard cəhd edən hücuma görə (sızmış bazadakı ən pis hal)."
         />
       </div>
 

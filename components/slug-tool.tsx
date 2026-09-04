@@ -92,7 +92,7 @@ export function SlugTool() {
           <ToolField
             label="Başlıq"
             htmlFor="slug-title-input"
-            note="Texniki termin ingiliscə qalır: websocket-nədir yazsan, slug websocket-nedir olur — veb-soket-nedir yox."
+            note="Texniki termin ingiliscə qalır: websocket-nədir yazsan, slug websocket-nedir olur, veb-soket-nedir yox."
           >
             <ToolInput
               id="slug-title-input"

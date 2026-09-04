@@ -444,7 +444,7 @@ export const olcuRows: ReferenceRow[] = [
   /* prefiks — SI */
   {
     term: "k",
-    label: "kilo — 1000",
+    label: "kilo: 1000",
     note: "Onluq prefiks. 1 kB = 1000 bayt; internet paketi və disk qutusu bu hesabla yazılır.",
     section: "prefiks",
     example: "1 kB = 1 000 B",
@@ -452,7 +452,7 @@ export const olcuRows: ReferenceRow[] = [
   },
   {
     term: "M",
-    label: "meqa — 1000²",
+    label: "meqa: 1000²",
     note: "1 MB = 1 000 000 bayt. Video bitreyti, trafik hesabı və fayl ölçüsü adətən bu vahiddədir.",
     section: "prefiks",
     example: "1 MB = 1 000 000 B",
@@ -460,7 +460,7 @@ export const olcuRows: ReferenceRow[] = [
   },
   {
     term: "G",
-    label: "giqa — 1000³",
+    label: "giqa: 1000³",
     note: "1 GB = 1 000 000 000 bayt. Disk istehsalçısı «1 TB» yazanda da məhz bu hesabı işlədir.",
     section: "prefiks",
     example: "1 GB = 1 000 000 000 B",
@@ -468,21 +468,21 @@ export const olcuRows: ReferenceRow[] = [
   },
   {
     term: "T",
-    label: "tera — 1000⁴",
+    label: "tera: 1000⁴",
     note: "1 TB = min GB. Bu gün adi ev diskinin ölçüsü; buludda saxlama planları da bu pillədən başlayır.",
     section: "prefiks",
     match: ["si", "tera"],
   },
   {
     term: "P",
-    label: "peta — 1000⁵",
+    label: "peta: 1000⁵",
     note: "1 PB = min TB. Böyük şirkətin bir günlük log axını bu pillədə ölçülür.",
     section: "prefiks",
     match: ["si", "peta"],
   },
   {
     term: "E",
-    label: "eksa — 1000⁶",
+    label: "eksa: 1000⁶",
     note: "1 EB = min PB. Bu artıq bir bulud provayderinin ümumi saxlama tutumu sırasındadır.",
     section: "prefiks",
     match: ["si", "eksa", "exa"],
@@ -490,7 +490,7 @@ export const olcuRows: ReferenceRow[] = [
   /* prefiks — IEC */
   {
     term: "Ki",
-    label: "kibi — 1024",
+    label: "kibi: 1024",
     note: "İkilik prefiks. 1 KiB = 1024 bayt; fayl sistemi, RAM və proqram yaddaşı bu hesabla işləyir.",
     section: "prefiks",
     example: "1 KiB = 1 024 B",
@@ -498,7 +498,7 @@ export const olcuRows: ReferenceRow[] = [
   },
   {
     term: "Mi",
-    label: "mebi — 1024²",
+    label: "mebi: 1024²",
     note: "1 MiB = 1 048 576 bayt. Linux-da `ls -lh` çıxışındakı «M» hərfi məhz bunu bildirir.",
     section: "prefiks",
     example: "1 MiB = 1 048 576 B",
@@ -506,29 +506,29 @@ export const olcuRows: ReferenceRow[] = [
   },
   {
     term: "Gi",
-    label: "gibi — 1024³",
-    note: "1 GiB = 1 073 741 824 bayt — eyni pillədəki GB-dan 7,4% böyük. Windows bunu sadəcə «GB» yazır.",
+    label: "gibi: 1024³",
+    note: "1 GiB = 1 073 741 824 bayt, eyni pillədəki GB-dan 7,4% böyük. Windows bunu sadəcə «GB» yazır.",
     section: "prefiks",
     example: "1 GiB = 1 073 741 824 B",
     match: ["iec", "gibi", "ikilik", "windows"],
   },
   {
     term: "Ti",
-    label: "tebi — 1024⁴",
+    label: "tebi: 1024⁴",
     note: "1 TiB = 1024 GiB, yəni onluq TB-dan 10% böyük. Fərq pillə qalxdıqca böyüyür.",
     section: "prefiks",
     match: ["iec", "tebi", "ikilik"],
   },
   {
     term: "Pi",
-    label: "pebi — 1024⁵",
+    label: "pebi: 1024⁵",
     note: "1 PiB = 1024 TiB. Fayl saxlama klasterlərinin tutumu bu vahidlə yazılır.",
     section: "prefiks",
     match: ["iec", "pebi", "ikilik"],
   },
   {
     term: "Ei",
-    label: "eksbi — 1024⁶",
+    label: "eksbi: 1024⁶",
     note: "1 EiB = 1024 PiB. ZFS və btrfs kimi fayl sistemlərinin nəzəri həddi bu aralıqdadır.",
     section: "prefiks",
     match: ["iec", "eksbi", "ikilik"],
@@ -538,7 +538,7 @@ export const olcuRows: ReferenceRow[] = [
   {
     term: "CD",
     label: "700 MB",
-    note: "Bir audio CD — 74 dəqiqə səs. İndi bir telefonun bir neçə şəkli qədərdir.",
+    note: "Bir audio CD: 74 dəqiqə səs. İndi bir telefonun bir neçə şəkli qədərdir.",
     section: "hecm",
     match: ["disk", "kompakt"],
   },
@@ -573,7 +573,7 @@ export const olcuRows: ReferenceRow[] = [
   {
     term: "Veb səhifə",
     label: "≈ 2,5 MB",
-    note: "HTTP Archive-ın ölçdüyü orta səhifə çəkisi — şəkil, şrift və skript daxil.",
+    note: "HTTP Archive-ın ölçdüyü orta səhifə çəkisi: şəkil, şrift və skript daxil.",
     section: "hecm",
     match: ["sayt", "sehife", "performans"],
   },
@@ -594,7 +594,7 @@ export const olcuRows: ReferenceRow[] = [
   {
     term: "IPv4 ünvanı",
     label: "4 bayt",
-    note: "Cəmi 32 bit — dünyada mümkün ünvanların sayı buna görə 4,3 milyardla məhdudlaşır.",
+    note: "Cəmi 32 bit: dünyada mümkün ünvanların sayı buna görə 4,3 milyardla məhdudlaşır.",
     section: "hecm",
     match: ["sebeke", "ip", "unvan"],
   },
@@ -615,7 +615,7 @@ export const olcuRows: ReferenceRow[] = [
   {
     term: "Ethernet paketi",
     label: "1500 bayt",
-    note: "Standart MTU — şəbəkədən bir dəfəyə keçən çərçivənin ən böyük gövdəsi.",
+    note: "Standart MTU: şəbəkədən bir dəfəyə keçən çərçivənin ən böyük gövdəsi.",
     section: "hecm",
     match: ["sebeke", "mtu", "paket"],
   },
@@ -638,7 +638,7 @@ export const olcuRows: ReferenceRow[] = [
   {
     term: "5G",
     label: "≈ 200 Mbit/s",
-    note: "Şəhər şəraitində tipik 5G sürəti — 1 GB fayl təxminən 40 saniyəyə enir.",
+    note: "Şəhər şəraitində tipik 5G sürəti, 1 GB fayl təxminən 40 saniyəyə enir.",
     section: "suret",
     match: ["mobil", "internet"],
   },
@@ -666,7 +666,7 @@ export const olcuRows: ReferenceRow[] = [
   {
     term: "USB 3.0",
     label: "5 Gbit/s",
-    note: "Xarici disk üçün geniş kanal — məhdudiyyət adətən kanalda yox, diskin özündə olur.",
+    note: "Xarici disk üçün geniş kanal: məhdudiyyət adətən kanalda yox, diskin özündə olur.",
     section: "suret",
     match: ["usb", "xarici disk"],
   },
@@ -696,7 +696,7 @@ export const olcuRows: ReferenceRow[] = [
   {
     term: "L1 keş",
     label: "≈ 1 ns",
-    note: "Prosessorun ən yaxın keşi — bir maşın taktı ilə eyni sıradadır.",
+    note: "Prosessorun ən yaxın keşi: bir maşın taktı ilə eyni sıradadır.",
     section: "vaxt",
     match: [...latencyMatch, "cpu", "kes"],
   },
@@ -717,7 +717,7 @@ export const olcuRows: ReferenceRow[] = [
   {
     term: "RAM oxuma",
     label: "≈ 100 ns",
-    note: "Yaddaşdan təsadüfi oxu — L1 keşdən yüz dəfə yavaş, diskdən min dəfələrlə sürətli.",
+    note: "Yaddaşdan təsadüfi oxu: L1 keşdən yüz dəfə yavaş, diskdən min dəfələrlə sürətli.",
     section: "vaxt",
     match: [...latencyMatch, "yaddas", "memory"],
   },
@@ -731,7 +731,7 @@ export const olcuRows: ReferenceRow[] = [
   {
     term: "SSD təsadüfi oxu",
     label: "≈ 150 µs",
-    note: "NVMe diskdə bir bloka müraciət — RAM-dan min dəfəyə yaxın yavaş.",
+    note: "NVMe diskdə bir bloka müraciət: RAM-dan min dəfəyə yaxın yavaş.",
     section: "vaxt",
     match: [...latencyMatch, "disk", "nvme"],
   },
@@ -752,7 +752,7 @@ export const olcuRows: ReferenceRow[] = [
   {
     term: "HDD axtarışı",
     label: "≈ 10 ms",
-    note: "Başlığın lazımi treki tapması — fiziki hərəkətdir, keşlə örtülməsə dərhal hiss olunur.",
+    note: "Başlığın lazımi treki tapması: fiziki hərəkətdir, keşlə örtülməsə dərhal hiss olunur.",
     section: "vaxt",
     match: [...latencyMatch, "disk", "seek"],
   },

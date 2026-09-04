@@ -8,7 +8,7 @@ export function RegexSparTool() {
     <ReferenceTable
       rows={regexSparRows}
       sections={regexSparSections}
-      placeholder="Sintaksis parçası və ya açar söz axtar — lookahead, lazy, bayraq..."
+      placeholder="Sintaksis parçası və ya açar söz axtar: lookahead, lazy, bayraq..."
       footnote="Sintaksis ECMAScript (JavaScript) regex-inə görədir. PCRE (PHP, Perl) və Python-un `re` modulu bir çox yerdə eynidir, amma fərqlər var — \A/\z JavaScript-də yoxdur, PHP-də lookbehind uzunluğu sabit olmalıdır."
     />
   );

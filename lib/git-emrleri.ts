@@ -19,7 +19,7 @@ export const gitEmrleriRows: ReferenceRow[] = [
   /* ---------- gundelik ---------- */
   {
     term: "git init",
-    note: "Cari qovluqda yeni, boş Git deposu yaradır — .git qovluğu buraya düşür. Mövcud layihəni versiya nəzarətinə indi başlamaq istəyəndə işlədilir.",
+    note: "Cari qovluqda yeni, boş Git deposu yaradır: .git qovluğu buraya düşür. Mövcud layihəni versiya nəzarətinə indi başlamaq istəyəndə işlədilir.",
     example: "git init",
     section: "gundelik",
     match: ["yeni depo", "repo yarat"],
@@ -40,7 +40,7 @@ export const gitEmrleriRows: ReferenceRow[] = [
   },
   {
     term: "git add",
-    note: "Seçilən faylları stage sahəsinə əlavə edir — növbəti commitə nələrin daxil olacağını müəyyən edir. Faylı hazırlamaq deyəndə bu nəzərdə tutulur.",
+    note: "Seçilən faylları stage sahəsinə əlavə edir: növbəti commitə nələrin daxil olacağını müəyyən edir. Faylı hazırlamaq deyəndə bu nəzərdə tutulur.",
     example: "git add src/index.ts",
     section: "gundelik",
     match: ["stage et", "commitə hazırla"],
@@ -75,21 +75,21 @@ export const gitEmrleriRows: ReferenceRow[] = [
   },
   {
     term: "git commit --amend",
-    note: "Son commiti tamamilə əvəz edir — mesajını dəyişə, unudulmuş faylı əlavə edə bilərsən. Amma bu commit artıq push edilibsə tarixçəni dəyişdiyi üçün diqqətli olmaq lazımdır.",
+    note: "Son commiti tamamilə əvəz edir: mesajını dəyişə, unudulmuş faylı əlavə edə bilərsən. Amma bu commit artıq push edilibsə tarixçəni dəyişdiyi üçün diqqətli olmaq lazımdır.",
     example: 'git commit --amend -m "düzəldilmiş mesaj"',
     section: "gundelik",
     match: ["son commiti düzəlt", "amend", "commiti dəyiş"],
   },
   {
     term: "git diff",
-    note: "Working directory ilə son commit arasındakı fərqi sətir-sətir göstərir — hələ stage edilməmiş dəyişiklikləri görmək üçün.",
+    note: "Working directory ilə son commit arasındakı fərqi sətir-sətir göstərir: hələ stage edilməmiş dəyişiklikləri görmək üçün.",
     example: "git diff src/index.ts",
     section: "gundelik",
     match: ["fərqə bax", "nə dəyişib sətir"],
   },
   {
     term: "git diff --staged",
-    note: "Yalnız artıq stage edilmiş dəyişiklikləri göstərir — commit etməzdən əvvəl nəyin daxil olacağını son dəfə yoxlamaq üçün.",
+    note: "Yalnız artıq stage edilmiş dəyişiklikləri göstərir: commit etməzdən əvvəl nəyin daxil olacağını son dəfə yoxlamaq üçün.",
     example: "git diff --staged",
     section: "gundelik",
     match: ["stage olunanlara bax", "diff --cached"],
@@ -117,7 +117,7 @@ export const gitEmrleriRows: ReferenceRow[] = [
   },
   {
     term: "git mv",
-    note: "Faylı köçürür və ya adını dəyişir, həm də bu əməliyyatı stage edir — ayrıca mv və add etməyə ehtiyac qalmır.",
+    note: "Faylı köçürür və ya adını dəyişir, həm də bu əməliyyatı stage edir: ayrıca mv və add etməyə ehtiyac qalmır.",
     example: "git mv kohne-ad.ts yeni-ad.ts",
     section: "gundelik",
     match: ["faylı köçür", "adını dəyiş"],
@@ -140,7 +140,7 @@ export const gitEmrleriRows: ReferenceRow[] = [
   },
   {
     term: "git branch -d",
-    note: "Artıq main-ə birləşdirilmiş budağı silir. Birləşdirilməyibsə Git xəbərdarlıq edib silməkdən imtina edir — məcburi silmək üçün -D lazımdır.",
+    note: "Artıq main-ə birləşdirilmiş budağı silir. Birləşdirilməyibsə Git xəbərdarlıq edib silməkdən imtina edir: məcburi silmək üçün -D lazımdır.",
     example: "git branch -d kohne-ozellik",
     section: "budaq",
     match: ["budağı sil", "delete branch"],
@@ -154,14 +154,14 @@ export const gitEmrleriRows: ReferenceRow[] = [
   },
   {
     term: "git switch",
-    note: "checkout-un budaq dəyişməyə həsr olunmuş, daha sadə yeni forması — yalnız budaq dəyişir, fayl bərpa etmir.",
+    note: "checkout-un budaq dəyişməyə həsr olunmuş, daha sadə yeni forması: yalnız budaq dəyişir, fayl bərpa etmir.",
     example: "git switch main",
     section: "budaq",
     match: ["budağa keç", "yeni switch"],
   },
   {
     term: "git switch -c",
-    note: "Yeni budaq yaradır və dərhal ona keçir — branch və checkout-un iki addımını birləşdirir.",
+    note: "Yeni budaq yaradır və dərhal ona keçir: branch və checkout-un iki addımını birləşdirir.",
     example: "git switch -c yeni-ozellik",
     section: "budaq",
     match: ["yeni budaq yarat və keç", "checkout -b"],
@@ -210,7 +210,7 @@ export const gitEmrleriRows: ReferenceRow[] = [
   },
   {
     term: "git worktree add",
-    note: "Eyni depo üçün ayrı bir qovluqda başqa budağı checkout edir — iki budaq üzərində eyni anda, budaq dəyişmədən işləmək üçün.",
+    note: "Eyni depo üçün ayrı bir qovluqda başqa budağı checkout edir: iki budaq üzərində eyni anda, budaq dəyişmədən işləmək üçün.",
     example: "git worktree add ../hotfix hotfix-budagi",
     section: "budaq",
     match: ["paralel budaq qovluğu", "ikinci checkout"],
@@ -219,7 +219,7 @@ export const gitEmrleriRows: ReferenceRow[] = [
   /* ---------- tarixce ---------- */
   {
     term: "git log",
-    note: "Commit tarixçəsini ən yenidən başlayaraq göstərir — hər commitin hash-i, müəllifi, tarixi və mesajı ilə. Nə vaxt nə edildiyini görmək üçün başlanğıc nöqtədir.",
+    note: "Commit tarixçəsini ən yenidən başlayaraq göstərir: hər commitin hash-i, müəllifi, tarixi və mesajı ilə. Nə vaxt nə edildiyini görmək üçün başlanğıc nöqtədir.",
     example: "git log -5",
     section: "tarixce",
     match: ["tarixçəyə bax", "commitlər siyahısı"],
@@ -240,7 +240,7 @@ export const gitEmrleriRows: ReferenceRow[] = [
   },
   {
     term: "git show",
-    note: "Bir commitin tam məzmununu — mesajını və dəyişikliklərini — göstərir. Konkret bir commitə yaxından baxmaq üçün işlədilir.",
+    note: "Bir commitin tam məzmununu (mesajını və dəyişikliklərini) göstərir. Konkret bir commitə yaxından baxmaq üçün işlədilir.",
     example: "git show a1b2c3d",
     section: "tarixce",
     match: ["commit detalları"],
@@ -254,28 +254,28 @@ export const gitEmrleriRows: ReferenceRow[] = [
   },
   {
     term: "git bisect",
-    note: "İki nöqtə arasında ikili axtarışla baqın hansı commitdə yarandığını tapır — hər addımda commiti yaxşı ya da pis kimi işarələyirsən, Git özü ortadakı commiti sınamağa təklif edir.",
+    note: "İki nöqtə arasında ikili axtarışla baqın hansı commitdə yarandığını tapır: hər addımda commiti yaxşı ya da pis kimi işarələyirsən, Git özü ortadakı commiti sınamağa təklif edir.",
     example: "git bisect start",
     section: "tarixce",
     match: ["baqı tap", "hansı commit sındırıb"],
   },
   {
     term: "git shortlog",
-    note: "Commitləri müəllif üzrə qruplaşdırıb sayır — kimin nə qədər commit etdiyini tez görmək üçün.",
+    note: "Commitləri müəllif üzrə qruplaşdırıb sayır: kimin nə qədər commit etdiyini tez görmək üçün.",
     example: "git shortlog -sn",
     section: "tarixce",
     match: ["müəllif üzrə commit sayı"],
   },
   {
     term: "git describe",
-    note: "Cari commiti ən yaxın tag-a görə adlandırır, məsələn v1.2.0-5-ga1b2c3d — versiya nömrəsindən neçə commit uzaqda olduğunu göstərir.",
+    note: "Cari commiti ən yaxın tag-a görə adlandırır, məsələn v1.2.0-5-ga1b2c3d: versiya nömrəsindən neçə commit uzaqda olduğunu göstərir.",
     example: "git describe --tags",
     section: "tarixce",
     match: ["ən yaxın tag", "versiya adı"],
   },
   {
     term: "git grep",
-    note: "Bütün izlənən fayllar üzrə mətn axtarışı aparır, amma .gitignore-dakı faylları buraxır — adi grep-dən daha sürətli və təmizdir.",
+    note: "Bütün izlənən fayllar üzrə mətn axtarışı aparır, amma .gitignore-dakı faylları buraxır: adi grep-dən daha sürətli və təmizdir.",
     example: 'git grep "TODO"',
     section: "tarixce",
     match: ["kodda axtar", "mətn axtarışı"],
@@ -289,7 +289,7 @@ export const gitEmrleriRows: ReferenceRow[] = [
   },
   {
     term: "git ls-files",
-    note: "Stage sahəsindəki və izlənən bütün faylların siyahısını verir — .gitignore-a düşməyən faylların tam siyahısı.",
+    note: "Stage sahəsindəki və izlənən bütün faylların siyahısını verir: .gitignore-a düşməyən faylların tam siyahısı.",
     example: "git ls-files",
     section: "tarixce",
     match: ["izlənən fayllar", "stage siyahısı"],
@@ -298,21 +298,21 @@ export const gitEmrleriRows: ReferenceRow[] = [
   /* ---------- geri ---------- */
   {
     term: "git reset --soft",
-    note: "HEAD-i göstərilən commitə geri çəkir, amma stage sahəsini və working directory-ni toxunulmaz saxlayır — dəyişikliklər hələ də stage-dədir. Bir neçə commiti birləşdirib yenidən commit etmək istəyəndə lazımdır.",
+    note: "HEAD-i göstərilən commitə geri çəkir, amma stage sahəsini və working directory-ni toxunulmaz saxlayır: dəyişikliklər hələ də stage-dədir. Bir neçə commiti birləşdirib yenidən commit etmək istəyəndə lazımdır.",
     example: "git reset --soft HEAD~1",
     section: "geri",
     match: ["commit-i geri al", "undo commit", "yumşaq reset"],
   },
   {
     term: "git reset --mixed",
-    note: "HEAD-i geri çəkir və stage sahəsini təmizləyir, amma faylların özündəki dəyişikliyi saxlayır — bu, reset-in defolt rejimidir. Commiti geri alıb yenidən diqqətlə stage etmək istəyəndə işlədilir.",
+    note: "HEAD-i geri çəkir və stage sahəsini təmizləyir, amma faylların özündəki dəyişikliyi saxlayır: bu, reset-in defolt rejimidir. Commiti geri alıb yenidən diqqətlə stage etmək istəyəndə işlədilir.",
     example: "git reset --mixed HEAD~1",
     section: "geri",
     match: ["commit-i geri al", "undo commit", "orta reset"],
   },
   {
     term: "git reset --hard",
-    note: "Təhlükəlidir: HEAD-i geri çəkir və həm stage sahəsini, həm də working directory-ni geri çəkilən nöqtəyə uyğunlaşdırır — commitlənməmiş bütün dəyişikliklər geri qaytarılmadan silinir. İşlətmədən əvvəl narahat olduğun dəyişiklikləri ayrıca commit ilə saxlamağa dəyər.",
+    note: "Təhlükəlidir: HEAD-i geri çəkir və həm stage sahəsini, həm də working directory-ni geri çəkilən nöqtəyə uyğunlaşdırır: commitlənməmiş bütün dəyişikliklər geri qaytarılmadan silinir. İşlətmədən əvvəl narahat olduğun dəyişiklikləri ayrıca commit ilə saxlamağa dəyər.",
     example: "git reset --hard HEAD~1",
     section: "geri",
     match: ["commit-i geri al", "undo commit", "sərt reset", "hər şeyi sil"],
@@ -340,7 +340,7 @@ export const gitEmrleriRows: ReferenceRow[] = [
   },
   {
     term: "git stash list",
-    note: "Bütün saxlanmış stash-lərin siyahısını göstərir — hər biri nə vaxt hansı budaqda yaradıldığı ilə birlikdə. Birdən çox stash yığılanda hansının lazım olduğunu tapmaq üçündür.",
+    note: "Bütün saxlanmış stash-lərin siyahısını göstərir: hər biri nə vaxt hansı budaqda yaradıldığı ilə birlikdə. Birdən çox stash yığılanda hansının lazım olduğunu tapmaq üçündür.",
     example: "git stash list",
     section: "geri",
     match: ["stash siyahısı"],
@@ -354,7 +354,7 @@ export const gitEmrleriRows: ReferenceRow[] = [
   },
   {
     term: "git reflog",
-    note: 'HEAD-in hərəkət etdiyi hər nöqtəni qeyd edir — reset --hard, rebase və ya budaq silmə ilə "itmiş" görünən commitlər əslində reflog-da qalır və oradan tapılıb bərpa edilə bilər.',
+    note: 'HEAD-in hərəkət etdiyi hər nöqtəni qeyd edir: reset --hard, rebase və ya budaq silmə ilə "itmiş" görünən commitlər əslində reflog-da qalır və oradan tapılıb bərpa edilə bilər.',
     example: "git reflog",
     section: "geri",
     match: ["itmiş commit-i tap", "HEAD tarixçəsi", "geri qaytar", "undo"],
@@ -363,21 +363,21 @@ export const gitEmrleriRows: ReferenceRow[] = [
   /* ---------- uzaq ---------- */
   {
     term: "git fetch",
-    note: "Uzaq depodakı yeni commitləri lokal repoya endirir, amma cari budağı dəyişdirmir — yalnız uzaq izləmə budaqlarını yeniləyir. Nə dəyişdiyinə birləşdirmədən əvvəl baxmaq üçün təhlükəsiz yoldur.",
+    note: "Uzaq depodakı yeni commitləri lokal repoya endirir, amma cari budağı dəyişdirmir: yalnız uzaq izləmə budaqlarını yeniləyir. Nə dəyişdiyinə birləşdirmədən əvvəl baxmaq üçün təhlükəsiz yoldur.",
     example: "git fetch origin",
     section: "uzaq",
     match: ["uzaqdan yenilə", "yenilikləri endir"],
   },
   {
     term: "git pull",
-    note: "fetch ilə merge-i bir addımda edir — uzaq budağı endirib dərhal cari budağa birləşdirir. Ən sadə yenilənmə yoludur, amma lokal commitlərin varsa əlavə merge commiti yaradır.",
+    note: "fetch ilə merge-i bir addımda edir: uzaq budağı endirib dərhal cari budağa birləşdirir. Ən sadə yenilənmə yoludur, amma lokal commitlərin varsa əlavə merge commiti yaradır.",
     example: "git pull origin main",
     section: "uzaq",
     match: ["yenilə və birləşdir"],
   },
   {
     term: "git pull --rebase",
-    note: "fetch etdikdən sonra merge əvəzinə rebase edir — lokal commitlərin uzaqdakıların üstünə düzülür, gərəksiz merge commitləri yaranmır. Düz tarixçə saxlamaq istəyən komandalar bunu defolt edir.",
+    note: "fetch etdikdən sonra merge əvəzinə rebase edir: lokal commitlərin uzaqdakıların üstünə düzülür, gərəksiz merge commitləri yaranmır. Düz tarixçə saxlamaq istəyən komandalar bunu defolt edir.",
     example: "git pull --rebase origin main",
     section: "uzaq",
     match: ["yenilə və yenidən əsasla"],
@@ -391,14 +391,14 @@ export const gitEmrleriRows: ReferenceRow[] = [
   },
   {
     term: "git push -u",
-    note: "Push edərkən lokal budağı uzaq budağa əlaqələndirir (upstream qurur) — bundan sonra tək sözlə git push və git pull kifayət edir. Yeni budağı ilk dəfə uzağa göndərəndə işlədilir.",
+    note: "Push edərkən lokal budağı uzaq budağa əlaqələndirir (upstream qurur): bundan sonra tək sözlə git push və git pull kifayət edir. Yeni budağı ilk dəfə uzağa göndərəndə işlədilir.",
     example: "git push -u origin ozellik-budagi",
     section: "uzaq",
     match: ["upstream qur", "budağı əlaqələndir"],
   },
   {
     term: "git push --force-with-lease",
-    note: "Uzaq budağı məcburi yeniləyir, amma sadə --force-dan fərqli olaraq əvvəlcə uzaqda kiminsə səndən xəbərsiz yeni commit əlavə etmədiyini yoxlayır və toqquşma varsa göndərmədən imtina edir. Sadə git push --force təhlükəlidir, çünki başqasının commitlərini xəbərdarlıq etmədən siləcək — rebase və ya amend etdikdən sonra paylaşılan budağı yeniləmək lazımdırsa əvəzinə bu işlədilməlidir.",
+    note: "Uzaq budağı məcburi yeniləyir, amma sadə --force-dan fərqli olaraq əvvəlcə uzaqda kiminsə səndən xəbərsiz yeni commit əlavə etmədiyini yoxlayır və toqquşma varsa göndərmədən imtina edir. Sadə git push --force təhlükəlidir, çünki başqasının commitlərini xəbərdarlıq etmədən siləcək: rebase və ya amend etdikdən sonra paylaşılan budağı yeniləmək lazımdırsa əvəzinə bu işlədilməlidir.",
     example: "git push --force-with-lease origin ozellik-budagi",
     section: "uzaq",
     match: ["təhlükəsiz force push", "məcburi push", "force push"],
@@ -426,7 +426,7 @@ export const gitEmrleriRows: ReferenceRow[] = [
   },
   {
     term: "git tag",
-    note: "Cari commitə sabit bir ad — adətən versiya nömrəsi — qoyur. Budaqdan fərqli olaraq tag irəli getmir, həmişə eyni commitə işarə edir.",
+    note: "Cari commitə sabit bir ad (adətən versiya nömrəsi) qoyur. Budaqdan fərqli olaraq tag irəli getmir, həmişə eyni commitə işarə edir.",
     example: "git tag v1.2.0",
     section: "uzaq",
     match: ["versiya nişanı"],
@@ -440,7 +440,7 @@ export const gitEmrleriRows: ReferenceRow[] = [
   },
   {
     term: "git format-patch",
-    note: "Hər commiti ayrıca .patch faylına çevirir — e-poçtla göndərmək və ya Git host-u olmayan yerdə paylaşmaq üçün.",
+    note: "Hər commiti ayrıca .patch faylına çevirir: e-poçtla göndərmək və ya Git host-u olmayan yerdə paylaşmaq üçün.",
     example: "git format-patch -1 HEAD",
     section: "uzaq",
     match: ["patch faylı yarat", "email patch"],
@@ -456,7 +456,7 @@ export const gitEmrleriRows: ReferenceRow[] = [
   /* ---------- sazlama ---------- */
   {
     term: "git clean -fd",
-    note: "Git-in heç vaxt izləmədiyi faylları və qovluqları (build çıxışı, təsadüfən yaranan fayllar) silir. Əvvəlcə -n ilə nəyin siləcəyinə baxmaq, sonra -fd ilə həqiqətən silmək tövsiyə olunur — geri qaytarılmır.",
+    note: "Git-in heç vaxt izləmədiyi faylları və qovluqları (build çıxışı, təsadüfən yaranan fayllar) silir. Əvvəlcə -n ilə nəyin siləcəyinə baxmaq, sonra -fd ilə həqiqətən silmək tövsiyə olunur: geri qaytarılmır.",
     example: "git clean -fd",
     section: "sazlama",
     match: ["izlənməyən faylları sil", "təmizlə"],
@@ -491,14 +491,14 @@ export const gitEmrleriRows: ReferenceRow[] = [
   },
   {
     term: "git notes",
-    note: "Bir commitə, onun özünü dəyişmədən əlavə qeyd bağlayır — məsələn deploy tarixi və ya nəzərdən keçirmə şərhi. Adi commit mesajı kimi tarixçəyə hörülmür, ayrıca saxlanılır.",
+    note: "Bir commitə, onun özünü dəyişmədən əlavə qeyd bağlayır, məsələn deploy tarixi və ya nəzərdən keçirmə şərhi. Adi commit mesajı kimi tarixçəyə hörülmür, ayrıca saxlanılır.",
     example: 'git notes add -m "staging-də yoxlanıldı" a1b2c3d',
     section: "sazlama",
     match: ["commitə qeyd əlavə et"],
   },
   {
     term: "git gc",
-    note: "Deponu sıxışdırır — lazımsız obyektləri təmizləyir, qalanları daha səmərəli formata yığır. Böyük depolar zamanla ləng işləyəndə əl ilə də çağırıla bilər.",
+    note: "Deponu sıxışdırır: lazımsız obyektləri təmizləyir, qalanları daha səmərəli formata yığır. Böyük depolar zamanla ləng işləyəndə əl ilə də çağırıla bilər.",
     example: "git gc",
     section: "sazlama",
     match: ["deponu sıxışdır", "təmizlə"],

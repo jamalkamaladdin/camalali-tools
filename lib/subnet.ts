@@ -160,14 +160,14 @@ const RESERVED: { prefix: number; network: string; scope: Ipv4Scope }[] = [
     prefix: 32,
     scope: {
       private: false,
-      label: "Məhdud yayım ünvanı — yalnız yerli seqmentə göndərilir",
+      label: "Məhdud yayım ünvanı: yalnız yerli seqmentə göndərilir",
       reference: "RFC 919",
     },
   },
   {
     network: "0.0.0.0",
     prefix: 8,
-    scope: { private: false, label: "«Bu şəbəkə» — mənbə ünvanı kimi", reference: "RFC 1122" },
+    scope: { private: false, label: "«Bu şəbəkə»: mənbə ünvanı kimi", reference: "RFC 1122" },
   },
   {
     network: "10.0.0.0",
@@ -179,21 +179,21 @@ const RESERVED: { prefix: number; network: string; scope: Ipv4Scope }[] = [
     prefix: 10,
     scope: {
       private: false,
-      label: "Operator NAT-ı (CGNAT) — provayderin daxili aralığı",
+      label: "Operator NAT-ı (CGNAT): provayderin daxili aralığı",
       reference: "RFC 6598",
     },
   },
   {
     network: "127.0.0.0",
     prefix: 8,
-    scope: { private: false, label: "Loopback — cihazın özü", reference: "RFC 1122" },
+    scope: { private: false, label: "Loopback: cihazın özü", reference: "RFC 1122" },
   },
   {
     network: "169.254.0.0",
     prefix: 16,
     scope: {
       private: false,
-      label: "Link-local (APIPA) — DHCP cavab vermədikdə özü təyin olunur",
+      label: "Link-local (APIPA): DHCP cavab vermədikdə özü təyin olunur",
       reference: "RFC 3927",
     },
   },
@@ -241,7 +241,7 @@ const RESERVED: { prefix: number; network: string; scope: Ipv4Scope }[] = [
 
 const PUBLIC_SCOPE: Ipv4Scope = {
   private: false,
-  label: "İctimai ünvan — internetdə marşrutlanır",
+  label: "İctimai ünvan: internetdə marşrutlanır",
   reference: "IANA",
 };
 

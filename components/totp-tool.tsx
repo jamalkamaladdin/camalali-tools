@@ -163,7 +163,7 @@ export function TotpTool() {
           <ToolField
             label="Base32 gizli açar"
             htmlFor="totp-secret"
-            note="Autentifikator tətbiqinin QR kodunda daşıdığı sətirdir — boşluqlar və kiçik hərflər problem deyil."
+            note="Autentifikator tətbiqinin QR kodunda daşıdığı sətirdir: boşluqlar və kiçik hərflər problem deyil."
           >
             <div className="flex items-center gap-2">
               <ToolInput
@@ -238,12 +238,12 @@ export function TotpTool() {
       )}
 
       <ToolPanel>
-        <ToolPanelHeader title="HOTP — sayğac əsaslı kod" hint="RFC 4226" />
+        <ToolPanelHeader title="HOTP: sayğac əsaslı kod" hint="RFC 4226" />
         <div className="space-y-3 p-4">
           <ToolField
             label="Sayğac"
             htmlFor="totp-counter"
-            note="TOTP-dən fərqli olaraq vaxtdan asılı deyil — hər istifadədən sonra əl ilə (və ya serverdə) bir vahid artırılır."
+            note="TOTP-dən fərqli olaraq vaxtdan asılı deyil: hər istifadədən sonra əl ilə (və ya serverdə) bir vahid artırılır."
           >
             <ToolInput
               id="totp-counter"

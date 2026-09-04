@@ -49,8 +49,8 @@ const SP_OPTIONS: { value: SpMode; label: string }[] = [
 ];
 
 const ALIGNMENT_OPTIONS: { value: DmarcAlignment; label: string }[] = [
-  { value: "r", label: "r — yumşaq" },
-  { value: "s", label: "s — sərt" },
+  { value: "r", label: "r: yumşaq" },
+  { value: "s", label: "s: sərt" },
 ];
 
 /*
@@ -277,23 +277,23 @@ export function DmarcOxucuTool() {
                 />
               </ToolField>
 
-              <ToolField label="p — siyasət">
+              <ToolField label="p: siyasət">
                 <ToolSegmented options={POLICY_OPTIONS} value={buildP} onChange={setBuildP} fill />
               </ToolField>
 
-              <ToolField label="sp — subdomen siyasəti">
+              <ToolField label="sp: subdomen siyasəti">
                 <ToolSegmented options={SP_OPTIONS} value={buildSp} onChange={setBuildSp} fill />
               </ToolField>
 
-              <ToolField label="adkim — DKIM uyğunlaşma">
+              <ToolField label="adkim: DKIM uyğunlaşma">
                 <ToolSegmented options={ALIGNMENT_OPTIONS} value={buildAdkim} onChange={setBuildAdkim} fill />
               </ToolField>
 
-              <ToolField label="aspf — SPF uyğunlaşma">
+              <ToolField label="aspf: SPF uyğunlaşma">
                 <ToolSegmented options={ALIGNMENT_OPTIONS} value={buildAspf} onChange={setBuildAspf} fill />
               </ToolField>
 
-              <ToolField label="fo — uğursuzluq hesabat seçimi" htmlFor="dmarc-build-fo" hint="0, 1, d, s">
+              <ToolField label="fo: uğursuzluq hesabat seçimi" htmlFor="dmarc-build-fo" hint="0, 1, d, s">
                 <ToolInput
                   id="dmarc-build-fo"
                   value={buildFo}
@@ -302,7 +302,7 @@ export function DmarcOxucuTool() {
                 />
               </ToolField>
 
-              <ToolField label="ri — hesabat intervalı" htmlFor="dmarc-build-ri" suffix="saniyə">
+              <ToolField label="ri: hesabat intervalı" htmlFor="dmarc-build-ri" suffix="saniyə">
                 <ToolInput
                   id="dmarc-build-ri"
                   type="number"
@@ -314,7 +314,7 @@ export function DmarcOxucuTool() {
 
               <div className="md:col-span-2">
                 <ToolField
-                  label="rua — məcmu hesabat ünvanları"
+                  label="rua: məcmu hesabat ünvanları"
                   htmlFor="dmarc-build-rua"
                   note="vergül və ya yeni sətir ilə ayır, mailto: özü əlavə olunur"
                 >
@@ -332,9 +332,9 @@ export function DmarcOxucuTool() {
 
               <div className="md:col-span-2">
                 <ToolField
-                  label="ruf — uğursuzluq hesabat ünvanları"
+                  label="ruf: uğursuzluq hesabat ünvanları"
                   htmlFor="dmarc-build-ruf"
-                  note="könüllü — boş buraxsan ruf teqi yazılmır"
+                  note="könüllü: boş buraxsan ruf teqi yazılmır"
                 >
                   <ToolTextArea
                     id="dmarc-build-ruf"

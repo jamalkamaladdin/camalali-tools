@@ -8,7 +8,7 @@ export function StatusKodlariTool() {
     <ReferenceTable
       rows={statusKodlariRows}
       sections={statusKodlariSections}
-      placeholder="Kod, ad və ya açar söz axtar — 404, redirect, server error..."
+      placeholder="Kod, ad və ya açar söz axtar: 404, redirect, server error..."
       footnote="RFC 9110 və IANA-nın HTTP Status Code reyestrinə əsaslanır. Cloudflare-in öz 5xx genişlənmələri (520-527) reyestrin bir hissəsi deyil və bura daxil edilməyib."
     />
   );

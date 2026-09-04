@@ -321,13 +321,13 @@ export function explain(node: RegexNode): ExplainedNode {
         description: `Unicode xüsusiyyəti "${node.name}"${node.negated ? " OLMAYAN" : ""} bir simvolu tutur.`,
       };
     case "anchorStart":
-      return { token: "^", description: "Lövbər — sətrin (və ya `m` bayrağı yoxdursa mətnin) əvvəli." };
+      return { token: "^", description: "Lövbər: sətrin (və ya `m` bayrağı yoxdursa mətnin) əvvəli." };
     case "anchorEnd":
-      return { token: "$", description: "Lövbər — sətrin (və ya `m` bayrağı yoxdursa mətnin) sonu." };
+      return { token: "$", description: "Lövbər: sətrin (və ya `m` bayrağı yoxdursa mətnin) sonu." };
     case "wordBoundary":
       return { token: node.negated ? "\\B" : "\\b", description: node.negated ? "Söz sərhədi OLMAYAN mövqe." : "Söz sərhədi — söz simvolu ilə söz-olmayan arasındaki mövqe." };
     case "backreference":
-      return { token: `\\${node.ref}`, description: `Geri istinad — ${/^[0-9]+$/.test(node.ref) ? `${node.ref}-ci qrupun` : `"${node.ref}" adlı qrupun`} tutduğu mətni təkrar axtarır.` };
+      return { token: `\\${node.ref}`, description: `Geri istinad: ${/^[0-9]+$/.test(node.ref) ? `${node.ref}-ci qrupun` : `"${node.ref}" adlı qrupun`} tutduğu mətni təkrar axtarır.` };
     case "group": {
       const child = explain(node.child);
       const label = GROUP_LABEL[node.kind];

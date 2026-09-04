@@ -30,9 +30,9 @@ const SAMPLE_TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkVsdmluIE3JmW1tyZlkb3YiLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNzM1Njg5NjAwLCJleHAiOjE4OTM0NTYwMDB9.dGhpc19pc19hX2Zha2Vfc2lnbmF0dXJl";
 
 const TIME_CLAIMS = [
-  { key: "iat", label: "iat — verilmə vaxtı" },
-  { key: "nbf", label: "nbf — qüvvəyə minmə vaxtı" },
-  { key: "exp", label: "exp — bitmə vaxtı" },
+  { key: "iat", label: "iat: verilmə vaxtı" },
+  { key: "nbf", label: "nbf: qüvvəyə minmə vaxtı" },
+  { key: "exp", label: "exp: bitmə vaxtı" },
 ] as const;
 
 const STANDARD_CLAIM_KEYS = Object.keys(STANDARD_CLAIM_NOTES);

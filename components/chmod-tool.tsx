@@ -358,7 +358,7 @@ export function ChmodTool() {
       <ReferenceTable
         rows={chmodRows}
         sections={chmodSections}
-        placeholder="Rejim, əmr və ya bit adı — 755, u+x, sticky"
+        placeholder="Rejim, əmr və ya bit adı: 755, u+x, sticky"
         footnote="Cədvəl GNU coreutils chmod davranışına görə yazılıb. Fayl sistemi ACL, bağlama seçimi və ya konteyner qatı ilə məhdudlaşdırılıbsa, effektiv icazə bu bitlərdən dar ola bilər."
       />
     </>

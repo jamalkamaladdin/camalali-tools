@@ -44,7 +44,7 @@ const TWITTER_CARD_OPTIONS: { value: TwitterCardType; label: string }[] = [
 const SAMPLE: MetaFields = {
   title: "Kod incəliklərini izah edən jurnal",
   description:
-    "Backend, verilənlər bazası və sistem dizaynı haqqında Azərbaycan dilində praktik yazılar — real layihələrdən çıxarılan qərar və səbəblər.",
+    "Backend, verilənlər bazası və sistem dizaynı haqqında Azərbaycan dilində praktik yazılar: real layihələrdən çıxarılan qərar və səbəblər.",
   url: "https://camalali.com/bloq/websocket-nedir",
   image: "/og/websocket-nedir.png",
   siteName: "camalali",

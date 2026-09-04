@@ -253,10 +253,10 @@ export function MiqyasTool() {
     {
       label: "Gündəlik saxlama artımı",
       value: formatBytes(result.dailyStorageBytes),
-      note: "yalnız yazılan gövdə — oxu disk yeri tutmur",
+      note: "yalnız yazılan gövdə, oxu disk yeri tutmur",
     },
     {
-      label: "Saxlama — replikasiyasız",
+      label: "Saxlama (replikasiyasız)",
       value: formatBytes(result.storageBytes),
       note: `${formatNumber(result.retentionDays)} gün saxlanır`,
     },
@@ -519,13 +519,13 @@ export function MiqyasTool() {
                  used to read "pik RPS ÷ 0 RPS" under a value of "—". */
               note={
                 result.nodes === null
-                  ? "node tutumu sıfırdır — bölünəcək tutum yoxdur"
+                  ? "node tutumu sıfırdır: bölünəcək tutum yoxdur"
                   : `pik RPS ÷ ${formatNumber(applied.nodeCapacityRps)} RPS, yuxarı yuvarlaqlaşdırılıb`
               }
               tone={result.nodes !== null && result.nodes > 100 ? "warning" : "accent"}
             />
             <ToolStat
-              label="Saxlama — replikasiya ilə"
+              label="Saxlama: replikasiya ilə"
               value={formatBytes(result.replicatedStorageBytes)}
               note={`hər qeyd ${formatNumber(applied.replication)} nüsxədə`}
               tone="accent"

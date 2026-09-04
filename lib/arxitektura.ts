@@ -52,11 +52,11 @@ const strictQuestions = [
     label: "Məlumatın forması",
     hint: "Əsas həcmi hansı forma tutur — hamısı yox, ən böyüyü.",
     options: [
-      { value: "relational", label: "Relyasion — cədvəl və əlaqələr" },
-      { value: "document", label: "Sənəd — iç-içə, dəyişkən sxem" },
-      { value: "timeseries", label: "Vaxt sırası — hadisə, metrika, log" },
-      { value: "keyvalue", label: "Açar-dəyər — tək açar üzrə giriş" },
-      { value: "graph", label: "Qraf — çoxsəviyyəli əlaqə gəzişməsi" },
+      { value: "relational", label: "Relyasion: cədvəl və əlaqələr" },
+      { value: "document", label: "Sənəd: iç-içə, dəyişkən sxem" },
+      { value: "timeseries", label: "Vaxt sırası: hadisə, metrika, log" },
+      { value: "keyvalue", label: "Açar-dəyər: tək açar üzrə giriş" },
+      { value: "graph", label: "Qraf: çoxsəviyyəli əlaqə gəzişməsi" },
     ],
   },
   {
@@ -86,7 +86,7 @@ const strictQuestions = [
     label: "Uyğunluq tələbi",
     hint: "Yazılan dəyər dərhal hər yerdə düzgün görünməlidirmi?",
     options: [
-      { value: "strong", label: "Güclü — pul, anbar, sifariş" },
+      { value: "strong", label: "Güclü: pul, anbar, sifariş" },
       { value: "eventual", label: "Son nəticədə kifayətdir" },
     ],
   },
@@ -124,9 +124,9 @@ const strictQuestions = [
     label: "Büdcə həssaslığı",
     hint: "Aylıq infrastruktur xərci nə qədər sıxır?",
     options: [
-      { value: "high", label: "Yüksək — hər manat sayılır" },
+      { value: "high", label: "Yüksək: hər manat sayılır" },
       { value: "medium", label: "Orta" },
-      { value: "low", label: "Aşağı — sürət xərcdən vacibdir" },
+      { value: "low", label: "Aşağı: sürət xərcdən vacibdir" },
     ],
   },
 ] satisfies readonly StrictQuestion[];
@@ -149,7 +149,7 @@ export type Preset = { id: string; label: string; answers: Answers };
 export const presets: readonly Preset[] = [
   {
     id: "mvp",
-    label: "MVP — iki nəfər",
+    label: "MVP: iki nəfər",
     answers: {
       shape: "relational",
       load: "low",

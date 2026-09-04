@@ -125,7 +125,7 @@ export function SitemapYoxlayiciTool() {
               label="Sitemap və ya lent ünvanı"
               htmlFor="sitemap-url"
               className="min-w-56 flex-1"
-              note="Sxem yazılmasa https götürülür. «.xml.gz» faylı açılmır — sıxılmamış variantı ver."
+              note="Sxem yazılmasa https götürülür. «.xml.gz» faylı açılmır: sıxılmamış variantı ver."
             >
               <ToolInput
                 id="sitemap-url"

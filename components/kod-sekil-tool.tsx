@@ -428,7 +428,7 @@ export function KodSekilTool() {
                 id="kod-sekil-lines"
                 type="text"
                 inputMode="text"
-                placeholder="boş — heç biri"
+                placeholder="boş: heç biri"
                 value={lineRangeSpec}
                 onChange={(event) => setLineRangeSpec(event.target.value)}
               />

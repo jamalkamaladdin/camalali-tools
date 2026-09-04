@@ -104,7 +104,7 @@ export function AcarSozSixligiTool() {
           <ToolField
             label="Mətn və ya HTML"
             htmlFor="acar-soz-sixligi-input"
-            note="Səhifə mənbəyini yapışdırmısansa «HTML» seç — teqlər və skript/stil gövdəsi ölçüdən əvvəl atılır."
+            note="Səhifə mənbəyini yapışdırmısansa «HTML» seç. Teqlər və skript/stil gövdəsi ölçüdən əvvəl atılır."
           >
             <ToolTextArea
               id="acar-soz-sixligi-input"

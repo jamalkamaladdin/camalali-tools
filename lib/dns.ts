@@ -418,7 +418,7 @@ export function classifyTxt(value: string): TxtInsight {
   return {
     kind: "other",
     value: trimmed,
-    note: "Tanınan siyasət qeydi deyil — sərbəst mətn və ya xüsusi inteqrasiya.",
+    note: "Tanınan siyasət qeydi deyil: sərbəst mətn və ya xüsusi inteqrasiya.",
     weak: false,
   };
 }
@@ -552,7 +552,7 @@ export function buildFindings(
     findings.push({
       tone: "accent",
       title: "Domen IP ünvanına həll olunmur",
-      text: "Nə A, nə AAAA, nə də CNAME qeydi var — bu ad brauzerdə açılmır.",
+      text: "Nə A, nə AAAA, nə də CNAME qeydi var. Bu ad brauzerdə açılmır.",
     });
   }
 
@@ -568,7 +568,7 @@ export function buildFindings(
     findings.push({
       tone: "info",
       title: "E-poçt qəbulu qurulmayıb",
-      text: "MX qeydi yoxdur — bu domenə göndərilən məktub çatmır. Yalnız sayt üçün istifadə olunan domendə bu normaldır.",
+      text: "MX qeydi yoxdur: bu domenə göndərilən məktub çatmır. Yalnız sayt üçün istifadə olunan domendə bu normaldır.",
     });
   } else {
     const spf = txt.find((entry) => entry.kind === "spf") ?? null;
@@ -577,7 +577,7 @@ export function buildFindings(
       findings.push({
         tone: "accent",
         title: "SPF qeydi yoxdur",
-        text: "Domen məktub qəbul edir, amma göndərən serverlərin siyahısı elan edilməyib — istənilən server bu domenin adından yaza bilər.",
+        text: "Domen məktub qəbul edir, amma göndərən serverlərin siyahısı elan edilməyib. İstənilən server bu domenin adından yaza bilər.",
       });
     } else if (spf.weak) {
       findings.push({ tone: "accent", title: "SPF zəifdir", text: spf.note });

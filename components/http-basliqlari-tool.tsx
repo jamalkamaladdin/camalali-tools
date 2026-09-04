@@ -8,7 +8,7 @@ export function HttpBasliqlariTool() {
     <ReferenceTable
       rows={httpBasliqlariRows}
       sections={httpBasliqlariSections}
-      placeholder="Başlığın adı və ya açar söz axtar — cache, cors, cookie..."
+      placeholder="Başlığın adı və ya açar söz axtar: cache, cors, cookie..."
     />
   );
 }

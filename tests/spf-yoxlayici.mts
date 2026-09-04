@@ -146,7 +146,7 @@ export const checks: CheckSuite = (check) => {
 
   check(
     "spf: +all en yuxari tapintidir, -all hec bir tapinti vermir",
-    plusAll.findings[0]?.title === "«+all» — istənilən server bu domenin adından yaza bilər" &&
+    plusAll.findings[0]?.title === "«+all»: istənilən server bu domenin adından yaza bilər" &&
       minusAll.findings.length === 0,
     `+all tapintilari ${JSON.stringify(titles(plusAll.findings))}, -all tapintilari ${JSON.stringify(titles(minusAll.findings))}`,
   );

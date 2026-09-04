@@ -382,7 +382,7 @@ function buildSpfFindings(expansion: ExpansionBase, sourcedFromText: boolean): S
   if (allTerm && allTerm.form === "mechanism" && allTerm.qualifier === "+") {
     findings.push({
       tone: "accent",
-      title: "«+all» — istənilən server bu domenin adından yaza bilər",
+      title: "«+all»: istənilən server bu domenin adından yaza bilər",
       text: "Bu, SPF-i mənasız edir: siyahıda olmayan istənilən göndərən də «pass» qiyməti alır, yəni siyahının özü heç nəyi süzmür. «-all» (rədd) və ya ən azı «~all» (softfail) ilə əvəz et.",
     });
   }
@@ -391,7 +391,7 @@ function buildSpfFindings(expansion: ExpansionBase, sourcedFromText: boolean): S
     findings.push({
       tone: "accent",
       title: `DNS sorğu limiti aşılıb (${totalLookups}/${SPF_LOOKUP_LIMIT})`,
-      text: "RFC 7208 §4.6.4 SPF qiymətləndirməsini 10 sorğuya qədər buraxır. Bundan çoxu permerror sayılır — qəbuledicilərin əksəriyyəti nəticədə bu qeydi elə sanki heç yazılmayıb kimi görməzdən gəlir.",
+      text: "RFC 7208 §4.6.4 SPF qiymətləndirməsini 10 sorğuya qədər buraxır. Bundan çoxu permerror sayılır: qəbuledicilərin əksəriyyəti nəticədə bu qeydi elə sanki heç yazılmayıb kimi görməzdən gəlir.",
     });
   } else if (totalLookups >= SPF_LOOKUP_LIMIT - 2) {
     findings.push({
@@ -405,7 +405,7 @@ function buildSpfFindings(expansion: ExpansionBase, sourcedFromText: boolean): S
     findings.push({
       tone: "accent",
       title: `Boş axtarış limiti aşılıb (${voidLookups}/${SPF_VOID_LIMIT})`,
-      text: "RFC 7208 §4.6.4 cavabsız (NXDOMAIN və ya boş) axtarışları 2-də məhdudlaşdırır — bundan artığı da permerror sayılır, elə limitin özü aşılmasa belə.",
+      text: "RFC 7208 §4.6.4 cavabsız (NXDOMAIN və ya boş) axtarışları 2-də məhdudlaşdırır: bundan artığı da permerror sayılır, elə limitin özü aşılmasa belə.",
     });
   }
 
@@ -413,7 +413,7 @@ function buildSpfFindings(expansion: ExpansionBase, sourcedFromText: boolean): S
     findings.push({
       tone: "accent",
       title: "Dövr aşkarlandı",
-      text: `${cycles.join(", ")} zəncirin özünə qayıdır — həmin budaqda genişləndirmə dayandırıldı ki, sonsuz dövrə düşməsin.`,
+      text: `${cycles.join(", ")} zəncirin özünə qayıdır: həmin budaqda genişləndirmə dayandırıldı ki, sonsuz dövrə düşməsin.`,
     });
   }
 
@@ -430,7 +430,7 @@ function buildSpfFindings(expansion: ExpansionBase, sourcedFromText: boolean): S
     findings.push({
       tone: "info",
       title: "«redirect=» «all» ilə birlikdə yazılıb",
-      text: `${redirectWithAllDomain} qeydində hər ikisi var — «all» mövcud olduğu üçün qiymətləndirmə heç vaxt ora çatmır, «redirect=» tamamilə nəzərə alınmır.`,
+      text: `${redirectWithAllDomain} qeydində hər ikisi var: «all» mövcud olduğu üçün qiymətləndirmə heç vaxt ora çatmır, «redirect=» tamamilə nəzərə alınmır.`,
     });
   }
 
@@ -438,7 +438,7 @@ function buildSpfFindings(expansion: ExpansionBase, sourcedFromText: boolean): S
     findings.push({
       tone: "info",
       title: "«ptr» mexanizmi köhnəlib",
-      text: "RFC 7208 §5.5 «ptr»-i yavaş və etibarsız elan edir və istifadəsini tövsiyə etmir — üstəlik hər hərəkəti bir DNS sorğusuna mal olur.",
+      text: "RFC 7208 §5.5 «ptr»-i yavaş və etibarsız elan edir və istifadəsini tövsiyə etmir, üstəlik hər hərəkəti bir DNS sorğusuna mal olur.",
     });
   }
 
@@ -446,7 +446,7 @@ function buildSpfFindings(expansion: ExpansionBase, sourcedFromText: boolean): S
     findings.push({
       tone: "info",
       title: "«all» yoxdur",
-      text: "Qeyd heç bir defolt qayda göstərmir — bu, örtülü «?all» (neytral) kimi işlənir: siyahıdan kənar göndərən nə rədd, nə də təsdiq edilir.",
+      text: "Qeyd heç bir defolt qayda göstərmir. Bu, örtülü «?all» (neytral) kimi işlənir: siyahıdan kənar göndərən nə rədd, nə də təsdiq edilir.",
     });
   }
 
@@ -454,7 +454,7 @@ function buildSpfFindings(expansion: ExpansionBase, sourcedFromText: boolean): S
     findings.push({
       tone: "info",
       title: "TXT sətri 255 baytdan uzundur",
-      text: "Hər TXT character-string 255 baytdan uzun ola bilməz. Bu zonada ən azı bir sətir bu həddi keçib — bəzi köhnə tərtibatlar belə qeydi düzgün oxumaya bilər.",
+      text: "Hər TXT character-string 255 baytdan uzun ola bilməz. Bu zonada ən azı bir sətir bu həddi keçib: bəzi köhnə tərtibatlar belə qeydi düzgün oxumaya bilər.",
     });
   }
 
@@ -462,7 +462,7 @@ function buildSpfFindings(expansion: ExpansionBase, sourcedFromText: boolean): S
     findings.push({
       tone: "info",
       title: "Qeyd 512 baytdan uzundur",
-      text: `Ümumi uzunluq ${byteLength(recordText)} bayt. Köhnə UDP cavabları bunu daşımır və sorğu TCP-yə keçməli olur — hər DNS server bunu dəstəkləmir.`,
+      text: `Ümumi uzunluq ${byteLength(recordText)} bayt. Köhnə UDP cavabları bunu daşımır və sorğu TCP-yə keçməli olur: hər DNS server bunu dəstəkləmir.`,
     });
   }
 
@@ -470,7 +470,7 @@ function buildSpfFindings(expansion: ExpansionBase, sourcedFromText: boolean): S
     findings.push({
       tone: "info",
       title: "Dərinlik həddi aşıldı",
-      text: "Include zənciri ayrılmış dərinlikdən uzun idi, bəzi budaqlar genişləndirilmədi — aşağıdakı say tam olmaya bilər.",
+      text: "Include zənciri ayrılmış dərinlikdən uzun idi, bəzi budaqlar genişləndirilmədi, aşağıdakı say tam olmaya bilər.",
     });
   }
 
@@ -478,7 +478,7 @@ function buildSpfFindings(expansion: ExpansionBase, sourcedFromText: boolean): S
     findings.push({
       tone: "info",
       title: "Sorğu büdcəsi bitdi",
-      text: "Genişləndirmə üçün ayrılmış sorğu sayı bitdiyi üçün dayandırıldı — aşağıdakı say tam olmaya bilər.",
+      text: "Genişləndirmə üçün ayrılmış sorğu sayı bitdiyi üçün dayandırıldı: aşağıdakı say tam olmaya bilər.",
     });
   }
 

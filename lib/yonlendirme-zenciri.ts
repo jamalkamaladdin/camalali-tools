@@ -55,7 +55,7 @@ export type ChainReport = {
  * that nobody travelled.
  */
 const STATUS_LABELS: Record<number, { kind: HopKind; label: string }> = {
-  200: { kind: "son", label: "son ünvan — səhifə var" },
+  200: { kind: "son", label: "son ünvan, səhifə var" },
   201: { kind: "son", label: "yaradıldı" },
   204: { kind: "son", label: "gövdəsiz cavab" },
   300: { kind: "muveqqeti", label: "çoxvariantlı cavab" },
@@ -70,7 +70,7 @@ const STATUS_LABELS: Record<number, { kind: HopKind; label: string }> = {
   403: { kind: "xeta", label: "giriş bağlıdır" },
   404: { kind: "xeta", label: "səhifə tapılmadı" },
   410: { kind: "xeta", label: "səhifə silinib" },
-  429: { kind: "xeta", label: "çox sorğu — server gözlədir" },
+  429: { kind: "xeta", label: "çox sorğu, server gözlədir" },
   500: { kind: "xeta", label: "server xətası" },
   502: { kind: "xeta", label: "şlüz xətası" },
   503: { kind: "xeta", label: "xidmət əlçatmazdır" },

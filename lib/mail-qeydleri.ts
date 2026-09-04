@@ -308,7 +308,7 @@ export function buildMailFindings(input: {
     findings.push({
       tone: "info",
       title: "Poçt konfiqurasiyası tapılmadı",
-      text: "Bu domendə MX, SPF və DMARC qeydlərindən heç biri tapılmadı — hazırda heç bir poçt siyasəti fəaliyyət göstərmir.",
+      text: "Bu domendə MX, SPF və DMARC qeydlərindən heç biri tapılmadı: hazırda heç bir poçt siyasəti fəaliyyət göstərmir.",
     });
   }
 
@@ -316,7 +316,7 @@ export function buildMailFindings(input: {
     findings.push({
       tone: "accent",
       title: "Birdən çox SPF qeydi var",
-      text: `Domendə ${spfRecords.length} ədəd SPF qeydi tapıldı. RFC 7208-ə görə bu vəziyyət «permerror»dur — qəbuledici SPF-i bütövlükdə rədd edir, birincini seçmir. Köhnə inteqrasiyanı tapıb yalnız bir SPF qeydi saxla.`,
+      text: `Domendə ${spfRecords.length} ədəd SPF qeydi tapıldı. RFC 7208-ə görə bu vəziyyət «permerror»dur: qəbuledici SPF-i bütövlükdə rədd edir, birincini seçmir. Köhnə inteqrasiyanı tapıb yalnız bir SPF qeydi saxla.`,
     });
   }
 
@@ -327,7 +327,7 @@ export function buildMailFindings(input: {
       findings.push({
         tone: "accent",
         title: "SPF «+all» ilə bitir",
-        text: "İstənilən server bu domenin adından məktub göndərə bilər — «+all» SPF siyasətini faktiki olaraq söndürür. «-all» və ya «~all» ilə əvəz et.",
+        text: "İstənilən server bu domenin adından məktub göndərə bilər. «+all» SPF siyasətini faktiki olaraq söndürür. «-all» və ya «~all» ilə əvəz et.",
       });
     } else if (qualifier === null) {
       findings.push({
@@ -342,7 +342,7 @@ export function buildMailFindings(input: {
     findings.push({
       tone: "accent",
       title: "DMARC yalnız izləyir, qorumur",
-      text: "«p=none» saxta məktubu bloklamır, yalnız hesabat toplayır — əksər domen elə bununla dayanıb özünü qorunmuş sanır. Qorunma üçün «p=quarantine» və ya «p=reject» yaz.",
+      text: "«p=none» saxta məktubu bloklamır, yalnız hesabat toplayır. Əksər domen elə bununla dayanıb özünü qorunmuş sanır. Qorunma üçün «p=quarantine» və ya «p=reject» yaz.",
     });
   }
 
@@ -350,20 +350,20 @@ export function buildMailFindings(input: {
     findings.push({
       tone: "info",
       title: "Domen məktub qəbul etmir",
-      text: "MX qeydi bilərəkdən tək nöqtəyə («.») yönəldilib — RFC 7505-in «bu domen heç vaxt mail qəbul etməyəcək» elanıdır, xəta deyil.",
+      text: "MX qeydi bilərəkdən tək nöqtəyə («.») yönəldilib: RFC 7505-in «bu domen heç vaxt mail qəbul etməyəcək» elanıdır, xəta deyil.",
     });
   } else if (mx.length === 0) {
     findings.push({
       tone: "info",
       title: "E-poçt qəbulu qurulmayıb",
-      text: "MX qeydi yoxdur — bu domenə göndərilən məktub çatmır. Yalnız sayt üçün istifadə olunan domendə bu normaldır.",
+      text: "MX qeydi yoxdur: bu domenə göndərilən məktub çatmır. Yalnız sayt üçün istifadə olunan domendə bu normaldır.",
     });
   } else {
     if (spfRecords.length === 0) {
       findings.push({
         tone: "accent",
         title: "SPF qeydi yoxdur",
-        text: "Domen məktub qəbul edir, amma göndərən serverlərin siyahısı elan edilməyib — istənilən server bu domenin adından yaza bilər.",
+        text: "Domen məktub qəbul edir, amma göndərən serverlərin siyahısı elan edilməyib. İstənilən server bu domenin adından yaza bilər.",
       });
     }
     if (!dmarc) {

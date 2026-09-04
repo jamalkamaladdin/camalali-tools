@@ -104,7 +104,7 @@ export function SubnetTool() {
             <ToolField
               label="Ünvan və ya CIDR"
               htmlFor="subnet-address"
-              note="192.168.1.10 və ya 192.168.1.10/24 — hər iki forma qəbul edilir."
+              note="192.168.1.10 və ya 192.168.1.10/24, hər iki forma qəbul edilir."
             >
               <ToolInput
                 id="subnet-address"
@@ -120,7 +120,7 @@ export function SubnetTool() {
               label="Prefiks"
               htmlFor="subnet-prefix"
               hint={<span className="tabular-nums">/{activePrefix}</span>}
-              note="Sürüşdür — bütün nəticələr dərhal yenilənir."
+              note="Sürüşdür: bütün nəticələr dərhal yenilənir."
             >
               {/* A native range: the skin layer draws buttons and fields, and a
                   slider is neither. `accent-color` is what makes it follow the

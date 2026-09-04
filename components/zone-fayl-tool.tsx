@@ -299,7 +299,7 @@ function BuildTab() {
             <ToolField label="Ad" htmlFor="zone-fayl-name">
               <ToolInput id="zone-fayl-name" value={name} onChange={(event) => setName(event.target.value)} spellCheck={false} />
             </ToolField>
-            <ToolField label="TTL" htmlFor="zone-fayl-row-ttl" note="boş — $TTL dəyərini miras alır">
+            <ToolField label="TTL" htmlFor="zone-fayl-row-ttl" note="boş: $TTL dəyərini miras alır">
               <ToolInput id="zone-fayl-row-ttl" value={rowTtl} onChange={(event) => setRowTtl(event.target.value)} inputMode="numeric" />
             </ToolField>
           </div>

@@ -119,7 +119,7 @@ export function PasswordBreachTool() {
           <ToolField
             label="Yoxlanacaq parol"
             htmlFor="parol-sizmasi-input"
-            note="Yazdıqca heç nə göndərilmir — sorğu yalnız düyməni basanda gedir."
+            note="Yazdıqca heç nə göndərilmir, sorğu yalnız düyməni basanda gedir."
             suffix={
               <ToolButton size="chip" onClick={() => setReveal((on) => !on)}>
                 {reveal ? "Gizlət" : "Göstər"}
@@ -179,12 +179,12 @@ export function PasswordBreachTool() {
               <ToolStat
                 label="Göndərilən hissə"
                 value={outcome.parts.prefix}
-                note="Hash-in ilk 5 simvolu — şəbəkəyə çıxan yeganə məlumat."
+                note="Hash-in ilk 5 simvolu: şəbəkəyə çıxan yeganə məlumat."
               />
               <ToolStat
                 label="Eyni prefiksli hash sayı"
                 value={formatNumber(outcome.crowd)}
-                note="Sorğun bu qədər hash-in arasında gizləndi — xidmət hansının səninki olduğunu bilmir."
+                note="Sorğun bu qədər hash-in arasında gizləndi: xidmət hansının səninki olduğunu bilmir."
               />
             </div>
 

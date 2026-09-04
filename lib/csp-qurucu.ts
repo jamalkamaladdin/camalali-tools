@@ -319,7 +319,7 @@ export const CSP_PRESETS: CspPreset[] = [
   {
     id: "sert",
     label: "Sərt (yalnız 'self')",
-    description: "Ən sərt başlanğıc nöqtəsi — hər şey öz domenindən, heç bir xarici mənbə yoxdur.",
+    description: "Ən sərt başlanğıc nöqtəsi: hər şey öz domenindən, heç bir xarici mənbə yoxdur.",
     directives: {
       "default-src": ["'self'"],
       "object-src": ["'none'"],

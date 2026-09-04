@@ -163,7 +163,7 @@ export const CONSISTENCY_MODELS: ConsistencyModel[] = [
   {
     id: "strong",
     label: "Güclü konsistentlik",
-    promise: "Hər oxu, harada baş versə də, ən son yazının nəticəsini görür — sanki tək node var.",
+    promise: "Hər oxu, harada baş versə də, ən son yazının nəticəsini görür, sanki tək node var.",
   },
   {
     id: "read-your-writes",
@@ -178,7 +178,7 @@ export const CONSISTENCY_MODELS: ConsistencyModel[] = [
   {
     id: "eventual",
     label: "Son nəticədə konsistentlik",
-    promise: "Yazı dayandıqdan müəyyən müddət sonra bütün node-lar eyni dəyərə gəlir — nə vaxt olduğuna zəmanət yoxdur.",
+    promise: "Yazı dayandıqdan müəyyən müddət sonra bütün node-lar eyni dəyərə gəlir. Nə vaxt olduğuna zəmanət yoxdur.",
   },
 ];
 
@@ -191,7 +191,7 @@ export type SystemStance = { name: string; stance: CapSide; note: string };
  * here is the behaviour a team gets without reaching for those knobs.
  */
 export const KNOWN_SYSTEMS: SystemStance[] = [
-  { name: "PostgreSQL", stance: "CP", note: "Tək yazan node — bölünmədə əlçatanlıq itir, konsistentlik qorunur." },
+  { name: "PostgreSQL", stance: "CP", note: "Tək yazan node: bölünmədə əlçatanlıq itir, konsistentlik qorunur." },
   {
     name: "Cassandra",
     stance: "AP",
@@ -202,7 +202,7 @@ export const KNOWN_SYSTEMS: SystemStance[] = [
     stance: "AP",
     note: "Çox-master reallıqda əlçatanlıq üstündür; güclü konsistent oxu ayrıca bayraqla istənilir.",
   },
-  { name: "etcd", stance: "CP", note: "Raft konsensusu — əksəriyyət əlçatan olmasa yazı dayanır." },
+  { name: "etcd", stance: "CP", note: "Raft konsensusu: əksəriyyət əlçatan olmasa yazı dayanır." },
   {
     name: "Redis",
     stance: "CP",

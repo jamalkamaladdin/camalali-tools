@@ -131,7 +131,7 @@ function assessCsp(map: ReadonlyMap<string, string>): HeaderFinding {
       verdict: "weak",
       value,
       points: 8,
-      note: "Nə «script-src», nə «default-src» var — siyasət skriptlərə toxunmur, yəni əsas işini görmür.",
+      note: "Nə «script-src», nə «default-src» var: siyasət skriptlərə toxunmur, yəni əsas işini görmür.",
     };
   }
 
@@ -163,7 +163,7 @@ function assessCsp(map: ReadonlyMap<string, string>): HeaderFinding {
       verdict: "weak",
       value,
       points: 18,
-      note: "«unsafe-eval» açıqdır — eval() və new Function() ilə mətndən kod qurmaq mümkün qalır.",
+      note: "«unsafe-eval» açıqdır: eval() və new Function() ilə mətndən kod qurmaq mümkün qalır.",
     };
   }
 
@@ -203,7 +203,7 @@ function assessHsts(map: ReadonlyMap<string, string>, https: boolean): HeaderFin
       verdict: value === null ? "missing" : "weak",
       value,
       points: 0,
-      note: "Ünvan http-dir. Bu başlıq yalnız https bağlantısında nəzərə alınır — əvvəlcə saytı https-ə keçirmək lazımdır.",
+      note: "Ünvan http-dir. Bu başlıq yalnız https bağlantısında nəzərə alınır: əvvəlcə saytı https-ə keçirmək lazımdır.",
     };
   }
 
@@ -213,7 +213,7 @@ function assessHsts(map: ReadonlyMap<string, string>, https: boolean): HeaderFin
       verdict: "missing",
       value: null,
       points: 0,
-      note: "Başlıq yoxdur — ilk müraciət http ilə gedirsə, araya girən şəbəkə onu oxuya bilər.",
+      note: "Başlıq yoxdur: ilk müraciət http ilə gedirsə, araya girən şəbəkə onu oxuya bilər.",
     };
   }
 
@@ -239,7 +239,7 @@ function assessHsts(map: ReadonlyMap<string, string>, https: boolean): HeaderFin
       verdict: "weak",
       value,
       points: 8,
-      note: `max-age ${maxAge} saniyədir (bir gündən az) — qoruma demək olar dərhal bitir.`,
+      note: `max-age ${maxAge} saniyədir (bir gündən az): qoruma demək olar dərhal bitir.`,
     };
   }
 
@@ -294,13 +294,13 @@ function assessFrameOptions(map: ReadonlyMap<string, string>): HeaderFinding {
       verdict: "missing",
       value: null,
       points: 0,
-      note: "Nə X-Frame-Options, nə də CSP «frame-ancestors» var — səhifə görünməz iframe-ə salına bilər.",
+      note: "Nə X-Frame-Options, nə də CSP «frame-ancestors» var: səhifə görünməz iframe-ə salına bilər.",
     };
   }
 
   const upper = value.trim().toUpperCase();
   if (upper === "DENY" || upper === "SAMEORIGIN") {
-    return { ...base, verdict: "good", value, points: 15, note: `«${upper}» qoyulub — iframe bağlıdır.` };
+    return { ...base, verdict: "good", value, points: 15, note: `«${upper}» qoyulub, iframe bağlıdır.` };
   }
 
   return {
@@ -326,7 +326,7 @@ function assessNosniff(map: ReadonlyMap<string, string>): HeaderFinding {
       verdict: "missing",
       value: null,
       points: 0,
-      note: "Başlıq yoxdur — yüklənmiş fayl brauzerdə skript kimi şərh oluna bilər.",
+      note: "Başlıq yoxdur: yüklənmiş fayl brauzerdə skript kimi şərh oluna bilər.",
     };
   }
   if (value.trim().toLowerCase() === "nosniff") {
@@ -368,7 +368,7 @@ function assessReferrer(map: ReadonlyMap<string, string>): HeaderFinding {
   const effective = [...tokens].reverse().find((token) => REFERRER_STRONG.has(token) || REFERRER_WEAK.has(token) || token === "unsafe-url");
 
   if (effective === undefined) {
-    return { ...base, verdict: "weak", value, points: 3, note: "Dəyər tanınmır — brauzer öz defoltuna qayıdır." };
+    return { ...base, verdict: "weak", value, points: 3, note: "Dəyər tanınmır: brauzer öz defoltuna qayıdır." };
   }
   if (effective === "unsafe-url") {
     return {
@@ -388,7 +388,7 @@ function assessReferrer(map: ReadonlyMap<string, string>): HeaderFinding {
       note: `«${effective}» domen adını kənar sayta ötürür. «strict-origin-when-cross-origin» daha dar variantdır.`,
     };
   }
-  return { ...base, verdict: "good", value, points: 10, note: `«${effective}» — ünvan kənara sızmır.` };
+  return { ...base, verdict: "good", value, points: 10, note: `«${effective}»: ünvan kənara sızmır.` };
 }
 
 function assessPermissions(map: ReadonlyMap<string, string>): HeaderFinding {
@@ -405,11 +405,11 @@ function assessPermissions(map: ReadonlyMap<string, string>): HeaderFinding {
       verdict: "missing",
       value: null,
       points: 0,
-      note: "Başlıq yoxdur — səhifəyə düşən üçüncü tərəf skripti kamera və ya geolokasiya istəyə bilər.",
+      note: "Başlıq yoxdur, səhifəyə düşən üçüncü tərəf skripti kamera və ya geolokasiya istəyə bilər.",
     };
   }
   if (value.trim() === "") {
-    return { ...base, verdict: "weak", value, points: 3, note: "Dəyər boşdur — heç bir imkan məhdudlaşdırılmır." };
+    return { ...base, verdict: "weak", value, points: 3, note: "Dəyər boşdur, heç bir imkan məhdudlaşdırılmır." };
   }
   const count = value.split(",").filter((part) => part.trim() !== "").length;
   return {
@@ -434,7 +434,7 @@ function assessCoop(map: ReadonlyMap<string, string>): HeaderFinding {
   }
   const token = value.trim().toLowerCase();
   if (token === "same-origin") {
-    return { ...base, verdict: "good", value, points: 4, note: "«same-origin» — pəncərə tam təcrid olunub." };
+    return { ...base, verdict: "good", value, points: 4, note: "«same-origin»: pəncərə tam təcrid olunub." };
   }
   if (token === "same-origin-allow-popups") {
     return {
@@ -462,7 +462,7 @@ function assessCoep(map: ReadonlyMap<string, string>): HeaderFinding {
       verdict: "missing",
       value: null,
       points: 0,
-      note: "Başlıq yoxdur. Adi sayt üçün bu ciddi qüsur deyil — tələb yalnız cross-origin izolyasiya lazım olanda yaranır.",
+      note: "Başlıq yoxdur. Adi sayt üçün bu ciddi qüsur deyil: tələb yalnız cross-origin izolyasiya lazım olanda yaranır.",
     };
   }
   const token = value.trim().toLowerCase();
@@ -492,7 +492,7 @@ function assessCorp(map: ReadonlyMap<string, string>): HeaderFinding {
     verdict: "weak",
     value,
     points: 1,
-    note: "«cross-origin» hər sayta yükləməyə icazə verir — CDN üçün düzgün, adi səhifə üçün yox.",
+    note: "«cross-origin» hər sayta yükləməyə icazə verir: CDN üçün düzgün, adi səhifə üçün yox.",
   };
 }
 

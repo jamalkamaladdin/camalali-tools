@@ -107,7 +107,7 @@ export function BasliqlarTool() {
               label="Sayt ünvanı"
               htmlFor="basliqlar-url"
               className="min-w-56 flex-1"
-              note="Sxem yazılmasa https götürülür. Yönləndirmə izlənmir — hara yönləndirdiyi göstərilir."
+              note="Sxem yazılmasa https götürülür. Yönləndirmə izlənmir: hara yönləndirdiyi göstərilir."
             >
               <ToolInput
                 id="basliqlar-url"

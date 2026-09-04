@@ -158,7 +158,7 @@ function Inspector() {
         <div className="space-y-4 p-4">
           <ToolField
             label="Yoxlanacaq mətn"
-            note="Yazdıqların brauzerdən çıxmır — heç bir serverə göndərilmir."
+            note="Yazdıqların brauzerdən çıxmır. Heç bir serverə göndərilmir."
             htmlFor="ascii-unicode-input"
           >
             <ToolTextArea

@@ -118,7 +118,7 @@ export function RobotsCanliTool() {
               label="Domen adı"
               htmlFor="robots-canli-domen"
               className="min-w-56 flex-1"
-              note="Yalnız domen götürülür — yazdığın yol nəzərə alınmır, fayl həmişə /robots.txt ünvanından gətirilir."
+              note="Yalnız domen götürülür: yazdığın yol nəzərə alınmır, fayl həmişə /robots.txt ünvanından gətirilir."
             >
               <ToolInput
                 id="robots-canli-domen"
@@ -340,7 +340,7 @@ function PathTester({ report }: { report: RobotsLiveReport }) {
           <ToolField
             label="Bot"
             htmlFor="robots-canli-bot"
-            note="Adı çəkilən bot yalnız öz qrupunu oxuyur — * qrupu ona əlavə olunmur."
+            note="Adı çəkilən bot yalnız öz qrupunu oxuyur, * qrupu ona əlavə olunmur."
           >
             <ToolSelect
               id="robots-canli-bot"

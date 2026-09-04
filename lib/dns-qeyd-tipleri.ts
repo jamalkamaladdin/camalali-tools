@@ -49,7 +49,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "A",
     label: "1",
-    note: "Domeni IPv4 ünvanına bağlayır — brauzer səhifəni bu ünvandan istəyir. Ən köhnə və ən çox axtarılan qeyd tipidir.",
+    note: "Domeni IPv4 ünvanına bağlayır: brauzer səhifəni bu ünvandan istəyir. Ən köhnə və ən çox axtarılan qeyd tipidir.",
     section: "esas",
     example: "example.com. 3600 IN A 93.184.216.34",
     match: ["address record", "ipv4"],
@@ -57,7 +57,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "AAAA",
     label: "28",
-    note: "Domeni IPv6 ünvanına bağlayır. A qeydi olmadan da işləyə bilər — ikisi eyni adda paralel yaşayır, brauzer əvvəlcə AAAA-nı sınayır.",
+    note: "Domeni IPv6 ünvanına bağlayır. A qeydi olmadan da işləyə bilər. İkisi eyni adda paralel yaşayır, brauzer əvvəlcə AAAA-nı sınayır.",
     section: "esas",
     example: "example.com. 3600 IN AAAA 2606:2800:220:1:248:1893:25c8:1946",
     match: ["quad-a", "ipv6 address"],
@@ -65,7 +65,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "CNAME",
     label: "5",
-    note: "Adı IP-yə yox, başqa bir ada yönləndirir. Kök domendə (apex, məs. `example.com`) qoyula bilməz və eyni adda başqa heç bir qeydlə yan-yana ola bilməz — bu iki qadağa ALIAS, ANAME kimi provayder-spesifik 'apex flattening' funksiyalarının yaranma səbəbidir; onlar DNS tipi deyil, vendor xüsusiyyətidir.",
+    note: "Adı IP-yə yox, başqa bir ada yönləndirir. Kök domendə (apex, məs. `example.com`) qoyula bilməz və eyni adda başqa heç bir qeydlə yan-yana ola bilməz: bu iki qadağa ALIAS, ANAME kimi provayder-spesifik 'apex flattening' funksiyalarının yaranma səbəbidir; onlar DNS tipi deyil, vendor xüsusiyyətidir.",
     section: "esas",
     example: "www.example.com. 3600 IN CNAME example.com.",
     match: ["canonical name", "alias record", "apex flattening"],
@@ -81,7 +81,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "TXT",
     label: "16",
-    note: "İstənilən sərbəst mətni saxlayan universal qeyddir; SPF, DKIM, DMARC və sahiblik təsdiqləri hamısı bunun üzərində qurulub. Bir sətir (string) 255 baytla məhdudlaşır — daha uzun məzmun (məsələn DKIM açarı) bir neçə dırnaqlı sətrə bölünür və oxuyan tərəf onları özü birləşdirir.",
+    note: "İstənilən sərbəst mətni saxlayan universal qeyddir; SPF, DKIM, DMARC və sahiblik təsdiqləri hamısı bunun üzərində qurulub. Bir sətir (string) 255 baytla məhdudlaşır. Daha uzun məzmun (məsələn DKIM açarı) bir neçə dırnaqlı sətrə bölünür və oxuyan tərəf onları özü birləşdirir.",
     section: "esas",
     example: 'example.com. 3600 IN TXT "google-site-verification=abc123"',
     match: ["text record", "255 byte limit"],
@@ -105,7 +105,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "PTR",
     label: "12",
-    note: "IP ünvanını ada bağlayan tərs qeyddir, `in-addr.arpa` (IPv4) və ya `ip6.arpa` (IPv6) zonasında yaşayır. Bu zonaya domen sahibi yox, IP blokunun sahibi (adətən hosting və ya ISP) yazır — ona görə öz domeninin PTR-ını özün deyil, provayderindən istəyərək düzəldirsən.",
+    note: "IP ünvanını ada bağlayan tərs qeyddir, `in-addr.arpa` (IPv4) və ya `ip6.arpa` (IPv6) zonasında yaşayır. Bu zonaya domen sahibi yox, IP blokunun sahibi (adətən hosting və ya ISP) yazır. Ona görə öz domeninin PTR-ını özün deyil, provayderindən istəyərək düzəldirsən.",
     section: "esas",
     example: "34.216.184.93.in-addr.arpa. 3600 IN PTR example.com.",
     match: ["reverse dns", "rdns", "in-addr.arpa"],
@@ -113,7 +113,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "TTL",
     label: "Saniyə",
-    note: "Bu, DNS qeyd tipi deyil — hər qeydin yanında duran, cavabın resolver keşində neçə saniyə saxlanacağını göstərən ədəddir. Planlaşdırılan dəyişiklikdən əvvəl azaldılması yayılma müddətini qısaldır.",
+    note: "Bu, DNS qeyd tipi deyil: hər qeydin yanında duran, cavabın resolver keşində neçə saniyə saxlanacağını göstərən ədəddir. Planlaşdırılan dəyişiklikdən əvvəl azaldılması yayılma müddətini qısaldır.",
     section: "esas",
     example: "example.com. 300 IN A 93.184.216.34   ← 300 buradakı TTL-dir",
     match: ["time to live", "cache duration", "propagation"],
@@ -123,7 +123,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "SPF",
     label: "TXT",
-    note: "Ayrıca qeyd tipi deyil — göndərməyə icazəli serverlər `v=spf1` prefiksli TXT qeydində saxlanılır. 2005-də ayrıca tip (99) təklif olunmuşdu, RFC 7208 bunu 2014-də rəsmən ləğv etdi.",
+    note: "Ayrıca qeyd tipi deyil: göndərməyə icazəli serverlər `v=spf1` prefiksli TXT qeydində saxlanılır. 2005-də ayrıca tip (99) təklif olunmuşdu, RFC 7208 bunu 2014-də rəsmən ləğv etdi.",
     section: "poct",
     example: 'example.com. 3600 IN TXT "v=spf1 include:_spf.google.com ~all"',
     match: ["spf", "sender policy framework", "v=spf1"],
@@ -131,7 +131,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "DKIM",
     label: "TXT (selector._domainkey)",
-    note: "Göndərilən məktubu rəqəmsal imzalayan açıq açar TXT qeydində saxlanılır, adı `<seçici>._domainkey.<domen>` formatındadır. Açar mətni tez-tez 255 baytdan uzun olur — o zaman bir neçə dırnaqlı sətrə bölünür, sistemlər həmin sətirləri sadəcə ardıcıl birləşdirərək oxuyur.",
+    note: "Göndərilən məktubu rəqəmsal imzalayan açıq açar TXT qeydində saxlanılır, adı `<seçici>._domainkey.<domen>` formatındadır. Açar mətni tez-tez 255 baytdan uzun olur, o zaman bir neçə dırnaqlı sətrə bölünür, sistemlər həmin sətirləri sadəcə ardıcıl birləşdirərək oxuyur.",
     section: "poct",
     example: 'selector1._domainkey.example.com. TXT "v=DKIM1; k=rsa; p=MIGfMA0GCSq..."',
     match: ["domainkeys identified mail", "dkim selector"],
@@ -181,7 +181,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "SVCB",
     label: "64",
-    note: "Siyahıdakı ən yeni tipdir — bir xidmətin dəstəklədiyi protokolları (h2, h3), portunu və IP ipuçlarını əlaqə qurulmazdan əvvəl elan etməyə imkan verir. HTTPS qeydi onun veb üçün xüsusiləşmiş versiyasıdır.",
+    note: "Siyahıdakı ən yeni tipdir: bir xidmətin dəstəklədiyi protokolları (h2, h3), portunu və IP ipuçlarını əlaqə qurulmazdan əvvəl elan etməyə imkan verir. HTTPS qeydi onun veb üçün xüsusiləşmiş versiyasıdır.",
     section: "xidmet-kesf",
     example: "example.com. 3600 IN SVCB 1 . alpn=h3,h2",
     match: ["service binding", "http3 discovery"],
@@ -189,7 +189,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "HTTPS",
     label: "65",
-    note: "SVCB-nin veb üçün xüsusiləşmiş formasıdır; brauzerə HTTP/3-ə birbaşa keçməyi və Encrypted Client Hello (ECH) açarını əvvəlcədən bildirir — bu, TLS əl sıxışmasında domen adının açıq görünməsinin qarşısını alır.",
+    note: "SVCB-nin veb üçün xüsusiləşmiş formasıdır; brauzerə HTTP/3-ə birbaşa keçməyi və Encrypted Client Hello (ECH) açarını əvvəlcədən bildirir. Bu, TLS əl sıxışmasında domen adının açıq görünməsinin qarşısını alır.",
     section: "xidmet-kesf",
     example: "example.com. 3600 IN HTTPS 1 . alpn=h3,h2 ech=AEn+...",
     match: ["encrypted client hello", "ech", "http3"],
@@ -205,7 +205,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "URI",
     label: "256",
-    note: "SRV-nin sadələşdirilmiş formasıdır — port və çəki əvəzinə birbaşa tam URI göstərir; RFC 7553-də təsvir olunub, amma real dünyada SRV qədər geniş dəstəklənmir.",
+    note: "SRV-nin sadələşdirilmiş formasıdır: port və çəki əvəzinə birbaşa tam URI göstərir; RFC 7553-də təsvir olunub, amma real dünyada SRV qədər geniş dəstəklənmir.",
     section: "xidmet-kesf",
     example: '_ftp._tcp.example.com. 3600 IN URI 10 1 "ftp://ftp.example.com/"',
     match: ["uniform resource identifier record"],
@@ -215,7 +215,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "CAA",
     label: "257",
-    note: "Bu domenə hansı sertifikat mərkəzlərinin (CA) TLS sertifikatı verə biləcəyini məhdudlaşdırır. Yalnız sertifikat verilən anda sertifikat mərkəzi tərəfindən yoxlanılır — brauzer səhifəni açanda buna baxmır, ona görə səhv CAA saytı sındırmaz, sadəcə yeni sertifikat almağı əngəlləyər.",
+    note: "Bu domenə hansı sertifikat mərkəzlərinin (CA) TLS sertifikatı verə biləcəyini məhdudlaşdırır. Yalnız sertifikat verilən anda sertifikat mərkəzi tərəfindən yoxlanılır. Brauzer səhifəni açanda buna baxmır, ona görə səhv CAA saytı sındırmaz, sadəcə yeni sertifikat almağı əngəlləyər.",
     section: "tehlukesizlik",
     example: 'example.com. 3600 IN CAA 0 issue "letsencrypt.org"',
     match: ["certificate authority authorization"],
@@ -223,7 +223,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "TLSA",
     label: "52",
-    note: "DANE mexanizminin əsasıdır — hansı sertifikatın və ya açarın bu xidmət üçün etibarlı olduğunu birbaşa DNS-də elan edir, CA-ya güvənməyi əvəzləyir. Yalnız DNSSEC imzalanmış zonada mənalıdır, yoxsa qeydin özü saxtalaşdırıla bilər.",
+    note: "DANE mexanizminin əsasıdır: hansı sertifikatın və ya açarın bu xidmət üçün etibarlı olduğunu birbaşa DNS-də elan edir, CA-ya güvənməyi əvəzləyir. Yalnız DNSSEC imzalanmış zonada mənalıdır, yoxsa qeydin özü saxtalaşdırıla bilər.",
     section: "tehlukesizlik",
     example: "_443._tcp.example.com. 3600 IN TLSA 3 1 1 abc123def456...",
     match: ["dane", "tls authentication"],
@@ -239,7 +239,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "DS",
     label: "43",
-    note: "Alt zonanın DNSKEY-inin heşini yuxarı zonada saxlayır — DNSSEC etibar zəncirini bir səviyyə yuxarı bağlayan qeyddir; registrar panelində 'DS record' yükləmək domeni imzalı zonaya bağlayır.",
+    note: "Alt zonanın DNSKEY-inin heşini yuxarı zonada saxlayır: DNSSEC etibar zəncirini bir səviyyə yuxarı bağlayan qeyddir; registrar panelində 'DS record' yükləmək domeni imzalı zonaya bağlayır.",
     section: "tehlukesizlik",
     example: "example.com. 3600 IN DS 12345 8 2 ABCDEF0123456789...",
     match: ["delegation signer", "trust chain"],
@@ -247,7 +247,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "DNSKEY",
     label: "48",
-    note: "Zonanın DNSSEC açıq açarını daşıyır — RRSIG imzalarını yoxlamaq üçün istifadə olunur. Adətən iki cüt olur: tez-tez dəyişən ZSK (zone signing key) və nadir dəyişən KSK (key signing key).",
+    note: "Zonanın DNSSEC açıq açarını daşıyır: RRSIG imzalarını yoxlamaq üçün istifadə olunur. Adətən iki cüt olur: tez-tez dəyişən ZSK (zone signing key) və nadir dəyişən KSK (key signing key).",
     section: "tehlukesizlik",
     example: "example.com. 3600 IN DNSKEY 257 3 8 AwEAAagAI...",
     match: ["dnssec public key", "zsk", "ksk"],
@@ -255,7 +255,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "RRSIG",
     label: "46",
-    note: "Başqa bir qeyd dəstinin (RRset) rəqəmsal imzasıdır — DNSSEC-də hər cavab öz RRSIG-i ilə birlikdə gəlir, resolver bunu DNSKEY ilə yoxlayır.",
+    note: "Başqa bir qeyd dəstinin (RRset) rəqəmsal imzasıdır. DNSSEC-də hər cavab öz RRSIG-i ilə birlikdə gəlir, resolver bunu DNSKEY ilə yoxlayır.",
     section: "tehlukesizlik",
     example: "example.com. 3600 IN RRSIG A 8 2 3600 20260401000000 20260301000000 12345 example.com. ABCDEF...",
     match: ["resource record signature"],
@@ -263,7 +263,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "NSEC",
     label: "47",
-    note: "Bir adın mövcud olmadığını sübut etmək üçün DNSSEC-in istifadə etdiyi qeyddir — zonadakı növbəti mövcud ada işarə edir. Yan təsiri: zonanın bütün adlarını ardıcıl sorğu ilə gəzib çıxarmaq (zone walking) mümkün olur.",
+    note: "Bir adın mövcud olmadığını sübut etmək üçün DNSSEC-in istifadə etdiyi qeyddir: zonadakı növbəti mövcud ada işarə edir. Yan təsiri: zonanın bütün adlarını ardıcıl sorğu ilə gəzib çıxarmaq (zone walking) mümkün olur.",
     section: "tehlukesizlik",
     example: "example.com. 3600 IN NSEC mail.example.com. A MX RRSIG NSEC",
     match: ["next secure record", "zone walking", "denial of existence"],
@@ -271,7 +271,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "NSEC3",
     label: "50",
-    note: "NSEC-in eyni işi görən, amma adları açıq yazmaq əvəzinə heşləyən versiyasıdır — zona gəzintisini çətinləşdirir, tamamilə bağlamır.",
+    note: "NSEC-in eyni işi görən, amma adları açıq yazmaq əvəzinə heşləyən versiyasıdır. Zona gəzintisini çətinləşdirir, tamamilə bağlamır.",
     section: "tehlukesizlik",
     example: "37h9fkm8...example.com. 3600 IN NSEC3 1 0 10 ABCD 92h3k...  A RRSIG",
     match: ["hashed denial of existence"],
@@ -279,7 +279,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "CDS",
     label: "59",
-    note: "Alt zonanın öz DS qeydinin necə olmasını istədiyini yuxarı zonaya ('parent') bildirir — bəzi registrar-lar bunu avtomatik oxuyub DS-i özləri yeniləyir (CDS/CDNSKEY consumer).",
+    note: "Alt zonanın öz DS qeydinin necə olmasını istədiyini yuxarı zonaya ('parent') bildirir. Bəzi registrar-lar bunu avtomatik oxuyub DS-i özləri yeniləyir (CDS/CDNSKEY consumer).",
     section: "tehlukesizlik",
     example: "example.com. 3600 IN CDS 12345 8 2 ABCDEF0123456789...",
     match: ["child ds", "automated dnssec rollover"],
@@ -287,7 +287,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "CDNSKEY",
     label: "60",
-    note: "CDS ilə eyni məqsədi DNSKEY formatında görür — alt zona öz açarını yuxarı zonaya köçürmək istədiyini elan edir, avtomatik açar dəyişimi (key rollover) üçün nəzərdə tutulub.",
+    note: "CDS ilə eyni məqsədi DNSKEY formatında görür: alt zona öz açarını yuxarı zonaya köçürmək istədiyini elan edir, avtomatik açar dəyişimi (key rollover) üçün nəzərdə tutulub.",
     section: "tehlukesizlik",
     example: "example.com. 3600 IN CDNSKEY 257 3 8 AwEAAagAI...",
     match: ["child dnskey", "key rollover"],
@@ -297,7 +297,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "AXFR",
     label: "252",
-    note: "Zonada saxlanan qeyd deyil — bütün zonanı bir dəfəyə köçürən sorğu tipidir, əsas server ikincil serverə tam surət verəndə işlədilir. Kənara açıq buraxılan AXFR zonanın bütün adlarını sızdıra bilər.",
+    note: "Zonada saxlanan qeyd deyil: bütün zonanı bir dəfəyə köçürən sorğu tipidir, əsas server ikincil serverə tam surət verəndə işlədilir. Kənara açıq buraxılan AXFR zonanın bütün adlarını sızdıra bilər.",
     section: "sorgu-nezaret",
     example: "dig axfr example.com @ns1.example.com",
     match: ["full zone transfer", "query type"],
@@ -305,7 +305,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "IXFR",
     label: "251",
-    note: "AXFR kimi qeyd deyil, sorğu tipidir — amma bütün zonanı yox, son sinxronizasiyadan bəri dəyişən hissəni köçürür, SOA seriya nömrəsi bunun üçün müqayisə nöqtəsidir.",
+    note: "AXFR kimi qeyd deyil, sorğu tipidir, amma bütün zonanı yox, son sinxronizasiyadan bəri dəyişən hissəni köçürür, SOA seriya nömrəsi bunun üçün müqayisə nöqtəsidir.",
     section: "sorgu-nezaret",
     example: "dig ixfr=2026090301 example.com @ns1.example.com",
     match: ["incremental zone transfer", "query type"],
@@ -313,7 +313,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "ANY",
     label: "255 (*)",
-    note: "Zonada saxlanan qeyd deyil, 'bu adda nə varsa hamısını göstər' sorğusudur. Kiçik sorğuya nisbətən çox böyük cavab qaytardığı üçün DNS gücləndirmə (amplification) hücumlarında sui-istifadə olunub — bir çox resolver artıq tam dəstəkləmir.",
+    note: "Zonada saxlanan qeyd deyil, 'bu adda nə varsa hamısını göstər' sorğusudur. Kiçik sorğuya nisbətən çox böyük cavab qaytardığı üçün DNS gücləndirmə (amplification) hücumlarında sui-istifadə olunub. Bir çox resolver artıq tam dəstəkləmir.",
     section: "sorgu-nezaret",
     example: "dig ANY example.com",
     match: ["query type", "dns amplification"],
@@ -321,7 +321,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "OPT",
     label: "41",
-    note: "Zonada yazılmır — hər sorğu və cavaba əlavə olunan psevdo-qeyddir, EDNS0 uzantısının daşıyıcısıdır; DNSSEC üçün lazım olan 512 baytdan böyük UDP cavablarını mümkün edir.",
+    note: "Zonada yazılmır: hər sorğu və cavaba əlavə olunan psevdo-qeyddir, EDNS0 uzantısının daşıyıcısıdır; DNSSEC üçün lazım olan 512 baytdan böyük UDP cavablarını mümkün edir.",
     section: "sorgu-nezaret",
     example: "; EDNS: version: 0, flags:; udp: 4096",
     match: ["edns0", "pseudo record", "extension mechanism for dns"],
@@ -329,7 +329,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "TSIG",
     label: "250",
-    note: "Zonada saxlanmır — iki server arasındakı sorğu-cavabı (adətən zona köçürməsini) paylaşılan sirlə imzalayan sorğu-səviyyəli mexanizmdir; DNSSEC-dən fərqli olaraq asimmetrik açar yox, ortaq açar işlədir.",
+    note: "Zonada saxlanmır: iki server arasındakı sorğu-cavabı (adətən zona köçürməsini) paylaşılan sirlə imzalayan sorğu-səviyyəli mexanizmdir; DNSSEC-dən fərqli olaraq asimmetrik açar yox, ortaq açar işlədir.",
     section: "sorgu-nezaret",
     example: "dig axfr example.com @ns1.example.com -y hmac-sha256:keyname:base64secret",
     match: ["transaction signature", "shared secret"],
@@ -339,7 +339,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "SPF",
     label: "99 (ləğv edilib)",
-    note: "IANA reyestrində ayrıca SPF tipi 2005-də ayrılmışdı, amma heç vaxt geniş dəstək tapmadı; RFC 7208 onu rəsmən ləğv etdi — bugün SPF yalnız TXT qeydi kimi yazılır.",
+    note: "IANA reyestrində ayrıca SPF tipi 2005-də ayrılmışdı, amma heç vaxt geniş dəstək tapmadı; RFC 7208 onu rəsmən ləğv etdi. Bugün SPF yalnız TXT qeydi kimi yazılır.",
     section: "kohne",
     example: "; type 99 (SPF) artıq heç bir aktual DNS proqramı tərəfindən yazılmır",
     match: ["spf type 99", "spf record type", "retired"],
@@ -354,7 +354,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "MF",
     label: "4 (ləğv edilib)",
-    note: "MD-nin cütü idi — poçtu ötürən ('forward') serveri göstərirdi; ikisi də MX-in xeyrinə 1980-ci illərdə tərk edildi.",
+    note: "MD-nin cütü idi: poçtu ötürən ('forward') serveri göstərirdi; ikisi də MX-in xeyrinə 1980-ci illərdə tərk edildi.",
     section: "kohne",
     match: ["mail forwarder", "obsolete"],
   },
@@ -368,7 +368,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "A6",
     label: "38 (ləğv edilib)",
-    note: "IPv6 ünvanını hissə-hissə, zəncirlənən qeydlərlə saxlamaq üçün AAAA-ya alternativ kimi təklif olunmuşdu; mürəkkəbliyi xeyrini üstələdi, RFC 6563 onu rəsmən 'tarixi' elan edib — bugün hər yerdə sadə AAAA işlədilir.",
+    note: "IPv6 ünvanını hissə-hissə, zəncirlənən qeydlərlə saxlamaq üçün AAAA-ya alternativ kimi təklif olunmuşdu; mürəkkəbliyi xeyrini üstələdi, RFC 6563 onu rəsmən 'tarixi' elan edib. Bugün hər yerdə sadə AAAA işlədilir.",
     section: "kohne",
     match: ["ipv6 chained address", "historic"],
   },
@@ -382,7 +382,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "MG",
     label: "8 (eksperimental)",
-    note: "Poçt qrupunun üzvünü göstərən eksperimental tip idi — poçt siyahısı idarəçiliyi sonradan tamamilə SMTP tərəfinin işi oldu, bu tip tərk edildi.",
+    note: "Poçt qrupunun üzvünü göstərən eksperimental tip idi. Poçt siyahısı idarəçiliyi sonradan tamamilə SMTP tərəfinin işi oldu, bu tip tərk edildi.",
     section: "kohne",
     match: ["mail group member", "experimental"],
   },
@@ -396,7 +396,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "NULL",
     label: "10 (eksperimental)",
-    note: "Formatı təyin olunmamış, ixtiyari ikili məlumat daşımaq üçün ayrılmış eksperimental tipdir — DNS protokolunun daxili sınaqlarından kənar heç vaxt real istifadə tapmadı.",
+    note: "Formatı təyin olunmamış, ixtiyari ikili məlumat daşımaq üçün ayrılmış eksperimental tipdir. DNS protokolunun daxili sınaqlarından kənar heç vaxt real istifadə tapmadı.",
     section: "kohne",
     match: ["experimental record", "opaque data"],
   },
@@ -439,7 +439,7 @@ export const dnsQeydTipleriRows: ReferenceRow[] = [
   {
     term: "KEY",
     label: "25 (DNSKEY ilə əvəz olunub)",
-    note: "SIG kimi DNSSEC-in ilk versiyasına aiddir — açıq açarı daşıyırdı; 2005-ci il yenidən yazımında DNSKEY onu əvəz etdi, bugün yalnız SIG(0) əməliyyatlarında qalıq kimi görünür.",
+    note: "SIG kimi DNSSEC-in ilk versiyasına aiddir: açıq açarı daşıyırdı; 2005-ci il yenidən yazımında DNSKEY onu əvəz etdi, bugün yalnız SIG(0) əməliyyatlarında qalıq kimi görünür.",
     section: "kohne",
     match: ["dnssec key record v1"],
   },

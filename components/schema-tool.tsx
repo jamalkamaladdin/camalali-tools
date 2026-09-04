@@ -793,7 +793,7 @@ function OrganizationForm({ values, set }: FormProps) {
           field="sameAs"
           values={values}
           set={set}
-          note="Hər sətirdə bir ünvan — sətirlər sameAs massivinə çevrilir."
+          note="Hər sətirdə bir ünvan: sətirlər sameAs massivinə çevrilir."
           placeholder={"https://github.com/istifadeci\nhttps://www.linkedin.com/in/istifadeci"}
         />
       </Wide>
@@ -827,7 +827,7 @@ function PersonForm({ values, set }: FormProps) {
         field="worksFor"
         values={values}
         set={set}
-        note="Təşkilat adı — çıxışda worksFor içində Organization kimi yazılır."
+        note="Təşkilat adı: çıxışda worksFor içində Organization kimi yazılır."
         placeholder="Şirkətin adı"
       />
       <TextRow
@@ -855,7 +855,7 @@ function PersonForm({ values, set }: FormProps) {
           field="sameAs"
           values={values}
           set={set}
-          note="Hər sətirdə bir ünvan — sətirlər sameAs massivinə çevrilir."
+          note="Hər sətirdə bir ünvan: sətirlər sameAs massivinə çevrilir."
           placeholder={"https://github.com/istifadeci\nhttps://orcid.org/0000-0000-0000-0000"}
         />
       </Wide>

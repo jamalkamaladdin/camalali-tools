@@ -74,12 +74,12 @@ const PLATFORMS: Record<
   },
   linkedin: {
     label: "LinkedIn",
-    note: "Lentdə yalnız şəkil, başlıq və domen çəkilir — təsvir oxunur, amma göstərilmir.",
+    note: "Lentdə yalnız şəkil, başlıq və domen çəkilir: təsvir oxunur, amma göstərilmir.",
     showDescription: false,
   },
   whatsapp: {
     label: "WhatsApp",
-    note: "Şəkil kiçik kvadratdır və mesaj göndərilməzdən əvvəl WhatsApp onu özü yükləyir — ağır şəkil önizləməni ləngidir.",
+    note: "Şəkil kiçik kvadratdır və mesaj göndərilməzdən əvvəl WhatsApp onu özü yükləyir, ağır şəkil önizləməni ləngidir.",
     showDescription: true,
   },
 };
@@ -162,7 +162,7 @@ export function OgOnizlemeTool() {
               label="Səhifə ünvanı"
               htmlFor="og-onizleme-url"
               className="min-w-56 flex-1"
-              note="Sxem yazılmasa https götürülür. Yönləndirmə izlənmir — hara yönləndirdiyi göstərilir."
+              note="Sxem yazılmasa https götürülür. Yönləndirmə izlənmir: hara yönləndirdiyi göstərilir."
             >
               <ToolInput
                 id="og-onizleme-url"

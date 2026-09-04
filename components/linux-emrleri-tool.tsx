@@ -8,7 +8,7 @@ export function LinuxEmrleriTool() {
     <ReferenceTable
       rows={linuxEmrleriRows}
       sections={linuxEmrleriSections}
-      placeholder="Əmr adı və ya nə etmək istədiyini yaz — fayl tap, prosesi öldür..."
+      placeholder="Əmr adı və ya nə etmək istədiyini yaz: fayl tap, prosesi öldür..."
     />
   );
 }

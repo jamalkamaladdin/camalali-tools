@@ -104,7 +104,7 @@ export function DnsTool() {
               label="Domen adı"
               htmlFor="dns-domain"
               className="min-w-56 flex-1"
-              note="Sxem, yol və başındakı «www» yazıla bilər — alət onları özü təmizləyir."
+              note="Sxem, yol və başındakı «www» yazıla bilər: alət onları özü təmizləyir."
             >
               <ToolInput
                 id="dns-domain"

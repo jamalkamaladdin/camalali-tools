@@ -30,7 +30,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "\\d",
     label: "rəqəm",
-    note: "Bir rəqəm simvolunu ([0-9]) tutur. Yalnız ASCII rəqəmlərdir — başqa yazı sistemlərinin rəqəmləri üçün `\\p{Nd}` lazımdır.",
+    note: "Bir rəqəm simvolunu ([0-9]) tutur. Yalnız ASCII rəqəmlərdir: başqa yazı sistemlərinin rəqəmləri üçün `\\p{Nd}` lazımdır.",
     section: "sinif",
     example: '/\\d{3}/ → "994" tutur',
     match: ["rəqəm", "digit"],
@@ -38,7 +38,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "\\d / \\D",
     label: "rəqəm / rəqəm olmayan",
-    note: "`\\d` bir rəqəm simvolunu ([0-9]) tutur, `\\D` isə əksini — rəqəm olmayan istənilən simvolu. Yalnız ASCII rəqəmlərdir — başqa yazı sistemlərinin rəqəmi üçün `\\p{Nd}` lazımdır.",
+    note: "`\\d` bir rəqəm simvolunu ([0-9]) tutur, `\\D` isə əksini, yəni rəqəm olmayan istənilən simvolu. Yalnız ASCII rəqəmlərdir: başqa yazı sistemlərinin rəqəmi üçün `\\p{Nd}` lazımdır.",
     section: "sinif",
     example: '/\\d{3}/ → "994" tutur; /\\D+/ → "ünvan"dakı hərfləri tutur, rəqəmi tutmur',
     match: ["rəqəm", "digit", "rəqəm olmayan"],
@@ -46,7 +46,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "\\w / \\W",
     label: "söz simvolu / söz olmayan",
-    note: "`\\w` yalnız [A-Za-z0-9_] tutur — Azərbaycan hərflərini (ə ğ ı İ ö ş ü ç) TUTMUR, çünki bu sinif ASCII üçün təyin olunub; `\\W` onun əksidir. AZ hərfi lazımdırsa `\\p{L}` və `u` bayrağı işlədilməlidir.",
+    note: "`\\w` yalnız [A-Za-z0-9_] tutur. Azərbaycan hərflərini (ə ğ ı İ ö ş ü ç) TUTMUR, çünki bu sinif ASCII üçün təyin olunub; `\\W` onun əksidir. AZ hərfi lazımdırsa `\\p{L}` və `u` bayrağı işlədilməlidir.",
     section: "sinif",
     example: '/\\w+/ → "əli" sözündə yalnız "l" və "i" tutulur; /\\W/ isə "ə"ni tutur',
     match: ["söz simvolu", "word character", "söz olmayan", "azərbaycan hərfi tutmur"],
@@ -54,7 +54,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "\\s / \\S",
     label: "boşluq / boşluq olmayan",
-    note: "`\\s` boşluq, tab, yeni sətir kimi ağ boşluq simvollarını tutur, `\\S` isə əksini — boşluq olmayan istənilən simvolu.",
+    note: "`\\s` boşluq, tab, yeni sətir kimi ağ boşluq simvollarını tutur, `\\S` isə əksini, yəni boşluq olmayan istənilən simvolu.",
     section: "sinif",
     example: '/a\\sb/ → "a b" tutur, "ab" tutmur; /\\S+/ → "ali qasimov"da "ali" və "qasimov" ayrı tutulur',
     match: ["boşluq", "whitespace", "boşluq olmayan"],
@@ -62,7 +62,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "[abc]",
     label: "simvol sinfi",
-    note: "Mötərizədə sadalanan simvollardan yalnız birini tutur — sırasından asılı deyil.",
+    note: "Mötərizədə sadalanan simvollardan yalnız birini tutur, sırasından asılı deyil.",
     section: "sinif",
     example: '/[aeiou]/ → "salam" içində "a" hərflərini tutur',
     match: ["simvol sinfi", "seçim mötərizəsi"],
@@ -70,7 +70,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "[^abc]",
     label: "inkar sinfi",
-    note: "Mötərizədəki `^` sinfi tərsinə çevirir — sadalananlardan BAŞQA istənilən simvolu tutur.",
+    note: "Mötərizədəki `^` sinfi tərsinə çevirir: sadalananlardan BAŞQA istənilən simvolu tutur.",
     section: "sinif",
     example: '/[^0-9]/ → "a1b2" içində "a" və "b" tutulur',
     match: ["inkar sinfi", "istisna sinfi"],
@@ -78,7 +78,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "[a-z]",
     label: "aralıq",
-    note: "İki simvol arasında defislə göstərilən aralığı tutur — burada kiçik latın hərfləri.",
+    note: "İki simvol arasında defislə göstərilən aralığı tutur (burada kiçik latın hərfləri).",
     section: "sinif",
     example: '/[a-z]+/ → "Salam2026" içində "alam" tutulur',
     match: ["hərf aralığı", "range"],
@@ -86,7 +86,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "[a-zA-Z0-9_]",
     label: "\\w-nin əl ilə yazılışı",
-    note: "`\\w` ilə eyni şeyi tutur, amma açıq yazıldığı üçün nəyin daxil olduğunu görmək asandır. AZ hərfi əlavə etmək istəsən aralığı özün genişləndirməlisən, yenə də tam düzgün olmur — `\\p{L}` daha etibarlıdır.",
+    note: "`\\w` ilə eyni şeyi tutur, amma açıq yazıldığı üçün nəyin daxil olduğunu görmək asandır. AZ hərfi əlavə etmək istəsən aralığı özün genişləndirməlisən, yenə də tam düzgün olmur: `\\p{L}` daha etibarlıdır.",
     section: "sinif",
     example: '/[a-zA-Z0-9_]+/ → "user_1" tam tutulur',
     match: ["word sinfi əl ilə"],
@@ -96,7 +96,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "*",
     label: "0 və çox",
-    note: "Əvvəlki elementin sıfır və ya daha çox təkrarını tutur — heç olmasa belə uyğun gəlir.",
+    note: "Əvvəlki elementin sıfır və ya daha çox təkrarını tutur, heç olmasa belə uyğun gəlir.",
     section: "tekrar",
     example: '/ab*c/ → "ac" və "abbbc" ikisini də tutur',
     match: ["ulduz", "sıfır və çox"],
@@ -112,7 +112,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "?",
     label: "0 və ya 1",
-    note: "Əvvəlki elementi opsional edir — ya var, ya yox, ikisi də uyğun sayılır.",
+    note: "Əvvəlki elementi opsional edir: ya var, ya yox, ikisi də uyğun sayılır.",
     section: "tekrar",
     example: '/colou?r/ → həm "color", həm "colour" tutur',
     match: ["opsional", "istəyə bağlı"],
@@ -120,7 +120,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "{n}",
     label: "dəqiq n dəfə",
-    note: "Əvvəlki elementin tam olaraq n dəfə təkrarını tələb edir — nə az, nə çox.",
+    note: "Əvvəlki elementin tam olaraq n dəfə təkrarını tələb edir, nə az, nə çox.",
     section: "tekrar",
     example: '/\\d{4}/ → "2026" tutur, "202" tutmur',
     match: ["dəqiq say"],
@@ -144,7 +144,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "*?",
     label: "lazy 0+",
-    note: "Aclıq deyil, tənbəllik — mümkün olan ƏN AZ simvolla uyğunluq axtarır. Adi `*` əksinə, mümkün qədər çox yığmağa çalışır (greedy).",
+    note: "Aclıq deyil, tənbəllik: mümkün olan ƏN AZ simvolla uyğunluq axtarır. Adi `*` əksinə, mümkün qədər çox yığmağa çalışır (greedy).",
     section: "tekrar",
     example: '/<.*?>/ → "<a><b>" içində yalnız "<a>" tutur ("<.*>" isə hamısını tutardı)',
     match: ["lazy", "tənbəl təkrar"],
@@ -152,7 +152,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "+?",
     label: "lazy 1+",
-    note: "`+`-ın tənbəl variantı — ən azı bir, amma mümkün qədər az simvol tutmağa çalışır.",
+    note: "`+`-ın tənbəl variantı: ən azı bir, amma mümkün qədər az simvol tutmağa çalışır.",
     section: "tekrar",
     example: '/a.+?c/ → "aXcXc" içində yalnız "aXc" tutur',
     match: ["lazy", "tənbəl təkrar"],
@@ -160,7 +160,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "??",
     label: "lazy 0-1",
-    note: "`?`-in tənbəl variantı — mümkünsə elementi heç götürməməyi üstün tutur.",
+    note: "`?`-in tənbəl variantı: mümkünsə elementi heç götürməməyi üstün tutur.",
     section: "tekrar",
     example: '/colou??r/ → əvvəlcə "color" formasını sınayır',
     match: ["lazy opsional"],
@@ -186,7 +186,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "\\b / \\B",
     label: "söz sərhədi / sərhəd olmayan",
-    note: "`\\b` söz simvolu (\\w) ilə söz-olmayan simvol arasındakı sərhədi göstərir, heç bir simvol tutmur — bütöv sözü tapmaq üçün. `\\B` əksinə, sərhəd OLMAYAN mövqeləri, yəni sözün ortasını göstərir.",
+    note: "`\\b` söz simvolu (\\w) ilə söz-olmayan simvol arasındakı sərhədi göstərir, heç bir simvol tutmur, bütöv sözü tapmaq üçün. `\\B` əksinə, sərhəd OLMAYAN mövqeləri, yəni sözün ortasını göstərir.",
     section: "lovber",
     example: '/\\bkat\\b/ → "kat" tutur, "kateqoriya" tutmur; /\\Bkat/ → "duplikat" içindəki "kat"ı tutur',
     match: ["söz sərhədi", "word boundary", "sərhəd olmayan"],
@@ -194,7 +194,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "\\A",
     label: "mətnin əvvəli",
-    note: "Mətnin mütləq əvvəlini göstərir, `m` bayrağından təsirlənmir — JavaScript-də dəstəklənmir, PCRE və Python-da var.",
+    note: "Mətnin mütləq əvvəlini göstərir, `m` bayrağından təsirlənmir: JavaScript-də dəstəklənmir, PCRE və Python-da var.",
     section: "lovber",
     example: 'Python: re.match(r"\\Asalam", mətn) yalnız mətnin əvvəlindəki "salam"ı tutur',
     match: ["mütləq başlanğıc"],
@@ -202,7 +202,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "\\z",
     label: "mətnin sonu",
-    note: "Mətnin mütləq sonunu göstərir, `m` bayrağından təsirlənmir — JavaScript-də dəstəklənmir, PCRE və Python-da var.",
+    note: "Mətnin mütləq sonunu göstərir, `m` bayrağından təsirlənmir. JavaScript-də dəstəklənmir, PCRE və Python-da var.",
     section: "lovber",
     example: 'Python: re.search(r"son\\z", mətn) yalnız mətnin sonundakı "son"u tutur',
     match: ["mütləq son"],
@@ -212,7 +212,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "(...)",
     label: "tutan qrup",
-    note: "Bir hissəni ayırıb nömrələnmiş qrup kimi yaddaşda saxlayır — nəticədə `m[1]`, `m[2]` kimi oxunur.",
+    note: "Bir hissəni ayırıb nömrələnmiş qrup kimi yaddaşda saxlayır: nəticədə `m[1]`, `m[2]` kimi oxunur.",
     section: "qrup",
     example: '/(\\d{4})-(\\d{2})/ → "2026-09"da qrup 1 "2026", qrup 2 "09" olur',
     match: ["tutan qrup", "capturing group"],
@@ -220,7 +220,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "(?:...)",
     label: "tutmayan qrup",
-    note: "Simvolları qruplaşdırır (məsələn `|` və ya `*` üçün), amma nəticədə ayrıca qrup kimi saxlamır — yalnız quruluş üçün.",
+    note: "Simvolları qruplaşdırır (məsələn `|` və ya `*` üçün), amma nəticədə ayrıca qrup kimi saxlamır, yalnız quruluş üçün.",
     section: "qrup",
     example: '/(?:https?:\\/\\/)?example\\.com/ → "http://" olsun-olmasın uyğun gəlir, qrup siyahısında görünmür',
     match: ["tutmayan qrup", "non-capturing"],
@@ -228,7 +228,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "(?<ad>...)",
     label: "adlandırılmış qrup",
-    note: "Qrupu nömrə əvəzinə adla saxlayır — nəticədə `m.groups.ad` kimi oxunur, oxunaqlığı artırır.",
+    note: "Qrupu nömrə əvəzinə adla saxlayır: nəticədə `m.groups.ad` kimi oxunur, oxunaqlığı artırır.",
     section: "qrup",
     example: '/(?<il>\\d{4})-(?<ay>\\d{2})/ → "2026-09"da groups.il = "2026", groups.ay = "09"',
     match: ["adlandırılmış qrup", "named group"],
@@ -236,7 +236,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "\\1",
     label: "nömrəli istinad",
-    note: "Naxışın öz içində əvvəlki tutan qrupun tutduğu dəyəri təkrar tələb edir — məsələn eyni sözün iki dəfə gəlməsini tapmaq üçün.",
+    note: "Naxışın öz içində əvvəlki tutan qrupun tutduğu dəyəri təkrar tələb edir, məsələn eyni sözün iki dəfə gəlməsini tapmaq üçün.",
     section: "qrup",
     example: '/(\\w+) \\1/ → "salam salam" tutur, "salam görüş" tutmur',
     match: ["backreference", "geriyə istinad"],
@@ -244,7 +244,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "\\k<ad>",
     label: "adlı istinad",
-    note: "`\\1`-in adlandırılmış qrup versiyası — naxışın öz içində `(?<ad>...)` qrupunun dəyərinə istinad edir.",
+    note: "`\\1`-in adlandırılmış qrup versiyası: naxışın öz içində `(?<ad>...)` qrupunun dəyərinə istinad edir.",
     section: "qrup",
     example: '/(?<söz>\\w+)-\\k<söz>/ → "sınaq-sınaq" tutur',
     match: ["adlı geriyə istinad"],
@@ -252,7 +252,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "|",
     label: "və ya",
-    note: "İki və ya daha çox alternativdən birinin uyğun gəlməsini tələb edir — soldan sağa yoxlanır.",
+    note: "İki və ya daha çox alternativdən birinin uyğun gəlməsini tələb edir, soldan sağa yoxlanır.",
     section: "qrup",
     example: '/pişik|it/ → "ev pişiyi" da, "küçə iti" da tutur',
     match: ["alternativ", "or işarəsi"],
@@ -262,7 +262,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "(?=...)",
     label: "lookahead",
-    note: "Naxışdan sonra müəyyən şeyin gəlməsini tələb edir, amma özü heç nə tutmur — nəticəyə daxil olmur.",
+    note: "Naxışdan sonra müəyyən şeyin gəlməsini tələb edir, amma özü heç nə tutmur, nəticəyə daxil olmur.",
     section: "baxis",
     example: '/\\d+(?= AZN)/ → "150 AZN" içindən yalnız "150" tutulur',
     match: ["lookahead", "irəli baxış"],
@@ -270,7 +270,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "(?!...)",
     label: "negative lookahead",
-    note: "Naxışdan sonra müəyyən şeyin GƏLMƏMƏSİNİ tələb edir — özü heç nə tutmur.",
+    note: "Naxışdan sonra müəyyən şeyin GƏLMƏMƏSİNİ tələb edir, özü heç nə tutmur.",
     section: "baxis",
     example: '/\\d+(?! AZN)/ → "150 AZN" içindəki "150"u yox, başqa yerdəki rəqəmi tutur',
     match: ["negative lookahead", "mənfi irəli baxış"],
@@ -286,7 +286,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "(?<!...)",
     label: "negative lookbehind",
-    note: "Naxışdan əvvəl müəyyən şeyin GƏLMƏMƏSİNİ tələb edir — özü heç nə tutmur.",
+    note: "Naxışdan əvvəl müəyyən şeyin GƏLMƏMƏSİNİ tələb edir. Özü heç nə tutmur.",
     section: "baxis",
     example: '/(?<!\\$)\\d+/ → "$150 və 50" içindəki "50"ni tutur, "150"ni tutmur',
     match: ["negative lookbehind", "mənfi geri baxış"],
@@ -320,7 +320,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "s",
     label: "dotAll",
-    note: "`.`-ə sətir sonu simvolunu (\\n) da tutmağa icazə verir — normalda `.` bunu keçir.",
+    note: "`.`-ə sətir sonu simvolunu (\\n) da tutmağa icazə verir: normalda `.` bunu keçir.",
     section: "bayraq",
     example: '/a.c/s → "a\\nc" tutur (s olmadan tutmazdı)',
     match: ["dotall", "nöqtə sətir sonunu tutsun"],
@@ -328,7 +328,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "u",
     label: "unicode",
-    note: "Naxışı düzgün Unicode kod nöqtəsi kimi oxuyur — `\\p{...}` sinifləri və emoji kimi surrogate cütlər yalnız bu bayraqla düzgün işləyir.",
+    note: "Naxışı düzgün Unicode kod nöqtəsi kimi oxuyur: `\\p{...}` sinifləri və emoji kimi surrogate cütlər yalnız bu bayraqla düzgün işləyir.",
     section: "bayraq",
     example: '/\\p{L}+/u → Azərbaycan hərflərini tutmaq üçün məcburidir',
     match: ["unicode bayrağı"],
@@ -336,7 +336,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "y",
     label: "sticky",
-    note: "Axtarışı mətnin istənilən yerində yox, məhz `lastIndex` mövqeyindən başlamağa məcbur edir — tokenizatorlarda ardıcıl oxuma üçün.",
+    note: "Axtarışı mətnin istənilən yerində yox, məhz `lastIndex` mövqeyindən başlamağa məcbur edir, tokenizatorlarda ardıcıl oxuma üçün.",
     section: "bayraq",
     example: 'regex.lastIndex = 5; /\\d+/y həmin mövqedən başlamasa uyğunluq vermir',
     match: ["sticky bayrağı", "yapışqan"],
@@ -474,7 +474,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "\\n",
     label: "yeni sətir",
-    note: "Yeni sətir simvolunu tutur — çoxsətirli mətndə sətirlərin arasını tapmaq üçün.",
+    note: "Yeni sətir simvolunu tutur, çoxsətirli mətndə sətirlərin arasını tapmaq üçün.",
     section: "qacir",
     example: '/sətir1\\nsətir2/ → aralarında yeni sətir olan "sətir1\\nsətir2"nü tutur',
     match: ["newline"],
@@ -482,7 +482,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "\\t",
     label: "tab",
-    note: "Tab simvolunu tutur — TSV kimi tab ilə ayrılmış mətn formatlarını parçalayanda faydalıdır.",
+    note: "Tab simvolunu tutur: TSV kimi tab ilə ayrılmış mətn formatlarını parçalayanda faydalıdır.",
     section: "qacir",
     example: '/ad\\tsoyad/ → aralarında tab olan mətni tutur',
     match: ["tab simvolu"],
@@ -490,7 +490,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "\\r",
     label: "karvan qaytarma",
-    note: "Carriage return simvolunu tutur — Windows stilli sətir sonu (\\r\\n) təmizləyəndə lazım olur.",
+    note: "Carriage return simvolunu tutur: Windows stilli sətir sonu (\\r\\n) təmizləyəndə lazım olur.",
     section: "qacir",
     example: '/\\r\\n/g → Windows sətir sonlarını tapıb təmizləmək üçün',
     match: ["carriage return"],
@@ -498,7 +498,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "\\0",
     label: "boş simvol",
-    note: "NUL simvolunu (kod nöqtəsi 0) tutur — praktikada nadir hallarda, ikilik mətndə rast gəlinir.",
+    note: "NUL simvolunu (kod nöqtəsi 0) tutur, praktikada nadir hallarda, ikilik mətndə rast gəlinir.",
     section: "qacir",
     example: '/\\0/ → NUL baytını tutur',
     match: ["null simvolu"],
@@ -506,7 +506,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "\\xhh",
     label: "hex kod",
-    note: "İki rəqəmli hex kodla göstərilən Latin-1 simvolunu tutur — məsələn `\\x41` böyük hərf «A»-dır.",
+    note: "İki rəqəmli hex kodla göstərilən Latin-1 simvolunu tutur, məsələn `\\x41` böyük hərf «A»-dır.",
     section: "qacir",
     example: '/\\x41/ → "A" hərfini tutur',
     match: ["hex simvol kodu"],
@@ -514,7 +514,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "\\uhhhh",
     label: "unicode kod (4 rəqəm)",
-    note: "Dörd rəqəmli hex kodla UTF-16 vahidini tutur — Azərbaycan hərfi «ə» üçün `\\u0259`.",
+    note: "Dörd rəqəmli hex kodla UTF-16 vahidini tutur: Azərbaycan hərfi «ə» üçün `\\u0259`.",
     section: "qacir",
     example: '/\\u0259/ → "ə" hərfini tutur',
     match: ["unicode kod nöqtəsi"],
@@ -522,7 +522,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "\\u{...}",
     label: "unicode kod (dəyişən uzunluq)",
-    note: "`u` bayrağı ilə işləyəndə istənilən uzunluqda kod nöqtəsini göstərir — surrogate cütlərə ehtiyac olmadan emoji kimi geniş simvolları da tutur.",
+    note: "`u` bayrağı ilə işləyəndə istənilən uzunluqda kod nöqtəsini göstərir: surrogate cütlərə ehtiyac olmadan emoji kimi geniş simvolları da tutur.",
     section: "qacir",
     example: '/\\u{1F600}/u → gülən emoji simvolunu tutur',
     match: ["genişləndirilmiş unicode kodu"],
@@ -530,7 +530,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "[.]",
     label: "sinif daxilində sadə nöqtə",
-    note: "Simvol sinfinin (`[...]`) içində nöqtə artıq «istənilən simvol» demək deyil, avtomatik hərfidir — burada ayrıca `\\.` yazmağa ehtiyac yoxdur.",
+    note: "Simvol sinfinin (`[...]`) içində nöqtə artıq «istənilən simvol» demək deyil, avtomatik hərfidir: burada ayrıca `\\.` yazmağa ehtiyac yoxdur.",
     section: "qacir",
     example: '/[.,;]/ → "." "," ";" işarələrindən birini hərfi mənada tutur, qaçırma tələb etmir',
     match: ["mötərizə içində qaçırma lazım deyil"],
@@ -540,7 +540,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "\\p{L}",
     label: "istənilən hərf",
-    note: "Latın, kiril, ərəb — istənilən yazı sistemindən istənilən hərfi tutur. Azərbaycan hərflərini (ə ğ ı İ ö ş ü ç) tutmaq üçün `\\w` əvəzinə bu işlədilməlidir. Yalnız `u` bayrağı ilə işləyir.",
+    note: "İstənilən yazı sistemindən (latın, kiril, ərəb) istənilən hərfi tutur. Azərbaycan hərflərini (ə ğ ı İ ö ş ü ç) tutmaq üçün `\\w` əvəzinə bu işlədilməlidir. Yalnız `u` bayrağı ilə işləyir.",
     section: "unicode",
     example: '/\\p{L}+/u → "əli" sözünü tam tutur, "\\w+" isə yalnız "l" və "i"ni tutardı',
     match: ["hər hansı hərf", "azərbaycan hərfi", "unicode hərf"],
@@ -548,7 +548,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "\\p{Lu}",
     label: "böyük hərf",
-    note: "Yalnız böyük hərfləri tutur — Azərbaycanın nöqtəli İ-si daxil. Yalnız `u` bayrağı ilə işləyir.",
+    note: "Yalnız böyük hərfləri tutur (Azərbaycanın nöqtəli İ-si daxil). Yalnız `u` bayrağı ilə işləyir.",
     section: "unicode",
     example: '/\\p{Lu}/gu → "İstanbul" sözündən "İ" hərfini tutur',
     match: ["böyük hərf unicode"],
@@ -572,7 +572,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "\\p{N}",
     label: "istənilən rəqəm",
-    note: "`\\p{Nd}`-dən genişdir — kəsr, romalı rəqəm kimi digər rəqəm kateqoriyalarını da tutur. Yalnız `u` bayrağı ilə işləyir.",
+    note: "`\\p{Nd}`-dən genişdir: kəsr, romalı rəqəm kimi digər rəqəm kateqoriyalarını da tutur. Yalnız `u` bayrağı ilə işləyir.",
     section: "unicode",
     example: '/\\p{N}/gu → "Ⅷ" (roma rəqəmi) simvolunu da tutur',
     match: ["hər hansı rəqəm unicode"],
@@ -580,7 +580,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "\\p{Script=Latin}",
     label: "yazı sistemi",
-    note: "Yalnız müəyyən yazı sisteminə aid simvolları tutur — mətndə latın və kiril qarışığını ayırmaq üçün faydalıdır. Yalnız `u` bayrağı ilə işləyir.",
+    note: "Yalnız müəyyən yazı sisteminə aid simvolları tutur, mətndə latın və kiril qarışığını ayırmaq üçün faydalıdır. Yalnız `u` bayrağı ilə işləyir.",
     section: "unicode",
     example: '/\\p{Script=Latin}+/gu → qarışıq mətndə yalnız latın hərflərindən ibarət hissələri tutur',
     match: ["yazı sistemi", "script unicode"],
@@ -596,7 +596,7 @@ export const regexSparRows: ReferenceRow[] = [
   {
     term: "\\p{Alphabetic}",
     label: "əlifba simvolu",
-    note: "`\\p{L}`-dən bir az genişdir — hərflərlə yanaşı hərf sayılan digər əlifba simvollarını da (məsələn bəzi diakritik işarələri) tutur. Yalnız `u` bayrağı ilə işləyir.",
+    note: "`\\p{L}`-dən bir az genişdir: hərflərlə yanaşı hərf sayılan digər əlifba simvollarını da (məsələn bəzi diakritik işarələri) tutur. Yalnız `u` bayrağı ilə işləyir.",
     section: "unicode",
     example: '/\\p{Alphabetic}+/gu → əlifba mənşəli istənilən simvolu tutur',
     match: ["əlifba simvolu unicode"],

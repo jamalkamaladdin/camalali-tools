@@ -94,7 +94,7 @@ export function WhoisTool() {
               label="Domen adı"
               htmlFor="whois-domain"
               className="min-w-56 flex-1"
-              note="Sxem və yol yazmadan — yalnız «example.com» formatında."
+              note="Sxem və yol yazmadan: yalnız «example.com» formatında."
             >
               <ToolInput
                 id="whois-domain"

@@ -450,7 +450,7 @@ export function OlcuVahidleriTool() {
                 hint="0 – 100"
                 htmlFor={`${ids}-percent`}
                 suffix="%"
-                note="SLA-da yazılan rəqəmi yaz — nəticə icazə verilən dayanma müddətidir."
+                note="SLA-da yazılan rəqəmi yaz: nəticə icazə verilən dayanma müddətidir."
               >
                 <ToolInput
                   id={`${ids}-percent`}

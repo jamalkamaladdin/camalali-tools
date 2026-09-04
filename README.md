@@ -169,7 +169,7 @@ The per-category pages under `kateqoriya/` are in Azerbaijani. The English index
 | [Sitemap və lent yoxlayıcısı](https://camalali.com/alet/sitemap-yoxlayici) | Sitemap and feed validator for a live sitemap, RSS or Atom file: addresses, date range, duplicates and XML faults. | `lib/sitemap-yoxlayici.ts` |
 | [Yönləndirmə zənciri](https://camalali.com/alet/yonlendirme-zenciri) | Redirect chain tracer: every hop, its status code and the final destination. | `lib/yonlendirme-zenciri.ts` |
 | [Canlı robots.txt yoxlayıcısı](https://camalali.com/alet/robots-canli) | Live robots.txt tester: which rule blocks a path, and the line number it sits on. | `lib/robots-canli.ts` |
-| [Birləşik sayt hesabatı](https://camalali.com/alet/sayt-hesabati) | Combined site report: security, speed, meta and indexing for one address in one report. | — |
+| [Birləşik sayt hesabatı](https://camalali.com/alet/sayt-hesabati) | Combined site report: security, speed, meta and indexing for one address in one report. |  |
 
 </details>
 
@@ -338,7 +338,7 @@ The per-category pages under `kateqoriya/` are in Azerbaijani. The English index
 | Tool | What it does | Logic file |
 |---|---|---|
 | [Layihə qiymətləndiricisi](https://camalali.com/alet/qiymetlendirici) | Project estimator: four questions turn into a phase plan and a duration range in working days. | `lib/estimate.ts` |
-| [Hesab-faktura generatoru](https://camalali.com/alet/faktura) | Invoice generator: add line items, pick a VAT rate, download the PDF. | — |
+| [Hesab-faktura generatoru](https://camalali.com/alet/faktura) | Invoice generator: add line items, pick a VAT rate, download the PDF. |  |
 | [Valyuta çevirici](https://camalali.com/alet/valyuta) | Currency converter with dated exchange rates for AZN and world currencies. | `lib/valyuta.ts` |
 | [PDF birləşdirici](https://camalali.com/alet/pdf-birlesdir) | PDF merge: combine several PDFs, choosing the page range taken from each one. | `lib/pdf-birlesdir.ts` |
 | [PDF bölücü](https://camalali.com/alet/pdf-bol) | PDF split: cut a PDF page by page, by written ranges, or every N pages. | `lib/pdf-bol.ts` |

@@ -175,7 +175,7 @@ export function rateStrength(bits: number): Strength {
   if (bits < 40) {
     return {
       label: "Zəif",
-      note: "Bir kompüterin gücü ilə qırılır — yalnız əhəmiyyətsiz hesablar üçün.",
+      note: "Bir kompüterin gücü ilə qırılır: yalnız əhəmiyyətsiz hesablar üçün.",
     };
   }
   if (bits < 60) {

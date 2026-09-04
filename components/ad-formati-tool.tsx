@@ -72,7 +72,7 @@ export function AdFormatiTool() {
                 <span className="tabular-nums">{meaningfulLines.length} ad</span>
               ) : undefined
             }
-            note="Bir sətirdə bir ad — bir neçə sətir yapışdırsan toplu rejimə keçir."
+            note="Bir sətirdə bir ad, bir neçə sətir yapışdırsan toplu rejimə keçir."
           >
             <ToolTextArea
               id="ad-formati-input"

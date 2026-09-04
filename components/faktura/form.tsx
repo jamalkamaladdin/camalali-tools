@@ -461,7 +461,7 @@ export function InvoiceForm({
               <ToolField
                 label="Qeyd"
                 htmlFor={fieldId("note")}
-                note="Fakturanın altında görünür — ödəniş şərti, müqavilə nömrəsi."
+                note="Fakturanın altında görünür: ödəniş şərti, müqavilə nömrəsi."
               >
                 <ToolTextArea
                   id={fieldId("note")}

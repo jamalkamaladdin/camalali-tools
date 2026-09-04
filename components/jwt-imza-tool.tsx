@@ -173,7 +173,7 @@ export function JwtImzaTool() {
           <ToolField
             label="Gizli açar"
             htmlFor="jwt-imza-secret"
-            note="HMAC-in özündə işlədilir — heç yerə göndərilmir."
+            note="HMAC-in özündə işlədilir, heç yerə göndərilmir."
           >
             <div className="flex items-center gap-2">
               <ToolInput

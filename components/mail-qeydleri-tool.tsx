@@ -109,7 +109,7 @@ export function MailQeydleriTool() {
               label="Domen adı"
               htmlFor="mail-qeydleri-domen"
               className="min-w-56 flex-1"
-              note="Sxem və başındakı «www» yazıla bilər — server onları özü təmizləyir."
+              note="Sxem və başındakı «www» yazıla bilər: server onları özü təmizləyir."
             >
               <ToolInput
                 id="mail-qeydleri-domen"

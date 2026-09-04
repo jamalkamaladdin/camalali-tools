@@ -467,7 +467,7 @@ export function parsePngTextChunks(bytes: Uint8Array): { keyword: string; text: 
 
       if (compressionFlag === 1) {
         // Decompression is out of scope — noting that rather than guessing at it.
-        results.push({ keyword, text: "(sıxılmış mətn — açılmadı)" });
+        results.push({ keyword, text: "(sıxılmış mətn, açılmadı)" });
         continue;
       }
       results.push({ keyword, text: new TextDecoder("utf-8").decode(bytes.subarray(pos, end)) });

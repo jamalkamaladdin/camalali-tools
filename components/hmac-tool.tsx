@@ -167,7 +167,7 @@ export function HmacTool() {
             label="Gözlənilən HMAC"
             htmlFor="hmac-expected"
             hint="opsional"
-            note="Bura bir dəyər yazsan, hesablanan HMAC onunla sabit vaxtlı müsaidə ilə tutuşdurulur — hex və Base64 hər ikisi qəbul edilir."
+            note="Bura bir dəyər yazsan, hesablanan HMAC onunla sabit vaxtlı müsaidə ilə tutuşdurulur (hex və Base64 hər ikisi qəbul edilir)."
           >
             <ToolInput
               id="hmac-expected"

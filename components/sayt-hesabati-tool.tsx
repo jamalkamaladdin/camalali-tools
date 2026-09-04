@@ -154,7 +154,7 @@ export function SaytHesabatiTool() {
               label="Sayt ünvanı"
               htmlFor="hesabat-url"
               className="min-w-56 flex-1"
-              note="Sxem yazılmasa https götürülür. Yönləndirmə izlənmir — son ünvanı yaz."
+              note="Sxem yazılmasa https götürülür. Yönləndirmə izlənmir: son ünvanı yaz."
             >
               <ToolInput
                 id="hesabat-url"

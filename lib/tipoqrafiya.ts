@@ -39,14 +39,14 @@ const BASE_STEP_INDEX = SCALE_STEP_NAMES.indexOf("base");
 
 /** The eight named ratios a type-scale reference table offers, plus whatever the visitor types in themselves. */
 export const NAMED_RATIOS: { value: number; label: string }[] = [
-  { value: 1.067, label: "1.067 — kiçik ikinci (Minor Second)" },
-  { value: 1.125, label: "1.125 — böyük ikinci (Major Second)" },
-  { value: 1.2, label: "1.2 — kiçik terts (Minor Third)" },
-  { value: 1.25, label: "1.25 — böyük terts (Major Third)" },
-  { value: 1.333, label: "1.333 — mükəmməl kvarta (Perfect Fourth)" },
-  { value: 1.414, label: "1.414 — artırılmış kvarta (Augmented Fourth)" },
-  { value: 1.5, label: "1.5 — mükəmməl kvinta (Perfect Fifth)" },
-  { value: 1.618, label: "1.618 — qızıl nisbət (Golden Ratio)" },
+  { value: 1.067, label: "1.067: kiçik ikinci (Minor Second)" },
+  { value: 1.125, label: "1.125: böyük ikinci (Major Second)" },
+  { value: 1.2, label: "1.2: kiçik terts (Minor Third)" },
+  { value: 1.25, label: "1.25: böyük terts (Major Third)" },
+  { value: 1.333, label: "1.333: mükəmməl kvarta (Perfect Fourth)" },
+  { value: 1.414, label: "1.414: artırılmış kvarta (Augmented Fourth)" },
+  { value: 1.5, label: "1.5: mükəmməl kvinta (Perfect Fifth)" },
+  { value: 1.618, label: "1.618: qızıl nisbət (Golden Ratio)" },
 ];
 
 const MIN_BASE_PX = 8;

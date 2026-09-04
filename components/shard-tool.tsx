@@ -125,7 +125,7 @@ export function ShardTool() {
             label="Saxlama müddəti"
             htmlFor={`${idPrefix}-retention`}
             suffix="gün"
-            note="Bu müddətdən köhnə data silindiyi fərz olunur — data həcmi bu müddət dolana qədər artır, sonra sabitləşir."
+            note="Bu müddətdən köhnə data silindiyi fərz olunur: data həcmi bu müddət dolana qədər artır, sonra sabitləşir."
           >
             <ToolInput id={`${idPrefix}-retention`} inputMode="decimal" value={retentionDays} onChange={(e) => setRetentionDays(e.target.value)} />
           </ToolField>
@@ -164,7 +164,7 @@ export function ShardTool() {
           <ToolField label="Yeni şard sayı" htmlFor={`${idPrefix}-new`}>
             <ToolInput id={`${idPrefix}-new`} inputMode="numeric" min={1} step={1} value={newShardCount} onChange={(e) => setNewShardCount(e.target.value)} />
           </ToolField>
-          <ToolField label="Nümunə açar sayı" htmlFor={`${idPrefix}-keys`} note="Simulyasiya üçün sintetik açar sayı — real data bazandakı konkret açarlar deyil.">
+          <ToolField label="Nümunə açar sayı" htmlFor={`${idPrefix}-keys`} note="Simulyasiya üçün sintetik açar sayı: real data bazandakı konkret açarlar deyil.">
             <ToolInput id={`${idPrefix}-keys`} inputMode="numeric" min={1} step={100} value={sampleKeyCount} onChange={(e) => setSampleKeyCount(e.target.value)} />
           </ToolField>
         </div>

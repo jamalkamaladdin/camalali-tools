@@ -121,7 +121,7 @@ export function SpfYoxlayiciTool() {
               label="Domen adı və ya tam qeyd"
               htmlFor="spf-yoxlayici-input"
               className="min-w-56 flex-1"
-              note='Domen yazsan qeyd DNS-dən gətirilir. "v=spf1" ilə başlayan mətn yapışdırsan, birbaşa o təhlil edilir — yalnız içindəki include/redirect-lər DNS-dən oxunur.'
+              note='Domen yazsan qeyd DNS-dən gətirilir. "v=spf1" ilə başlayan mətn yapışdırsan, birbaşa o təhlil edilir: yalnız içindəki include/redirect-lər DNS-dən oxunur.'
             >
               <ToolInput
                 id="spf-yoxlayici-input"

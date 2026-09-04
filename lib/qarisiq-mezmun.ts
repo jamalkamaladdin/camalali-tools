@@ -138,7 +138,7 @@ function inlineStyleFindings(html: string, pageUrl: string): MixedContentFinding
         raw,
         url: resolved,
         blocked: false,
-        note: "CSS url() adətən arxa fon şəkli yükləyir — şəkil sorğusu kimi passiv sayılır.",
+        note: "CSS url() adətən arxa fon şəkli yükləyir: şəkil sorğusu kimi passiv sayılır.",
         index: match.index,
       });
     }

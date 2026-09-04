@@ -268,7 +268,7 @@ export function RsaTool() {
             <ToolField
               label="Açıq açar"
               htmlFor="rsa-public-export"
-              note="Paylaşıla bilər — başqası bununla sənə şifrələnmiş mətn göndərə və ya imzanı yoxlaya bilər."
+              note="Paylaşıla bilər: başqası bununla sənə şifrələnmiş mətn göndərə və ya imzanı yoxlaya bilər."
               suffix={
                 <CopyButton
                   value={exportFormat === "pem" ? keyPair.pemPublic : keyPair.jwkPublic}
@@ -284,7 +284,7 @@ export function RsaTool() {
             <ToolField
               label="Gizli açar"
               htmlFor="rsa-private-export"
-              note="Paylaşma — bununla deşifrələ və ya imzala edilir."
+              note="Paylaşma: bununla deşifrələ və ya imzala edilir."
               suffix={
                 <CopyButton
                   value={exportFormat === "pem" ? keyPair.pemPrivate : keyPair.jwkPrivate}
@@ -448,7 +448,7 @@ export function RsaTool() {
       <ToolPanel>
         <ToolPanelHeader title="Açar idxalı" />
         <div className="space-y-4 p-4">
-          <ToolField label="PEM və ya JWK" htmlFor="rsa-import-text" note="Format avtomatik tanınır — `-----BEGIN` ilə başlayan PEM, qalanı JWK sayılır.">
+          <ToolField label="PEM və ya JWK" htmlFor="rsa-import-text" note="Format avtomatik tanınır: `-----BEGIN` ilə başlayan PEM, qalanı JWK sayılır.">
             <ToolTextArea
               id="rsa-import-text"
               value={importText}

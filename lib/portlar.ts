@@ -34,7 +34,7 @@ export const portlarRows: ReferenceRow[] = [
   {
     term: "80",
     label: "HTTP",
-    note: "Şifrələnməmiş veb trafikinin standart portudur — bugün demək olar bütün sənədli saytlar birbaşa buradan HTTPS-ə yönləndirir.",
+    note: "Şifrələnməmiş veb trafikinin standart portudur: bugün demək olar bütün sənədli saytlar birbaşa buradan HTTPS-ə yönləndirir.",
     section: "veb",
     match: ["http", "web", "tcp"],
   },
@@ -69,14 +69,14 @@ export const portlarRows: ReferenceRow[] = [
   {
     term: "5000",
     label: "Flask / .NET dev server",
-    note: "Python Flask-ın və .NET-in default dev server portudur — macOS-da AirPlay Receiver bununla toqquşduğu üçün tez-tez dəyişdirilir.",
+    note: "Python Flask-ın və .NET-in default dev server portudur: macOS-da AirPlay Receiver bununla toqquşduğu üçün tez-tez dəyişdirilir.",
     section: "veb",
     match: ["flask", "dotnet", "dev server", "tcp"],
   },
   {
     term: "5173",
     label: "Vite dev server",
-    note: "Vite-nin dev serverinin default portudur — bugün yeni frontend layihələrinin çoxunda rast gəlinir.",
+    note: "Vite-nin dev serverinin default portudur: bugün yeni frontend layihələrinin çoxunda rast gəlinir.",
     section: "veb",
     match: ["vite", "dev server", "tcp"],
   },
@@ -90,7 +90,7 @@ export const portlarRows: ReferenceRow[] = [
   {
     term: "8080",
     label: "HTTP-alt",
-    note: "80-in ən çox işlədilən alternativi — proxy, Tomcat və konteynerdə çalışan veb tətbiqlər adətən bunu seçir.",
+    note: "80-in ən çox işlədilən alternativi: proxy, Tomcat və konteynerdə çalışan veb tətbiqlər adətən bunu seçir.",
     section: "veb",
     match: ["http alt", "tomcat", "proxy", "tcp"],
   },
@@ -104,7 +104,7 @@ export const portlarRows: ReferenceRow[] = [
   {
     term: "9000",
     label: "PHP-FPM / SonarQube / Portainer",
-    note: "Bir neçə fərqli xidmət bu portu paylaşır — PHP-FPM-in FastCGI portu, SonarQube-un veb interfeysi, Portainer-in HTTP UI-si.",
+    note: "Bir neçə fərqli xidmət bu portu paylaşır: PHP-FPM-in FastCGI portu, SonarQube-un veb interfeysi, Portainer-in HTTP UI-si.",
     section: "veb",
     match: ["php-fpm", "sonarqube", "portainer", "tcp"],
   },
@@ -155,21 +155,21 @@ export const portlarRows: ReferenceRow[] = [
   {
     term: "110",
     label: "POP3",
-    note: "Poçt qutusundakı məktubları serverdən silərək lokal proqrama endirən köhnə protokoldur — bugün nadir işlədilir.",
+    note: "Poçt qutusundakı məktubları serverdən silərək lokal proqrama endirən köhnə protokoldur. Bugün nadir işlədilir.",
     section: "poct",
     match: ["pop3", "mail", "tcp"],
   },
   {
     term: "143",
     label: "IMAP",
-    note: "Məktubları serverdə saxlayaraq bir neçə cihazdan sinxron göstərən poçt protokoludur — POP3-ün yerini tutub.",
+    note: "Məktubları serverdə saxlayaraq bir neçə cihazdan sinxron göstərən poçt protokoludur: POP3-ün yerini tutub.",
     section: "poct",
     match: ["imap", "mail", "tcp"],
   },
   {
     term: "465",
     label: "SMTPS",
-    note: "SMTP-nin TLS ilə əvvəldən şifrələnmiş versiyasıdır — göndərmə tərəfində bu gün ən çox tövsiyə olunan portdur.",
+    note: "SMTP-nin TLS ilə əvvəldən şifrələnmiş versiyasıdır: göndərmə tərəfində bu gün ən çox tövsiyə olunan portdur.",
     section: "poct",
     match: ["smtps", "smtp ssl", "mail", "tcp"],
   },
@@ -183,7 +183,7 @@ export const portlarRows: ReferenceRow[] = [
   {
     term: "993",
     label: "IMAPS",
-    note: "IMAP-ın TLS ilə şifrələnmiş versiyasıdır — bu gün demək olar bütün poçt müştəriləri bunu işlədir.",
+    note: "IMAP-ın TLS ilə şifrələnmiş versiyasıdır: bu gün demək olar bütün poçt müştəriləri bunu işlədir.",
     section: "poct",
     match: ["imaps", "imap ssl", "tcp"],
   },
@@ -197,7 +197,7 @@ export const portlarRows: ReferenceRow[] = [
   {
     term: "119",
     label: "NNTP",
-    note: "Usenet xəbər qruplarının paylaşılması üçün işlədilən köhnə protokoldur — poçtla eyni dövrün texnologiyasıdır.",
+    note: "Usenet xəbər qruplarının paylaşılması üçün işlədilən köhnə protokoldur, poçtla eyni dövrün texnologiyasıdır.",
     section: "poct",
     match: ["nntp", "usenet", "news", "tcp"],
   },
@@ -227,7 +227,7 @@ export const portlarRows: ReferenceRow[] = [
   {
     term: "1521",
     label: "Oracle",
-    note: "Oracle Database-in listener portudur — TNS protokolu bu üzərindən qoşulur.",
+    note: "Oracle Database-in listener portudur: TNS protokolu bu üzərindən qoşulur.",
     section: "baza",
     match: ["oracle", "tns", "tcp"],
   },
@@ -334,7 +334,7 @@ export const portlarRows: ReferenceRow[] = [
   {
     term: "23",
     label: "Telnet",
-    note: "Şifrələnməmiş, bütün trafiki açıq mətn kimi göndərən köhnə uzaqdan giriş protokoludur — internetə açıq qalması ciddi konfiqurasiya səhvi sayılır.",
+    note: "Şifrələnməmiş, bütün trafiki açıq mətn kimi göndərən köhnə uzaqdan giriş protokoludur: internetə açıq qalması ciddi konfiqurasiya səhvi sayılır.",
     section: "giris",
     match: ["telnet", "tcp"],
   },
@@ -362,7 +362,7 @@ export const portlarRows: ReferenceRow[] = [
   {
     term: "631",
     label: "IPP",
-    note: "Internet Printing Protocol — şəbəkə printerinin çap tapşırığı qəbul etdiyi portdur, CUPS bunu işlədir.",
+    note: "Internet Printing Protocol: şəbəkə printerinin çap tapşırığı qəbul etdiyi portdur, CUPS bunu işlədir.",
     section: "giris",
     match: ["ipp", "printing", "cups", "tcp"],
   },
@@ -390,7 +390,7 @@ export const portlarRows: ReferenceRow[] = [
   {
     term: "990",
     label: "FTPS",
-    note: "FTP-nin TLS ilə şifrələnmiş versiyasıdır — idarəetmə kanalı bu portda açılır.",
+    note: "FTP-nin TLS ilə şifrələnmiş versiyasıdır: idarəetmə kanalı bu portda açılır.",
     section: "giris",
     match: ["ftps", "ftp ssl", "tcp"],
   },
@@ -413,14 +413,14 @@ export const portlarRows: ReferenceRow[] = [
   {
     term: "53",
     label: "DNS",
-    note: "Domen adını IP ünvana çevirən sorğuların portudur — həm TCP, həm UDP üzərində işləyir.",
+    note: "Domen adını IP ünvana çevirən sorğuların portudur, həm TCP, həm UDP üzərində işləyir.",
     section: "infra",
     match: ["dns", "domain name system", "tcp", "udp"],
   },
   {
     term: "67-68",
     label: "DHCP",
-    note: "Şəbəkəyə qoşulan cihaza avtomatik IP ünvan verən protokoldur — 67 server, 68 müştəri tərəfindədir.",
+    note: "Şəbəkəyə qoşulan cihaza avtomatik IP ünvan verən protokoldur: 67 server, 68 müştəri tərəfindədir.",
     section: "infra",
     match: ["dhcp", "ip lease", "udp"],
   },
@@ -434,7 +434,7 @@ export const portlarRows: ReferenceRow[] = [
   {
     term: "179",
     label: "BGP",
-    note: "İnternetin marşrutlaşdırma cədvəllərini avtonom sistemlər arasında paylaşan protokoldur — böyük operatorların bir-biri ilə danışdığı dildir.",
+    note: "İnternetin marşrutlaşdırma cədvəllərini avtonom sistemlər arasında paylaşan protokoldur: böyük operatorların bir-biri ilə danışdığı dildir.",
     section: "infra",
     match: ["bgp", "routing", "tcp"],
   },
@@ -455,7 +455,7 @@ export const portlarRows: ReferenceRow[] = [
   {
     term: "1080",
     label: "SOCKS proxy",
-    note: "Tətbiqdən asılı olmayan ümumi proxy protokoludur — HTTP proxy-dən fərqli olaraq istənilən TCP trafikini ötürə bilir.",
+    note: "Tətbiqdən asılı olmayan ümumi proxy protokoludur: HTTP proxy-dən fərqli olaraq istənilən TCP trafikini ötürə bilir.",
     section: "infra",
     match: ["socks", "socks5", "proxy", "tcp"],
   },
@@ -483,14 +483,14 @@ export const portlarRows: ReferenceRow[] = [
   {
     term: "2375-2376",
     label: "Docker daemon",
-    note: "Docker-in uzaqdan idarəetmə API portlarıdır — 2375 şifrələnməmiş, 2376 TLS ilədir. 2375-in internetə açıq qalması hostda kod icra etməyə bərabərdir.",
+    note: "Docker-in uzaqdan idarəetmə API portlarıdır: 2375 şifrələnməmiş, 2376 TLS ilədir. 2375-in internetə açıq qalması hostda kod icra etməyə bərabərdir.",
     section: "infra",
     match: ["docker", "docker daemon", "tcp"],
   },
   {
     term: "5060-5061",
     label: "SIP",
-    note: "VoIP zənglərinin siqnalizasiya protokoludur — 5060 şifrələnməmiş, 5061 TLS ilədir.",
+    note: "VoIP zənglərinin siqnalizasiya protokoludur: 5060 şifrələnməmiş, 5061 TLS ilədir.",
     section: "infra",
     match: ["sip", "voip", "tcp", "udp"],
   },
@@ -511,14 +511,14 @@ export const portlarRows: ReferenceRow[] = [
   {
     term: "9092",
     label: "Kafka",
-    note: "Apache Kafka-nın broker portudur — böyük həcmli hadisə axınlarını (event stream) növbəyə yığan sistemdir.",
+    note: "Apache Kafka-nın broker portudur: böyük həcmli hadisə axınlarını (event stream) növbəyə yığan sistemdir.",
     section: "infra",
     match: ["kafka", "event streaming", "message queue", "tcp"],
   },
   {
     term: "51820",
     label: "WireGuard",
-    note: "Müasir, sadə konfiqurasiyalı VPN protokolunun default portudur — UDP üzərində işləyir.",
+    note: "Müasir, sadə konfiqurasiyalı VPN protokolunun default portudur: UDP üzərində işləyir.",
     section: "infra",
     match: ["wireguard", "vpn", "udp"],
   },
@@ -555,7 +555,7 @@ export const portlarRows: ReferenceRow[] = [
   {
     term: "161-162",
     label: "SNMP",
-    note: "Şəbəkə cihazlarını uzaqdan izləyən protokoldur — 161 sorğu, 162 tələ (trap) üçündür. Default 'public' community adı ilə açıq qalması geniş yayılmış konfiqurasiya səhvidir.",
+    note: "Şəbəkə cihazlarını uzaqdan izləyən protokoldur: 161 sorğu, 162 tələ (trap) üçündür. Default 'public' community adı ilə açıq qalması geniş yayılmış konfiqurasiya səhvidir.",
     section: "izleme",
     match: ["snmp", "network monitoring", "udp"],
   },
@@ -590,7 +590,7 @@ export const portlarRows: ReferenceRow[] = [
   {
     term: "25565",
     label: "Minecraft",
-    note: "Minecraft server protokolunun default portudur — şəbəkə portlarını öyrənərkən ən çox yadda qalan nümunələrdən biridir.",
+    note: "Minecraft server protokolunun default portudur: şəbəkə portlarını öyrənərkən ən çox yadda qalan nümunələrdən biridir.",
     section: "izleme",
     match: ["minecraft", "game server", "tcp"],
   },

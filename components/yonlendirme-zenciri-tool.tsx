@@ -123,7 +123,7 @@ export function YonlendirmeZenciriTool() {
               label="Sayt ünvanı"
               htmlFor="zencir-url"
               className="min-w-56 flex-1"
-              note="Sxem yazılmasa https götürülür. http:// yazsan, http-dən başlayan zənciri görərsən — köçürmə qaydalarını yoxlamağın ən dəqiq yolu budur."
+              note="Sxem yazılmasa https götürülür. http:// yazsan, http-dən başlayan zənciri görərsən: köçürmə qaydalarını yoxlamağın ən dəqiq yolu budur."
             >
               <ToolInput
                 id="zencir-url"

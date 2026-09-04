@@ -92,7 +92,7 @@ export function checkLanguageCode(raw: string): CodeCheck {
       ok: true,
       language: null,
       region: null,
-      label: "x-default — ziyarətçinin dili siyahıdakı heç bir kodla üst-üstə düşmürsə göstərilən fallback.",
+      label: "x-default: ziyarətçinin dili siyahıdakı heç bir kodla üst-üstə düşmürsə göstərilən fallback.",
       problem: null,
     };
   }
