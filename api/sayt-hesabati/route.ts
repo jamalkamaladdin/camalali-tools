@@ -212,7 +212,7 @@ async function buildPayload(target: {
     return {
       ok: false,
       status: 400,
-      message: `Ünvan ${page.status} ilə «${page.redirectedTo}» ünvanına yönləndirir. Yönləndirmə izlənmir — həmin ünvanı olduğu kimi kopyalayıb yenidən yoxla.`,
+      message: `Ünvan ${page.status} ilə «${page.redirectedTo}» ünvanına yönləndirir. Yönləndirmə izlənmir. Həmin ünvanı olduğu kimi kopyalayıb yenidən yoxla.`,
     };
   }
 
@@ -220,7 +220,7 @@ async function buildPayload(target: {
     return {
       ok: false,
       status: 400,
-      message: `Səhifə HTTP ${page.status} qaytardı — hesabat qurmaq üçün açıq bir səhifə lazımdır.`,
+      message: `Səhifə HTTP ${page.status} qaytardı: hesabat qurmaq üçün açıq bir səhifə lazımdır.`,
     };
   }
 

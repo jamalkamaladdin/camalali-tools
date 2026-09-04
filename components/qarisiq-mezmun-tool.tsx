@@ -76,7 +76,7 @@ export function QarisiqMezmunTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu alət yalnız HTML mətnini oxuyur">
-        Server yazdığın səhifənin HTML mətnini bir dəfə gətirir — tapılan şəkil, skript, iframe kimi
+        Server yazdığın səhifənin HTML mətnini bir dəfə gətirir: tapılan şəkil, skript, iframe kimi
         resursların özü heç vaxt yüklənmir, yalnız HTML-dəki ünvanlar oxunur.
       </ToolNote>
 
@@ -143,7 +143,7 @@ function Report({ report }: { report: MixedContentApiReport }) {
   if (!report.applicable) {
     return (
       <ToolNote tone="info" title="Bu ünvan https deyil">
-        Qarışıq məzmun anlayışı yalnız https səhifəyə aiddir — bu ünvan artıq https ilə açılmır, ona görə
+        Qarışıq məzmun anlayışı yalnız https səhifəyə aiddir: bu ünvan artıq https ilə açılmır, ona görə
         müqayisə üçün əsas yoxdur.
       </ToolNote>
     );
@@ -169,7 +169,7 @@ function Report({ report }: { report: MixedContentApiReport }) {
 
       {report.upgradeInsecureRequests && (
         <ToolNote tone="info" title="upgrade-insecure-requests aktivdir">
-          Bu səhifənin CSP-si brauzerə bütün http:// istinadları özü https-ə çevirməyi əmr edir — tapılan
+          Bu səhifənin CSP-si brauzerə bütün http:// istinadları özü https-ə çevirməyi əmr edir: tapılan
           resurslar aşağıda yenə göstərilir, amma server https cavab versə heç biri həqiqətən http ilə
           yüklənmir.
         </ToolNote>
@@ -190,7 +190,7 @@ function Report({ report }: { report: MixedContentApiReport }) {
 
       {report.truncated && (
         <ToolNote tone="info">
-          Səhifə byte büdcəsindən uzun idi və oxunuşu kəsildi — nəticə səhifənin yalnız oxunmuş hissəsinə
+          Səhifə byte büdcəsindən uzun idi və oxunuşu kəsildi: nəticə səhifənin yalnız oxunmuş hissəsinə
           aiddir.
         </ToolNote>
       )}

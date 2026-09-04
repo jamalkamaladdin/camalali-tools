@@ -113,10 +113,10 @@ export function validateAnimationConfig(config: AnimationConfig): string[] {
   }
   for (const step of config.steps) {
     if (!Number.isFinite(step.offset) || step.offset < 0 || step.offset > 100) {
-      errors.push(`Addım faizi 0 ilə 100 arasında olmalıdır — "${step.offset}" deyil.`);
+      errors.push(`Addım faizi 0 ilə 100 arasında olmalıdır: "${step.offset}" deyil.`);
     }
     if (step.opacity !== undefined && (step.opacity < 0 || step.opacity > 1)) {
-      errors.push(`Şəffaflıq 0 ilə 1 arasında olmalıdır — "${step.opacity}" deyil.`);
+      errors.push(`Şəffaflıq 0 ilə 1 arasında olmalıdır: "${step.opacity}" deyil.`);
     }
   }
   if (!Number.isFinite(config.durationMs) || config.durationMs < 0) {

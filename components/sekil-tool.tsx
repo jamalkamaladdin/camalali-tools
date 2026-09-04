@@ -73,7 +73,7 @@ function loadImageElement(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const image = new Image();
     image.onload = () => resolve(image);
-    image.onerror = () => reject(new Error("Şəkil açılmadı — fayl zədəli və ya format dəstəklənmir."));
+    image.onerror = () => reject(new Error("Şəkil açılmadı: fayl zədəli və ya format dəstəklənmir."));
     image.src = src;
   });
 }
@@ -109,13 +109,13 @@ async function encodeImage(
     canvas.width = target.width;
     canvas.height = target.height;
     const context = canvas.getContext("2d");
-    if (!context) throw new Error("2D kontekst alınmadı — brauzer canvas-ı dəstəkləmir.");
+    if (!context) throw new Error("2D kontekst alınmadı: brauzer canvas-ı dəstəkləmir.");
     context.drawImage(image, 0, 0, target.width, target.height);
 
     const blob = await new Promise<Blob | null>((resolve) => {
       canvas.toBlob(resolve, mimeForFormat(format), qualityFraction);
     });
-    if (!blob) throw new Error("Kodlaşdırma alınmadı — seçilmiş format bu brauzerdə dəstəklənmir.");
+    if (!blob) throw new Error("Kodlaşdırma alınmadı: seçilmiş format bu brauzerdə dəstəklənmir.");
 
     return {
       blob,
@@ -262,7 +262,7 @@ export function SekilTool() {
     const rejected = incoming.length - supported.length;
     setRejectedNote(
       rejected > 0
-        ? `${rejected} fayl şəkil formatında deyil (və ya brauzer onu tanımadı) — əlavə olunmadı.`
+        ? `${rejected} fayl şəkil formatında deyil (və ya brauzer onu tanımadı): əlavə olunmadı.`
         : null,
     );
     if (supported.length === 0) return;
@@ -370,7 +370,7 @@ export function SekilTool() {
         <div className="grid gap-5 p-4 lg:grid-cols-[220px_minmax(0,1fr)]">
           <div className="space-y-4">
             <ToolNote>
-              Şəkil heç yerə göndərilmir — sıxma, ölçü dəyişmə və format çevirmə tamamilə
+              Şəkil heç yerə göndərilmir: sıxma, ölçü dəyişmə və format çevirmə tamamilə
               brauzerdə, canvas ilə aparılır.
             </ToolNote>
 
@@ -408,7 +408,7 @@ export function SekilTool() {
 
             {format === "png" && (
               <ToolNote tone="info">
-                PNG itkisiz formatdır — keyfiyyət faizi ona təsir etmir. Faylı kiçiltmək üçün
+                PNG itkisiz formatdır: keyfiyyət faizi ona təsir etmir. Faylı kiçiltmək üçün
                 maksimum en/hündürlüyü azalt və ya JPEG/WebP-ə keç.
               </ToolNote>
             )}
@@ -438,7 +438,7 @@ export function SekilTool() {
               >
                 <span className="font-ui text-sm">Şəkil seç və ya bura sürüşdür</span>
                 <span className="font-ui text-xs text-muted">
-                  JPEG · PNG · WebP · GIF · BMP — bir neçəsi birdən
+                  JPEG · PNG · WebP · GIF · BMP, bir neçəsi birdən
                 </span>
               </label>
             </div>

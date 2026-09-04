@@ -80,7 +80,7 @@ async function loadPdf(bytes: Uint8Array): Promise<LoadResult> {
     return {
       ok: false,
       encrypted: false,
-      error: "Fayl PDF kimi oxunmadı — zədəli ola bilər və ya başqa formatdır.",
+      error: "Fayl PDF kimi oxunmadı: zədəli ola bilər və ya başqa formatdır.",
     };
   }
 }
@@ -159,7 +159,7 @@ export async function mergePdfs(
   if (totalBytes > MAX_MERGE_TOTAL_BYTES) {
     return {
       ok: false,
-      error: `Faylların cəmi ${formatMb(MAX_MERGE_TOTAL_BYTES)} MB həddini aşır — brauzerdə bu qədərini eyni anda emal etmək olmur.`,
+      error: `Faylların cəmi ${formatMb(MAX_MERGE_TOTAL_BYTES)} MB həddini aşır: brauzerdə bu qədərini eyni anda emal etmək olmur.`,
     };
   }
   for (const [index, input] of inputs.entries()) {

@@ -86,7 +86,7 @@ export function ValyutaTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote>
-        Bu alət heç bir mətn göndərmir — server Mərkəzi Bank (cbar.az) və Frankfurter
+        Bu alət heç bir mətn göndərmir: server Mərkəzi Bank (cbar.az) və Frankfurter
         (frankfurter.dev) cədvəllərini bütöv çəkir, çevirmə isə brauzerdə aparılır.
       </ToolNote>
 
@@ -145,7 +145,7 @@ function CbarConverter({ state }: { state: TableState<CbarData> }) {
           >
             {rates.map((rate) => (
               <option key={rate.code} value={rate.code}>
-                {rate.code} — {stripNominalPrefix(rate.nameAz, rate.nominal)}
+                {rate.code}: {stripNominalPrefix(rate.nameAz, rate.nominal)}
               </option>
             ))}
           </ToolSelect>
@@ -290,7 +290,7 @@ function CurrencySelect({
       <ToolSelect id={id} value={value} onChange={(event) => onChange(event.target.value)}>
         {WORLD_CURRENCIES.map((currency) => (
           <option key={currency.code} value={currency.code}>
-            {currency.code} — {currency.nameAz}
+            {currency.code}: {currency.nameAz}
           </option>
         ))}
       </ToolSelect>

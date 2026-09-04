@@ -140,32 +140,32 @@ export function buildCacheReport(input: CacheHeadersInput, now: Date = new Date(
   const conflicts: CacheConflict[] = [];
   if (directives.noStore && (directives.maxAge !== null || directives.sMaxAge !== null)) {
     conflicts.push({
-      message: "«no-store» ilə «max-age» birlikdə yazılıb — «no-store» bütün digər göstərişləri ləğv edir, «max-age» heç vaxt nəzərə alınmır.",
+      message: "«no-store» ilə «max-age» birlikdə yazılıb: «no-store» bütün digər göstərişləri ləğv edir, «max-age» heç vaxt nəzərə alınmır.",
     });
   }
   if (directives.noCache && (directives.maxAge !== null || directives.sMaxAge !== null)) {
     conflicts.push({
-      message: "«no-cache» ilə müsbət «max-age» birlikdə yazılıb — «no-cache» yenə də hər sorğuda serverlə yenidən təsdiqləşməyi məcbur edir, «max-age» müddəti gözlənilmədən.",
+      message: "«no-cache» ilə müsbət «max-age» birlikdə yazılıb: «no-cache» yenə də hər sorğuda serverlə yenidən təsdiqləşməyi məcbur edir, «max-age» müddəti gözlənilmədən.",
     });
   }
   if (varyIsWildcard) {
     conflicts.push({
-      message: "«Vary: *» yazılıb — bu, cavabın demək olar heç bir ara keşdə saxlanmayacağı mənasına gəlir, çünki hər sorğu fərqli sayılır.",
+      message: "«Vary: *» yazılıb. Bu, cavabın demək olar heç bir ara keşdə saxlanmayacağı mənasına gəlir, çünki hər sorğu fərqli sayılır.",
     });
   }
   if (directives.mustRevalidate && !conditionalRequestReady) {
     conflicts.push({
-      message: "«must-revalidate» var, amma nə ETag, nə Last-Modified var — müddət bitəndə server şərti sorğu ala bilmir, tam yenidən yükləməyə məcbur olur.",
+      message: "«must-revalidate» var, amma nə ETag, nə Last-Modified var: müddət bitəndə server şərti sorğu ala bilmir, tam yenidən yükləməyə məcbur olur.",
     });
   }
   if (directives.private && directives.public) {
     conflicts.push({
-      message: "«public» ilə «private» birlikdə yazılıb — RFC 9111-ə görə «private» qalib gəlir, ara keşlər cavabı saxlaya bilmir.",
+      message: "«public» ilə «private» birlikdə yazılıb: RFC 9111-ə görə «private» qalib gəlir, ara keşlər cavabı saxlaya bilmir.",
     });
   }
   if (directives.raw === null && input.pragma !== null && /no-cache/i.test(input.pragma)) {
     conflicts.push({
-      message: "Cache-Control yoxdur, yalnız köhnə «Pragma: no-cache» var — müasir brauzerlər cavab başlığında bunu həmişə nəzərə almır, yalnız sorğu başlığında etibarlıdır.",
+      message: "Cache-Control yoxdur, yalnız köhnə «Pragma: no-cache» var. Müasir brauzerlər cavab başlığında bunu həmişə nəzərə almır, yalnız sorğu başlığında etibarlıdır.",
     });
   }
 

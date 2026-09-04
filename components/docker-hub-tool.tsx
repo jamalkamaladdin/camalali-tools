@@ -49,7 +49,7 @@ export function DockerHubTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote>
-        Ad Docker Hub-ın öz API-sinə (hub.docker.com) göndərilir — başqa heç yerə. Sahib yazmasan
+        Ad Docker Hub-ın öz API-sinə (hub.docker.com) göndərilir: başqa heç yerə. Sahib yazmasan
         rəsmi image sahibi (`library`) əvəzinə əlavə olunur. Nəticə 10 dəqiqə keşlənir.
       </ToolNote>
 
@@ -99,7 +99,7 @@ function DockerHubResult({ info }: { info: DockerHubImageInfo }) {
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           <ToolStat label="Ulduz" value={formatCompact(info.starCount)} />
           <ToolStat label="Yükləmə" value={formatCompact(info.pullCount)} />
-          <ToolStat label="Son yenilənmə" value={lastUpdated ?? "—"} />
+          <ToolStat label="Son yenilənmə" value={lastUpdated ?? "yoxdur"} />
         </div>
 
         {info.tags.length > 0 && (
@@ -123,7 +123,7 @@ function TagRow({ tag }: { tag: DockerHubTag }) {
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <span className="font-mono text-sm break-all">{tag.name}</span>
         <span className="text-ios-footnote text-muted tabular-nums">
-          {tag.fullSizeBytes !== null ? formatBytes(tag.fullSizeBytes) : "—"}
+          {tag.fullSizeBytes !== null ? formatBytes(tag.fullSizeBytes) : ""}
         </span>
       </div>
       <p className="mt-1 text-[11px] text-muted">

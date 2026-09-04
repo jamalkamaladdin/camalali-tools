@@ -140,7 +140,7 @@ function parseXml(text: string): Document {
       i += 2;
       return { kind: "element", tag, attrs, children: [], selfClosing: true };
     }
-    if (text[i] !== ">") fail(i, `"<${tag}>" bağlanmayıb — ">" gözlənilirdi.`);
+    if (text[i] !== ">") fail(i, `"<${tag}>" bağlanmayıb: ">" gözlənilirdi.`);
     i++;
 
     const children: Node[] = [];
@@ -197,7 +197,7 @@ function parseXml(text: string): Document {
   skipWhitespace();
   skipMisc();
   skipWhitespace();
-  if (i < n) fail(i, "Kök elementdən sonra əlavə məzmun var — XML-də yalnız bir kök ola bilər.");
+  if (i < n) fail(i, "Kök elementdən sonra əlavə məzmun var: XML-də yalnız bir kök ola bilər.");
 
   return { declaration, root, elementCount };
 }
@@ -212,7 +212,7 @@ function toIssue(text: string, cause: unknown): { error: string; line: number; c
     const loc = locate(text, cause.position);
     return { error: cause.message, line: loc.line, column: loc.column };
   }
-  return { error: "XML təhlil oluna bilmədi — quruluş gözlənilməz formadadır.", line: 1, column: 1 };
+  return { error: "XML təhlil oluna bilmədi, quruluş gözlənilməz formadadır.", line: 1, column: 1 };
 }
 
 /* ---------- validation ---------- */

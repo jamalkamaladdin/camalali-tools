@@ -201,7 +201,7 @@ export function partySummary(party: Party): string {
 }
 
 export function invoiceSummary(invoice: Invoice): string {
-  return `№ ${invoice.number.trim() || "—"} · ${formatAzDate(invoice.date)}`;
+  return `№ ${invoice.number.trim() || ""} · ${formatAzDate(invoice.date)}`;
 }
 
 export function itemsSummary(invoice: Invoice, totals: InvoiceTotals): string {

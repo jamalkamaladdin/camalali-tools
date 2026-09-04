@@ -120,12 +120,12 @@ export type Ipv4Result = { ok: true; value: number } | { ok: false; error: strin
 /** Wraps `safe-url`'s strict dotted-quad parser with the visitor-facing error this file needs. */
 export function readIpv4(text: string): Ipv4Result {
   const trimmed = text.trim();
-  if (trimmed === "") return { ok: false, error: "Boş sahə — IPv4 ünvanı yaz." };
+  if (trimmed === "") return { ok: false, error: "Boş sahə: IPv4 ünvanı yaz." };
   const value = parseIpv4(trimmed);
   if (value === null) {
     return {
       ok: false,
-      error: `IPv4 ünvanı düzgün deyil: «${trimmed}» — a.b.c.d formatında, hər hissə 0–255 arasında və sıfırla başlamır.`,
+      error: `IPv4 ünvanı düzgün deyil: «${trimmed}»: a.b.c.d formatında, hər hissə 0–255 arasında və sıfırla başlamır.`,
     };
   }
   return { ok: true, value };
@@ -145,7 +145,7 @@ export function readCidr(text: string): CidrResult {
   if (trimmed.includes(":")) {
     return {
       ok: false,
-      error: `«${trimmed}» IPv6 ünvanına oxşayır — bu alət yalnız IPv4 üçündür.`,
+      error: `«${trimmed}» IPv6 ünvanına oxşayır: bu alət yalnız IPv4 üçündür.`,
     };
   }
 
@@ -186,7 +186,7 @@ function readCidrList(text: string): { ok: true; blocks: CidrBlock[] } | { ok: f
   if (lines.length > MAX_LIST_ENTRIES) {
     return {
       ok: false,
-      error: `${lines.length} sətir verilib, limit ${MAX_LIST_ENTRIES}-dir — siyahını qısalt.`,
+      error: `${lines.length} sətir verilib, limit ${MAX_LIST_ENTRIES}-dir: siyahını qısalt.`,
     };
   }
   const blocks: CidrBlock[] = [];
@@ -213,7 +213,7 @@ export function convertRangeToCidr(startText: string, endText: string): RangeToC
   if (start.value > end.value) {
     return {
       ok: false,
-      error: `Son ünvan (${formatIpv4(end.value)}) başlanğıcdan (${formatIpv4(start.value)}) əvvəldir — sıra tərsinədir.`,
+      error: `Son ünvan (${formatIpv4(end.value)}) başlanğıcdan (${formatIpv4(start.value)}) əvvəldir: sıra tərsinədir.`,
     };
   }
 
@@ -300,7 +300,7 @@ export function exclude(baseText: string, subsText: string): ExclusionResult {
   if (subLines.length > MAX_LIST_ENTRIES) {
     return {
       ok: false,
-      error: `${subLines.length} sətir verilib, limit ${MAX_LIST_ENTRIES}-dir — siyahını qısalt.`,
+      error: `${subLines.length} sətir verilib, limit ${MAX_LIST_ENTRIES}-dir: siyahını qısalt.`,
     };
   }
 
@@ -312,7 +312,7 @@ export function exclude(baseText: string, subsText: string): ExclusionResult {
     if (range.start < baseRange.start || range.end > baseRange.end) {
       return {
         ok: false,
-        error: `«${line}» ${formatCidr(base.block)} şəbəkəsinin xaricindədir — çıxarıla bilmir.`,
+        error: `«${line}» ${formatCidr(base.block)} şəbəkəsinin xaricindədir: çıxarıla bilmir.`,
       };
     }
     subRanges.push(range);

@@ -73,7 +73,7 @@ export async function GET(request: Request) {
   if (refused) return refused;
 
   const raw = (new URL(request.url).searchParams.get("domen") ?? "").trim();
-  if (raw === "") return fail("Boş sahə — domen adı və ya v=spf1 qeydi yaz.");
+  if (raw === "") return fail("Boş sahə, domen adı və ya v=spf1 qeydi yaz.");
 
   try {
     if (SPF_PREFIX.test(raw)) {

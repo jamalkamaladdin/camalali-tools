@@ -255,10 +255,10 @@ async function loadPdf(bytes: Uint8Array): Promise<LoadResult> {
     if (cause instanceof EncryptedPDFError) {
       return {
         ok: false,
-        error: "Bu PDF şifrələnib — əvvəlcə şifrəni aç (məsələn Acrobat-da), sonra bura yüklə.",
+        error: "Bu PDF şifrələnib: əvvəlcə şifrəni aç (məsələn Acrobat-da), sonra bura yüklə.",
       };
     }
-    return { ok: false, error: "Fayl PDF kimi açılmadı — zədəli və ya dəstəklənməyən formatdadır." };
+    return { ok: false, error: "Fayl PDF kimi açılmadı: zədəli və ya dəstəklənməyən formatdadır." };
   }
 }
 
@@ -326,12 +326,12 @@ export async function applyWatermarkAndPageNumbers(
   if (!hasWatermark && !hasPageNumber) {
     return {
       ok: false,
-      error: "Nə su nişanı mətni, nə də səhifə nömrəsi aktivdir — heç nə tətbiq olunmadı.",
+      error: "Nə su nişanı mətni, nə də səhifə nömrəsi aktivdir: heç nə tətbiq olunmadı.",
     };
   }
 
   if (sourceBytes.byteLength === 0) {
-    return { ok: false, error: "Boş fayl — bir PDF seç." };
+    return { ok: false, error: "Boş fayl, bir PDF seç." };
   }
   if (sourceBytes.byteLength > MAX_PDF_BYTES) {
     return {

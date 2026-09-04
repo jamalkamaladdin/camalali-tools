@@ -220,10 +220,10 @@ export function parseAmount(raw: string): ParsedAmount {
 
   const value = cleanNumber(raw);
   if (value === null || Number.isNaN(value)) {
-    return { value: null, error: "Bu rəqəm deyil — vahidi yanındakı siyahıdan seç." };
+    return { value: null, error: "Bu rəqəm deyil: vahidi yanındakı siyahıdan seç." };
   }
   if (value <= 0) {
-    return { value: null, error: "Sıfırdan böyük rəqəm yaz — sıfır və mənfi ötürmə mənasızdır." };
+    return { value: null, error: "Sıfırdan böyük rəqəm yaz: sıfır və mənfi ötürmə mənasızdır." };
   }
   return { value, error: null };
 }
@@ -247,7 +247,7 @@ function validateSizeBytes(bytes: number): string | null {
     return "Ölçü sıfırdan böyük olmalıdır.";
   }
   if (bytes > MAX_SIZE_BYTES) {
-    return `Ölçü çox böyükdür — bu alət ən çox ${formatDecimalSize(MAX_SIZE_BYTES)} qəbul edir.`;
+    return `Ölçü çox böyükdür: bu alət ən çox ${formatDecimalSize(MAX_SIZE_BYTES)} qəbul edir.`;
   }
   return null;
 }
@@ -257,7 +257,7 @@ function validateBandwidthBps(bitsPerSecond: number): string | null {
     return "Bant genişliyi sıfırdan böyük olmalıdır.";
   }
   if (bitsPerSecond > MAX_BANDWIDTH_BPS) {
-    return `Bant genişliyi çox böyükdür — bu alət ən çox ${formatBandwidthAuto(MAX_BANDWIDTH_BPS)} qəbul edir.`;
+    return `Bant genişliyi çox böyükdür: bu alət ən çox ${formatBandwidthAuto(MAX_BANDWIDTH_BPS)} qəbul edir.`;
   }
   return null;
 }
@@ -267,7 +267,7 @@ function validateTimeSeconds(seconds: number): string | null {
     return "Vaxt sıfırdan böyük olmalıdır.";
   }
   if (seconds > MAX_TIME_SECONDS) {
-    return `Vaxt çox uzundur — bu alət ən çox ${MAX_TIME_YEARS} il qəbul edir.`;
+    return `Vaxt çox uzundur: bu alət ən çox ${MAX_TIME_YEARS} il qəbul edir.`;
   }
   return null;
 }
@@ -276,7 +276,7 @@ function validateOverheadPercent(percent: number): string | null {
   if (!Number.isFinite(percent)) return "Protokol xərci rəqəm deyil.";
   if (percent < 0) return "Protokol xərci mənfi ola bilməz.";
   if (percent >= MAX_OVERHEAD_PERCENT) {
-    return `Protokol xərci ${MAX_OVERHEAD_PERCENT}%-dən aşağı olmalıdır — bundan yuxarısı faktiki sıfır ötürmə deməkdir.`;
+    return `Protokol xərci ${MAX_OVERHEAD_PERCENT}%-dən aşağı olmalıdır: bundan yuxarısı faktiki sıfır ötürmə deməkdir.`;
   }
   return null;
 }
@@ -392,7 +392,7 @@ function trimmedAmount(value: number): string {
 }
 
 function autoScale(value: number, ladder: readonly [string, number][]): string {
-  if (!Number.isFinite(value)) return "—";
+  if (!Number.isFinite(value)) return "";
   if (value === 0) {
     const smallest = ladder[ladder.length - 1];
     return `0 ${smallest[0]}`;
@@ -457,7 +457,7 @@ export type BandwidthPresetRow = {
   note?: string;
 };
 
-const REALISTIC_NOTE = "faktiki ötürmə — elan olunan sürət deyil";
+const REALISTIC_NOTE = "faktiki ötürmə: elan olunan sürət deyil";
 
 export const BANDWIDTH_PRESETS: BandwidthPresetRow[] = [
   { id: "eth-10m", label: "10 Mbit Ethernet", value: 10, unit: "Mbit/s" },

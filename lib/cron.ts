@@ -241,10 +241,10 @@ function expandField(raw: string, spec: FieldSpec) {
     if (slices.length === 2) {
       const stepText = slices[1].trim();
       if (!/^\d+$/.test(stepText)) {
-        throw new FieldError(`"${piece}" — addım müsbət tam ədəd olmalıdır.`);
+        throw new FieldError(`"${piece}": addım müsbət tam ədəd olmalıdır.`);
       }
       step = Number(stepText);
-      if (step === 0) throw new FieldError(`"${piece}" — addım 0 ola bilməz.`);
+      if (step === 0) throw new FieldError(`"${piece}": addım 0 ola bilməz.`);
     }
 
     const base = slices[0].trim();
@@ -260,7 +260,7 @@ function expandField(raw: string, spec: FieldSpec) {
       const from = readValue(base.slice(0, dash), spec);
       const to = readValue(base.slice(dash + 1), spec);
       if (from > to) {
-        throw new FieldError(`"${base}" — aralığın başlanğıcı sonundan böyükdür.`);
+        throw new FieldError(`"${base}": aralığın başlanğıcı sonundan böyükdür.`);
       }
       parts.push({ kind: "range", from, to, step });
       for (let v = from; v <= to; v += step) values.add(normalise(v, spec));
@@ -375,9 +375,9 @@ function fieldSummary(spec: FieldSpec, parts: CronPart[]): string {
 
 function fieldCountMessage(count: number): string {
   if (count === 6) {
-    return "Cron ifadəsi 5 sahədən ibarət olmalıdır — burada 6 sahə var. Altıncı sahə (saniyə və ya il) yalnız Quartz və node-cron kimi sistemlərdə var, standart crontab-da yoxdur.";
+    return "Cron ifadəsi 5 sahədən ibarət olmalıdır: burada 6 sahə var. Altıncı sahə (saniyə və ya il) yalnız Quartz və node-cron kimi sistemlərdə var, standart crontab-da yoxdur.";
   }
-  return `Cron ifadəsi 5 sahədən ibarət olmalıdır — burada ${count} sahə var. Sıra belədir: dəqiqə, saat, ayın günü, ay, həftənin günü.`;
+  return `Cron ifadəsi 5 sahədən ibarət olmalıdır: burada ${count} sahə var. Sıra belədir: dəqiqə, saat, ayın günü, ay, həftənin günü.`;
 }
 
 export function parseCron(expression: string): CronParseResult {
@@ -388,7 +388,7 @@ export function parseCron(expression: string): CronParseResult {
       error: {
         fieldIndex: null,
         fieldLabel: null,
-        message: "Boş sahə — cron ifadəsini yaz (məsələn: 0 3 * * *).",
+        message: "Boş sahə: cron ifadəsini yaz (məsələn: 0 3 * * *).",
       },
     };
   }

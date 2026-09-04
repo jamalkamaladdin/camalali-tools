@@ -206,12 +206,12 @@ function imageIssues(data: OgExtract, pageUrl: string, out: OgIssue[]): void {
         ? {
             severity: "xeta",
             message:
-              "«og:image» yoxdur. Şəkilsiz link lentdə sadəcə bir sətir mətn kimi görünür — Facebook, LinkedIn və WhatsApp heç bir təsvir çəkmir.",
+              "«og:image» yoxdur. Şəkilsiz link lentdə sadəcə bir sətir mətn kimi görünür: Facebook, LinkedIn və WhatsApp heç bir təsvir çəkmir.",
           }
         : {
             severity: "xeberdarliq",
             message:
-              "«og:image» yoxdur, yalnız «twitter:image» var. Şəkli X göstərəcək, Facebook, LinkedIn və WhatsApp isə göstərməyəcək — hər iki teqi yazmaq lazımdır.",
+              "«og:image» yoxdur, yalnız «twitter:image» var. Şəkli X göstərəcək, Facebook, LinkedIn və WhatsApp isə göstərməyəcək: hər iki teqi yazmaq lazımdır.",
           },
     );
     return;
@@ -221,7 +221,7 @@ function imageIssues(data: OgExtract, pageUrl: string, out: OgIssue[]): void {
     const resolved = absoluteUrl(raw, pageUrl);
     out.push({
       severity: "xeta",
-      message: `«og:image» nisbi ünvandır («${raw}») — bu, ən çox rast gəlinən qüsurdur. Facebook nisbi yolu açmır, mütləq ünvan tələb edir.${
+      message: `«og:image» nisbi ünvandır («${raw}»): bu, ən çox rast gəlinən qüsurdur. Facebook nisbi yolu açmır, mütləq ünvan tələb edir.${
         resolved === null ? "" : ` Düzgün variant: «${resolved}».`
       }`,
     });
@@ -237,7 +237,7 @@ function imageIssues(data: OgExtract, pageUrl: string, out: OgIssue[]): void {
   if ((data.tags["og:image:alt"] ?? "") === "") {
     out.push({
       severity: "melumat",
-      message: "«og:image:alt» yoxdur — ekran oxuyucusu kartdakı şəkli təsvir edə bilmir.",
+      message: "«og:image:alt» yoxdur: ekran oxuyucusu kartdakı şəkli təsvir edə bilmir.",
     });
   }
 }
@@ -248,7 +248,7 @@ function textIssues(data: OgExtract, out: OgIssue[]): void {
       data.title === null
         ? {
             severity: "xeta",
-            message: "Nə «og:title», nə də «title» etiketi var — linkin başlığı boş qalacaq.",
+            message: "Nə «og:title», nə də «title» etiketi var: linkin başlığı boş qalacaq.",
           }
         : {
             severity: "xeberdarliq",
@@ -275,7 +275,7 @@ function textIssues(data: OgExtract, out: OgIssue[]): void {
     out.push({
       severity: "melumat",
       message:
-        "«twitter:card» yazılmayıb. X bu halda Facebook teqlərindən istifadə edir, amma kartı kiçik («summary») çəkir — böyük şəkil üçün «summary_large_image» lazımdır.",
+        "«twitter:card» yazılmayıb. X bu halda Facebook teqlərindən istifadə edir, amma kartı kiçik («summary») çəkir: böyük şəkil üçün «summary_large_image» lazımdır.",
     });
   }
 }
@@ -302,7 +302,7 @@ function urlIssues(data: OgExtract, pageUrl: string, out: OgIssue[]): void {
     out.push({
       severity: "melumat",
       message:
-        "«og:url» yoxdur. Bu teq paylaşım statistikasının hansı ünvana yazılacağını təyin edir — utm parametrli link paylaşılanda onsuz saylar parçalanır.",
+        "«og:url» yoxdur. Bu teq paylaşım statistikasının hansı ünvana yazılacağını təyin edir: utm parametrli link paylaşılanda onsuz saylar parçalanır.",
     });
     return;
   }
@@ -322,7 +322,7 @@ function lengthIssues(data: OgExtract, out: OgIssue[]): void {
   if (titleCut.length > 0) {
     out.push({
       severity: titleCut.includes("Facebook") ? "xeberdarliq" : "melumat",
-      message: `Başlıq ${title.length} simvoldur — ${titleCut.join(", ")} onu kəsəcək. Hədlər: WhatsApp 65, X 70, Facebook 88, LinkedIn 119 simvol.`,
+      message: `Başlıq ${title.length} simvoldur: ${titleCut.join(", ")} onu kəsəcək. Hədlər: WhatsApp 65, X 70, Facebook 88, LinkedIn 119 simvol.`,
     });
   }
 
@@ -331,7 +331,7 @@ function lengthIssues(data: OgExtract, out: OgIssue[]): void {
   if (descriptionCut.length > 0) {
     out.push({
       severity: descriptionCut.includes("Facebook") ? "xeberdarliq" : "melumat",
-      message: `Təsvir ${description.length} simvoldur — ${descriptionCut.join(", ")} onu kəsəcək. Hədlər: WhatsApp 110, LinkedIn 120, Facebook və X 200 simvol.`,
+      message: `Təsvir ${description.length} simvoldur: ${descriptionCut.join(", ")} onu kəsəcək. Hədlər: WhatsApp 110, LinkedIn 120, Facebook və X 200 simvol.`,
     });
   }
 }

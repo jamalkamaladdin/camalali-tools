@@ -336,7 +336,7 @@ function parseJpegExif(bytes: Uint8Array): ExifParseResult {
 
   while (offset < bytes.length) {
     if (bytes[offset] !== 0xff) {
-      return { ok: false, error: "JPEG marker strukturu zədələnib — fayl korlanmış ola bilər." };
+      return { ok: false, error: "JPEG marker strukturu zədələnib: fayl korlanmış ola bilər." };
     }
     // Some encoders pad a marker with extra 0xFF fill bytes before it; skip them.
     let markerPos = offset + 1;
@@ -351,7 +351,7 @@ function parseJpegExif(bytes: Uint8Array): ExifParseResult {
     if (isLengthlessMarker(marker)) continue;
 
     if (offset + 2 > bytes.length) {
-      return { ok: false, error: "JPEG faylı qısa kəsilib — marker uzunluğu oxunmur." };
+      return { ok: false, error: "JPEG faylı qısa kəsilib, marker uzunluğu oxunmur." };
     }
     const segmentLength = readU16(bytes, offset, "BE");
     if (segmentLength < 2) {
@@ -360,7 +360,7 @@ function parseJpegExif(bytes: Uint8Array): ExifParseResult {
     const payloadStart = offset + 2;
     const payloadEnd = payloadStart + (segmentLength - 2);
     if (payloadEnd > bytes.length) {
-      return { ok: false, error: "JPEG faylı qısa kəsilib — seqment gövdəsi tam deyil." };
+      return { ok: false, error: "JPEG faylı qısa kəsilib: seqment gövdəsi tam deyil." };
     }
 
     if (marker === JPEG_APP1 && tiffStart === undefined && matchesExifHeader(bytes, payloadStart)) {
@@ -490,10 +490,10 @@ export function parseExif(bytes: Uint8Array): ExifParseResult {
     if (isPng(bytes)) return parsePngExif(bytes);
     return {
       ok: false,
-      error: "Bu fayl JPEG və ya PNG formatında deyil — EXIF yalnız bu iki formatdan oxunur.",
+      error: "Bu fayl JPEG və ya PNG formatında deyil: EXIF yalnız bu iki formatdan oxunur.",
     };
   } catch {
-    return { ok: false, error: "Fayl oxunarkən gözlənilməz xəta baş verdi — fayl zədəli ola bilər." };
+    return { ok: false, error: "Fayl oxunarkən gözlənilməz xəta baş verdi. Fayl zədəli ola bilər." };
   }
 }
 
@@ -525,7 +525,7 @@ function stripJpegExif(bytes: Uint8Array): StripResult {
 
   while (offset < bytes.length) {
     if (bytes[offset] !== 0xff) {
-      return { ok: false, error: "JPEG marker strukturu zədələnib — fayl təmizlənə bilmədi." };
+      return { ok: false, error: "JPEG marker strukturu zədələnib: fayl təmizlənə bilmədi." };
     }
     let markerPos = offset + 1;
     while (markerPos < bytes.length && bytes[markerPos] === 0xff) markerPos++;

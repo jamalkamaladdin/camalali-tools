@@ -131,9 +131,9 @@ export function WhoisTool() {
 }
 
 function dateLine(iso: string | null): string {
-  if (iso === null) return "—";
+  if (iso === null) return "";
   const date = new Date(iso);
-  if (Number.isNaN(date.getTime())) return "—";
+  if (Number.isNaN(date.getTime())) return "";
   return azLongDate(date);
 }
 
@@ -150,7 +150,7 @@ function Report({ report }: { report: WhoisReport }) {
     <div className="space-y-5">
       <ToolNote title="Sahib məlumatı niyə göstərilmir">
         Ad, ünvan, e-poçt və telefon burada qəsdən yoxdur. 2018-dən (GDPR) bəri demək olar bütün
-        reyestrlər bu sahələri RDAP cavabında qaralayır — boş bir «sahib» sətri göstərmək heç nə
+        reyestrlər bu sahələri RDAP cavabında qaralayır: boş bir «sahib» sətri göstərmək heç nə
         öyrətmir, ona görə bu alət ümumiyyətlə göstərmir.
       </ToolNote>
 
@@ -158,12 +158,12 @@ function Report({ report }: { report: WhoisReport }) {
         <div className="grid gap-3 @min-[30rem]:grid-cols-2 @min-[52rem]:grid-cols-4">
           <ToolStat
             label="Yaş"
-            value={report.ageDays === null ? "—" : daysLabel(report.ageDays)}
+            value={report.ageDays === null ? "" : daysLabel(report.ageDays)}
             note={report.dates.registration === null ? "qeydiyyat tarixi yoxdur" : undefined}
           />
           <ToolStat
             label={report.daysToExpiry !== null && report.daysToExpiry < 0 ? "Bitməsindən keçib" : "Bitməyə qalıb"}
-            value={report.daysToExpiry === null ? "—" : daysLabel(report.daysToExpiry)}
+            value={report.daysToExpiry === null ? "" : daysLabel(report.daysToExpiry)}
             tone={expiryTone}
             note={report.dates.expiration === null ? "bitmə tarixi yoxdur" : undefined}
           />

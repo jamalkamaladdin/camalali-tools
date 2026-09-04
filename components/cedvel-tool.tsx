@@ -114,7 +114,7 @@ export function CedvelTool() {
               <ToolStat label="Sütun" value={parsed.table.headers.length} />
               <ToolStat label="Sətir" value={parsed.table.rows.length} />
             </div>
-            <ToolOutput>{output || "—"}</ToolOutput>
+            <ToolOutput>{output || ""}</ToolOutput>
           </div>
         </ToolResultPanel>
       )}

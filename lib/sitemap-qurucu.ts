@@ -252,7 +252,7 @@ export function parseUrlList(text: string, defaults: SitemapDefaults): ParseResu
       issues.push({
         severity: "xeta",
         line: lineNumber,
-        message: `nisbi URL rədd olundu — <loc> mütləq olmalıdır: "${url}"`,
+        message: `nisbi URL rədd olundu, <loc> mütləq olmalıdır: "${url}"`,
       });
       continue;
     }
@@ -270,7 +270,7 @@ export function parseUrlList(text: string, defaults: SitemapDefaults): ParseResu
       issues.push({
         severity: "xeberdarliq",
         line: lineNumber,
-        message: `URL ${loc.length} simvoldur — 2048 həddini keçir`,
+        message: `URL ${loc.length} simvoldur: 2048 həddini keçir`,
       });
     }
 
@@ -314,7 +314,7 @@ export function parseUrlList(text: string, defaults: SitemapDefaults): ParseResu
         issues.push({
           severity: "xeberdarliq",
           line,
-          message: `fərqli host: "${host}" — sitemap-in əsas hostu "${primaryHost}"`,
+          message: `fərqli host: "${host}", sitemap-in əsas hostu "${primaryHost}"`,
         });
       }
     }

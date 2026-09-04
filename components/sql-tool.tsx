@@ -157,7 +157,7 @@ export function SqlTool() {
 
             {byteLength(input) > LARGE_INPUT_BYTES && (
               <ToolNote tone="info" title="Böyük giriş" className="mt-4">
-                Sorğu {formatBytes(byteLength(input))} ölçüsündədir — emal davam edir, amma bu
+                Sorğu {formatBytes(byteLength(input))} ölçüsündədir: emal davam edir, amma bu
                 qədər böyük mətndə brauzer bir az yavaşlaya bilər.
               </ToolNote>
             )}
@@ -175,7 +175,7 @@ export function SqlTool() {
             )}
 
             <ToolNote tone="info" title="Nəyə toxunulmur" className="mt-4">
-              Dırnaq içindəki mətn və şərhlər olduğu kimi köçürülür — orada yazılmış
+              Dırnaq içindəki mətn və şərhlər olduğu kimi köçürülür: orada yazılmış
               açar söz formatlanmır. Sorğu brauzerdə emal olunur, serverə göndərilmir.
             </ToolNote>
           </div>

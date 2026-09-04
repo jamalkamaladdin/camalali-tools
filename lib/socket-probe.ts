@@ -78,14 +78,14 @@ export type NameCheck = { ok: true; hostname: string } | ProbeFail;
 export function checkHostname(raw: string): NameCheck {
   const hostname = raw.trim().toLowerCase().replace(/\.$/, "");
 
-  if (hostname === "") return { ok: false, message: "Boş sahə — domen adı yaz.", status: 400 };
+  if (hostname === "") return { ok: false, message: "Boş sahə: domen adı yaz.", status: 400 };
   if (hostname.length > 253) {
     return { ok: false, message: "Domen adı həddindən uzundur.", status: 400 };
   }
   if (!HOSTNAME.test(hostname)) {
     return {
       ok: false,
-      message: "Domen adı oxunmadı — «example.com» formatında, sxem və yol olmadan yaz.",
+      message: "Domen adı oxunmadı: «example.com» formatında, sxem və yol olmadan yaz.",
       status: 400,
     };
   }
@@ -114,7 +114,7 @@ export type ResolvedHost = {
 export async function resolveHost(raw: string): Promise<ResolvedHost | ProbeFail> {
   const hostname = raw.trim().toLowerCase().replace(/\.$/, "");
 
-  if (hostname === "") return { ok: false, message: "Boş sahə — domen adı yaz.", status: 400 };
+  if (hostname === "") return { ok: false, message: "Boş sahə: domen adı yaz.", status: 400 };
   if (hostname.length > 253) {
     return { ok: false, message: "Domen adı həddindən uzundur.", status: 400 };
   }
@@ -137,7 +137,7 @@ export async function resolveHost(raw: string): Promise<ResolvedHost | ProbeFail
   if (!HOSTNAME.test(hostname)) {
     return {
       ok: false,
-      message: "Domen adı oxunmadı — «example.com» formatında, sxem və yol olmadan yaz.",
+      message: "Domen adı oxunmadı: «example.com» formatında, sxem və yol olmadan yaz.",
       status: 400,
     };
   }

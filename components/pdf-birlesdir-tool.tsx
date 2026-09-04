@@ -113,7 +113,7 @@ export function PdfBirlesdirTool() {
       setItems((prev) =>
         prev.map((item) =>
           item.id === id
-            ? { ...item, status: "problem", problem: "Fayl oxunmadı — zədəli ola bilər." }
+            ? { ...item, status: "problem", problem: "Fayl oxunmadı: zədəli ola bilər." }
             : item,
         ),
       );
@@ -185,7 +185,7 @@ export function PdfBirlesdirTool() {
     }
     const notReady = items.find((item) => item.status !== "ready" || item.bytes === null);
     if (notReady) {
-      setError(`"${notReady.file.name}" hazır deyil — problemli faylı siyahıdan çıxar.`);
+      setError(`"${notReady.file.name}" hazır deyil: problemli faylı siyahıdan çıxar.`);
       return;
     }
 
@@ -214,7 +214,7 @@ export function PdfBirlesdirTool() {
       setDone({ pageCount: result.pageCount });
     } catch (cause) {
       console.error("pdf-birlesdir: birləşdirmə alınmadı", cause);
-      setError("Birləşdirmə alınmadı — bir daha yoxla.");
+      setError("Birləşdirmə alınmadı: bir daha yoxla.");
     } finally {
       setBusy(false);
     }
@@ -357,7 +357,7 @@ export function PdfBirlesdirTool() {
       {done !== null && (
         <ToolResultPanel title="Hazırdır" hint={`${done.pageCount} səhifə`}>
           <p className="p-4 font-ui text-sm text-muted">
-            <code>birlesdirilmis.pdf</code> endirildi — brauzerin öz endirmə qovluğuna baxa bilərsən.
+            <code>birlesdirilmis.pdf</code> endirildi: brauzerin öz endirmə qovluğuna baxa bilərsən.
           </p>
         </ToolResultPanel>
       )}

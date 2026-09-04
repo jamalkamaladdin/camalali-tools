@@ -60,7 +60,7 @@ export async function GET(request: Request) {
       return {
         ok: false,
         status: 502,
-        message: `Ünvan ${fetched.status} yönləndirməsi qaytardı. Yönləndirmə izlənmir — «${fetched.redirectedTo}» ünvanını olduğu kimi kopyalayıb yenidən yoxla.`,
+        message: `Ünvan ${fetched.status} yönləndirməsi qaytardı. Yönləndirmə izlənmir: «${fetched.redirectedTo}» ünvanını olduğu kimi kopyalayıb yenidən yoxla.`,
       };
     }
 

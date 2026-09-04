@@ -38,7 +38,7 @@ export type Ipv4Parse = { ok: true; value: number } | { ok: false; error: string
  */
 export function parseIpv4(text: string): Ipv4Parse {
   const trimmed = text.trim();
-  if (trimmed === "") return { ok: false, error: "Boş sahə — IPv4 ünvanı yaz." };
+  if (trimmed === "") return { ok: false, error: "Boş sahə: IPv4 ünvanı yaz." };
 
   const parts = trimmed.split(".");
   if (parts.length !== 4) {
@@ -60,7 +60,7 @@ export function parseIpv4(text: string): Ipv4Parse {
     if (part.length > 1 && part[0] === "0") {
       return {
         ok: false,
-        error: `${i + 1}-ci hissə sıfırla başlayır: «${part}». Bəzi sistemlər belə rəqəmi səkkizlik oxuyur — sıfırsız yaz.`,
+        error: `${i + 1}-ci hissə sıfırla başlayır: «${part}». Bəzi sistemlər belə rəqəmi səkkizlik oxuyur: sıfırsız yaz.`,
       };
     }
     const octet = Number(part);
@@ -130,11 +130,11 @@ export function classOf(value: number): Ipv4Class {
 }
 
 export const CLASS_LABELS: Record<Ipv4Class, string> = {
-  A: "A sinfi (0–127) — köhnə təsnifat, standart maska /8",
-  B: "B sinfi (128–191) — köhnə təsnifat, standart maska /16",
-  C: "C sinfi (192–223) — köhnə təsnifat, standart maska /24",
-  D: "D sinfi (224–239) — multicast, hosta verilmir",
-  E: "E sinfi (240–255) — ayrılmış, istifadə olunmur",
+  A: "A sinfi (0–127): köhnə təsnifat, standart maska /8",
+  B: "B sinfi (128–191): köhnə təsnifat, standart maska /16",
+  C: "C sinfi (192–223): köhnə təsnifat, standart maska /24",
+  D: "D sinfi (224–239): multicast, hosta verilmir",
+  E: "E sinfi (240–255): ayrılmış, istifadə olunmur",
 };
 
 export type Ipv4Scope = {
@@ -497,7 +497,7 @@ export type Ipv6Groups = { ok: true; groups: number[] } | { ok: false; error: st
 /** Parses any legal textual form into the eight 16-bit groups behind it. */
 export function parseIpv6(text: string): Ipv6Groups {
   let value = text.trim();
-  if (value === "") return { ok: false, error: "Boş sahə — IPv6 ünvanı yaz." };
+  if (value === "") return { ok: false, error: "Boş sahə: IPv6 ünvanı yaz." };
 
   // "[2001:db8::1]:443" is how a URL carries one; the brackets and the port
   // are not part of the address.
@@ -574,7 +574,7 @@ export function parseIpv6(text: string): Ipv6Groups {
 
   const filled = 8 - left.length - right.length;
   if (filled < 0) {
-    return { ok: false, error: "Səkkiz qrupdan çox yazılıb — «::» sıfırları əvəz edir." };
+    return { ok: false, error: "Səkkiz qrupdan çox yazılıb: «::» sıfırları əvəz edir." };
   }
 
   const groups = [...left, ...Array<number>(filled).fill(0), ...right];

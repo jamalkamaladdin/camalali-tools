@@ -185,7 +185,7 @@ function computeResult(input: string, mode: Mode, indent: IndentOption): ToolRes
     documents: converted.documents,
     note:
       converted.documents > 1
-        ? `Sənəddə «---» ilə ayrılmış ${formatNumber(converted.documents)} hissə var — JSON-da onlar bir massivə yığıldı.`
+        ? `Sənəddə «---» ilə ayrılmış ${formatNumber(converted.documents)} hissə var: JSON-da onlar bir massivə yığıldı.`
         : null,
   };
 }
@@ -219,7 +219,7 @@ export function YamlTool() {
         şərh, <code>|</code> və <code>&gt;</code> blokları, bir sətirlik <code>[a, b]</code> və{" "}
         <code>{"{a: 1}"}</code> çevrilir. Anchor (<code>&amp;</code>), alias (<code>*</code>), teq (
         <code>!</code>), <code>&lt;&lt;</code> birləşdirmə açarı, mürəkkəb açar (<code>?</code>) və{" "}
-        <code>%</code> direktivi çevrilmir — alət onları tanıyır və sətir nömrəsi ilə xəta verir,
+        <code>%</code> direktivi çevrilmir: alət onları tanıyır və sətir nömrəsi ilə xəta verir,
         səssizcə yanlış nəticə vermir. Dəyər tipləri YAML 1.2 core sxeminə görə oxunur:{" "}
         <code>yes</code> və <code>no</code> mətndir, <code>true</code> və <code>false</code> buldur.
       </ToolNote>

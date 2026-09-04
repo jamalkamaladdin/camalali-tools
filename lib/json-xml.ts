@@ -43,7 +43,7 @@ function buildElement(tagName: string, value: unknown, depth: number): string[] 
   const pad = "  ".repeat(depth);
 
   if (!isValidXmlTagName(tagName)) {
-    throw new XmlBuildError(`"${tagName}" düzgün XML teq adı deyil — hərf və ya "_" ilə başlamalıdır.`);
+    throw new XmlBuildError(`"${tagName}" düzgün XML teq adı deyil: hərf və ya "_" ilə başlamalıdır.`);
   }
 
   if (value === null || value === undefined) {
@@ -52,7 +52,7 @@ function buildElement(tagName: string, value: unknown, depth: number): string[] 
 
   if (Array.isArray(value)) {
     throw new XmlBuildError(
-      `"${tagName}" massiv içində massivdir — XML bunu birbaşa ifadə edə bilmir, əvvəlcə düzləşdir.`,
+      `"${tagName}" massiv içində massivdir: XML bunu birbaşa ifadə edə bilmir, əvvəlcə düzləşdir.`,
     );
   }
 
@@ -102,7 +102,7 @@ function buildElement(tagName: string, value: unknown, depth: number): string[] 
 
 export function jsonToXml(jsonText: string, rootTag: string): JsonToXmlResult {
   if (!isValidXmlTagName(rootTag)) {
-    return { ok: false, error: `"${rootTag}" düzgün XML teq adı deyil — hərf və ya "_" ilə başlamalıdır.` };
+    return { ok: false, error: `"${rootTag}" düzgün XML teq adı deyil: hərf və ya "_" ilə başlamalıdır.` };
   }
 
   const parsed = formatJson(jsonText, { mode: "pretty", indent: "2", sortKeys: false });
@@ -243,7 +243,7 @@ function parseXmlDocument(text: string): XmlElement {
       i += 2;
       return { tag, attrs, children: [] };
     }
-    if (text[i] !== ">") fail(i, `"<${tag}>" bağlanmayıb — ">" gözlənilirdi.`);
+    if (text[i] !== ">") fail(i, `"<${tag}>" bağlanmayıb: ">" gözlənilirdi.`);
     i++;
 
     const children: XmlNode[] = [];
@@ -297,7 +297,7 @@ function parseXmlDocument(text: string): XmlElement {
   skipWhitespace();
   skipMisc();
   skipWhitespace();
-  if (i < n) fail(i, "Kök elementdən sonra əlavə məzmun var — XML-də yalnız bir kök ola bilər.");
+  if (i < n) fail(i, "Kök elementdən sonra əlavə məzmun var: XML-də yalnız bir kök ola bilər.");
 
   return root;
 }
@@ -348,6 +348,6 @@ export function xmlToJson(xmlText: string, indent: "2" | "4" | "tab" = "2"): Xml
       const loc = locate(xmlText, cause.position);
       return { ok: false, error: cause.message, line: loc.line, column: loc.column };
     }
-    return { ok: false, error: "XML təhlil oluna bilmədi — quruluş gözlənilməz formadadır." };
+    return { ok: false, error: "XML təhlil oluna bilmədi: quruluş gözlənilməz formadadır." };
   }
 }

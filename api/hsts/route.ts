@@ -88,7 +88,7 @@ async function readScheme(url: string, checkRedirect: boolean): Promise<SchemeFe
       ok: false,
       message: aborted
         ? "Sayt 8 saniyə ərzində cavab vermədi."
-        : "Saytla əlaqə qurulmadı — ünvan işləyirmi, yoxla.",
+        : "Saytla əlaqə qurulmadı: ünvan işləyirmi, yoxla.",
     };
   } finally {
     clearTimeout(deadline);

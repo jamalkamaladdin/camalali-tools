@@ -38,7 +38,7 @@ const SAMPLE = [
   "}",
   "```",
   "",
-  "Kod blokunun içindəki `**ulduzlar**` formatlanmır — mətn olaraq qalır.",
+  "Kod blokunun içindəki `**ulduzlar**` formatlanmır: mətn olaraq qalır.",
   "",
   "## Siyahılar",
   "",
@@ -66,7 +66,7 @@ const SAMPLE = [
   "| --- | --- |",
   "| Cəmalı | Azərbaycan |",
   "",
-  "Sətir sonu üçün iki boşluq qoyulur —  ",
+  "Sətir sonu üçün iki boşluq qoyulur:  ",
   "bu sətir yenisinin üstündədir.",
 ].join("\n");
 
@@ -137,7 +137,7 @@ export function MarkdownTool() {
           <ToolResultPanel title="Canlı nəticə" className="min-w-0">
             {source.trim() === "" ? (
               <p className="p-4 font-ui text-sm text-muted">
-                Solda markdown yazın — nəticə burada canlı görünəcək.
+                Solda markdown yazın: nəticə burada canlı görünəcək.
               </p>
             ) : (
               // The one dangerouslySetInnerHTML on this page, fed only by
@@ -152,7 +152,7 @@ export function MarkdownTool() {
 
         <div className="border-t border-rule p-4">
           <ToolNote>
-            Nəticə həmişə qaçırılmış (escaped) mətndən qurulur — yazdığın ham
+            Nəticə həmişə qaçırılmış (escaped) mətndən qurulur: yazdığın ham
             HTML heç vaxt işə düşmür, yalnız ekranda görünən mətnə çevrilir.
             javascript: və data: ünvanlı linklər saxlanmır.
           </ToolNote>
@@ -167,7 +167,7 @@ export function MarkdownTool() {
             className="min-w-0"
           >
             <ToolOutput className="m-3 max-h-96 overflow-y-auto">
-              {html === "" ? <span className="text-muted">—</span> : html}
+              {html === "" ? <span className="text-muted"></span> : html}
             </ToolOutput>
           </ToolResultPanel>
         </ToolAccordionItem>

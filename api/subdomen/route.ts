@@ -54,7 +54,7 @@ export async function GET(request: Request) {
        successful status is not the same as a successful answer. */
     const rows = parseCrtRows(result.text);
     if (rows === null) {
-      refuse(`${SERVICE} oxunaqlı cavab vermədi — bu, adətən onun yüklü olduğunu göstərir.`);
+      refuse(`${SERVICE} oxunaqlı cavab vermədi: bu, adətən onun yüklü olduğunu göstərir.`);
     }
 
     return collectSubdomains(rows, domain);

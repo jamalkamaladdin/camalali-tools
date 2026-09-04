@@ -69,11 +69,11 @@ export function buildGlass(input: GlassInput): GlassResult {
 
   const background = parseHex(input.backgroundHex.trim());
   if (!background) {
-    return { ok: false, error: "Fon rəngi HEX formatında deyil — #rrggbb gözlənilir." };
+    return { ok: false, error: "Fon rəngi HEX formatında deyil: #rrggbb gözlənilir." };
   }
   const border = parseHex(input.borderHex.trim());
   if (!border) {
-    return { ok: false, error: "Kənar rəngi HEX formatında deyil — #rrggbb gözlənilir." };
+    return { ok: false, error: "Kənar rəngi HEX formatında deyil: #rrggbb gözlənilir." };
   }
 
   const filter = `blur(${round1(input.blur)}px) saturate(${round1(input.saturate)}%)`;

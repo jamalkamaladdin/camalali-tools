@@ -23,7 +23,7 @@ const ALGORITHM_HASH: Record<JwtAlgorithm, "SHA-256" | "SHA-384" | "SHA-512"> = 
 };
 
 const NO_SUBTLE_ERROR =
-  "Bu səhifə kriptoqrafiya funksiyasına icazə verməyən ünvandan açılıb — imzalamaq üçün https və ya localhost lazımdır.";
+  "Bu səhifə kriptoqrafiya funksiyasına icazə verməyən ünvandan açılıb: imzalamaq üçün https və ya localhost lazımdır.";
 
 function subtleCrypto(): SubtleCrypto | null {
   return typeof globalThis.crypto?.subtle === "object" ? globalThis.crypto.subtle : null;
@@ -155,13 +155,13 @@ export async function verifyJwt(
   if (!subtle) return { ok: false, error: NO_SUBTLE_ERROR };
 
   const trimmed = token.trim();
-  if (trimmed === "") return { ok: false, error: "Boş sahə — JWT token yapışdır." };
+  if (trimmed === "") return { ok: false, error: "Boş sahə: JWT token yapışdır." };
 
   const parts = trimmed.split(".");
   if (parts.length !== 3) {
     return {
       ok: false,
-      error: `Token 3 hissədən ibarət olmalıdır (header.payload.imza) — tapılan hissə sayı: ${parts.length}.`,
+      error: `Token 3 hissədən ibarət olmalıdır (header.payload.imza), tapılan hissə sayı: ${parts.length}.`,
     };
   }
   const [headerPart, payloadPart, signaturePart] = parts;

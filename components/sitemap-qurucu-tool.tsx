@@ -304,7 +304,7 @@ export function SitemapQurucuTool() {
           <ToolNote tone="accent" title="priority və changefreq Google-da işləmir">
             Google özü açıq bildirib ki, sitemap-dəki <code>priority</code> və{" "}
             <code>changefreq</code> sahələrini nəzərə almır. Bu sahələr digər axtarış
-            sistemləri üçün saxlanılır. Sitemap ümumiyyətlə indeksləşməni zəmanət etmir — botun səhifəni tapmasını
+            sistemləri üçün saxlanılır. Sitemap ümumiyyətlə indeksləşməni zəmanət etmir: botun səhifəni tapmasını
             asanlaşdırır, tapılmasını məcbur etmir. Yapışdırdığın heç nə serverə getmir, hamısı brauzerdə qurulur.
           </ToolNote>
         </div>

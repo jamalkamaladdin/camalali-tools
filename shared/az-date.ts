@@ -71,7 +71,7 @@ const pad2 = (value: number) => String(value).padStart(2, "0");
 /** "2026-09-01" → "1 sentyabr 2026". Returns the input when it is not a date. */
 export function formatAzDate(iso: string): string {
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso.trim());
-  if (!match) return iso.trim() || "—";
+  if (!match) return iso.trim() || "";
 
   const [, year, month, day] = match;
   const monthName = AZ_MONTHS[Number(month) - 1];
@@ -82,13 +82,13 @@ export function formatAzDate(iso: string): string {
 
 /** Local time, because a cron schedule and a token expiry are read locally. */
 export function formatAzDateTime(date: Date): string {
-  if (Number.isNaN(date.getTime())) return "—";
+  if (Number.isNaN(date.getTime())) return "";
   return `${azLongDate(date)}, ${azTime(date)}`;
 }
 
 /** Local `yyyy-mm-dd hh:mm:ss` — the sortable form, for tables. */
 export function formatAzStamp(date: Date): string {
-  if (Number.isNaN(date.getTime())) return "—";
+  if (Number.isNaN(date.getTime())) return "";
   return `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(
     date.getDate(),
   )} ${azTime(date, true)}`;

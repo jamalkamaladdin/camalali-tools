@@ -62,7 +62,7 @@ function addressSourceLabel(source: AddressSource): ReactNode {
   if (source === "cf-connecting-ip") {
     return (
       <>
-        <span className="font-mono text-xs">cf-connecting-ip</span> başlığından oxunub — bu sayt
+        <span className="font-mono text-xs">cf-connecting-ip</span> başlığından oxunub: bu sayt
         Cloudflare arxasında işlədiyi üçün əsl soket ünvanı deyil, Cloudflare-in əlavə etdiyi başlıq
         oxunur.
       </>
@@ -71,12 +71,12 @@ function addressSourceLabel(source: AddressSource): ReactNode {
   if (source === "x-forwarded-for") {
     return (
       <>
-        <span className="font-mono text-xs">x-forwarded-for</span> başlığından oxunub — bu ünvanı
+        <span className="font-mono text-xs">x-forwarded-for</span> başlığından oxunub: bu ünvanı
         proksi zənciri əlavə edib.
       </>
     );
   }
-  return "Heç bir etibarlı başlıq tapılmadı — server sənin ünvanını bilmir.";
+  return "Heç bir etibarlı başlıq tapılmadı: server sənin ünvanını bilmir.";
 }
 
 export function MenimIpTool() {
@@ -98,7 +98,7 @@ export function MenimIpTool() {
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu bölmə sorğunu serverə göndərir">
         Səhifə açılan kimi server sənin öz IP ünvanını, onun ASN-ini, RDAP qeydini və tərs DNS
-        yazısını yoxlayır — heç nə yazmırsan. Aşağıdakı brauzer bölməsi isə tamam fərqlidir: heç
+        yazısını yoxlayır. Heç nə yazmırsan. Aşağıdakı brauzer bölməsi isə tamam fərqlidir: heç
         bir sorğu getmir, hər şey brauzerin özündə oxunub göstərilir.
       </ToolNote>
 
@@ -151,7 +151,7 @@ function Field({ label, value }: { label: string; value: string | null }) {
   return (
     <div className="min-w-0">
       <ToolLabel>{label}</ToolLabel>
-      <p className="mt-0.5 text-ios-subhead break-words">{value ?? "—"}</p>
+      <p className="mt-0.5 text-ios-subhead break-words">{value ?? ""}</p>
     </div>
   );
 }
@@ -165,12 +165,12 @@ function ServerReport({ report }: { report: MenimIpReport }) {
         <div className="grid gap-3 @min-[30rem]:grid-cols-2 @min-[52rem]:grid-cols-4">
           <ToolStat
             label="ASN"
-            value={report.asn ? `AS${report.asn.asn}` : "—"}
+            value={report.asn ? `AS${report.asn.asn}` : ""}
             note={report.asnName ?? undefined}
           />
-          <ToolStat label="Elan edən prefiks" value={report.asn?.prefix ?? "—"} />
-          <ToolStat label="Qeydiyyat (RIR)" value={report.asn?.registry ?? "—"} />
-          <ToolStat label="Ölkə kodu" value={report.rdap?.country ?? report.asn?.country ?? "—"} />
+          <ToolStat label="Elan edən prefiks" value={report.asn?.prefix ?? ""} />
+          <ToolStat label="Qeydiyyat (RIR)" value={report.asn?.registry ?? ""} />
+          <ToolStat label="Ölkə kodu" value={report.rdap?.country ?? report.asn?.country ?? ""} />
         </div>
       </div>
 
@@ -213,7 +213,7 @@ function ServerReport({ report }: { report: MenimIpReport }) {
             </ul>
           ) : (
             <p className="text-ios-subhead text-muted">
-              Bu ünvan üçün PTR yazısı yoxdur — çoxu üçün adi haldır, xəta deyil.
+              Bu ünvan üçün PTR yazısı yoxdur: çoxu üçün adi haldır, xəta deyil.
             </p>
           )}
         </div>
@@ -321,7 +321,7 @@ function BrowserReveal() {
       <div className="space-y-4 p-3">
         <ToolNote>
           Bu bölmədəki hər dəyər brauzerin öz JavaScript mühitindən oxunur və yalnız bu səhifədə
-          göstərilir — heç biri serverə göndərilmir. WebRTC ilə yerli şəbəkə ünvanını tapmağa cəhd
+          göstərilir. Heç biri serverə göndərilmir. WebRTC ilə yerli şəbəkə ünvanını tapmağa cəhd
           edilmir: müasir brauzerlər əsl ünvan əvəzinə təsadüfi bir{" "}
           <span className="font-mono text-xs">.local</span> adı qaytarır, faydasız bir sətri
           «tapıldı» kimi göstərmək isə heç nə göstərməməkdən pisdir.
@@ -362,12 +362,12 @@ function BrowserReveal() {
                 <ToolStat
                   label="Prosessor nüvəsi"
                   value={
-                    signals.hardwareConcurrency !== null ? String(signals.hardwareConcurrency) : "—"
+                    signals.hardwareConcurrency !== null ? String(signals.hardwareConcurrency) : ""
                   }
                 />
                 <ToolStat
                   label="Yaddaş"
-                  value={signals.deviceMemory !== null ? `${signals.deviceMemory} GB` : "—"}
+                  value={signals.deviceMemory !== null ? `${signals.deviceMemory} GB` : ""}
                   note={signals.deviceMemory === null ? "bu brauzer açıqlamır" : undefined}
                 />
               </div>
@@ -382,7 +382,7 @@ function BrowserReveal() {
                   <li>
                     <span className="font-mono text-xs">navigator.webdriver</span>:{" "}
                     {signals.webdriver
-                      ? "true — avtomatlaşdırılmış brauzer əlaməti"
+                      ? "true: avtomatlaşdırılmış brauzer əlaməti"
                       : "false"}
                   </li>
                 </ul>

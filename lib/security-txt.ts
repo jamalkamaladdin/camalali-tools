@@ -35,13 +35,13 @@ export const SECURITY_TXT_FIELDS: SecurityTxtField[] = [
 const REQUIRED_FIELDS = new Set<SecurityTxtField>(["Contact", "Expires"]);
 
 const FIELD_PURPOSE: Record<SecurityTxtField, string> = {
-  Contact: "Zəiflik tapan kəsin necə əlaqə saxlayacağı — e-poçt, telefon və ya forma ünvanı. Bir neçə dəfə yazıla bilər, sıra ilə üstünlük göstərir.",
+  Contact: "Zəiflik tapan kəsin necə əlaqə saxlayacağı: e-poçt, telefon və ya forma ünvanı. Bir neçə dəfə yazıla bilər, sıra ilə üstünlük göstərir.",
   Expires: "Faylın nə vaxta qədər etibarlı sayılacağı. Bu tarix keçəndə skanerlər faylı köhnəlmiş sayır və nəzərə almır.",
   Encryption: "Şifrələnmiş məlumat göndərmək üçün açıq açarın ünvanı (adətən bir OpenPGP açarı).",
   Acknowledgments: "Bildirilmiş zəiflikləri kimin aşkarladığını sadalayan səhifənin ünvanı.",
   Policy: "Məsuliyyətli açıqlama qaydalarının (hansı testlər icazəlidir, cavab müddəti) yazıldığı sənəd.",
   "Preferred-Languages": "Əlaqə üçün üstünlük verilən dillərin vergüllə ayrılmış siyahısı.",
-  Canonical: "Bu faylın özünün rəsmi ünvanı — güzgülənmiş bir nüsxədə oxunanda əslinə yönləndirir.",
+  Canonical: "Bu faylın özünün rəsmi ünvanı: güzgülənmiş bir nüsxədə oxunanda əslinə yönləndirir.",
 };
 
 export type SecurityTxtDoc = {

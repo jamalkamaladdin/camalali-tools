@@ -181,7 +181,7 @@ export function WildcardMaskaTool() {
         <ToolResultPanel title="Qeyri-ardıcıl wildcard" hint={`${result.matchedCount} ünvan`}>
           <div className="space-y-3 p-4">
             <ToolNote tone="accent" title="Bu wildcard-ın subnet maska qarşılığı yoxdur">
-              {`«${result.wildcardMask}» bit-bit naxışdır, soldan-sağa ardıcıl 1-0 formasında deyil — ona görə heç bir /prefiks onu ifadə edə bilmir. Cisco ACL və OSPF sətirlərində istifadəyə tam yararlıdır, sadəcə CIDR və iptables kimi prefiks tələb edən formatlara çevrilə bilmir.`}
+              {`«${result.wildcardMask}» bit-bit naxışdır, soldan-sağa ardıcıl 1-0 formasında deyil: ona görə heç bir /prefiks onu ifadə edə bilmir. Cisco ACL və OSPF sətirlərində istifadəyə tam yararlıdır, sadəcə CIDR və iptables kimi prefiks tələb edən formatlara çevrilə bilmir.`}
             </ToolNote>
             <ToolStat label="Uyğun gələn ünvan sayı" value={String(result.matchedCount)} tone="accent" />
             <div>
@@ -201,12 +201,12 @@ export function WildcardMaskaTool() {
               <AclLineRow
                 label="CIDR"
                 value={acl.lines.cidr}
-                unavailableNote="Bu wildcard-ın prefiks ekvivalenti yoxdur — CIDR onu ifadə edə bilmir."
+                unavailableNote="Bu wildcard-ın prefiks ekvivalenti yoxdur: CIDR onu ifadə edə bilmir."
               />
               <AclLineRow
                 label="iptables"
                 value={acl.lines.iptables}
-                unavailableNote="Bu wildcard-ın prefiks ekvivalenti yoxdur — iptables onu ifadə edə bilmir."
+                unavailableNote="Bu wildcard-ın prefiks ekvivalenti yoxdur: iptables onu ifadə edə bilmir."
               />
             </div>
           </ToolResultPanel>

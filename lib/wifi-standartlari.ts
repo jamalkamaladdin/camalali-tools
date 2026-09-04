@@ -23,13 +23,13 @@ export const wifiStandartlariSections: ReferenceSection[] = [
   {
     id: "nesil",
     label: "Nəsillər",
-    hint: "Hər sətirdə iki rəqəm var: nəzəri PHY tavanı və adi bir cihazda ölçülən real ötürmə. Real ötürmə ən yaxşı halda PHY-nin yarısı qədərdir — protokol başlıqları, təsdiq paketləri, yarım-dupleks efir və kanalı paylaşan digər cihazlar fərqi yeyir.",
+    hint: "Hər sətirdə iki rəqəm var: nəzəri PHY tavanı və adi bir cihazda ölçülən real ötürmə. Real ötürmə ən yaxşı halda PHY-nin yarısı qədərdir, çünki protokol başlıqları, təsdiq paketləri, yarım-dupleks efir və kanalı paylaşan digər cihazlar fərqi yeyir.",
   },
   { id: "kanal", label: "Kanal və zolaq" },
   {
     id: "tehlukesizlik",
     label: "Təhlükəsizlik protokolları",
-    hint: "Bura yalnız protokolun özü haqqındadır — güclü, unikal parol seçimi bundan ayrı, həmişə lazım olan bir amildir.",
+    hint: "Bura yalnız protokolun özü haqqındadır. Güclü, unikal parol seçimi bundan ayrı, həmişə lazım olan bir amildir.",
   },
   { id: "terim", label: "Termin lüğəti" },
 ];
@@ -41,7 +41,7 @@ export const wifiStandartlariRows: ReferenceRow[] = [
     label: "1997",
     note: "İlk Wi-Fi standartıdır: yalnız 2.4 GHz-də, 2 Mbit/s-ə qədər. Bugün heç bir istehsal edilən cihaz bunu dəstəkləmir, amma bütün sonrakı nəsillərin əsasını (CSMA/CA çərçivə formatı) o qoyub.",
     section: "nesil",
-    example: "PHY tavanı 2 Mbit/s idi (1 və 2 Mbit/s rejimləri) — real ötürmə rəqəmi tarixi mənbələrdə belə nadir qeyd olunub, çünki praktiki istifadəsi olmayıb.",
+    example: "PHY tavanı 2 Mbit/s idi (1 və 2 Mbit/s rejimləri): real ötürmə rəqəmi tarixi mənbələrdə belə nadir qeyd olunub, çünki praktiki istifadəsi olmayıb.",
     match: ["ilk wifi", "orijinal 802.11", "legacy"],
   },
   {
@@ -65,7 +65,7 @@ export const wifiStandartlariRows: ReferenceRow[] = [
     label: "2003",
     note: "802.11a-nın OFDM sürətini 2.4 GHz-ə gətirdi və 802.11b ilə geriyə uyğun qaldı. Bu geriyə uyğunluq bir üstünlük idi, amma şəbəkədə tək bir köhnə 802.11b cihazı olanda belə bütün şəbəkəni qorumalı rejimə salıb yavaşladırırdı.",
     section: "nesil",
-    example: "PHY tavanı 54 Mbit/s idi, real ötürmə 20-25 Mbit/s civarında qalırdı — 802.11a ilə eyni tavan, fərq yalnız tezlik zolağında idi.",
+    example: "PHY tavanı 54 Mbit/s idi, real ötürmə 20-25 Mbit/s civarında qalırdı. 802.11a ilə eyni tavan, fərq yalnız tezlik zolağında idi.",
     match: ["ofdm 2.4ghz"],
   },
   {
@@ -89,7 +89,7 @@ export const wifiStandartlariRows: ReferenceRow[] = [
     label: "802.11ax",
     note: "OFDMA (bir kanalı kiçik alt-daşıyıcılara bölüb bir neçə cihaza eyni anda xidmət) və hər iki istiqamətdə MU-MIMO gətirdi. Təkbaşına sürətdən çox, sıx mühitdə (ofis, stadion, mənzil binası) eyni vaxtda çox cihazla işləməyi yaxşılaşdırmaq üçün dizayn edilib.",
     section: "nesil",
-    example: "PHY tavanı (8 axın, 160 MHz, 1024-QAM) 9.6 Gbit/s kimi elan olunur, amma adi 2x2 noutbuk və 80 MHz kanalla real ötürmə adətən 500-600 Mbit/s-dir — reklam rəqəmi bugünkü heç bir istehlakçı cihazının çatmadığı laboratoriya konfiqurasiyasıdır.",
+    example: "PHY tavanı (8 axın, 160 MHz, 1024-QAM) 9.6 Gbit/s kimi elan olunur, amma adi 2x2 noutbuk və 80 MHz kanalla real ötürmə adətən 500-600 Mbit/s-dir: reklam rəqəmi bugünkü heç bir istehlakçı cihazının çatmadığı laboratoriya konfiqurasiyasıdır.",
     match: ["802.11ax", "ofdma nesli"],
   },
   {
@@ -113,7 +113,7 @@ export const wifiStandartlariRows: ReferenceRow[] = [
     label: "802.11bn (layihə)",
     note: "IEEE-də hələ layihə mərhələsindədir, təsdiqi bu onilliyin sonuna planlaşdırılır. Diqqət mərkəzində bu dəfə də xam sürət yox, sıx mühitdə etibarlılıq və gecikmənin sabitliyi var.",
     section: "nesil",
-    example: "Standart hələ təsdiqlənməyib — bu mərhələdə hər hansı PHY və ya real sürət rəqəmi fakt deyil, ona görə bura rəqəm yazılmır; yalnız istiqamət (etibarlılıq) bəllidir.",
+    example: "Standart hələ təsdiqlənməyib: bu mərhələdə hər hansı PHY və ya real sürət rəqəmi fakt deyil, ona görə bura rəqəm yazılmır; yalnız istiqamət (etibarlılıq) bəllidir.",
     match: ["802.11bn", "draft", "layihe"],
   },
 
@@ -138,7 +138,7 @@ export const wifiStandartlariRows: ReferenceRow[] = [
     label: "36-48",
     note: "5 GHz-in ən aşağı alt-zolağıdır, DFS tələb etmir. Tarixən yalnız daxili istifadə üçün nəzərdə tutulub, indi bir çox tənzimləyici rejimdə açıq havada da işlədilə bilir.",
     section: "kanal",
-    example: "36, 40, 44, 48 kanalları — DFS gözləmədən dərhal işə düşür.",
+    example: "36, 40, 44, 48 kanalları: DFS gözləmədən dərhal işə düşür.",
     match: ["unii1"],
   },
   {
@@ -154,7 +154,7 @@ export const wifiStandartlariRows: ReferenceRow[] = [
     label: "100-144",
     note: "UNII-2-Extended də adlanır, ən çox kanal sayını daşıyan alt-zolaqdır və demək olar hamısı DFS tələb edir. 80 MHz və 160 MHz kanal genişliyi əldə etmək üçün adətən buradan istifadə olunur.",
     section: "kanal",
-    example: "100, 104, 108 ... 144 kanalları — 44 kanal aralığında ən geniş seçim burdadır.",
+    example: "100, 104, 108 ... 144 kanalları: 44 kanal aralığında ən geniş seçim burdadır.",
     match: ["unii2c", "unii2-extended"],
   },
   {
@@ -162,7 +162,7 @@ export const wifiStandartlariRows: ReferenceRow[] = [
     label: "149-165",
     note: "5 GHz-in ən yuxarı alt-zolağıdır, DFS tələb etmir. Tarixən açıq havada nöqtədən-nöqtəyə körpü qurmaq üçün seçilib, bu gün ev routerlərinin əksəriyyəti də bunu dəstəkləyir.",
     section: "kanal",
-    example: "149, 153, 157, 161, 165 kanalları — DFS olmadığı üçün ev router-lərinin default seçimi tez-tez buradan olur.",
+    example: "149, 153, 157, 161, 165 kanalları: DFS olmadığı üçün ev router-lərinin default seçimi tez-tez buradan olur.",
     match: ["unii3"],
   },
   {
@@ -170,7 +170,7 @@ export const wifiStandartlariRows: ReferenceRow[] = [
     label: "Dynamic Frequency Selection",
     note: "5 GHz-in bir çox kanalını hava radarı və hərbi radarla paylaşdığı üçün var olan mexanizmdir. Access point kanalı işə salmadan əvvəl bir neçə dəqiqə radar üçün dinləyir (CAC), işlədiyi müddətdə radar aşkarlansa 10 saniyə ərzində kanalı tərk edib başqasına keçməlidir. Bağlantı bu keçid zamanı bir neçə saniyə kəsilə bilər.",
     section: "kanal",
-    example: "'Radar aşkarlandı, kanal dəyişdirilir' logu — DFS kanalında əlaqənin naməlum səbəbdən qırıldığını görəndə axtarılacaq ilk sətir.",
+    example: "'Radar aşkarlandı, kanal dəyişdirilir' logu: DFS kanalında əlaqənin naməlum səbəbdən qırıldığını görəndə axtarılacaq ilk sətir.",
     match: ["radar", "kanal deyisimi"],
   },
   {
@@ -186,7 +186,7 @@ export const wifiStandartlariRows: ReferenceRow[] = [
     label: "Wi-Fi 6E ilə açıldı",
     note: "Wi-Fi 6E, 802.11ax standardını əvvəllər Wi-Fi üçün istifadə olunmayan 6 GHz zolağına genişləndirdi. Bir çox ölkədə bu, yüzlərlə MHz təzə, legacy trafiksiz spektr deməkdir. 6 GHz-in mülki Wi-Fi üçün açılıb-açılmaması və hansı gücdə işlədilə biləcəyi ölkənin radiotezlik tənzimləyicisinin qərarından asılıdır və ölkədən ölkəyə fərqlənir; bu, yerli tənzimləmədən asılı olduğu üçün burada tək bir cavabla verilmir.",
     section: "kanal",
-    example: "Cihaz qutusunda 'Wi-Fi 6E' yazması 6 GHz-in avtomatik işə düşəcəyi demək deyil — həm cihaz, həm də ölkənin tənzimləməsi buna icazə verməlidir.",
+    example: "Cihaz qutusunda 'Wi-Fi 6E' yazması 6 GHz-in avtomatik işə düşəcəyi demək deyil: həm cihaz, həm də ölkənin tənzimləməsi buna icazə verməlidir.",
     match: ["6ghz", "wifi 6e kanal"],
   },
 
@@ -196,7 +196,7 @@ export const wifiStandartlariRows: ReferenceRow[] = [
     label: "Wired Equivalent Privacy",
     note: "Qırılıb: RC4 axın şifrəsinin zəif açar idarəetməsi (kiçik təsadüfi vektor təkrarı) sayəsində adi noutbukla bir neçə dəqiqədə sındırıla bilir. Bu gün heç bir şəraitdə istifadə edilməməlidir, hətta köhnə cihaz məcbur edəndə belə.",
     section: "tehlukesizlik",
-    example: "Router panelində 'WEP' seçimi görünürsə, bu adətən yalnız 15+ illik cihazla uyğunluq üçün saxlanılıb — aktiv edilməməlidir.",
+    example: "Router panelində 'WEP' seçimi görünürsə, bu adətən yalnız 15+ illik cihazla uyğunluq üçün saxlanılıb. Aktiv edilməməlidir.",
     match: ["wired equivalent privacy", "sinmis sifrelenme"],
   },
   {
@@ -204,7 +204,7 @@ export const wifiStandartlariRows: ReferenceRow[] = [
     label: "Wi-Fi Protected Access",
     note: "WEP-in aşkar zəifliklərini aradan qaldırmaq üçün tələsik hazırlanmış keçid protokoludur. TKIP-in özü də sonradan Beck-Tews və Ohigashi-Morii həmlələri ilə qırılmış sayılır və bu gün WEP kimi istifadə edilməməlidir.",
     section: "tehlukesizlik",
-    example: "Router panelində 'WPA-TKIP' və ya 'WPA/WPA2 qarışıq' seçimləri təhlükəsizlik baxımından TKIP-i aktiv saxlayır — yalnız 'WPA2-AES' seçilməlidir.",
+    example: "Router panelində 'WPA-TKIP' və ya 'WPA/WPA2 qarışıq' seçimləri təhlükəsizlik baxımından TKIP-i aktiv saxlayır. Yalnız 'WPA2-AES' seçilməlidir.",
     match: ["tkip", "wpa1"],
   },
   {
@@ -212,7 +212,7 @@ export const wifiStandartlariRows: ReferenceRow[] = [
     label: "Wi-Fi Protected Access 2",
     note: "Bu gün hələ qəbul ediləndir: AES şifrələməsi (CCMP rejimində) özü sınmayıb. Zəif tərəfi 4 tərəfli əl sıxma (handshake) zamanı tutulan trafikin offline lüğət həmləsinə açıq olmasıdır: zəif parol seçilibsə, həmlə şəbəkəyə heç toxunmadan aparıla bilər.",
     section: "tehlukesizlik",
-    example: "2017-ci ildə tapılan KRACK zəifliyi məhz WPA2-nin əl sıxma prosesini hədəf alıb — protokolun AES şifrəsini yox, açar quraşdırma addımını.",
+    example: "2017-ci ildə tapılan KRACK zəifliyi məhz WPA2-nin əl sıxma prosesini hədəf alıb: protokolun AES şifrəsini yox, açar quraşdırma addımını.",
     match: ["ccmp", "aes wifi", "wpa2 personal"],
   },
   {
@@ -220,7 +220,7 @@ export const wifiStandartlariRows: ReferenceRow[] = [
     label: "SAE (Dragonfly handshake)",
     note: "4 tərəfli əl sıxmanı SAE (Simultaneous Authentication of Equals) ilə əvəz edir. Bu, WPA2-ni zəif parolla belə lüğət həmləsinə açıq edən şeyi aradan qaldırır, çünki hücumçu bir trafik tutmasından paroları offline yoxlaya bilmir. Həmçinin forward secrecy verir: köhnə trafik sonradan parol öyrənilsə belə deşifr olunmur. Bu gün Wi-Fi təhlükəsizlik protokollarının ən güclüsüdür.",
     section: "tehlukesizlik",
-    example: "Router panelində 'WPA3-Personal' seçimi — dəstəkləyən cihazlar varsa WPA2/WPA3 qarışıq rejimdən üstün tutulmalıdır.",
+    example: "Router panelində 'WPA3-Personal' seçimi: dəstəkləyən cihazlar varsa WPA2/WPA3 qarışıq rejimdən üstün tutulmalıdır.",
     match: ["sae", "dragonfly", "simultaneous authentication of equals"],
   },
   {
@@ -228,7 +228,7 @@ export const wifiStandartlariRows: ReferenceRow[] = [
     label: "CNSA uyğun rejim",
     note: "Adi WPA3-Enterprise-ın üzərinə hökumət və maliyyə səviyyəli kriptoqrafiya tələbləri (192-bit açar gücü, GCMP-256 şifrələmə) əlavə edən rejimdir. Adi ofis şəbəkəsi üçün deyil, yüksək təhlükəsizlik tələb edən qurumlar üçün nəzərdə tutulub.",
     section: "tehlukesizlik",
-    example: "Bu rejim həm access point-də, həm də RADIUS serverində eyni 192-bit dəst tələb edir — biri dəstəkləməsə bağlantı qurulmur.",
+    example: "Bu rejim həm access point-də, həm də RADIUS serverində eyni 192-bit dəst tələb edir: biri dəstəkləməsə bağlantı qurulmur.",
     match: ["192 bit", "cnsa", "enterprise wifi"],
   },
   {
@@ -244,7 +244,7 @@ export const wifiStandartlariRows: ReferenceRow[] = [
     label: "Wi-Fi Protected Setup",
     note: "PIN rejimi 8 rəqəmli kodu iki ayrı yarı kimi təsdiqləyir, bu da mümkün kombinasiyanı praktiki olaraq ~11.000-ə endirir və brute-force həmləsini bir neçə saata qədər qısaldır (Pixie Dust həmləsi bəzi çiplərdə bunu dəqiqələrə endirir). Router panelində söndürülməlidir.",
     section: "tehlukesizlik",
-    example: "Router üzərindəki fiziki 'WPS' düyməsi işə düşürsə, panel ayarlarından PIN rejimi ayrıca söndürülməlidir — düymə fiziki basılmadan da PIN aktiv qala bilir.",
+    example: "Router üzərindəki fiziki 'WPS' düyməsi işə düşürsə, panel ayarlarından PIN rejimi ayrıca söndürülməlidir: düymə fiziki basılmadan da PIN aktiv qala bilir.",
     match: ["wps pin", "pixie dust"],
   },
   {
@@ -252,7 +252,7 @@ export const wifiStandartlariRows: ReferenceRow[] = [
     label: "2017",
     note: "WPA2-nin 4 tərəfli əl sıxmasına qarşı tapılan açar-yenidənquraşdırma (key reinstallation) həmləsidir: protokolun şifrəsini yox, açarın necə quraşdırıldığını hədəf alır. İstehsalçıların proqram təminatı yeniləmələri ilə düzəldilib, protokolun özündə (802.11-2016 düzəlişi) də bağlanıb.",
     section: "tehlukesizlik",
-    example: "2017-ci ildə açıqlandı; düzəliş tərəf (client) tərəfindən tələb olunur — köhnəlmiş, yenilənməmiş cihaz hələ də açıq qala bilər.",
+    example: "2017-ci ildə açıqlandı; düzəliş tərəf (client) tərəfindən tələb olunur: köhnəlmiş, yenilənməmiş cihaz hələ də açıq qala bilər.",
     match: ["key reinstallation attack", "wpa2 zeiflik"],
   },
   {
@@ -333,7 +333,7 @@ export const wifiStandartlariRows: ReferenceRow[] = [
     label: "Sinyal gücü (dBm)",
     note: "Qəbul edilən sinyalın gücüdür, mənfi ədədlə ölçülür və sıfıra nə qədər yaxındırsa, siqnal bir o qədər güclüdür: -50 dBm əla, -67 dBm səs zəngi (VoIP) üçün adətən qəbul edilən minimal hədd, -80 dBm isə demək olar istifadəyə yaramaz sayılır.",
     section: "terim",
-    example: "-45 dBm — çox güclü, otaqda routerin yanında; -72 dBm — divarların arxasında, video zəngdə kəsilmə gözlənilə bilər.",
+    example: "-45 dBm: çox güclü, otaqda routerin yanında; -72 dBm: divarların arxasında, video zəngdə kəsilmə gözlənilə bilər.",
     match: ["dbm", "sinyal gucu"],
   },
   {

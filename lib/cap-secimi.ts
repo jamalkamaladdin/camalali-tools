@@ -106,37 +106,37 @@ function buildReasons(a: CapAnswers): CapReason[] {
       side: a.partitionPreference === "staleData" ? "AP" : "CP",
       text:
         a.partitionPreference === "staleData"
-          ? "Bölünmə zamanı köhnə (bəlkə uyğunsuz) məlumatı qəbul edirsən — bu, birbaşa AP-nin tərifidir: hər node cavab verməyə davam edir."
-          : "Bölünmə zamanı xətanı üstün tutursan — bu, CP-nin tərifidir: sistem düzgün cavab verə bilmədiyi halda susmaq əvəzinə açıq imtina edir.",
+          ? "Bölünmə zamanı köhnə (bəlkə uyğunsuz) məlumatı qəbul edirsən. Bu, birbaşa AP-nin tərifidir: hər node cavab verməyə davam edir."
+          : "Bölünmə zamanı xətanı üstün tutursan. Bu, CP-nin tərifidir: sistem düzgün cavab verə bilmədiyi halda susmaq əvəzinə açıq imtina edir.",
     },
     {
       side: a.irreversibleOps ? "CP" : "notr",
       text: a.irreversibleOps
-        ? "Pul, sifariş və ya anbar kimi geri qaytarıla bilməyən əməliyyat var — iki node-un ziddiyyətli qərar verməsi (məsələn, eyni məhsulu iki dəfə satmaq) real itkidir, ona görə güclü tərəf ağırlıq qazanır."
-        : "Dönməz əməliyyat yoxdur — ziddiyyətli yazını sonradan həll etmək (son-yazan-udur, birləşdirmə) adətən qəbul edilə bilər.",
+        ? "Pul, sifariş və ya anbar kimi geri qaytarıla bilməyən əməliyyat var: iki node-un ziddiyyətli qərar verməsi (məsələn, eyni məhsulu iki dəfə satmaq) real itkidir, ona görə güclü tərəf ağırlıq qazanır."
+        : "Dönməz əməliyyat yoxdur: ziddiyyətli yazını sonradan həll etmək (son-yazan-udur, birləşdirmə) adətən qəbul edilə bilər.",
     },
     {
       side: a.geography === "multiRegion" ? "AP" : "notr",
       text:
         a.geography === "multiRegion"
-          ? "Coğrafi olaraq bir neçə regiona yayılmısan — regionlar arası hər yazını gözləmək gecikməni saniyələrə çıxarır, bu da əlçatanlıq tərəfini cəzbedici edir."
-          : "Tək region daxilində işləyirsən — konsensus üçün lazım olan şəbəkə gedişi onsuz da qısadır, güclü konsistentliyin gecikmə cəzası kiçikdir.",
+          ? "Coğrafi olaraq bir neçə regiona yayılmısan: regionlar arası hər yazını gözləmək gecikməni saniyələrə çıxarır, bu da əlçatanlıq tərəfini cəzbedici edir."
+          : "Tək region daxilində işləyirsən: konsensus üçün lazım olan şəbəkə gedişi onsuz da qısadır, güclü konsistentliyin gecikmə cəzası kiçikdir.",
     },
     {
       side: a.latencyBudget === "tight" ? "AP" : "notr",
       text:
         a.latencyBudget === "tight"
-          ? "Gecikmə büdcəsi sıxdır — konsensus gözləmək (quorum yazısı) bu büdcəni asanlıqla aşır."
-          : "Gecikmə kritik deyil — konsensus üçün əlavə gediş-gəliş büdcəyə sığır.",
+          ? "Gecikmə büdcəsi sıxdır: konsensus gözləmək (quorum yazısı) bu büdcəni asanlıqla aşır."
+          : "Gecikmə kritik deyil: konsensus üçün əlavə gediş-gəliş büdcəyə sığır.",
     },
     {
       side: a.workload === "readHeavy" ? "AP" : a.workload === "writeHeavy" ? "CP" : "notr",
       text:
         a.workload === "readHeavy"
-          ? "Yük əsasən oxudur — köhnəlmiş replikadan oxumaq adətən zərərsizdir, bu da əlçatanlıq tərəfinə meyl yaradır."
+          ? "Yük əsasən oxudur: köhnəlmiş replikadan oxumaq adətən zərərsizdir, bu da əlçatanlıq tərəfinə meyl yaradır."
           : a.workload === "writeHeavy"
-            ? "Yük əsasən yazıdır — ziddiyyətli yazıları sonradan barışdırmaq getdikcə çətinləşir, bu da konsistentlik tərəfinə meyl yaradır."
-            : "Oxu və yazı balanslıdır — bu sual tək başına tərəf seçmir.",
+            ? "Yük əsasən yazıdır: ziddiyyətli yazıları sonradan barışdırmaq getdikcə çətinləşir, bu da konsistentlik tərəfinə meyl yaradır."
+            : "Oxu və yazı balanslıdır, bu sual tək başına tərəf seçmir.",
     },
   ];
 }

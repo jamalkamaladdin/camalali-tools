@@ -115,7 +115,7 @@ function AmountField<T extends string>({
           >
             {units.map((item) => (
               <option key={item} value={item}>
-                {item} — {unitLabels[item]}
+                {item}: {unitLabels[item]}
               </option>
             ))}
           </ToolSelect>
@@ -224,8 +224,8 @@ export function OlcuVahidleriTool() {
                 <ToolNote tone="accent">{size.error}</ToolNote>
               ) : (
                 <ToolNote tone="info" title="Nə göstərilir">
-                  Solda onluq vahidlər — istehsalçının və internet paketinin
-                  hesabı. Sağda ikilik vahidlər — əməliyyat sisteminin hesabı.
+                  Solda onluq vahidlər: istehsalçının və internet paketinin
+                  hesabı. Sağda ikilik vahidlər: əməliyyat sisteminin hesabı.
                   Baytların sayı eynidir, yalnız bölən dəyişir.
                 </ToolNote>
               )}
@@ -351,10 +351,10 @@ export function OlcuVahidleriTool() {
               <div className="space-y-3 p-3">
                 <ToolStat
                   label="Nə qədər çəkir"
-                  value={transfer === null ? "—" : humanDuration(transfer)}
+                  value={transfer === null ? "" : humanDuration(transfer)}
                   note={
                     transfer === null
-                      ? "sürət və ya həcm oxunmadı — sıfırdan böyük rəqəm lazımdır"
+                      ? "sürət və ya həcm oxunmadı: sıfırdan böyük rəqəm lazımdır"
                       : `${formatAmount(transfer)} saniyə`
                   }
                   tone="accent"
@@ -410,7 +410,7 @@ export function OlcuVahidleriTool() {
               <div className="p-3">
                 <ToolStat
                   label="Oxunaqlı forma"
-                  value={durationSeconds === null ? "—" : humanDuration(durationSeconds)}
+                  value={durationSeconds === null ? "" : humanDuration(durationSeconds)}
                   note={
                     durationSeconds === null
                       ? "rəqəm oxunmadı"
@@ -491,22 +491,22 @@ export function OlcuVahidleriTool() {
               <div className="grid grid-cols-2 gap-3 p-3 @min-[34rem]:grid-cols-4">
                 <ToolStat
                   label="Gündə"
-                  value={budget === null ? "—" : humanDuration(budget.day)}
+                  value={budget === null ? "" : humanDuration(budget.day)}
                   note={budget === null ? "rəqəm oxunmadı" : `${formatAmount(budget.day)} san`}
                 />
                 <ToolStat
                   label="Həftədə"
-                  value={budget === null ? "—" : humanDuration(budget.week)}
+                  value={budget === null ? "" : humanDuration(budget.week)}
                   note={budget === null ? "rəqəm oxunmadı" : `${formatAmount(budget.week)} san`}
                 />
                 <ToolStat
                   label="Ayda"
-                  value={budget === null ? "—" : humanDuration(budget.month)}
+                  value={budget === null ? "" : humanDuration(budget.month)}
                   note={budget === null ? "30 gün" : `30 gün · ${formatAmount(budget.month)} san`}
                 />
                 <ToolStat
                   label="İldə"
-                  value={budget === null ? "—" : humanDuration(budget.year)}
+                  value={budget === null ? "" : humanDuration(budget.year)}
                   note={budget === null ? "365 gün" : `365 gün · ${formatAmount(budget.year)} san`}
                   tone="accent"
                 />
@@ -533,7 +533,7 @@ export function OlcuVahidleriTool() {
         rows={olcuRows}
         sections={olcuSections}
         placeholder="prefiks, həcm, sürət və ya gecikmə axtar"
-        footnote="Həcm və sürət sətirləri tipik dəyərlərdir — müqayisə üçün, ölçmə üçün yox. Gecikmə şkalası Jeff Dean-in siyahısının bugünkü avadanlıqla yenilənmiş variantıdır."
+        footnote="Həcm və sürət sətirləri tipik dəyərlərdir: müqayisə üçün, ölçmə üçün yox. Gecikmə şkalası Jeff Dean-in siyahısının bugünkü avadanlıqla yenilənmiş variantıdır."
       />
     </div>
   );

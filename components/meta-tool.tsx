@@ -238,7 +238,7 @@ export function MetaTool() {
       <ToolAccordion>
         <ToolAccordionItem summary="Piksel həddi nə üçün simvol sayı ilə göstərilir?">
           <p>
-            Google başlığı və təsviri ekranda tutduğu piksel enə görə kəsir, simvol sayına görə yox —
+            Google başlığı və təsviri ekranda tutduğu piksel enə görə kəsir, simvol sayına görə yox:
             «i» ilə «W» eyni sayda hərf olsa da fərqli en tutur. Bu alət yuxarıda göstərdiyi 60/155
             simvol həddini geniş qəbul edilmiş təxmini göstərici kimi işlədir, dəqiq zəmanət kimi yox.
           </p>
@@ -342,9 +342,7 @@ function TwitterCardPreview({
         // eslint-disable-next-line @next/next/no-img-element -- same as above: external, visitor-supplied address.
         <img src={image} alt="" className="size-24 shrink-0 bg-gray-100 object-cover" />
       ) : (
-        <div className="flex size-24 shrink-0 items-center justify-center bg-gray-100 text-xs text-gray-400">
-          —
-        </div>
+        <div className="flex size-24 shrink-0 items-center justify-center bg-gray-100 text-xs text-gray-400" />
       )}
       <div className="min-w-0 flex-1 bg-gray-50 p-3">
         <p className="line-clamp-2 font-semibold text-gray-900">{title}</p>

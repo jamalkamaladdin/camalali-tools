@@ -86,7 +86,7 @@ export function computeRateLimit(input: AlgorithmInput): RateLimitComputation {
   if (windowLimit < 1) {
     return {
       ok: false,
-      error: "Bu sürət və pəncərə uzunluğu ilə pəncərə həddi 0-a yuvarlaqlaşır — pəncərəni uzat və ya sürəti artır.",
+      error: "Bu sürət və pəncərə uzunluğu ilə pəncərə həddi 0-a yuvarlaqlaşır: pəncərəni uzat və ya sürəti artır.",
     };
   }
 

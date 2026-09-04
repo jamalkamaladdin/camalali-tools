@@ -54,7 +54,7 @@ export function CratesTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote>
-        Ad crates.io-nun öz reyestrinə göndərilir — başqa heç yerə. Nəticə 10 dəqiqə keşlənir.
+        Ad crates.io-nun öz reyestrinə göndərilir: başqa heç yerə. Nəticə 10 dəqiqə keşlənir.
       </ToolNote>
 
       <ToolPanel>
@@ -96,11 +96,11 @@ function CratesResult({ info }: { info: CratesPackageInfo }) {
         {info.description && <p className="text-sm/6">{info.description}</p>}
 
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-          <ToolStat label="Lisenziya" value={info.license ?? "—"} />
+          <ToolStat label="Lisenziya" value={info.license ?? ""} />
           <ToolStat label="Yükləmə (cəmi)" value={formatCompact(info.downloadsTotal)} />
           <ToolStat
             label="Son 90 gün"
-            value={info.downloadsRecent90d !== null ? formatCompact(info.downloadsRecent90d) : "—"}
+            value={info.downloadsRecent90d !== null ? formatCompact(info.downloadsRecent90d) : ""}
           />
         </div>
 

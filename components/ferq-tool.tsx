@@ -232,13 +232,13 @@ export function FerqTool() {
               <ToolNote title="Sətir sonu fərqlidir">
                 Köhnə mətn {ENDING_LABELS[result.summary.leftEnding]}, yeni mətn{" "}
                 {ENDING_LABELS[result.summary.rightEnding]} işlədir. Bu fərq sətir-sətir
-                müqayisəyə daxil edilmir — əks halda bütün sətirlər dəyişmiş görünərdi.
+                müqayisəyə daxil edilmir: əks halda bütün sətirlər dəyişmiş görünərdi.
               </ToolNote>
             )}
 
             {empty ? (
               <p className="font-ui text-sm text-muted">
-                Yuxarıdakı iki sahəyə mətn yapışdır — fərq burada görünəcək. Hər tərəf üçün
+                Yuxarıdakı iki sahəyə mətn yapışdır: fərq burada görünəcək. Hər tərəf üçün
                 hədd <span className="tabular-nums">{formatNumber(MAX_LINES)}</span> sətirdir.
               </p>
             ) : view === "yan" ? (
@@ -269,7 +269,7 @@ function OmittedNote({ shown, total }: { shown: number; total: number }) {
   return (
     <p className="mt-2 font-ui text-[11px] text-muted">
       İlk <span className="tabular-nums">{formatNumber(shown)}</span> sətir göstərilir,{" "}
-      <span className="tabular-nums">{formatNumber(total - shown)}</span> sətir çölə qalıb —
+      <span className="tabular-nums">{formatNumber(total - shown)}</span> sətir çölə qalıb:
       «fərqi kopyala» hamısını götürür.
     </p>
   );

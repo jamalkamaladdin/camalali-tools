@@ -91,7 +91,7 @@ export function buildCompressionReport(samples: EncodingSample[]): CompressionRe
     }
     seen.add(sample.encoding);
     if (sample.byteSize !== null && (!Number.isFinite(sample.byteSize) || sample.byteSize < 0)) {
-      return { ok: false, error: "Etibarsız bayt ölçüsü — mənfi və ya rəqəm olmayan dəyər gəldi." };
+      return { ok: false, error: "Etibarsız bayt ölçüsü: mənfi və ya rəqəm olmayan dəyər gəldi." };
     }
   }
 

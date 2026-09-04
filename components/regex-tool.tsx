@@ -147,7 +147,7 @@ export function RegexTool() {
           {result.truncated && (
             <ToolNote tone="accent" title="Uyğunluq sayı hədddən keçdi">
               İlk {formatNumber(MAX_MATCHES)} uyğunluq göstərilir, qalanı bu
-              siyahıda kəsildi — mətnin özü toxunulmayıb.
+              siyahıda kəsildi: mətnin özü toxunulmayıb.
             </ToolNote>
           )}
 

@@ -46,7 +46,7 @@ export function SpfYoxlayiciTool() {
   async function run(rawInput: string) {
     const trimmed = rawInput.trim();
     if (trimmed === "") {
-      setState({ phase: "error", message: "Boş sahə — domen adı və ya v=spf1 qeydi yaz." });
+      setState({ phase: "error", message: "Boş sahə, domen adı və ya v=spf1 qeydi yaz." });
       return;
     }
 
@@ -89,7 +89,7 @@ export function SpfYoxlayiciTool() {
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu alət sorğunu serverə göndərir">
         Yazdığın domenin (və qeyddə adı keçən hər <span className="font-mono text-xs">include</span>/
-        <span className="font-mono text-xs">redirect</span> domeninin) TXT qeydini bu saytın serveri özü oxuyur —
+        <span className="font-mono text-xs">redirect</span> domeninin) TXT qeydini bu saytın serveri özü oxuyur:
         brauzerin heç bir ad serverinə birbaşa müraciət etmir.
       </ToolNote>
 

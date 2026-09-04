@@ -501,7 +501,7 @@ export function parseBcryptHash(hash: string): ParseBcryptHashResult {
   if (!match) {
     return {
       ok: false,
-      error: "Hash formatı tanınmadı — gözlənilən forma: `$2a$`/`$2b$`/`$2y$` + iki rəqəmli cost + `$` + 22 simvol duz + 31 simvol hash.",
+      error: "Hash formatı tanınmadı, gözlənilən forma: `$2a$`/`$2b$`/`$2y$` + iki rəqəmli cost + `$` + 22 simvol duz + 31 simvol hash.",
     };
   }
   const [, version, costText, saltEncoded, hashEncoded] = match;
@@ -509,7 +509,7 @@ export function parseBcryptHash(hash: string): ParseBcryptHashResult {
 }
 
 function costOutOfRangeError(cost: number): string {
-  return `Cost ${BCRYPT_MIN_COST}–${BCRYPT_MAX_COST} arasında tam ədəd olmalıdır — tapılan: ${cost}. Bu alət daha yüksək cost-u qəsdən qəbul etmir, çünki brauzerdə donmaya səbəb ola bilər.`;
+  return `Cost ${BCRYPT_MIN_COST}–${BCRYPT_MAX_COST} arasında tam ədəd olmalıdır, tapılan: ${cost}. Bu alət daha yüksək cost-u qəsdən qəbul etmir, çünki brauzerdə donmaya səbəb ola bilər.`;
 }
 
 export type BcryptHashResult =
@@ -556,14 +556,14 @@ export async function bcryptVerify(password: string, hash: string): Promise<Bcry
   if (cost < BCRYPT_MIN_COST || cost > BCRYPT_MAX_COST) {
     return {
       ok: false,
-      error: `Bu hash-in cost dəyəri ${cost} — bu alət yalnız ${BCRYPT_MIN_COST}–${BCRYPT_MAX_COST} aralığını yoxlaya bilir.`,
+      error: `Bu hash-in cost dəyəri ${cost}: bu alət yalnız ${BCRYPT_MIN_COST}–${BCRYPT_MAX_COST} aralığını yoxlaya bilir.`,
     };
   }
 
   const decodedSalt = bcryptBase64Decode(saltEncoded);
   if (!decodedSalt.ok) return decodedSalt;
   if (decodedSalt.bytes.length < 16) {
-    return { ok: false, error: "Hash daxilindəki duz 16 baytdan azdır — hash zədələnib." };
+    return { ok: false, error: "Hash daxilindəki duz 16 baytdan azdır: hash zədələnib." };
   }
   const salt = decodedSalt.bytes.slice(0, 16);
 

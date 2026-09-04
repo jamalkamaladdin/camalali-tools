@@ -130,7 +130,7 @@ function ParseTab() {
 
       <ToolResultPanel
         title="Qeydlər"
-        hint={`${result.records.length} ədəd — ${ZONE_RECORD_TYPES.filter((type) => counts[type]).map((type) => `${type} ${counts[type]}`).join(", ") || "yoxdur"}`}
+        hint={`${result.records.length} ədəd: ${ZONE_RECORD_TYPES.filter((type) => counts[type]).map((type) => `${type} ${counts[type]}`).join(", ") || "yoxdur"}`}
       >
         {result.records.length === 0 ? (
           <p className="p-3 text-sm/6 text-muted">Cədvələ düşəcək düzgün qeyd tapılmadı.</p>
@@ -149,7 +149,7 @@ function ParseTab() {
                 {result.records.map((record, index) => (
                   <tr key={index} className="border-b border-result-rule align-top last:border-0">
                     <td className="p-2 font-mono break-all">{record.name}</td>
-                    <td className="p-2 font-mono tabular-nums text-muted">{record.ttl ?? "—"}</td>
+                    <td className="p-2 font-mono tabular-nums text-muted">{record.ttl ?? ""}</td>
                     <td className="p-2 font-mono">{record.type}</td>
                     <td className="p-2 font-mono break-all">{formatRdata(record)}</td>
                   </tr>
@@ -368,7 +368,7 @@ function BuildTab() {
                 {records.map((record, index) => (
                   <tr key={index} className="border-b border-result-rule align-top last:border-0">
                     <td className="p-2 font-mono break-all">{record.name}</td>
-                    <td className="p-2 font-mono tabular-nums text-muted">{record.ttl ?? "—"}</td>
+                    <td className="p-2 font-mono tabular-nums text-muted">{record.ttl ?? ""}</td>
                     <td className="p-2 font-mono">{record.type}</td>
                     <td className="p-2 font-mono break-all">{formatRdata(record)}</td>
                     <td className="p-2">

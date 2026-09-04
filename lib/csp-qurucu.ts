@@ -86,13 +86,13 @@ export const DIRECTIVE_LABELS: Record<CspDirective, string> = {
   "font-src": "Veb şriftlərin hansı mənbədən yüklənə biləcəyi",
   "connect-src": "fetch, XHR, WebSocket və EventSource-un qoşula biləcəyi ünvanlar",
   "frame-src": "Səhifənin öz içinə hansı ünvanları `<iframe>` ilə yerləşdirə biləcəyi",
-  "frame-ancestors": "Bu səhifəni hansı digər səhifələrin öz `<iframe>`-inə yerləşdirə biləcəyi — clickjacking qorunması",
+  "frame-ancestors": "Bu səhifəni hansı digər səhifələrin öz `<iframe>`-inə yerləşdirə biləcəyi (clickjacking qorunması)",
   "form-action": "`<form>` göndərişinin icazəli olduğu ünvanlar",
   "base-uri": "`<base href>` teqinin icazəli olduğu ünvanlar",
   "object-src": "`<object>`, `<embed>`, `<applet>` ilə hansı mənbədən əlavə yüklənə biləcəyi",
   "worker-src": "Web Worker, Shared Worker və Service Worker skriptlərinin hansı mənbədən yüklənə biləcəyi",
   "manifest-src": "Veb tətbiq manifestinin (manifest.json) hansı mənbədən yüklənə biləcəyi",
-  "upgrade-insecure-requests": "Bütün http:// sorğularını avtomatik https://-ə yüksəldən bayraq — mənbə siyahısı götürmür",
+  "upgrade-insecure-requests": "Bütün http:// sorğularını avtomatik https://-ə yüksəldən bayraq (mənbə siyahısı götürmür)",
   "report-uri": "Pozuntu hesabatlarının POST ediləcəyi köhnə üslublu ünvan(lar)",
   "report-to": "Pozuntu hesabatlarının göndəriləcəyi Reporting API qrupunun adı",
 };
@@ -158,7 +158,7 @@ const KNOWN_DIRECTIVES = new Set<string>(CSP_DIRECTIVE_ORDER);
 export function parseCspString(raw: string): ParseCspResult {
   const trimmed = raw.trim();
   if (trimmed === "") {
-    return { ok: false, error: "Boş sətir — CSP başlığını və ya `content` dəyərini yapışdır." };
+    return { ok: false, error: "Boş sətir: CSP başlığını və ya `content` dəyərini yapışdır." };
   }
 
   const segments = trimmed
@@ -168,7 +168,7 @@ export function parseCspString(raw: string): ParseCspResult {
     .filter((segment) => segment !== "");
 
   if (segments.length === 0) {
-    return { ok: false, error: "Heç bir direktiv tapılmadı — yalnız `;` işarələri var idi." };
+    return { ok: false, error: "Heç bir direktiv tapılmadı: yalnız `;` işarələri var idi." };
   }
 
   const directives: CspDirectiveMap = {};
@@ -243,7 +243,7 @@ export function findWeaknesses(directives: CspDirectiveMap): CspWeakness[] {
           : "`style-src`";
     weaknesses.push({
       directive: "script-src",
-      message: `${where} daxilində \`'unsafe-inline'\` var — bu, CSP-nin XSS-ə qarşı verdiyi əsas qorunmanı ləğv edir, çünki səhifəyə yeridilən istənilən inline skript və ya stil maneəsiz işə düşür.`,
+      message: `${where} daxilində \`'unsafe-inline'\` var: bu, CSP-nin XSS-ə qarşı verdiyi əsas qorunmanı ləğv edir, çünki səhifəyə yeridilən istənilən inline skript və ya stil maneəsiz işə düşür.`,
     });
   }
 
@@ -251,7 +251,7 @@ export function findWeaknesses(directives: CspDirectiveMap): CspWeakness[] {
     weaknesses.push({
       directive: "script-src",
       message:
-        "`script-src` daxilində `'unsafe-eval'` var — `eval()`, `new Function()` və oxşar dinamik kod icrasına icazə verir, bu da CSP-nin bloklamaq istədiyi vektorlardan biridir.",
+        "`script-src` daxilində `'unsafe-eval'` var. `eval()`, `new Function()` və oxşar dinamik kod icrasına icazə verir, bu da CSP-nin bloklamaq istədiyi vektorlardan biridir.",
     });
   }
 
@@ -259,7 +259,7 @@ export function findWeaknesses(directives: CspDirectiveMap): CspWeakness[] {
     if (effectiveValues.includes("*")) {
       weaknesses.push({
         directive,
-        message: `\`${directive}\` daxilində \`*\` joker işarəsi var — istənilən domendən yüklənməyə icazə verir, direktivi demək olar mənasız edir.`,
+        message: `\`${directive}\` daxilində \`*\` joker işarəsi var: istənilən domendən yüklənməyə icazə verir, direktivi demək olar mənasız edir.`,
       });
     }
   }
@@ -268,7 +268,7 @@ export function findWeaknesses(directives: CspDirectiveMap): CspWeakness[] {
     weaknesses.push({
       directive: "script-src",
       message:
-        "`script-src` daxilində `data:` var — `data:` URI-lə yeridilən skript CSP-nin qarşısını almağa çalışdığı inline koda çox yaxın bir vektordir.",
+        "`script-src` daxilində `data:` var. `data:` URI-lə yeridilən skript CSP-nin qarşısını almağa çalışdığı inline koda çox yaxın bir vektordir.",
     });
   }
 
@@ -276,7 +276,7 @@ export function findWeaknesses(directives: CspDirectiveMap): CspWeakness[] {
     weaknesses.push({
       directive: "object-src",
       message:
-        "`object-src` təyin edilməyib (nə özü, nə `default-src` var) — `<object>`/`<embed>` ilə yüklənən köhnə plagin məzmunu heç bir qaydaya tabe deyil.",
+        "`object-src` təyin edilməyib (nə özü, nə `default-src` var): `<object>`/`<embed>` ilə yüklənən köhnə plagin məzmunu heç bir qaydaya tabe deyil.",
     });
   }
 
@@ -284,7 +284,7 @@ export function findWeaknesses(directives: CspDirectiveMap): CspWeakness[] {
     weaknesses.push({
       directive: "base-uri",
       message:
-        "`base-uri` təyin edilməyib — `default-src`-dən miras almır, ona görə səhifəyə yeridilən bir `<base href>` teqi bütün nisbi linkləri başqa domenə yönləndirə bilər.",
+        "`base-uri` təyin edilməyib. `default-src`-dən miras almır, ona görə səhifəyə yeridilən bir `<base href>` teqi bütün nisbi linkləri başqa domenə yönləndirə bilər.",
     });
   }
 
@@ -292,7 +292,7 @@ export function findWeaknesses(directives: CspDirectiveMap): CspWeakness[] {
     weaknesses.push({
       directive: "frame-ancestors",
       message:
-        "`frame-ancestors` təyin edilməyib — başqa bir sayt bu səhifəni öz `<iframe>`-inə yerləşdirib clickjacking hücumu qura bilər.",
+        "`frame-ancestors` təyin edilməyib, başqa bir sayt bu səhifəni öz `<iframe>`-inə yerləşdirib clickjacking hücumu qura bilər.",
     });
   }
 
@@ -304,7 +304,7 @@ export function findWeaknesses(directives: CspDirectiveMap): CspWeakness[] {
       const names = openDirectives.map((entry) => `\`${entry.directive}\``).join(", ");
       weaknesses.push({
         directive: "default-src",
-        message: `\`default-src\` təyin edilməyib — miras üçün heç bir baza yoxdur, ona görə açıq təyin olunmamış hər *-src direktivi (${names}) tamamilə məhdudiyyətsiz qalır.`,
+        message: `\`default-src\` təyin edilməyib: miras üçün heç bir baza yoxdur, ona görə açıq təyin olunmamış hər *-src direktivi (${names}) tamamilə məhdudiyyətsiz qalır.`,
       });
     }
   }

@@ -43,7 +43,7 @@ function loadImageElement(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const image = new Image();
     image.onload = () => resolve(image);
-    image.onerror = () => reject(new Error("Loqo açılmadı — fayl zədəli və ya format dəstəklənmir."));
+    image.onerror = () => reject(new Error("Loqo açılmadı: fayl zədəli və ya format dəstəklənmir."));
     image.src = src;
   });
 }
@@ -263,7 +263,7 @@ export function OgSekilTool() {
 
             {overflowWarning && (
               <ToolNote tone="accent" title="Mətn sığmır">
-                Başlıq minimum şrift ölçüsündə də ayrılmış sahəyə sığmadı — bir hissəsi kəsilə bilər.
+                Başlıq minimum şrift ölçüsündə də ayrılmış sahəyə sığmadı: bir hissəsi kəsilə bilər.
                 Mətni qısalt və ya alt başlığı boş burax.
               </ToolNote>
             )}
@@ -343,7 +343,7 @@ export function OgSekilTool() {
       </ToolResultPanel>
 
       <ToolNote>
-        Mətn heç yerə göndərilmir — şəklin bütün qurulması brauzerin öz canvas-ında aparılır, bu
+        Mətn heç yerə göndərilmir: şəklin bütün qurulması brauzerin öz canvas-ında aparılır, bu
         səhifə heç bir sorğu göndərmir.
       </ToolNote>
     </div>

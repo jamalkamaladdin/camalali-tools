@@ -50,7 +50,7 @@ export function DnssecTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu alət DS/DNSKEY/RRSIG-i oxuya bilmir">
-        Node-un DNS modulu bu üç tipi sorğulaya bilmir — modulun özü xəta atır, şəbəkəyə çıxmır. Alət
+        Node-un DNS modulu bu üç tipi sorğulaya bilmir: modulun özü xəta atır, şəbəkəyə çıxmır. Alət
         əvəzinə valideyn zonanın domenə göstərdiyi ad serverlərini domenin öz elan etdiyi siyahı ilə
         tutuşdurur. Aşağıda niyə izah olunur.
       </ToolNote>
@@ -119,7 +119,7 @@ function Report({ report }: { report: DnssecReport }) {
         <ToolNote tone={delegation.consistent ? "info" : "accent"} title="Delegasiya">
           {delegation.consistent
             ? "Valideyn zona ilə domenin öz elan etdiyi ad serverləri üst-üstə düşür."
-            : "Uyğunsuzluq tapıldı — aşağıda hansı ad serverinin harada olduğuna bax."}
+            : "Uyğunsuzluq tapıldı: aşağıda hansı ad serverinin harada olduğuna bax."}
         </ToolNote>
       ) : (
         <ToolNote tone="accent" title="Delegasiya yoxlanmadı">
@@ -162,7 +162,7 @@ function NsList({ title, names, highlight }: { title: string; names: string[]; h
           {names.map((name) => (
             <li key={name} className={`font-mono text-xs break-all ${highlighted.has(name) ? "text-accent-text" : ""}`}>
               {name}
-              {highlighted.has(name) && " — tək tərəfdə"}
+              {highlighted.has(name) && ": tək tərəfdə"}
             </li>
           ))}
         </ul>

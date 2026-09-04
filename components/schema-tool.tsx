@@ -55,11 +55,11 @@ const TYPE_LABELS: Record<SchemaType, string> = {
 
 /** One line under the type strip, so the visitor picks by what the page is rather than by the English class name. */
 const TYPE_HINTS: Record<SchemaType, string> = {
-  Article: "Bloq yazısı, xəbər, təlimat — mətn daşıyan səhifə.",
+  Article: "Bloq yazısı, xəbər, təlimat: mətn daşıyan səhifə.",
   FAQPage: "Yalnız sual-cavabdan ibarət səhifə və ya bölmə.",
   BreadcrumbList: "Səhifənin sayt içindəki yolu: ana səhifə → bölmə → səhifə.",
   LocalBusiness: "Ünvanı və iş saatı olan fiziki məkan.",
-  Organization: "Şirkət, komanda, qurum — məkana bağlı olmayan.",
+  Organization: "Şirkət, komanda, qurum: məkana bağlı olmayan.",
   Person: "Bir şəxsin profili: ad, iş, xarici hesablar.",
 };
 
@@ -91,7 +91,7 @@ const SAMPLES: Record<SchemaType, Values> = {
       },
       {
         question: "Bir səhifədə neçə qeyd ola bilər?",
-        answer: "Bir neçə — hər biri ayrı script bloku, ya da bir «@graph» massivi içində.",
+        answer: "Bir neçə: hər biri ayrı script bloku, ya da bir «@graph» massivi içində.",
       },
     ] as FaqPair[],
   },
@@ -244,7 +244,7 @@ function BuildPane() {
       <ToolAccordion>
         <ToolAccordionItem summary="Bu bloku səhifənin harasına qoymalıyam?">
           <p>
-            Fərqi yoxdur: «head» içində və ya «body»-nin sonunda — hər ikisi oxunur. Vacib olan
+            Fərqi yoxdur: «head» içində və ya «body»-nin sonunda, hər ikisi oxunur. Vacib olan
             blokun səhifənin ilk HTML cavabında olmasıdır;
             sonradan JavaScript ilə əlavə edilən qeydi hər axtarış sistemi görmür. Bir səhifədə bir
             neçə blok ola bilər, yaxud hamısı bir «@graph» massivində birləşdirilə bilər.
@@ -512,7 +512,7 @@ function CrumbForm({ values, set }: FormProps) {
       <ToolNote title="Sıra nömrəsi">
         <p className="font-ui text-xs/6 text-muted">
           «position» avtomatik yazılır: adı boş qalan sətir siyahıdan düşür, qalanlar 1-dən başlayıb
-          ardıcıl nömrələnir. Sonuncu pillə üçün ünvanı boş buraxmaq olar — o, səhifənin özüdür.
+          ardıcıl nömrələnir. Sonuncu pillə üçün ünvanı boş buraxmaq olar: o, səhifənin özüdür.
         </p>
       </ToolNote>
 
@@ -928,7 +928,7 @@ function ValidationReport({ result }: { result: ReturnType<typeof validateSchema
                 value={result.ok ? "keçdi" : "çatışmır"}
                 tone={result.ok ? "default" : "warning"}
               />
-              <ToolStat label="Tip" value={result.type ?? "—"} />
+              <ToolStat label="Tip" value={result.type ?? "yoxdur"} />
               <ToolStat
                 label="Çatışmayan məcburi sahə"
                 value={required.length}

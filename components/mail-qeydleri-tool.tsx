@@ -39,7 +39,7 @@ export function MailQeydleriTool() {
   async function run(domain: string, selector?: string) {
     const trimmed = domain.trim();
     if (trimmed === "") {
-      setState({ phase: "error", message: "Boş sahə — domen adı yaz." });
+      setState({ phase: "error", message: "Boş sahə: domen adı yaz." });
       return;
     }
 
@@ -76,7 +76,7 @@ export function MailQeydleriTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu alət sorğunu serverə göndərir">
-        Yazdığın domen adı bu saytın serverinə, oradan da həmin domenin öz ad serverlərinə gedir —
+        Yazdığın domen adı bu saytın serverinə, oradan da həmin domenin öz ad serverlərinə gedir:
         iyirmiyə yaxın DNS sorğusu ilə. Başqa heç bir xidmətə, o cümlədən heç bir HTTP ünvanına
         müraciət olunmur; cavab 5 dəqiqə saxlanılır.
       </ToolNote>
@@ -202,7 +202,7 @@ function MxSection({ report }: { report: MailReport }) {
         <p className="font-ui text-[11px] text-muted">{MAIL_RECORD_NOTES.mx}</p>
         {mx.nullMx ? (
           <p className="text-sm/6">
-            Tək qeyd tapıldı və hədəfi <span className="font-mono text-xs">.</span> — RFC 7505-ə görə
+            Tək qeyd tapıldı və hədəfi <span className="font-mono text-xs">.</span>: RFC 7505-ə görə
             bu domen heç vaxt məktub qəbul etməyəcək, bilərəkdən elan olunub.
           </p>
         ) : mx.records.length === 0 ? (
@@ -217,7 +217,7 @@ function MxSection({ report }: { report: MailReport }) {
                 <span className="font-ui text-xs tabular-nums text-muted">{record.priority}</span>
                 <span className="min-w-0 flex-1 font-mono text-sm break-all">{record.host}</span>
                 {index === 0 && (
-                  <span className="font-ui text-[11px] text-muted">ən kiçik prioritet — əvvəl sınanır</span>
+                  <span className="font-ui text-[11px] text-muted">ən kiçik prioritet (əvvəl sınanır)</span>
                 )}
               </li>
             ))}
@@ -268,11 +268,11 @@ function DmarcSection({ report }: { report: MailReport }) {
             <ul className="mt-1 space-y-1 font-ui text-[11px] text-muted">
               <li>
                 <span className="font-mono">p=</span>{" "}
-                {dmarc.policy ? `${dmarc.policy} — ${DMARC_POLICY_LABELS[dmarc.policy]}` : "yoxdur — qeyd etibarsızdır"}
+                {dmarc.policy ? `${dmarc.policy}: ${DMARC_POLICY_LABELS[dmarc.policy]}` : "yoxdur: qeyd etibarsızdır"}
               </li>
               <li>
                 <span className="font-mono">sp=</span>{" "}
-                {dmarc.subdomainPolicy ? `${dmarc.subdomainPolicy} — ${DMARC_POLICY_LABELS[dmarc.subdomainPolicy]}` : "yoxdur — sub-domenlərə də p= tətbiq olunur"}
+                {dmarc.subdomainPolicy ? `${dmarc.subdomainPolicy}: ${DMARC_POLICY_LABELS[dmarc.subdomainPolicy]}` : "yoxdur: sub-domenlərə də p= tətbiq olunur"}
               </li>
               <li>
                 <span className="font-mono">pct=</span> {dmarc.percent}% məktuba tətbiq olunur
@@ -308,7 +308,7 @@ function DkimSection({
     <ToolResultPanel title="DKIM" hint={`${found.length}/${report.dkim.length} seçici tapıldı`}>
       <div className="space-y-3 p-3">
         <ToolNote>
-          Seçici (selector) adı DNS-dən oxuna bilmir — bu, {report.dkim.length} tanınan adı sınayır.
+          Seçici (selector) adı DNS-dən oxuna bilmir: bu, {report.dkim.length} tanınan adı sınayır.
           Heç biri tapılmasa da DKIM işləyə bilər; bu, yalnız «bu adlarla tapılmadı» deməkdir.
         </ToolNote>
 

@@ -149,17 +149,17 @@ export function BantGenisliyiTool() {
   ]);
 
   const overheadLabel = overheadLabelFor(form.overheadPreset);
-  const overheadPercentText = Number.isFinite(overheadPercent) ? formatNumber(overheadPercent, 1) : "—";
+  const overheadPercentText = Number.isFinite(overheadPercent) ? formatNumber(overheadPercent, 1) : "";
 
-  let theoreticalValue = "—";
+  let theoreticalValue = "";
   let theoreticalNote = "";
-  let realisticValue = "—";
+  let realisticValue = "";
   let realisticNote = "";
 
   if (result.ok) {
     if (result.solveFor === "time") {
       theoreticalValue = formatDuration(result.theoreticalSeconds);
-      theoreticalNote = "Protokol xərci yoxdur — xəttin bütün nominal tutumu istifadə olunur.";
+      theoreticalNote = "Protokol xərci yoxdur: xəttin bütün nominal tutumu istifadə olunur.";
       realisticValue = formatDuration(result.realisticSeconds);
       realisticNote = `${overheadLabel} fərziyyəsi ilə (~${overheadPercentText}% xərc).`;
     } else if (result.solveFor === "bandwidth") {
@@ -363,7 +363,7 @@ export function BantGenisliyiTool() {
 
       <ToolNote tone="info">
         {withInlineCode(
-          "Bant genişliyi bit əsasında (`Mbit/s`), ölçü isə bayt əsasında (`MB`) satılır — arada 8 dəfə fərq var. Onluq vahid (`MB`, `GB`) disk qutusunda və provayder reklamında, ikilik vahid (`MiB`, `GiB`) isə əməliyyat sisteminin özündə görünür; hər nəticə ikisini də göstərir ki, hansı vahidin işlədiyi aydın olsun.",
+          "Bant genişliyi bit əsasında (`Mbit/s`), ölçü isə bayt əsasında (`MB`) satılır: arada 8 dəfə fərq var. Onluq vahid (`MB`, `GB`) disk qutusunda və provayder reklamında, ikilik vahid (`MiB`, `GiB`) isə əməliyyat sisteminin özündə görünür; hər nəticə ikisini də göstərir ki, hansı vahidin işlədiyi aydın olsun.",
         )}
       </ToolNote>
     </div>

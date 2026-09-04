@@ -66,7 +66,7 @@ export function JsSixisdiriciTool() {
   const savingsLabel =
     result.syntaxOk && result.inputBytes > 0
       ? `${result.savingsPercent >= 0 ? "-" : "+"}${Math.abs(result.savingsPercent).toFixed(1)}%`
-      : "—";
+      : "";
 
   return (
     <div className="mt-8 space-y-5">
@@ -136,7 +136,7 @@ export function JsSixisdiriciTool() {
         action={<CopyButton value={result.output} label="Kodu kopyala" />}
       >
         <div className="space-y-3 p-4">
-          <ToolOutput className="max-h-72 overflow-y-auto">{result.output || "—"}</ToolOutput>
+          <ToolOutput className="max-h-72 overflow-y-auto">{result.output || ""}</ToolOutput>
 
           {result.ruleSavings.length > 0 && (
             <div className="overflow-x-auto">
@@ -156,7 +156,7 @@ export function JsSixisdiriciTool() {
                     <tr key={entry.rule} className="border-b border-result-rule last:border-0">
                       <td className="p-1.5">{JS_MINIFY_RULE_LABELS[entry.rule]}</td>
                       <td className="p-1.5 text-right tabular-nums">
-                        {entry.bytesSaved > 0 ? `-${formatBytes(entry.bytesSaved)}` : "—"}
+                        {entry.bytesSaved > 0 ? `-${formatBytes(entry.bytesSaved)}` : ""}
                       </td>
                     </tr>
                   ))}
@@ -168,8 +168,8 @@ export function JsSixisdiriciTool() {
       </ToolResultPanel>
 
       <ToolNote>
-        Kod heç yerə göndərilmir — bütün qaydalar mətn üzərində, brauzerin öz yaddaşında işləyir.
-        Dəyişən adları qısaldılmır — yalnız şərh və boşluq atılır, tam parser tələb edən mangling
+        Kod heç yerə göndərilmir: bütün qaydalar mətn üzərində, brauzerin öz yaddaşında işləyir.
+        Dəyişən adları qısaldılmır: yalnız şərh və boşluq atılır, tam parser tələb edən mangling
         bu alətin əhatəsindən kənardır.
       </ToolNote>
     </div>

@@ -32,7 +32,7 @@ export type JsMinifyRule = "comments" | "whitespace" | "line-joining";
 export const JS_MINIFY_RULES: JsMinifyRule[] = ["comments", "whitespace", "line-joining"];
 
 export const JS_MINIFY_RULE_LABELS: Record<JsMinifyRule, string> = {
-  comments: "Şərhlər atılır — /*! və // @license qorunur",
+  comments: "Şərhlər atılır: /*! və // @license qorunur",
   whitespace: "Artıq boşluq və girinti yığılır",
   "line-joining": "Təhlükəsiz olan yerlərdə sətir sonu birləşdirilir",
 };

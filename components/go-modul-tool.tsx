@@ -61,7 +61,7 @@ export function GoModulTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote>
-        Modul yolu Go-nun öz açıq proxy-sinə (proxy.golang.org) göndərilir — başqa heç yerə. Nəticə 10
+        Modul yolu Go-nun öz açıq proxy-sinə (proxy.golang.org) göndərilir: başqa heç yerə. Nəticə 10
         dəqiqə keşlənir.
       </ToolNote>
 

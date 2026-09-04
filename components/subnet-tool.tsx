@@ -245,7 +245,7 @@ export function SubnetTool() {
         >
           {info === null || split === null ? (
             <p className="font-ui text-sm text-muted">
-              Yuxarıda düzgün bir şəbəkə yaz — bölgü burada görünəcək.
+              Yuxarıda düzgün bir şəbəkə yaz: bölgü burada görünəcək.
             </p>
           ) : (
             <div className="space-y-4">
@@ -275,7 +275,7 @@ export function SubnetTool() {
                 <p className="font-ui text-xs/6 text-muted">
                   <span className="tabular-nums">{formatNumber(split.total)}</span> alt şəbəkə
                   {split.truncated
-                    ? ` — ilk ${SPLIT_ROW_LIMIT} dənəsi göstərilir.`
+                    ? `, ilk ${SPLIT_ROW_LIMIT} dənəsi göstərilir.`
                     : "."}
                 </p>
               </div>
@@ -307,11 +307,11 @@ export function SubnetTool() {
                         <td className="p-2 whitespace-nowrap">{part.cidr}</td>
                         <td className="p-2 whitespace-nowrap">
                           {part.firstHost === null || part.lastHost === null
-                            ? "—"
+                            ? ""
                             : `${formatIpv4(part.firstHost)} – ${formatIpv4(part.lastHost)}`}
                         </td>
                         <td className="p-2 whitespace-nowrap">
-                          {part.broadcast === null ? "—" : formatIpv4(part.broadcast)}
+                          {part.broadcast === null ? "" : formatIpv4(part.broadcast)}
                         </td>
                         <td className="p-2 text-right tabular-nums">
                           {formatNumber(part.usableHosts)}
@@ -333,7 +333,7 @@ export function SubnetTool() {
             <ToolNote title="Bu bölmə nə edir">
               Qısaldılmış formanı tam səkkiz qrupa açır və əksinə (RFC 5952), prefiksə görə
               şəbəkə ünvanını tapır və prefiksin neçə ünvan tutduğunu göstərir. Host
-              aralığı, broadcast və şəxsi/ictimai bölgüsü yalnız IPv4 hissəsindədir —
+              aralığı, broadcast və şəxsi/ictimai bölgüsü yalnız IPv4 hissəsindədir:
               IPv6-da broadcast yoxdur, onun işini multicast görür.
             </ToolNote>
 

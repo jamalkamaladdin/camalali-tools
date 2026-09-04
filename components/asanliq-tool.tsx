@@ -291,7 +291,7 @@ export function AsanliqTool() {
       </ToolResultPanel>
 
       <ToolNote tone="info">
-        x1 və x2 0–1 aralığında saxlanılır — kənara çıxan qiymət avtomatik ən yaxın sərhədə çəkilir. y sərhədsizdir, ona görə əyri hədəfi keçib geri qayıda bilər.
+        x1 və x2 0–1 aralığında saxlanılır: kənara çıxan qiymət avtomatik ən yaxın sərhədə çəkilir. y sərhədsizdir, ona görə əyri hədəfi keçib geri qayıda bilər.
       </ToolNote>
     </div>
   );

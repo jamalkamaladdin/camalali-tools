@@ -171,7 +171,7 @@ export function LinkAnaliziTool() {
       )}
 
       <ToolNote title="Sorğu göndərilmir">
-        Bu alət linklərin özlərinin haraya işarə etdiyini oxuyur, heç birinə sorğu göndərmir — hədəf
+        Bu alət linklərin özlərinin haraya işarə etdiyini oxuyur, heç birinə sorğu göndərmir: hədəf
         ünvanın canlı olub-olmadığını, 404 qaytarıb-qaytarmadığını yoxlamır.
       </ToolNote>
     </div>
@@ -181,7 +181,7 @@ export function LinkAnaliziTool() {
 function targetLabel(link: PageLink): ReactNode {
   if (link.resolved !== null) return link.resolved;
   if (link.href !== "") return link.href;
-  return <span className="italic">—</span>;
+  return <span className="text-muted italic">(boş)</span>;
 }
 
 function LinkRow({ link }: { link: PageLink }) {
@@ -195,8 +195,8 @@ function LinkRow({ link }: { link: PageLink }) {
         {link.fragmentOnly && <span className="ml-1 font-ui">(fraqment)</span>}
       </td>
       <td className="p-1.5">{link.internal ? "daxili" : "xarici"}</td>
-      <td className="p-1.5 font-mono text-muted">{link.rel.length > 0 ? link.rel.join(", ") : "—"}</td>
-      <td className="p-1.5 text-muted">{link.targetBlank ? "bəli" : "—"}</td>
+      <td className="p-1.5 font-mono text-muted">{link.rel.length > 0 ? link.rel.join(", ") : ""}</td>
+      <td className="p-1.5 text-muted">{link.targetBlank ? "bəli" : ""}</td>
     </tr>
   );
 }

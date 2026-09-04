@@ -116,7 +116,7 @@ export function SekilPdfTool() {
     const supported = incoming.filter((file) => file.type === "image/png" || file.type === "image/jpeg");
     const rejected = incoming.length - supported.length;
     setRejectedNote(
-      rejected > 0 ? `${rejected} fayl PNG/JPEG deyil (və ya brauzer onu tanımadı) — əlavə olunmadı.` : null,
+      rejected > 0 ? `${rejected} fayl PNG/JPEG deyil (və ya brauzer onu tanımadı), əlavə olunmadı.` : null,
     );
     if (supported.length === 0) return;
 
@@ -159,7 +159,7 @@ export function SekilPdfTool() {
     setDone(null);
 
     if (items.length === 0) {
-      setError("Heç bir şəkil yoxdur — əvvəlcə şəkil əlavə et.");
+      setError("Heç bir şəkil yoxdur: əvvəlcə şəkil əlavə et.");
       return;
     }
 
@@ -189,7 +189,7 @@ export function SekilPdfTool() {
       setDone({ pageCount: result.pageCount, bytes: result.bytes.byteLength });
     } catch (cause) {
       console.error("sekil-pdf: PDF qurulmadı", cause);
-      setError("PDF qurula bilmədi — bir daha yoxla.");
+      setError("PDF qurula bilmədi. Bir daha yoxla.");
     } finally {
       setBusy(false);
     }
@@ -201,7 +201,7 @@ export function SekilPdfTool() {
         <ToolPanelHeader title="Şəkillər" hint={items.length > 0 ? `${items.length} şəkil` : undefined} />
         <div className="space-y-4 p-4">
           <ToolNote>
-            Şəkillər heç yerə göndərilmir — PDF-in qurulması tamamilə brauzerdə aparılır.
+            Şəkillər heç yerə göndərilmir: PDF-in qurulması tamamilə brauzerdə aparılır.
           </ToolNote>
 
           <div className="relative">
@@ -226,7 +226,7 @@ export function SekilPdfTool() {
               }`}
             >
               <span className="font-ui text-sm">Şəkil seç və ya bura sürüşdür</span>
-              <span className="font-ui text-xs text-muted">PNG · JPEG — bir neçəsi birdən, hər hansı sıra ilə</span>
+              <span className="font-ui text-xs text-muted">PNG · JPEG (bir neçəsi birdən, hər hansı sıra ilə)</span>
             </label>
           </div>
 
@@ -356,7 +356,7 @@ export function SekilPdfTool() {
       {done !== null && (
         <ToolResultPanel title="Hazırdır" hint={`${done.pageCount} səhifə`}>
           <p className="p-4 font-ui text-sm text-muted">
-            <code>sekiller.pdf</code> ({formatBytes(done.bytes)}) endirildi — brauzerin öz endirmə qovluğuna bax.
+            <code>sekiller.pdf</code> ({formatBytes(done.bytes)}) endirildi: brauzerin öz endirmə qovluğuna bax.
           </p>
         </ToolResultPanel>
       )}

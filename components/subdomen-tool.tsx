@@ -79,7 +79,7 @@ export function SubdomainTool() {
           question on the visitor's behalf, and that is not the default promise
           the rest of the site's tools make. */}
       <ToolNote tone="accent" title="Bu alət kənar xidmətə sorğu göndərir">
-        Yazdığın domen adı <strong>crt.sh</strong> sertifikat şəffaflıq loquna göndərilir —
+        Yazdığın domen adı <strong>crt.sh</strong> sertifikat şəffaflıq loquna göndərilir:
         başqa heç nə. Loq ictimai qeydiyyatdır: hər buraxılmış TLS sertifikatı ora yazılır,
         ona görə buradakı adlar «sızma» deyil, açıq məlumatdır. Alət öz infrastrukturunda
         unudulmuş test və staging ünvanlarını tapmaq üçündür.
@@ -110,7 +110,7 @@ export function SubdomainTool() {
               {status === "loading" ? "Axtarılır…" : "Axtar"}
             </ToolButton>
             <span className="font-ui text-[11px] text-muted">
-              crt.sh yavaş cavab verə bilər — gözləmə həddi 8 saniyədir.
+              crt.sh yavaş cavab verə bilər: gözləmə həddi 8 saniyədir.
             </span>
           </div>
         </form>
@@ -150,7 +150,7 @@ export function SubdomainTool() {
                 value={formatNumber(result.wildcards)}
                 note={
                   result.wildcards > 0
-                    ? "*.domen formasında qeyd var — onun arxasındakı hostlar loqda görünmür."
+                    ? "*.domen formasında qeyd var: onun arxasındakı hostlar loqda görünmür."
                     : "Joker sertifikat qeydə alınmayıb."
                 }
               />

@@ -59,7 +59,7 @@ export function HstsTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu alət iki sorğu göndərir">
-        Yazdığın domenə https və http üzərindən ayrı-ayrı bir HEAD sorğusu göndərilir — sənin
+        Yazdığın domenə https və http üzərindən ayrı-ayrı bir HEAD sorğusu göndərilir: sənin
         brauzerin yox, bu saytın serveri. Səhifənin gövdəsi yüklənmir, yalnız başlıqlar oxunur.
       </ToolNote>
 
@@ -136,7 +136,7 @@ function Report({ report }: { report: HstsReport }) {
           <div className="grid gap-3 @min-[30rem]:grid-cols-2 @min-[52rem]:grid-cols-3">
             <ToolStat
               label="max-age"
-              value={report.humanMaxAge ?? "—"}
+              value={report.humanMaxAge ?? ""}
               tone={report.maxAgeStrength === "yaxsi" ? "default" : "warning"}
               note={<StrengthLabel strength={report.maxAgeStrength} />}
             />
@@ -156,7 +156,7 @@ function Report({ report }: { report: HstsReport }) {
       {report.httpLeaksHeader && (
         <ToolNote tone="accent" title="Http cavabında da başlıq var">
           Bu, plain http cavabında da göndərilir. RFC 6797-yə görə brauzer başlığı yalnız https
-          cavabında qəbul edir — http üzərindəki nüsxə heç bir qorumaya təsir etmir, sadəcə lazımsız
+          cavabında qəbul edir: http üzərindəki nüsxə heç bir qorumaya təsir etmir, sadəcə lazımsız
           bir sətirdir.
         </ToolNote>
       )}
@@ -178,7 +178,7 @@ function Report({ report }: { report: HstsReport }) {
               >
                 {requirement.met ? "ödənir" : "çatmır"}
               </span>{" "}
-              — {requirement.label}
+              : {requirement.label}
             </li>
           ))}
         </ul>

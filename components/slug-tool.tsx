@@ -129,7 +129,7 @@ export function SlugTool() {
         {slug === "" && title.trim() !== "" && (
           <div className="border-t border-rule p-4">
             <ToolNote tone="accent" title="Slug boş çıxdı">
-              Başlıq yalnız durğu işarələrindən ibarətdir — heç bir hərf və ya rəqəm tapılmadı.
+              Başlıq yalnız durğu işarələrindən ibarətdir: heç bir hərf və ya rəqəm tapılmadı.
             </ToolNote>
           </div>
         )}

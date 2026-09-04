@@ -394,25 +394,25 @@ function resolveFailure(
 
 function translateMessage(message: string): string {
   if (/Unexpected end of JSON input/i.test(message)) {
-    return "JSON yarımçıqdır — mötərizə və ya kvadrat mötərizə bağlanmayıb.";
+    return "JSON yarımçıqdır: mötərizə və ya kvadrat mötərizə bağlanmayıb.";
   }
   if (/Expected double-quoted property name/i.test(message)) {
-    return "Açar adı cüt dırnaqla yazılmalıdır — tək dırnaq və ya dırnaqsız açar JSON-da qadağandır.";
+    return "Açar adı cüt dırnaqla yazılmalıdır: tək dırnaq və ya dırnaqsız açar JSON-da qadağandır.";
   }
   if (/Expected property name/i.test(message)) {
-    return "Açar adı gözlənilirdi — burada cüt dırnaqla yazılmış sətir olmalıdır.";
+    return "Açar adı gözlənilirdi: burada cüt dırnaqla yazılmış sətir olmalıdır.";
   }
   if (message.includes("Expected ','")) {
-    return "Elementlər arasında vergül çatışmır — və ya sondan sonra artıq vergül var.";
+    return "Elementlər arasında vergül çatışmır, və ya sondan sonra artıq vergül var.";
   }
   if (/Unexpected number/i.test(message)) {
-    return "Rəqəm formatı yanlışdır — məsələn, sıfırla başlayan çoxrəqəmli ədəd JSON-da qadağandır.";
+    return "Rəqəm formatı yanlışdır: məsələn, sıfırla başlayan çoxrəqəmli ədəd JSON-da qadağandır.";
   }
   if (/Unexpected non-whitespace character/i.test(message)) {
-    return "Doğru JSON-dan sonra əlavə mətn var — sənəddə yalnız bir dəyər ola bilər.";
+    return "Doğru JSON-dan sonra əlavə mətn var: sənəddə yalnız bir dəyər ola bilər.";
   }
   if (/Unexpected token/i.test(message)) {
-    return "Gözlənilməz simvol var — sintaksis bu nöqtədə pozulub.";
+    return "Gözlənilməz simvol var: sintaksis bu nöqtədə pozulub.";
   }
   return "JSON sintaksisi səhvdir.";
 }
@@ -471,13 +471,13 @@ function scanJson(text: string): { index: number; reason: string } | null {
 
     while (true) {
       skipWhitespace();
-      if (i >= n) return fail(n, "Obyekt bağlanmayıb — \"}\" gözlənilirdi.");
+      if (i >= n) return fail(n, "Obyekt bağlanmayıb: \"}\" gözlənilirdi.");
       if (text[i] !== '"') {
         // Same sentence as `translateMessage`: both paths can reach a genuinely
         // unquoted key and they must not describe it differently.
         return fail(
           i,
-          "Açar adı cüt dırnaqla yazılmalıdır — tək dırnaq və ya dırnaqsız açar JSON-da qadağandır.",
+          "Açar adı cüt dırnaqla yazılmalıdır: tək dırnaq və ya dırnaqsız açar JSON-da qadağandır.",
         );
       }
 
@@ -494,18 +494,18 @@ function scanJson(text: string): { index: number; reason: string } | null {
       if (valueError) return valueError;
 
       skipWhitespace();
-      if (i >= n) return fail(n, "Obyekt bağlanmayıb — \"}\" gözlənilirdi.");
+      if (i >= n) return fail(n, "Obyekt bağlanmayıb: \"}\" gözlənilirdi.");
       if (text[i] === ",") {
         i++;
         skipWhitespace();
         if (i < n && text[i] === "}") {
-          return fail(i, "Sondakı vergül artıqdır — son elementdən sonra vergül qoyulmur.");
+          return fail(i, "Sondakı vergül artıqdır: son elementdən sonra vergül qoyulmur.");
         }
         // A second comma is the same mistake one step earlier: the slot between
         // them holds no member. Without this the loop falls through to the
         // key-quoting branch and blames the quotes.
         if (i < n && text[i] === ",") {
-          return fail(i, "Artıq vergül var — iki vergülün arasında element yoxdur.");
+          return fail(i, "Artıq vergül var: iki vergülün arasında element yoxdur.");
         }
         continue;
       }
@@ -530,12 +530,12 @@ function scanJson(text: string): { index: number; reason: string } | null {
       if (valueError) return valueError;
 
       skipWhitespace();
-      if (i >= n) return fail(n, "Massiv bağlanmayıb — \"]\" gözlənilirdi.");
+      if (i >= n) return fail(n, "Massiv bağlanmayıb: \"]\" gözlənilirdi.");
       if (text[i] === ",") {
         i++;
         skipWhitespace();
         if (i < n && text[i] === "]") {
-          return fail(i, "Sondakı vergül artıqdır — son elementdən sonra vergül qoyulmur.");
+          return fail(i, "Sondakı vergül artıqdır: son elementdən sonra vergül qoyulmur.");
         }
         continue;
       }
@@ -563,7 +563,7 @@ function scanJson(text: string): { index: number; reason: string } | null {
         if (escaped === "u") {
           const hex = text.slice(i + 1, i + 5);
           if (!/^[0-9a-fA-F]{4}$/.test(hex)) {
-            return fail(i - 1, "Yanlış \\u qaçış ardıcıllığı — dörd hex rəqəm lazımdır.");
+            return fail(i - 1, "Yanlış \\u qaçış ardıcıllığı: dörd hex rəqəm lazımdır.");
           }
           i += 5;
         } else if ('"\\/bfnrt'.includes(escaped)) {
@@ -578,7 +578,7 @@ function scanJson(text: string): { index: number; reason: string } | null {
       }
       i++;
     }
-    return fail(start, "Sətir bağlanmayıb — \" işarəsi çatışmır.");
+    return fail(start, "Sətir bağlanmayıb: \" işarəsi çatışmır.");
   }
 
   function parseNumber(): { index: number; reason: string } | null {

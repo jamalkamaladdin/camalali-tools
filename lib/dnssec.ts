@@ -51,10 +51,10 @@ export const SUPPORTED_RRTYPES = [
  */
 export function unmeasurableExplanation(): string {
   return (
-    `Node-un DNS modulu ${UNMEASURABLE_TYPES.join(", ")} tiplərini birbaşa sorğulaya bilmir — bu ` +
+    `Node-un DNS modulu ${UNMEASURABLE_TYPES.join(", ")} tiplərini birbaşa sorğulaya bilmir: bu ` +
     "modulun dəstəklədiyi siyahıda yoxdur, resolver.resolve() bu tiplərdən biri ilə çağırılanda özü xəta " +
     "verir, şəbəkəyə heç çıxmır. Ona görə bu alət imza və açar qeydlərinin məzmununu göstərə bilmir; " +
-    "əvəzinə valideyn zonanın domenə hansı ad serverlərini göstərdiyini yoxlayır — imzalanmadan asılı " +
+    "əvəzinə valideyn zonanın domenə hansı ad serverlərini göstərdiyini yoxlayır, imzalanmadan asılı " +
     "olmayan, amma DNSSEC-in üzərində qurulduğu eyni zəncirin bir hissəsidir."
   );
 }

@@ -114,7 +114,7 @@ export function ArxitekturaTool() {
                   <span className="font-semibold text-ink">
                     {item.alternative}
                   </span>{" "}
-                  — {item.alternativeWhen}.
+                  ({item.alternativeWhen}).
                 </p>
               </AreaRow>
             ))}
@@ -159,7 +159,7 @@ export function ArxitekturaTool() {
                     <span className="font-ui font-semibold text-ink">
                       {item.pick}
                     </span>{" "}
-                    — {item.wrongWhen}
+                    ({item.wrongWhen})
                   </p>
                 </AreaRow>
               ))}
@@ -252,7 +252,7 @@ export function ArxitekturaTool() {
           />
 
           <p className="border-b border-rule px-3 py-2.5 font-ui text-[11px]/5 text-muted">
-            Beş qat üzrə tövsiyə — cavabı dəyişən kimi yenilənir.
+            Beş qat üzrə tövsiyə: cavabı dəyişən kimi yenilənir.
           </p>
 
           <div className="p-3">
@@ -261,7 +261,7 @@ export function ArxitekturaTool() {
 
           <div className="border-t border-rule p-3">
             <ToolNote tone="info" title="Bu, qərar deyil">
-              Yuxarıdakı beş tövsiyə səkkiz cavaba görə hesablanır — komandanın
+              Yuxarıdakı beş tövsiyə səkkiz cavaba görə hesablanır: komandanın
               təcrübəsini, mövcud kod bazasını, müqavilə tələblərini və işə
               götürmə bazarını bilmir. Onları müzakirənin başlanğıc nöqtəsi kimi
               işlət: «niyə» və «nə vaxt səhv olar» hissələri adın özündən

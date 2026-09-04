@@ -22,7 +22,7 @@
  */
 
 const NO_SUBTLE_ERROR =
-  "Bu səhifə kriptoqrafiya funksiyasına icazə verməyən ünvandan açılıb — açar qurmaq üçün https və ya localhost lazımdır.";
+  "Bu səhifə kriptoqrafiya funksiyasına icazə verməyən ünvandan açılıb: açar qurmaq üçün https və ya localhost lazımdır.";
 
 function subtleCrypto(): SubtleCrypto | null {
   return typeof globalThis.crypto?.subtle === "object" ? globalThis.crypto.subtle : null;
@@ -97,7 +97,7 @@ export type PemDecode = { ok: true; der: Uint8Array<ArrayBuffer>; label: string 
 export function pemToDer(pem: string): PemDecode {
   const match = /-----BEGIN ([A-Z0-9 ]+)-----([\s\S]+?)-----END \1-----/.exec(pem.trim());
   if (!match) {
-    return { ok: false, error: "PEM formatı tanınmadı — `-----BEGIN ...-----` başlığı və uyğun sonluq axtarılır." };
+    return { ok: false, error: "PEM formatı tanınmadı: `-----BEGIN ...-----` başlığı və uyğun sonluq axtarılır." };
   }
   const [, label, body] = match;
   const der = base64ToBytes(body.replace(/\s+/g, ""));
@@ -139,7 +139,7 @@ export async function generateRsaKeyPair(
     );
     return { ok: true, publicKey: keyPair.publicKey, privateKey: keyPair.privateKey };
   } catch {
-    return { ok: false, error: "Açar cütü qurula bilmədi — seçilmiş ölçü və ya parametrlər dəstəklənmir." };
+    return { ok: false, error: "Açar cütü qurula bilmədi: seçilmiş ölçü və ya parametrlər dəstəklənmir." };
   }
 }
 
@@ -192,7 +192,7 @@ export async function importPublicKeyPem(
   const decoded = pemToDer(pem);
   if (!decoded.ok) return decoded;
   if (decoded.label !== PEM_LABELS.public) {
-    return { ok: false, error: `PEM "${PEM_LABELS.public}" başlıqlı olmalıdır — tapılan: "${decoded.label}".` };
+    return { ok: false, error: `PEM "${PEM_LABELS.public}" başlıqlı olmalıdır (tapılan: "${decoded.label}").` };
   }
   try {
     const key = await subtle.importKey(
@@ -204,7 +204,7 @@ export async function importPublicKeyPem(
     );
     return { ok: true, key };
   } catch {
-    return { ok: false, error: "Açıq açar oxunmadı — PEM bu məqsəd və hash ilə RSA açarına uyğun deyil." };
+    return { ok: false, error: "Açıq açar oxunmadı: PEM bu məqsəd və hash ilə RSA açarına uyğun deyil." };
   }
 }
 
@@ -219,7 +219,7 @@ export async function importPrivateKeyPem(
   const decoded = pemToDer(pem);
   if (!decoded.ok) return decoded;
   if (decoded.label !== PEM_LABELS.private) {
-    return { ok: false, error: `PEM "${PEM_LABELS.private}" başlıqlı olmalıdır — tapılan: "${decoded.label}".` };
+    return { ok: false, error: `PEM "${PEM_LABELS.private}" başlıqlı olmalıdır (tapılan: "${decoded.label}").` };
   }
   try {
     const key = await subtle.importKey(
@@ -231,7 +231,7 @@ export async function importPrivateKeyPem(
     );
     return { ok: true, key };
   } catch {
-    return { ok: false, error: "Gizli açar oxunmadı — PEM bu məqsəd və hash ilə RSA açarına uyğun deyil." };
+    return { ok: false, error: "Gizli açar oxunmadı: PEM bu məqsəd və hash ilə RSA açarına uyğun deyil." };
   }
 }
 
@@ -247,7 +247,7 @@ function parseJwk(text: string): { ok: true; value: JsonWebKey } | { ok: false; 
   }
   const kty = (value as Record<string, unknown>).kty;
   if (kty !== "RSA") {
-    return { ok: false, error: `JWK "kty" sahəsi "RSA" olmalıdır — tapılan: ${JSON.stringify(kty)}.` };
+    return { ok: false, error: `JWK "kty" sahəsi "RSA" olmalıdır (tapılan: ${JSON.stringify(kty)}).` };
   }
   return { ok: true, value: value as JsonWebKey };
 }
@@ -272,7 +272,7 @@ export async function importPublicKeyJwk(
     );
     return { ok: true, key };
   } catch {
-    return { ok: false, error: "Açıq açar oxunmadı — JWK bu məqsəd və hash ilə RSA açarına uyğun deyil." };
+    return { ok: false, error: "Açıq açar oxunmadı: JWK bu məqsəd və hash ilə RSA açarına uyğun deyil." };
   }
 }
 
@@ -296,7 +296,7 @@ export async function importPrivateKeyJwk(
     );
     return { ok: true, key };
   } catch {
-    return { ok: false, error: "Gizli açar oxunmadı — JWK bu məqsəd və hash ilə RSA açarına uyğun deyil." };
+    return { ok: false, error: "Gizli açar oxunmadı: JWK bu məqsəd və hash ilə RSA açarına uyğun deyil." };
   }
 }
 
@@ -349,7 +349,7 @@ export async function encryptWithPublicKey(publicKey: CryptoKey, plaintext: stri
   if (bytes.length > limit) {
     return {
       ok: false,
-      error: `Mətn ${bytes.length} bayt — bu açarla (${algorithm.modulusLength} bit, ${hash}) RSA-OAEP həddi ${limit} baytdır. Uzun mətn üçün hibrid üsul lazımdır: AES açarını RSA ilə şifrələ, mətnin özünü AES ilə.`,
+      error: `Mətn ${bytes.length} bayt. Bu açarla (${algorithm.modulusLength} bit, ${hash}) RSA-OAEP həddi ${limit} baytdır. Uzun mətn üçün hibrid üsul lazımdır: AES açarını RSA ilə şifrələ, mətnin özünü AES ilə.`,
     };
   }
 
@@ -357,7 +357,7 @@ export async function encryptWithPublicKey(publicKey: CryptoKey, plaintext: stri
     const ciphertext = await subtle.encrypt({ name: "RSA-OAEP" }, publicKey, bytes);
     return { ok: true, ciphertextBase64: bytesToBase64(new Uint8Array(ciphertext)) };
   } catch {
-    return { ok: false, error: "Şifrələmə alınmadı — açar bu əməliyyat üçün qurulmayıb." };
+    return { ok: false, error: "Şifrələmə alınmadı: açar bu əməliyyat üçün qurulmayıb." };
   }
 }
 
@@ -377,7 +377,7 @@ export async function decryptWithPrivateKey(
     const plaintextBytes = await subtle.decrypt({ name: "RSA-OAEP" }, privateKey, bytes);
     return { ok: true, plaintext: new TextDecoder().decode(plaintextBytes) };
   } catch {
-    return { ok: false, error: "Deşifrələmə alınmadı — gizli açar səhvdir və ya şifrmətn bu açarla şifrələnməyib." };
+    return { ok: false, error: "Deşifrələmə alınmadı: gizli açar səhvdir və ya şifrmətn bu açarla şifrələnməyib." };
   }
 }
 
@@ -401,7 +401,7 @@ export async function signWithPrivateKey(privateKey: CryptoKey, message: string)
     const signature = await subtle.sign(signParamsFor(algorithm), privateKey, new TextEncoder().encode(message));
     return { ok: true, signatureBase64: bytesToBase64(new Uint8Array(signature)) };
   } catch {
-    return { ok: false, error: "İmzalama alınmadı — açar bu əməliyyat üçün qurulmayıb." };
+    return { ok: false, error: "İmzalama alınmadı: açar bu əməliyyat üçün qurulmayıb." };
   }
 }
 
@@ -428,6 +428,6 @@ export async function verifyWithPublicKey(
     );
     return { ok: true, valid };
   } catch {
-    return { ok: false, error: "Yoxlama alınmadı — açar bu imza növü üçün qurulmayıb." };
+    return { ok: false, error: "Yoxlama alınmadı: açar bu imza növü üçün qurulmayıb." };
   }
 }

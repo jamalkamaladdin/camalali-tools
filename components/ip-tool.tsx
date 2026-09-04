@@ -34,7 +34,7 @@ export function IpTool() {
     event.preventDefault();
     const value = query.trim();
     if (value === "") {
-      setState({ status: "error", message: "Boş sahə — IP ünvanı və ya domen adı yaz." });
+      setState({ status: "error", message: "Boş sahə: IP ünvanı və ya domen adı yaz." });
       return;
     }
 
@@ -53,7 +53,7 @@ export function IpTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Şəhər səviyyəli yer göstərilmir">
-        RDAP və ASN mənbələrindən yalnız ölkə kodu gəlir — şəhər və ya koordinat pulsuz mənbədə
+        RDAP və ASN mənbələrindən yalnız ölkə kodu gəlir: şəhər və ya koordinat pulsuz mənbədə
         etibarlı olmadığı üçün heç vaxt uydurulmur.
       </ToolNote>
 
@@ -121,7 +121,7 @@ function AddressCard({ result }: { result: IpAddressResult }) {
 
         {!isPublic && (
           <p className="text-sm/6 text-muted">
-            Bu ünvan ictimai deyil — şəbəkə bloku, ASN və tərs DNS axtarışı yalnız ictimai ünvanlar
+            Bu ünvan ictimai deyil: şəbəkə bloku, ASN və tərs DNS axtarışı yalnız ictimai ünvanlar
             üçün aparılır, bu ünvan üçün heç bir xarici sorğu göndərilmədi.
           </p>
         )}
@@ -129,9 +129,9 @@ function AddressCard({ result }: { result: IpAddressResult }) {
         {isPublic && (
           <>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-              <ToolStat label="ASN" value={result.asn ? `AS${result.asn.asn}` : "—"} />
-              <ToolStat label="Şəbəkə bloku" value={result.asn?.prefix ?? "—"} />
-              <ToolStat label="Ölkə" value={result.rdap?.country ?? result.asn?.country ?? "—"} />
+              <ToolStat label="ASN" value={result.asn ? `AS${result.asn.asn}` : ""} />
+              <ToolStat label="Şəbəkə bloku" value={result.asn?.prefix ?? ""} />
+              <ToolStat label="Ölkə" value={result.rdap?.country ?? result.asn?.country ?? ""} />
               <ToolStat
                 label="Tərs DNS"
                 value={result.ptr && result.ptr.length > 0 ? "var" : "yoxdur"}

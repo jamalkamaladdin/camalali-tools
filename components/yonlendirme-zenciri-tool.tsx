@@ -89,7 +89,7 @@ export function YonlendirmeZenciriTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu alət sorğunu serverə göndərir">
-        Yazdığın ünvanı sənin brauzerin yox, bu saytın serveri açır və zənciri addım-addım izləyir —
+        Yazdığın ünvanı sənin brauzerin yox, bu saytın serveri açır və zənciri addım-addım izləyir:
         ən çoxu 10 addım. Səhifələrin mətni oxunmur, yalnız status kodu və «Location» başlığı
         götürülür. Hər addım ayrıca yoxlanılır: zəncir daxili şəbəkə ünvanına (localhost, 10.x,
         192.168.x) çıxarsa orada dayandırılır.
@@ -210,7 +210,7 @@ function Report({ report }: { report: ChainReport }) {
         <div className="space-y-3 p-3">
           {report.issues.length === 0 ? (
             <p className="text-sm/6 text-muted">
-              Zəncirdə düzəliş tələb edən bir şey tapılmadı — nə dövrə, nə artıq addım, nə də sxem
+              Zəncirdə düzəliş tələb edən bir şey tapılmadı: nə dövrə, nə artıq addım, nə də sxem
               enişi var.
             </p>
           ) : (
@@ -223,7 +223,7 @@ function Report({ report }: { report: ChainReport }) {
         Bu alət yalnız HTTP səviyyəsini oxuyur. Səhifənin içindəki{" "}
         <span className="font-mono text-xs">meta refresh</span> teqi və ya JavaScript ilə edilən{" "}
         <span className="font-mono text-xs">location.href</span> yönləndirməsi serverin cavabında
-        görünmür — belə hallarda burada «200, son ünvan» yazılır, çünki serverin dediyi elə budur.
+        görünmür: belə hallarda burada «200, son ünvan» yazılır, çünki serverin dediyi elə budur.
         Nəticə uydurulmur: brauzerdə köçürmə görürsənsə, amma zəncir 200 ilə bitirsə, səbəb məhz
         budur. Hər ikisi SEO baxımından 301-in əvəzi deyil.
       </ToolNote>

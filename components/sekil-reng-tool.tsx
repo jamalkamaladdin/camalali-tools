@@ -51,7 +51,7 @@ function loadImageElement(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const image = new Image();
     image.onload = () => resolve(image);
-    image.onerror = () => reject(new Error("Şəkil açılmadı — fayl zədəli və ya format dəstəklənmir."));
+    image.onerror = () => reject(new Error("Şəkil açılmadı: fayl zədəli və ya format dəstəklənmir."));
     image.src = src;
   });
 }
@@ -95,7 +95,7 @@ export function SekilRengTool() {
 
   async function loadFile(selected: File) {
     if (!isSupportedImageMime(selected.type)) {
-      setError("Fayl şəkil formatında deyil (və ya brauzer onu tanımadı) — başqa fayl seç.");
+      setError("Fayl şəkil formatında deyil (və ya brauzer onu tanımadı): başqa fayl seç.");
       return;
     }
 
@@ -129,7 +129,7 @@ export function SekilRengTool() {
       canvas.width = sample.width;
       canvas.height = sample.height;
       const context = canvas.getContext("2d");
-      if (!context) throw new Error("2D kontekst alınmadı — brauzer canvas-ı dəstəkləmir.");
+      if (!context) throw new Error("2D kontekst alınmadı: brauzer canvas-ı dəstəkləmir.");
       context.drawImage(image, 0, 0, sample.width, sample.height);
       const pixels = context.getImageData(0, 0, sample.width, sample.height).data;
 
@@ -211,7 +211,7 @@ export function SekilRengTool() {
 
         <div className="space-y-4 p-4">
           <ToolNote>
-            Şəkil serverə göndərilmir — açma, kiçildilmiş nüsxənin çəkilməsi və rəng hesablaması
+            Şəkil serverə göndərilmir: açma, kiçildilmiş nüsxənin çəkilməsi və rəng hesablaması
             tamamilə brauzerdə, canvas ilə aparılır.
           </ToolNote>
 
@@ -236,7 +236,7 @@ export function SekilRengTool() {
               }`}
             >
               <span className="font-ui text-sm">Şəkil seç və ya bura sürüşdür</span>
-              <span className="font-ui text-xs text-muted">JPEG · PNG · WebP · GIF · BMP — bir şəkil</span>
+              <span className="font-ui text-xs text-muted">JPEG · PNG · WebP · GIF · BMP, bir şəkil</span>
             </label>
           </div>
 

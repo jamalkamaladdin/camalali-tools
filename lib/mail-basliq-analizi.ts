@@ -300,7 +300,7 @@ function sumDelays(hops: readonly ReceivedHop[]): number | null {
  */
 export function buildMailAnalysis(raw: string): MailAnalysisResult {
   if (raw.trim() === "") {
-    return { ok: false, error: "Boş sahə — e-poçt başlıqlarını yapışdır." };
+    return { ok: false, error: "Boş sahə: e-poçt başlıqlarını yapışdır." };
   }
 
   const headers = parseHeaders(raw);

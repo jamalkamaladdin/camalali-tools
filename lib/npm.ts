@@ -60,7 +60,7 @@ export function parseNpmName(raw: string): NpmNameResult {
   if (value.startsWith("@")) {
     const slash = value.indexOf("/");
     if (slash === -1) {
-      return { ok: false, error: "Scope-lu ad @scope/ad formatındadır — '/' işarəsi yoxdur." };
+      return { ok: false, error: "Scope-lu ad @scope/ad formatındadır: '/' işarəsi yoxdur." };
     }
     const scope = value.slice(1, slash);
     const name = value.slice(slash + 1);

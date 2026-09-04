@@ -46,7 +46,7 @@ export function decodeBase64(value: string): DecodeResult {
   // Pasted Base64 is usually wrapped across lines; whitespace is never data.
   const cleaned = value.replace(/\s+/g, "");
   if (cleaned === "") {
-    return { ok: false, error: "Boş sahə — Base64 mətnini yapışdır." };
+    return { ok: false, error: "Boş sahə: Base64 mətnini yapışdır." };
   }
 
   let normalised = cleaned.replaceAll("-", "+").replaceAll("_", "/");

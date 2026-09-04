@@ -60,12 +60,12 @@ const KNOWN_LANGUAGES: Record<string, string> = {
  * hreflang value at all.
  */
 const UK_TRAP_NOTE =
-  ' — DİQQƏT: bu, Böyük Britaniya demək DEYİL. "uk" ISO 639-1-də Ukrayna dilini bildirir; Böyük Britaniya ingiliscəsi üçün "en-GB" işlədilir. Bu, hreflang-da ən çox yayılan səhvdir.';
+  '. DİQQƏT: bu, Böyük Britaniya demək DEYİL. "uk" ISO 639-1-də Ukrayna dilini bildirir; Böyük Britaniya ingiliscəsi üçün "en-GB" işlədilir. Bu, hreflang-da ən çox yayılan səhvdir.';
 
 function languageLabel(language: string): string {
   const known = KNOWN_LANGUAGES[language];
   if (known === undefined) {
-    return "Format düzgündür, amma bu dil kodu tanınmır — uydurma ad vermirik.";
+    return "Format düzgündür, amma bu dil kodu tanınmır: uydurma ad vermirik.";
   }
   return language === "uk" ? `${known}${UK_TRAP_NOTE}` : known;
 }
@@ -103,7 +103,7 @@ export function checkLanguageCode(raw: string): CodeCheck {
       language: null,
       region: null,
       label: null,
-      problem: `"${code}" — ayırıcı alt xətt (_) yox, defis (-) olmalıdır, məsələn "az-AZ".`,
+      problem: `"${code}": ayırıcı alt xətt (_) yox, defis (-) olmalıdır, məsələn "az-AZ".`,
     };
   }
 
@@ -114,7 +114,7 @@ export function checkLanguageCode(raw: string): CodeCheck {
       language: null,
       region: null,
       label: null,
-      problem: `"${code}" — yalnız dil ("az") və ya dil-ölkə ("az-AZ") formatı qəbul olunur, üçüncü hissə (məsələn skript alt-kodu) dəstəklənmir.`,
+      problem: `"${code}": yalnız dil ("az") və ya dil-ölkə ("az-AZ") formatı qəbul olunur, üçüncü hissə (məsələn skript alt-kodu) dəstəklənmir.`,
     };
   }
 
@@ -125,7 +125,7 @@ export function checkLanguageCode(raw: string): CodeCheck {
       language: null,
       region: null,
       label: null,
-      problem: `"${languagePart}" ISO 639-1 dil kodu deyil — iki hərfli olmalıdır (məsələn "az", "en"). Dilin tam adını yox, kodunu yaz.`,
+      problem: `"${languagePart}" ISO 639-1 dil kodu deyil: iki hərfli olmalıdır (məsələn "az", "en"). Dilin tam adını yox, kodunu yaz.`,
     };
   }
 
@@ -141,7 +141,7 @@ export function checkLanguageCode(raw: string): CodeCheck {
       language,
       region: null,
       label: null,
-      problem: `"${regionPart}" ISO 3166-1 alpha-2 ölkə kodu deyil — iki hərfli olmalıdır (məsələn "AZ"), "${regionPart}" ${regionPart.length} hərflidir.`,
+      problem: `"${regionPart}" ISO 3166-1 alpha-2 ölkə kodu deyil: iki hərfli olmalıdır (məsələn "AZ"), "${regionPart}" ${regionPart.length} hərflidir.`,
     };
   }
 
@@ -217,7 +217,7 @@ export function auditHreflang(entries: HreflangEntry[], selfUrl: string | null):
   for (const entry of entries) {
     const check = checkLanguageCode(entry.code);
     if (!check.ok) {
-      issues.push({ severity: "xeta", message: `"${entry.code}" — ${check.problem}`, entry });
+      issues.push({ severity: "xeta", message: `"${entry.code}": ${check.problem}`, entry });
     } else if (check.language === "uk") {
       issues.push({
         severity: "xeberdarliq",
@@ -229,7 +229,7 @@ export function auditHreflang(entries: HreflangEntry[], selfUrl: string | null):
     if (!isAbsoluteHttpUrl(entry.url)) {
       issues.push({
         severity: "xeta",
-        message: `"${entry.url}" mütləq URL deyil — hreflang sxem daxil olmaqla tam ünvan tələb edir (https://sayt.com/... kimi), nisbi yol qəbul etmir.`,
+        message: `"${entry.url}" mütləq URL deyil: hreflang sxem daxil olmaqla tam ünvan tələb edir (https://sayt.com/... kimi), nisbi yol qəbul etmir.`,
         entry,
       });
     }
@@ -246,7 +246,7 @@ export function auditHreflang(entries: HreflangEntry[], selfUrl: string | null):
     if (urls.size > 1) {
       issues.push({
         severity: "xeta",
-        message: `"${code}" dil kodu ${urls.size} fərqli URL-ə verilib — hər kod yalnız bir URL-i göstərə bilər, yoxsa crawler hansının doğru olduğunu bilmir.`,
+        message: `"${code}" dil kodu ${urls.size} fərqli URL-ə verilib: hər kod yalnız bir URL-i göstərə bilər, yoxsa crawler hansının doğru olduğunu bilmir.`,
         entry: null,
       });
     }
@@ -258,7 +258,7 @@ export function auditHreflang(entries: HreflangEntry[], selfUrl: string | null):
     if (!hasSelfReference) {
       issues.push({
         severity: "xeta",
-        message: `Özünə istinad yoxdur — "${trimmedSelf}" özü də bu hreflang dəstində sadalanmalıdır. Hər səhifə, o cümlədən özü, tam dəsti daşımalıdır.`,
+        message: `Özünə istinad yoxdur: "${trimmedSelf}" özü də bu hreflang dəstində sadalanmalıdır. Hər səhifə, o cümlədən özü, tam dəsti daşımalıdır.`,
         entry: null,
       });
     }
@@ -269,7 +269,7 @@ export function auditHreflang(entries: HreflangEntry[], selfUrl: string | null):
     issues.push({
       severity: "xeberdarliq",
       message:
-        "x-default yoxdur — dili siyahıdakı heç bir kodla üst-üstə düşməyən ziyarətçi üçün hansı səhifənin göstəriləcəyi deyilməyib.",
+        "x-default yoxdur: dili siyahıdakı heç bir kodla üst-üstə düşməyən ziyarətçi üçün hansı səhifənin göstəriləcəyi deyilməyib.",
       entry: null,
     });
   }

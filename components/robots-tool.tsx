@@ -280,14 +280,14 @@ export function RobotsTool() {
                       {checkerResult.matchedRule.type === "allow" ? "Allow" : "Disallow"}:{" "}
                       {checkerResult.matchedRule.path}
                     </span>{" "}
-                    — <span className="font-mono">{checkerResult.matchedRule.userAgents.join(", ")}</span> qrupundan
+                    , <span className="font-mono">{checkerResult.matchedRule.userAgents.join(", ")}</span> qrupundan
                     {checkerResult.usedWildcardFallback &&
                       " (bu bot üçün ayrıca qrup yoxdur, * qrupu işlədi)"}
                     .
                   </ToolNote>
                 ) : (
                   <ToolNote tone="info">
-                    Heç bir qayda bu yola uyğun gəlmədi — defolt olaraq icazə verilir.
+                    Heç bir qayda bu yola uyğun gəlmədi: defolt olaraq icazə verilir.
                   </ToolNote>
                 )}
               </div>

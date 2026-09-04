@@ -103,7 +103,7 @@ export function PdfBolTool() {
     } catch (cause) {
       console.error("pdf-bol: file read failed", cause);
       setStatus("problem");
-      setProblem("Fayl oxunmadı — zədəli ola bilər.");
+      setProblem("Fayl oxunmadı: zədəli ola bilər.");
     }
   }
 
@@ -141,7 +141,7 @@ export function PdfBolTool() {
     if (options === null) {
       setError(
         mode === "ranges"
-          ? "Səhifə aralığını yaz — məsələn 1-3, 5, 8-10."
+          ? "Səhifə aralığını yaz: məsələn 1-3, 5, 8-10."
           : "Neçə səhifədən bir bölünəcəyini müsbət tam ədədlə yaz.",
       );
       return;
@@ -165,7 +165,7 @@ export function PdfBolTool() {
       );
     } catch (cause) {
       console.error("pdf-bol: split failed", cause);
-      setError("Bölmə alınmadı — bir daha yoxla.");
+      setError("Bölmə alınmadı: bir daha yoxla.");
     } finally {
       setBusy(false);
     }
@@ -218,9 +218,9 @@ export function PdfBolTool() {
           {file !== null && (
             <p className="font-ui text-sm">
               {file.name} <span className="text-muted tabular-nums">({formatBytes(file.size)})</span>
-              {status === "checking" && <span className="text-muted"> — yoxlanılır…</span>}
+              {status === "checking" && <span className="text-muted">, yoxlanılır…</span>}
               {status === "ready" && pageCount !== null && (
-                <span className="text-muted tabular-nums"> — {pageCount} səhifə</span>
+                <span className="text-muted tabular-nums">, {pageCount} səhifə</span>
               )}
             </p>
           )}

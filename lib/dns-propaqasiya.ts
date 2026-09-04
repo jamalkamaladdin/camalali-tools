@@ -33,13 +33,13 @@ export const RECORD_TYPES = ["A", "AAAA", "CNAME", "MX", "TXT", "NS", "SOA"] as 
 export type RecordType = (typeof RECORD_TYPES)[number];
 
 export const RECORD_TYPE_LABELS: Record<RecordType, string> = {
-  A: "A — IPv4 ünvanı",
-  AAAA: "AAAA — IPv6 ünvanı",
-  CNAME: "CNAME — başqa ada yönləndirmə",
-  MX: "MX — poçt serveri",
-  TXT: "TXT — sərbəst mətn (SPF, DMARC, sahiblik)",
-  NS: "NS — zonanın ad serverləri",
-  SOA: "SOA — zonanın başlanğıc qeydi",
+  A: "A: IPv4 ünvanı",
+  AAAA: "AAAA: IPv6 ünvanı",
+  CNAME: "CNAME: başqa ada yönləndirmə",
+  MX: "MX: poçt serveri",
+  TXT: "TXT: sərbəst mətn (SPF, DMARC, sahiblik)",
+  NS: "NS: zonanın ad serverləri",
+  SOA: "SOA: zonanın başlanğıc qeydi",
 };
 
 export function isRecordType(value: string): value is RecordType {
@@ -158,7 +158,7 @@ export type PropagationVerdict =
  */
 export function buildVerdict(results: readonly ResolverResult[]): PropagationVerdict {
   if (results.length === 0) {
-    return { kind: "no-data", message: "Yoxlanacaq ad server yoxdur — sorğu göndərilmədi." };
+    return { kind: "no-data", message: "Yoxlanacaq ad server yoxdur: sorğu göndərilmədi." };
   }
 
   const comparable = results.filter((result) => result.status === "ok");
@@ -166,7 +166,7 @@ export function buildVerdict(results: readonly ResolverResult[]): PropagationVer
     return {
       kind: "no-data",
       message:
-        "Heç bir ad server vaxtında və ya düzgün cavab vermədi — nəticələr müqayisə edilə bilmədi.",
+        "Heç bir ad server vaxtında və ya düzgün cavab vermədi: nəticələr müqayisə edilə bilmədi.",
     };
   }
 
@@ -180,7 +180,7 @@ export function buildVerdict(results: readonly ResolverResult[]): PropagationVer
     return {
       kind: "not-synced",
       message:
-        "Domenin mötəbər ad serverləri bir-biri ilə razılaşmır — zona hələ öz bütün ad serverlərinə tam yayılmayıb. Bu, keşin gözlənilməsi ilə düzəlmir; problem keş serverlərdə deyil, zonanın öz mənbəyindədir.",
+        "Domenin mötəbər ad serverləri bir-biri ilə razılaşmır. Zona hələ öz bütün ad serverlərinə tam yayılmayıb. Bu, keşin gözlənilməsi ilə düzəlmir; problem keş serverlərdə deyil, zonanın öz mənbəyindədir.",
     };
   }
 
@@ -209,8 +209,8 @@ export function buildVerdict(results: readonly ResolverResult[]): PropagationVer
   const message =
     authGroups.length === 1
       ? maxWaitSeconds !== null
-        ? `Dəyişiklik mötəbər ad serverdə artıq var. ${differingLabels.length} keş server hələ köhnə cavabı saxlayır — gözləmə vaxtı ən çox ${formatDuration(maxWaitSeconds)} qədərdir.`
-        : `Dəyişiklik mötəbər ad serverdə artıq var. ${differingLabels.length} keş server hələ köhnə cavabı saxlayır — bu qeyd növü TTL daşımadığı üçün dəqiq gözləmə vaxtı bilinmir.`
+        ? `Dəyişiklik mötəbər ad serverdə artıq var. ${differingLabels.length} keş server hələ köhnə cavabı saxlayır: gözləmə vaxtı ən çox ${formatDuration(maxWaitSeconds)} qədərdir.`
+        : `Dəyişiklik mötəbər ad serverdə artıq var. ${differingLabels.length} keş server hələ köhnə cavabı saxlayır: bu qeyd növü TTL daşımadığı üçün dəqiq gözləmə vaxtı bilinmir.`
       : `Ad serverləri fərqli cavab verir: ${differingLabels.join(", ")} qalanlarından fərqlənir.`;
 
   return { kind: "disagree", message, differing: differingLabels, maxWaitSeconds };

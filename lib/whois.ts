@@ -49,14 +49,14 @@ export type DomainCheck =
 export function parseDomainName(raw: string): DomainCheck {
   const trimmed = raw.trim().toLowerCase().replace(/\.$/, "");
 
-  if (trimmed === "") return { ok: false, error: "Boş sahə — domen adı yaz." };
+  if (trimmed === "") return { ok: false, error: "Boş sahə: domen adı yaz." };
   if (trimmed.length > 253) {
     return { ok: false, error: "Domen adı həddindən uzundur." };
   }
   if (!DOMAIN_PATTERN.test(trimmed)) {
     return {
       ok: false,
-      error: "Domen adı oxunmadı — «example.com» formatında, sxem və yol olmadan yaz.",
+      error: "Domen adı oxunmadı: «example.com» formatında, sxem və yol olmadan yaz.",
     };
   }
 
@@ -91,47 +91,47 @@ function normalizeEppCode(raw: string): string {
  * rather than a lock at all.
  */
 const EPP_STATUS_EXPLANATIONS: Record<string, string> = {
-  ok: "Domendə heç bir məhdudiyyət yoxdur — transfer, silmə və yeniləmə sərbəstdir.",
-  active: "Domen aktivdir və heç bir məhdudiyyət daşımır — bəzi reyestrlər «ok» əvəzinə bu sözü yazır.",
+  ok: "Domendə heç bir məhdudiyyət yoxdur: transfer, silmə və yeniləmə sərbəstdir.",
+  active: "Domen aktivdir və heç bir məhdudiyyət daşımır (bəzi reyestrlər «ok» əvəzinə bu sözü yazır).",
 
   "client transfer prohibited":
-    "Reyestrator (və ya sahibin özü) domenin başqa reyestratora keçirilməsini qəsdən bloklayıb — bu, təhlükəsizlik qıfılıdır, problem əlaməti deyil. Transfer lazım olsa, əvvəlcə reyestratordan bu qıfılı açmaq istənilir.",
+    "Reyestrator (və ya sahibin özü) domenin başqa reyestratora keçirilməsini qəsdən bloklayıb. Bu, təhlükəsizlik qıfılıdır, problem əlaməti deyil. Transfer lazım olsa, əvvəlcə reyestratordan bu qıfılı açmaq istənilir.",
   "server transfer prohibited":
-    "Reyestrin özü (registry, reyestrator yox) transferi bloklayıb — adətən mübahisə, məhkəmə qərarı və ya reyestrin siyasəti səbəbindən qoyulur.",
+    "Reyestrin özü (registry, reyestrator yox) transferi bloklayıb: adətən mübahisə, məhkəmə qərarı və ya reyestrin siyasəti səbəbindən qoyulur.",
   "client delete prohibited":
-    "Reyestrator domenin təsadüfən silinməsinin qarşısını almaq üçün qıfıl qoyub — normal qoruyucu tədbirdir.",
+    "Reyestrator domenin təsadüfən silinməsinin qarşısını almaq üçün qıfıl qoyub (normal qoruyucu tədbirdir).",
   "server delete prohibited":
-    "Reyestr domeni silinmədən qoruyur — adətən reyestrin öz siyasəti və ya hüquqi məhdudiyyət səbəbindən.",
+    "Reyestr domeni silinmədən qoruyur: adətən reyestrin öz siyasəti və ya hüquqi məhdudiyyət səbəbindən.",
   "client renew prohibited":
-    "Reyestrator bu domen üçün yenilənməni bloklayıb — nadir hallarda, adətən hesab və ya ödəniş problemi ilə bağlı olur.",
+    "Reyestrator bu domen üçün yenilənməni bloklayıb, nadir hallarda, adətən hesab və ya ödəniş problemi ilə bağlı olur.",
   "server renew prohibited": "Reyestr bu domenin yenilənməsini bloklayıb.",
   "client update prohibited":
-    "Reyestrator domen məlumatlarının (nameserver, əlaqə və s.) dəyişdirilməsini bloklayıb — təhlükəsizlik qıfılıdır.",
+    "Reyestrator domen məlumatlarının (nameserver, əlaqə və s.) dəyişdirilməsini bloklayıb. Təhlükəsizlik qıfılıdır.",
   "server update prohibited": "Reyestr domen məlumatlarının dəyişdirilməsini bloklayıb.",
   "transfer prohibited":
-    "Domenin transferi bloklanıb — reyestr sahiblə reyestratoru ayırmadan bu qıfılı qoyub.",
+    "Domenin transferi bloklanıb: reyestr sahiblə reyestratoru ayırmadan bu qıfılı qoyub.",
   "delete prohibited": "Domenin silinməsi bloklanıb.",
   "renew prohibited": "Domenin yenilənməsi bloklanıb.",
   "update prohibited": "Domen məlumatlarının dəyişdirilməsi bloklanıb.",
 
-  "client hold": "Reyestrator domeni DNS-dən müvəqqəti çıxarıb — sayt işləməyəcək, adətən ödəniş problemi və ya sui-istifadə şübhəsi ilə qoyulur.",
-  "server hold": "Reyestr domeni DNS-dən çıxarıb — sayt bütün dünyada əlçatmaz olur, adətən mübahisə və ya sui-istifadə araşdırması zamanı qoyulur.",
-  locked: "Domen kilidlənib — bu, adətən «client transfer prohibited»-in reyestratorlar tərəfindən istifadə edilən adi adıdır və sahibin özü tərəfindən qoyulan qorumadır.",
-  inactive: "Domenin heç bir nameserver-i qeydə alınmayıb — qeydiyyat var, amma DNS qurulmayıb, sayt bu adla açılmayacaq.",
+  "client hold": "Reyestrator domeni DNS-dən müvəqqəti çıxarıb: sayt işləməyəcək, adətən ödəniş problemi və ya sui-istifadə şübhəsi ilə qoyulur.",
+  "server hold": "Reyestr domeni DNS-dən çıxarıb: sayt bütün dünyada əlçatmaz olur, adətən mübahisə və ya sui-istifadə araşdırması zamanı qoyulur.",
+  locked: "Domen kilidlənib. Bu, adətən «client transfer prohibited»-in reyestratorlar tərəfindən istifadə edilən adi adıdır və sahibin özü tərəfindən qoyulan qorumadır.",
+  inactive: "Domenin heç bir nameserver-i qeydə alınmayıb. Qeydiyyat var, amma DNS qurulmayıb, sayt bu adla açılmayacaq.",
 
-  "pending create": "Domenin qeydiyyatı hələ tamamlanır — adətən bir neçə saat içində bitir.",
-  "pending delete": "Domen artıq silinmə prosesindədir — bir neçə gün içində tamamilə boşalacaq və hər kəs onu qeydiyyatdan keçirə biləcək.",
+  "pending create": "Domenin qeydiyyatı hələ tamamlanır: adətən bir neçə saat içində bitir.",
+  "pending delete": "Domen artıq silinmə prosesindədir: bir neçə gün içində tamamilə boşalacaq və hər kəs onu qeydiyyatdan keçirə biləcək.",
   "pending renew": "Domenin yenilənmə sorğusu icra olunur.",
-  "pending restore": "Domen «redemption period»-dan geri qaytarılır — sahibi onu bərpa etmək üçün əlavə ödəniş edib.",
+  "pending restore": "Domen «redemption period»-dan geri qaytarılır: sahibi onu bərpa etmək üçün əlavə ödəniş edib.",
   "pending transfer": "Domenin başqa reyestratora keçirilmə sorğusu təsdiq gözləyir.",
   "pending update": "Domen məlumatlarında dəyişiklik icra olunur.",
 
-  "add period": "Domen son beş gün ərzində qeydə alınıb — bu müddətdə reyestrator qeydiyyatı pulsuz ləğv edə bilər (add grace period).",
-  "auto renew period": "Domenin müddəti bitib və avtomatik yenilənib — sahib bu qısa pəncərədə (adətən 45 gün) yenilənməni pulsuz ləğv edə bilər.",
-  "renew period": "Domen yaxınlarda əl ilə yenilənib — qısa ləğv pəncərəsindədir (renew grace period).",
-  "transfer period": "Domen yaxınlarda başqa reyestratora keçirilib — qısa ləğv pəncərəsindədir (transfer grace period).",
+  "add period": "Domen son beş gün ərzində qeydə alınıb: bu müddətdə reyestrator qeydiyyatı pulsuz ləğv edə bilər (add grace period).",
+  "auto renew period": "Domenin müddəti bitib və avtomatik yenilənib, sahib bu qısa pəncərədə (adətən 45 gün) yenilənməni pulsuz ləğv edə bilər.",
+  "renew period": "Domen yaxınlarda əl ilə yenilənib: qısa ləğv pəncərəsindədir (renew grace period).",
+  "transfer period": "Domen yaxınlarda başqa reyestratora keçirilib: qısa ləğv pəncərəsindədir (transfer grace period).",
   "redemption period":
-    "Domenin müddəti bitib və artıq silinmə mərhələsindədir — bu, itirilmiş domen demək deyil: sahib onu adətən 30 gün ərzində əlavə ödənişlə bərpa edə bilər, sonra tamamilə buraxılır.",
+    "Domenin müddəti bitib və artıq silinmə mərhələsindədir. Bu, itirilmiş domen demək deyil: sahib onu adətən 30 gün ərzində əlavə ödənişlə bərpa edə bilər, sonra tamamilə buraxılır.",
 };
 
 /**
@@ -141,7 +141,7 @@ const EPP_STATUS_EXPLANATIONS: Record<string, string> = {
  */
 export function explainEppStatus(rawCode: string): EppStatusExplained {
   const explanation = EPP_STATUS_EXPLANATIONS[normalizeEppCode(rawCode)];
-  return { code: rawCode, explanation: explanation ?? `${rawCode} — izah yoxdur.` };
+  return { code: rawCode, explanation: explanation ?? `${rawCode}: izah yoxdur.` };
 }
 
 /* ---------- reading the RDAP body ---------- */

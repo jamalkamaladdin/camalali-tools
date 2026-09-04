@@ -60,7 +60,7 @@ async function readHeaders(url: string): Promise<FetchResult> {
       ok: false,
       message: aborted
         ? "Sayt 8 saniyə ərzində cavab vermədi."
-        : "Saytla əlaqə qurulmadı — ünvan işləyirmi, yoxla.",
+        : "Saytla əlaqə qurulmadı: ünvan işləyirmi, yoxla.",
     };
   } finally {
     clearTimeout(deadline);

@@ -172,7 +172,7 @@ export function BcryptTool() {
 
               {overLimit && (
                 <ToolNote tone="accent" title="72 bayt limiti aşıldı">
-                  Parol {byteLength} bayt — bcrypt yalnız ilk {BCRYPT_MAX_PASSWORD_BYTES} baytı hesablamaya
+                  Parol {byteLength} bayt: bcrypt yalnız ilk {BCRYPT_MAX_PASSWORD_BYTES} baytı hesablamaya
                   qatır, qalanı sükutla atır. Azərbaycan hərfləri (ə, ş, ğ, ç, ö, ü, İ) UTF-8-də 2 bayt
                   tutduğu üçün bu hədd belə hərflərlə yazılmış parolda təxminən yarıya, 36 simvola düşür.
                 </ToolNote>

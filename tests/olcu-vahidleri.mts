@@ -122,7 +122,7 @@ export const checks: CheckSuite = (check) => {
   check(
     "olcu-vahidleri: a link of zero speed gives an infinite wait rather than a division result",
     transferSeconds(1e9, 0) === Number.POSITIVE_INFINITY &&
-      humanDuration(transferSeconds(1e9, 0)) === "—",
+      humanDuration(transferSeconds(1e9, 0)) === "",
     `got: ${transferSeconds(1e9, 0)}`,
   );
 
@@ -154,8 +154,8 @@ export const checks: CheckSuite = (check) => {
   );
 
   check(
-    "olcu-vahidleri: NaN and infinity come back as a dash instead of a crash",
-    humanDuration(Number.NaN) === "—" && humanDuration(Number.POSITIVE_INFINITY) === "—",
+    "olcu-vahidleri: NaN and infinity come back empty instead of crashing",
+    humanDuration(Number.NaN) === "" && humanDuration(Number.POSITIVE_INFINITY) === "",
     `got: ${humanDuration(Number.NaN)} / ${humanDuration(Number.POSITIVE_INFINITY)}`,
   );
 
@@ -258,8 +258,8 @@ export const checks: CheckSuite = (check) => {
   );
 
   check(
-    "olcu-vahidleri: an infinite or NaN reading prints as a dash",
-    formatAmount(Number.POSITIVE_INFINITY) === "—" && formatAmount(Number.NaN) === "—",
+    "olcu-vahidleri: an infinite or NaN reading prints as nothing at all",
+    formatAmount(Number.POSITIVE_INFINITY) === "" && formatAmount(Number.NaN) === "",
     `got: ${formatAmount(Number.POSITIVE_INFINITY)} / ${formatAmount(Number.NaN)}`,
   );
 

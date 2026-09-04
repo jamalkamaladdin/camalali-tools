@@ -32,7 +32,7 @@ export type LatencyReferenceRow = {
  */
 export const LATENCY_REFERENCE_YEAR = 2012;
 export const LATENCY_REFERENCE_SOURCE =
-  "Jeff Dean (Google) — Peter Norvig-in tərtib etdiyi və Colin Scott-un 2012-ci ildə yenilədiyi siyahı. Konkret bir maşının bugünkü ölçüsü deyil, nisbi miqyası göstərən istinad nöqtəsidir.";
+  "Jeff Dean (Google): Peter Norvig-in tərtib etdiyi və Colin Scott-un 2012-ci ildə yenilədiyi siyahı. Konkret bir maşının bugünkü ölçüsü deyil, nisbi miqyası göstərən istinad nöqtəsidir.";
 
 export const LATENCY_REFERENCE: LatencyReferenceRow[] = [
   { id: "l1", name: "L1 keşdən oxuma", ns: 0.5 },

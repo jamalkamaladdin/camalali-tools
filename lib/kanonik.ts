@@ -166,7 +166,7 @@ export function canonicalise(raw: string, enabled: Set<CanonRule>): CanonResult 
       input: raw,
       canonical: null,
       applied: [],
-      error: "Bu mütləq URL-ə oxşamır — sxem (https://) daxil olmalıdır.",
+      error: "Bu mütləq URL-ə oxşamır: sxem (https://) daxil olmalıdır.",
     };
   }
 
@@ -177,7 +177,7 @@ export function canonicalise(raw: string, enabled: Set<CanonRule>): CanonResult 
       input: raw,
       canonical: null,
       applied: [],
-      error: `"${originalScheme}:" sxemi dəstəklənmir — yalnız http və https URL-ləri kanonikləşdirilir.`,
+      error: `"${originalScheme}:" sxemi dəstəklənmir: yalnız http və https URL-ləri kanonikləşdirilir.`,
     };
   }
 

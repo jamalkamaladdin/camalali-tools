@@ -142,13 +142,13 @@ function ReceivedChainPanel({ hops }: { hops: ReceivedHop[] }) {
         {hops.map((hop, index) => (
           <div key={index} className="rounded border border-result-rule p-3">
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <ToolLabel>{index === 0 ? "1. sıçrayış — göndərən tərəf" : `${index + 1}. sıçrayış`}</ToolLabel>
+              <ToolLabel>{index === 0 ? "1. sıçrayış (göndərən tərəf)" : `${index + 1}. sıçrayış`}</ToolLabel>
               <span className="text-[11px] text-muted tabular-nums">{formatDelay(hop.delayMs)}</span>
             </div>
             <p className="mt-1 font-mono text-xs break-all">
-              {hop.from ? `from ${hop.from}` : "from — bilinmir"}
+              {hop.from ? `from ${hop.from}` : "from: bilinmir"}
             </p>
-            <p className="font-mono text-xs break-all">{hop.by ? `by ${hop.by}` : "by — bilinmir"}</p>
+            <p className="font-mono text-xs break-all">{hop.by ? `by ${hop.by}` : "by: bilinmir"}</p>
             {hop.withProtocol && <p className="font-mono text-xs break-all">with {hop.withProtocol}</p>}
           </div>
         ))}
@@ -171,9 +171,9 @@ function SenderPanel({ analysis }: { analysis: MailAnalysis }) {
         {(sender.fromReturnPathMismatch || sender.replyToMismatch) && (
           <p className="mt-2 text-sm/6">
             {sender.fromReturnPathMismatch &&
-              "«From» və «Return-Path» fərqli domendədir — bu, saxtakarlığın klassik izidir, amma qanuni newsletter platformaları da bunu edir. "}
+              "«From» və «Return-Path» fərqli domendədir: bu, saxtakarlığın klassik izidir, amma qanuni newsletter platformaları da bunu edir. "}
             {sender.replyToMismatch &&
-              "«Reply-To» «From»-dan fərqli bir domenə işarə edir — cavab yazsan mesaj başqa ünvana gedəcək."}
+              "«Reply-To» «From»-dan fərqli bir domenə işarə edir. Cavab yazsan mesaj başqa ünvana gedəcək."}
           </p>
         )}
       </div>

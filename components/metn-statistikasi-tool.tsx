@@ -14,7 +14,7 @@ import {
 import { analyseText } from "../lib/metn-statistikasi";
 
 const SAMPLE_TEXT =
-  "Salam! Bu, mətn statistikası alətinin nümunəsidir 😀. Alət söz, cümlə və abzas sayını hesablayır — meyvə, tərəvəz və s. kimi qısaltmalardan sonrakı nöqtəni cümlə sonu saymır.\n\nBu, ikinci abzasdır.";
+  "Salam! Bu, mətn statistikası alətinin nümunəsidir 😀. Alət söz, cümlə və abzas sayını hesablayır: meyvə, tərəvəz və s. kimi qısaltmalardan sonrakı nöqtəni cümlə sonu saymır.\n\nBu, ikinci abzasdır.";
 
 function formatReadingTime(minutes: number, seconds: number): string {
   if (minutes === 0) return `${seconds} san`;
@@ -111,7 +111,7 @@ export function MetnStatistikasiTool() {
             {lengthsDiffer && (
               <ToolNote>
                 Simvol sayı ilə UTF-16 uzunluğu fərqlənir, çünki mətndə emoji və ya oxşar
-                iki-vahidli simvol var — hər ikisi eyni yerdə göstərilir.
+                iki-vahidli simvol var: hər ikisi eyni yerdə göstərilir.
               </ToolNote>
             )}
           </div>

@@ -50,7 +50,7 @@ function formatAperture(fNumber: number): string {
 }
 
 function formatShutterSpeed(seconds: number): string {
-  if (seconds <= 0) return "—";
+  if (seconds <= 0) return "yoxdur";
   if (seconds >= 1) return `${trimNumber(seconds)} san.`;
   return `1/${Math.round(1 / seconds)} san.`;
 }
@@ -128,7 +128,7 @@ export function ExifTool() {
       setParseResult(parseExif(nextBytes));
       setTextChunks(parsePngTextChunks(nextBytes));
     } catch {
-      setReadError("Fayl oxunmadı — başqa fayl sınaq et.");
+      setReadError("Fayl oxunmadı: başqa fayl sınaq et.");
       setBytes(null);
       setParseResult(null);
       setTextChunks([]);
@@ -182,7 +182,7 @@ export function ExifTool() {
         <div className="grid gap-5 p-4 lg:grid-cols-[220px_minmax(0,1fr)]">
           <div className="space-y-4">
             <ToolNote>
-              Şəkil heç yerə göndərilmir — oxuma da, metadata silmə də tamamilə brauzerdə aparılır.
+              Şəkil heç yerə göndərilmir: oxuma da, metadata silmə də tamamilə brauzerdə aparılır.
             </ToolNote>
 
             {file && (
@@ -250,7 +250,7 @@ export function ExifTool() {
                       </p>
                       <p className="mt-1">
                         Bu şəkil harada çəkildiyini dəqiq göstərir. Şəkli olduğu kimi paylaşsan, bu
-                        koordinat da onunla gedir — evin, iş yerinin dəqiq ünvanı ola bilər.
+                        koordinat da onunla gedir: evin, iş yerinin dəqiq ünvanı ola bilər.
                       </p>
                       <div className="mt-2">
                         <CopyButton

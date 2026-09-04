@@ -64,7 +64,7 @@ export function HtmlSixisdiriciTool() {
   const savingsLabel =
     result.inputBytes > 0
       ? `${result.savingsPercent >= 0 ? "-" : "+"}${Math.abs(result.savingsPercent).toFixed(1)}%`
-      : "—";
+      : "";
 
   return (
     <div className="mt-8 space-y-5">
@@ -128,7 +128,7 @@ export function HtmlSixisdiriciTool() {
         action={<CopyButton value={result.output} label="HTML-i kopyala" />}
       >
         <div className="space-y-3 p-4">
-          <ToolOutput className="max-h-72 overflow-y-auto">{result.output || "—"}</ToolOutput>
+          <ToolOutput className="max-h-72 overflow-y-auto">{result.output || ""}</ToolOutput>
 
           {result.ruleSavings.length > 0 && (
             <div className="overflow-x-auto">
@@ -148,7 +148,7 @@ export function HtmlSixisdiriciTool() {
                     <tr key={entry.rule} className="border-b border-result-rule last:border-0">
                       <td className="p-1.5">{HTML_MINIFY_RULE_LABELS[entry.rule]}</td>
                       <td className="p-1.5 text-right tabular-nums">
-                        {entry.bytesSaved > 0 ? `-${formatBytes(entry.bytesSaved)}` : "—"}
+                        {entry.bytesSaved > 0 ? `-${formatBytes(entry.bytesSaved)}` : ""}
                       </td>
                     </tr>
                   ))}
@@ -160,7 +160,7 @@ export function HtmlSixisdiriciTool() {
       </ToolResultPanel>
 
       <ToolNote>
-        HTML heç yerə göndərilmir — <code>{"<style>"}</code>/<code>{"<script>"}</code> içinin
+        HTML heç yerə göndərilmir: <code>{"<style>"}</code>/<code>{"<script>"}</code> içinin
         sıxılması daxil, hər şey brauzerin öz yaddaşında işləyir.{" "}
         <code>{"<pre>"}</code>, <code>{"<textarea>"}</code> və <code>{"<code>"}</code> içi heç bir
         qaydadan toxunulmur.

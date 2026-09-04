@@ -263,7 +263,7 @@ export async function GET(request: Request) {
   const params = new URL(request.url).searchParams;
   const rawType = (params.get("tip") ?? "A").toUpperCase();
   if (!isRecordType(rawType)) {
-    return fail(`«${rawType}» tanınan qeyd tipi deyil — A, AAAA, CNAME, MX, TXT, NS və ya SOA yaz.`);
+    return fail(`«${rawType}» tanınan qeyd tipi deyil: A, AAAA, CNAME, MX, TXT, NS və ya SOA yaz.`);
   }
 
   const probe = checkHostname(params.get("domen") ?? "");

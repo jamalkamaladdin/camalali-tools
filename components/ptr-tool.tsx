@@ -51,7 +51,7 @@ export function PtrTool() {
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu alət sorğunu serverə göndərir">
         Yazdığın IP ünvanı bu saytın serverinə gedir, server tərs DNS və irəli təsdiq sorğusunu özü
-        göndərir — sənin brauzerin heç bir DNS sorğusu göndərmir.
+        göndərir: sənin brauzerin heç bir DNS sorğusu göndərmir.
       </ToolNote>
 
       <ToolPanel>
@@ -114,10 +114,10 @@ function Report({ report }: { report: PtrReport }) {
     <div className="space-y-5">
       <ToolNote tone={report.consistent ? "info" : "accent"} title={report.ptrNames.length === 0 ? "PTR qeydi yoxdur" : "Nəticə"}>
         {report.ptrNames.length === 0
-          ? "Bu ünvana bağlı heç bir tərs DNS qeydi tapılmadı. Bu, xəta deyil — PTR qeydi könüllüdür."
+          ? "Bu ünvana bağlı heç bir tərs DNS qeydi tapılmadı. Bu, xəta deyil: PTR qeydi könüllüdür."
           : report.consistent
-            ? "Ən azı bir PTR adı irəli istiqamətdə eyni ünvana qayıdır — irəli-geri uyğunluq var."
-            : "Heç bir PTR adı irəli istiqamətdə eyni ünvana qayıtmır — irəli-geri uyğunsuzluq var."}
+            ? "Ən azı bir PTR adı irəli istiqamətdə eyni ünvana qayıdır: irəli-geri uyğunluq var."
+            : "Heç bir PTR adı irəli istiqamətdə eyni ünvana qayıtmır: irəli-geri uyğunsuzluq var."}
       </ToolNote>
 
       <p className="text-[11px] break-all text-muted">

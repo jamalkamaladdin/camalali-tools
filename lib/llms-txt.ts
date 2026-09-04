@@ -160,7 +160,7 @@ export function auditLlmsTxt(text: string): { doc: LlmsDoc | null; issues: LlmsI
         issues.push({
           severity: "xeta",
           line: lineNumber,
-          message: "İkinci `# ` başlığı tapıldı — sənəddə yalnız bir başlıq ola bilər.",
+          message: "İkinci `# ` başlığı tapıldı: sənəddə yalnız bir başlıq ola bilər.",
         });
       }
       continue;
@@ -182,7 +182,7 @@ export function auditLlmsTxt(text: string): { doc: LlmsDoc | null; issues: LlmsI
         issues.push({
           severity: "xeta",
           line: lineNumber,
-          message: 'Link sətri gözlənilən formata uymur — "- [Ad](URL): izah" formatında olmalıdır.',
+          message: 'Link sətri gözlənilən formata uymur: "- [Ad](URL): izah" formatında olmalıdır.',
         });
         continue;
       }
@@ -195,7 +195,7 @@ export function auditLlmsTxt(text: string): { doc: LlmsDoc | null; issues: LlmsI
         issues.push({
           severity: "xeberdarliq",
           line: lineNumber,
-          message: `"${url}" nisbi URL-dir — llms.txt hər linkin mütləq (https://…) olmasını tələb edir.`,
+          message: `"${url}" nisbi URL-dir, llms.txt hər linkin mütləq (https://…) olmasını tələb edir.`,
         });
       }
 
@@ -205,7 +205,7 @@ export function auditLlmsTxt(text: string): { doc: LlmsDoc | null; issues: LlmsI
           issues.push({
             severity: "xeberdarliq",
             line: lineNumber,
-            message: `"${url}" artıq ${firstLine}-ci sətirdə var idi — təkrar URL.`,
+            message: `"${url}" artıq ${firstLine}-ci sətirdə var idi (təkrar URL).`,
           });
         } else {
           firstSeenAtLine.set(url, lineNumber);
@@ -231,7 +231,7 @@ export function auditLlmsTxt(text: string): { doc: LlmsDoc | null; issues: LlmsI
   closeCurrentSection();
 
   if (titleCount === 0) {
-    issues.push({ severity: "xeta", line: 1, message: "`# ` başlığı yoxdur — sənəd bir başlıqla başlamalıdır." });
+    issues.push({ severity: "xeta", line: 1, message: "`# ` başlığı yoxdur: sənəd bir başlıqla başlamalıdır." });
   }
   if (summary === "") {
     issues.push({

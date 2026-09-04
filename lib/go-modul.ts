@@ -55,7 +55,7 @@ export function parseGoModulePath(raw: string): GoModuleParseResult {
 
   const firstSegment = segments[0] ?? "";
   if (!firstSegment.includes(".")) {
-    return { ok: false, error: "Modul yolu domenlə başlamalıdır — məsələn github.com/istifadeci/repo." };
+    return { ok: false, error: "Modul yolu domenlə başlamalıdır: məsələn github.com/istifadeci/repo." };
   }
 
   return { ok: true, path: value };

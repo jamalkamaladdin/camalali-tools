@@ -32,12 +32,12 @@ export const subnetCedveliSections: ReferenceSection[] = [
   {
     id: "ipv4",
     label: "IPv4 prefiksləri",
-    hint: "/32-dən /0-a qədər bütün 33 prefiks — maska, wildcard və nə üçün işlədildiyi.",
+    hint: "/32-dən /0-a qədər bütün 33 prefiks: maska, wildcard və nə üçün işlədildiyi.",
   },
   {
     id: "ipv6",
     label: "IPv6 prefiksləri",
-    hint: "IPv6-da yayım (broadcast) ünvanı yoxdur, ona görə burada 'istifadə oluna bilən host' IPv4-dəki kimi cəmi-2 düsturu ilə hesablanmır — bloku bütöv əhatə edən ünvan sayı göstərilir.",
+    hint: "IPv6-da yayım (broadcast) ünvanı yoxdur, ona görə burada 'istifadə oluna bilən host' IPv4-dəki kimi cəmi-2 düsturu ilə hesablanmır, bloku bütöv əhatə edən ünvan sayı göstərilir.",
   },
   { id: "ayrilmis", label: "Ayrılmış və xüsusi diapazonlar" },
 ];
@@ -80,39 +80,39 @@ const DEMO_ADDRESS = (((203 << 24) | (0 << 16) | (113 << 8) | 45) >>> 0) as numb
  * these sentences still comes from the loop below, never typed here.
  */
 const IPV4_USAGE: Record<number, string> = {
-  0: "Marşrutlaşdırma cədvəlində 0.0.0.0/0 default marşrutu bildirir — paket üçün daha dəqiq uyğun qeyd tapılmayanda bu yol seçilir.",
-  1: "İnternetin yarısı qədər böyükdür — LAN-da deyil, yalnız marşrutlaşdırma cədvəllərində və nəhəng blok bölgüsündə rast gəlinir.",
-  2: "Fəzanın dörddə biridir — LAN-da deyil, yalnız IANA səviyyəsindəki blok bölgüsündə rast gəlinir.",
-  3: "Fəzanın səkkizdə biridir — LAN-da deyil, regional internet reyestrinin (RIR) səviyyəsindəki blok ölçüsüdür.",
-  4: "Fəzanın on altıda biridir — LAN-da deyil, tarixən bir neçə köhnə A sinfi blokun cəmlənməsinə bərabər miqyasdır.",
-  5: "Fəzanın otuz ikidə biridir — LAN-da deyil, nəhəng regional reyestrin bütöv payına bənzəyən miqyasdır.",
-  6: "Fəzanın altmış dörddə biridir — LAN-da deyil, yalnız ən böyük operator bölgülərində rast gəlinən miqyasdır.",
-  7: "Fəzanın yüz iyirmi səkkizdə biridir — LAN-da deyil, hələ də böyük operator blokunun ölçüsüdür.",
+  0: "Marşrutlaşdırma cədvəlində 0.0.0.0/0 default marşrutu bildirir: paket üçün daha dəqiq uyğun qeyd tapılmayanda bu yol seçilir.",
+  1: "İnternetin yarısı qədər böyükdür, LAN-da deyil, yalnız marşrutlaşdırma cədvəllərində və nəhəng blok bölgüsündə rast gəlinir.",
+  2: "Fəzanın dörddə biridir, LAN-da deyil, yalnız IANA səviyyəsindəki blok bölgüsündə rast gəlinir.",
+  3: "Fəzanın səkkizdə biridir, LAN-da deyil, regional internet reyestrinin (RIR) səviyyəsindəki blok ölçüsüdür.",
+  4: "Fəzanın on altıda biridir, LAN-da deyil, tarixən bir neçə köhnə A sinfi blokun cəmlənməsinə bərabər miqyasdır.",
+  5: "Fəzanın otuz ikidə biridir, LAN-da deyil, nəhəng regional reyestrin bütöv payına bənzəyən miqyasdır.",
+  6: "Fəzanın altmış dörddə biridir, LAN-da deyil, yalnız ən böyük operator bölgülərində rast gəlinən miqyasdır.",
+  7: "Fəzanın yüz iyirmi səkkizdə biridir, LAN-da deyil, hələ də böyük operator blokunun ölçüsüdür.",
   8: "Köhnə 'A sinfi' termini məhz bu sərhədə uyğun gəlirdi; klassik ünvanlama 1993-cü ildə CIDR ilə ləğv edilib, bu gün /8 RIR-lərin ən böyük regional bloklarında görünür.",
-  9: "Bir /8-in yarısıdır — böyük milli operatorun bütöv IPv4 payına bənzəyən miqyasdır.",
-  10: "Bir /8-in dörddə biridir — böyük operator və ya çoxsaylı filialı olan qurumun regional payıdır.",
+  9: "Bir /8-in yarısıdır, böyük milli operatorun bütöv IPv4 payına bənzəyən miqyasdır.",
+  10: "Bir /8-in dörddə biridir, böyük operator və ya çoxsaylı filialı olan qurumun regional payıdır.",
   11: "Regional operatora ayrılan tipik blok miqyasıdır.",
-  12: "172.16.0.0/12 məhz bu ölçüdədir — RFC 1918-in orta ölçülü şəxsi blokunu tam əhatə edir.",
+  12: "172.16.0.0/12 məhz bu ölçüdədir: RFC 1918-in orta ölçülü şəxsi blokunu tam əhatə edir.",
   13: "Orta ölçülü regional operatorun blokudur.",
   14: "Çoxsaylı filialı olan böyük qurumun bütöv daxili şəbəkəsini əhatə edən miqyasdır.",
-  15: "198.18.0.0/15 məhz bu ölçüdədir — avadanlıq performans testləri üçün ayrılmış blokun ölçüsü budur.",
+  15: "198.18.0.0/15 məhz bu ölçüdədir: avadanlıq performans testləri üçün ayrılmış blokun ölçüsü budur.",
   16: "Köhnə 'B sinfi' termini məhz bu sərhədə uyğun gəlirdi; klassik ünvanlama 1993-cü ildə CIDR ilə ləğv edilib, bu gün bulud provayderlərinin (məsələn default VPC-lərin) sevimli ölçüsüdür.",
-  17: "Bir /16-nın yarısıdır — böyük kampus şəbəkəsinin miqyasıdır.",
-  18: "Bir /16-nın dörddə biridir — böyük data mərkəzi podunun tipik ölçüsüdür.",
+  17: "Bir /16-nın yarısıdır, böyük kampus şəbəkəsinin miqyasıdır.",
+  18: "Bir /16-nın dörddə biridir, böyük data mərkəzi podunun tipik ölçüsüdür.",
   19: "Böyük kampus və ya data mərkəzi seqmentinin ölçüsüdür.",
   20: "Çoxsaylı VLAN-ı birləşdirən böyük ofis kompleksinin miqyasıdır.",
   21: "Orta ölçülü data mərkəzi seqmentinin tipik ölçüsüdür.",
   22: "Çoxmərtəbəli ofis binasının bütün şəbəkəsini əhatə edən miqyasdır.",
-  23: "İki /24-ü birləşdirən blokdur — kiçik data mərkəzi seqmentində rast gəlinir.",
-  24: "Köhnə 'C sinfi' termini məhz bu sərhədə uyğun gəlirdi; klassik ünvanlama 1993-cü ildə CIDR ilə ləğv edilib, amma insanlar bu gün də 'C sinfi' deyəndə adətən elə /24-ü nəzərdə tutur — ev və kiçik ofis şəbəkəsinin ənənəvi ölçüsüdür.",
-  25: "Bir /24-ü ikiyə bölərkən alınan ölçüdür — VLAN seqmentləşdirməsində işlədilir.",
+  23: "İki /24-ü birləşdirən blokdur, kiçik data mərkəzi seqmentində rast gəlinir.",
+  24: "Köhnə 'C sinfi' termini məhz bu sərhədə uyğun gəlirdi; klassik ünvanlama 1993-cü ildə CIDR ilə ləğv edilib, amma insanlar bu gün də 'C sinfi' deyəndə adətən elə /24-ü nəzərdə tutur: ev və kiçik ofis şəbəkəsinin ənənəvi ölçüsüdür.",
+  25: "Bir /24-ü ikiyə bölərkən alınan ölçüdür: VLAN seqmentləşdirməsində işlədilir.",
   26: "Filial ofisinin və ya kiçik şəbəkə seqmentinin tipik ölçüsüdür.",
   27: "Kiçik komanda seqmentinin və ya server rack-inin ölçüsüdür.",
   28: "Kiçik idarəetmə (management) VLAN-ının tipik ölçüsüdür.",
   29: "Provayderin firewall arxasındakı bir neçə serverə ictimai IP ayırarkən ən çox verdiyi blok ölçüsüdür.",
-  30: "İki marşrutlaşdırıcı arasındakı nöqtə-nöqtə əlaqənin ənənəvi ölçüsüdür — /31 alternativ olsa da, bu hələ geniş yayılıb.",
+  30: "İki marşrutlaşdırıcı arasındakı nöqtə-nöqtə əlaqənin ənənəvi ölçüsüdür: /31 alternativ olsa da, bu hələ geniş yayılıb.",
   31: "Ünvan qənaəti üçün /30 əvəzinə getdikcə daha çox data mərkəzində seçilir.",
-  32: "Marşrutlaşdırma cədvəlində tək bir hostu ayrıca qeyd etmək üçün işlədilir — host marşrutu adlanır.",
+  32: "Marşrutlaşdırma cədvəlində tək bir hostu ayrıca qeyd etmək üçün işlədilir: host marşrutu adlanır.",
 };
 
 /** Extra search words beyond the wildcard and the hex mask — a synonym, an
@@ -129,10 +129,10 @@ const IPV4_EXTRA_MATCH: Partial<Record<number, string[]>> = {
 
 function countClause(prefix: number, total: string, usable: string): string {
   if (prefix === 32) {
-    return `Bu blok tək bir ünvandır (${total}) və elə özü də host üçün istifadə olunur (${usable}) — şəbəkə və yayım ayrımı mənasızdır, ona görə host sayı sıfır deyil, birdir`;
+    return `Bu blok tək bir ünvandır (${total}) və elə özü də host üçün istifadə olunur (${usable}): şəbəkə və yayım ayrımı mənasızdır, ona görə host sayı sıfır deyil, birdir`;
   }
   if (prefix === 31) {
-    return `Bu blokda ${total} ünvan var və hər ikisi (${usable}) host üçün istifadə olunur — sıfır yox: RFC 3021 bu ölçünü xüsusi olaraq nöqtə-nöqtə əlaqə üçün ayırıb, şəbəkə/yayım konvensiyası tətbiq olunmur`;
+    return `Bu blokda ${total} ünvan var və hər ikisi (${usable}) host üçün istifadə olunur, sıfır yox: RFC 3021 bu ölçünü xüsusi olaraq nöqtə-nöqtə əlaqə üçün ayırıb, şəbəkə/yayım konvensiyası tətbiq olunmur`;
   }
   return `Bu blokda ${total} ünvan var, bunlardan ${usable} host üçün istifadə oluna bilər (şəbəkə və yayım ünvanları çıxılıb)`;
 }

@@ -146,7 +146,7 @@ const GROUP_LENGTHS = [8, 4, 4, 4, 12];
 export function inspectUuid(rawValue: string): UuidInspection {
   const trimmed = rawValue.trim();
   if (trimmed === "") {
-    return { ok: false, error: "Boş sahə — UUID yapışdır." };
+    return { ok: false, error: "Boş sahə: UUID yapışdır." };
   }
 
   // Strip the two paste artefacts a UUID commonly arrives wrapped in.

@@ -189,7 +189,7 @@ function parseCharClass(c: Cursor): RegexNode {
   }
   if (c.peek() === "]") c.next(); // a "]" right after "[" or "[^" is a literal member, not the closer
   while (c.peek() !== "]") {
-    if (c.eof()) throw new ParseError("Xarakter sinfi bağlanmayıb — sona çatan \"]\" yoxdur.");
+    if (c.eof()) throw new ParseError("Xarakter sinfi bağlanmayıb: sona çatan \"]\" yoxdur.");
     if (c.peek() === "\\") c.next();
     c.next();
   }
@@ -272,7 +272,7 @@ export type ExplainedNode = {
 };
 
 function quantifierLabel(min: number, max: number | null, lazy: boolean): string {
-  const greediness = lazy ? " (lazy — mümkün olan ən az sayda)" : "";
+  const greediness = lazy ? " (lazy: mümkün olan ən az sayda)" : "";
   if (min === 0 && max === null) return `0 və ya daha çox${greediness}`;
   if (min === 1 && max === null) return `1 və ya daha çox${greediness}`;
   if (min === 0 && max === 1) return `0 və ya 1${greediness}`;
@@ -294,7 +294,7 @@ const GROUP_LABEL: Record<string, string> = {
 const ESCAPE_LABEL: Record<string, string> = {
   d: "rəqəm (0–9)",
   D: "rəqəm olmayan simvol",
-  w: "söz simvolu (hərf, rəqəm, alt xətt — ASCII)",
+  w: "söz simvolu (ASCII hərf, rəqəm, alt xətt)",
   W: "söz simvolu olmayan",
   s: "boşluq simvolu",
   S: "boşluq olmayan simvol",
@@ -310,8 +310,8 @@ export function explain(node: RegexNode): ExplainedNode {
       return {
         token: node.raw,
         description: node.negated
-          ? `Xarakter sinfi — daxildəkilərdən BAŞQA istənilən bir simvolu tutur.`
-          : `Xarakter sinfi — daxildəkilərdən birini tutur.`,
+          ? `Xarakter sinfi: daxildəkilərdən BAŞQA istənilən bir simvolu tutur.`
+          : `Xarakter sinfi: daxildəkilərdən birini tutur.`,
       };
     case "escapeClass":
       return { token: `\\${node.kind}`, description: `Qısayol: ${ESCAPE_LABEL[node.kind]}.` };
@@ -325,13 +325,13 @@ export function explain(node: RegexNode): ExplainedNode {
     case "anchorEnd":
       return { token: "$", description: "Lövbər: sətrin (və ya `m` bayrağı yoxdursa mətnin) sonu." };
     case "wordBoundary":
-      return { token: node.negated ? "\\B" : "\\b", description: node.negated ? "Söz sərhədi OLMAYAN mövqe." : "Söz sərhədi — söz simvolu ilə söz-olmayan arasındaki mövqe." };
+      return { token: node.negated ? "\\B" : "\\b", description: node.negated ? "Söz sərhədi OLMAYAN mövqe." : "Söz sərhədi: söz simvolu ilə söz-olmayan arasındaki mövqe." };
     case "backreference":
       return { token: `\\${node.ref}`, description: `Geri istinad: ${/^[0-9]+$/.test(node.ref) ? `${node.ref}-ci qrupun` : `"${node.ref}" adlı qrupun`} tutduğu mətni təkrar axtarır.` };
     case "group": {
       const child = explain(node.child);
       const label = GROUP_LABEL[node.kind];
-      const numbering = node.kind === "capture" ? ` #${node.number}` : node.kind === "named" ? ` #${node.number} — "${node.name}"` : "";
+      const numbering = node.kind === "capture" ? ` #${node.number}` : node.kind === "named" ? ` #${node.number}: "${node.name}"` : "";
       return { token: tokenFor(node), description: `${label}${numbering}:`, children: [child] };
     }
     case "alternation":
@@ -441,14 +441,14 @@ export function findWarnings(flags: string, root: RegexNode): Warning[] {
   if (hasCatastrophicNesting(root)) {
     warnings.push({
       kind: "backtracking",
-      message: "İç-içə təkrar kəmiyyəti var (məsələn `(a+)+`). Uyğunsuz uzun girişdə mühərrik eksponensial sayda yol sınayır və brauzer donur — daxili qrupu tutmayan qrupa çevirmək kömək etmir, quruluşu dəyişmək lazımdır.",
+      message: "İç-içə təkrar kəmiyyəti var (məsələn `(a+)+`). Uyğunsuz uzun girişdə mühərrik eksponensial sayda yol sınayır və brauzer donur: daxili qrupu tutmayan qrupa çevirmək kömək etmir, quruluşu dəyişmək lazımdır.",
     });
   }
 
   if (hasDot(root)) {
     warnings.push({
       kind: "dot",
-      message: 'Qaçırılmamış "." istənilən simvolu tutur — hərfi nöqtəni nəzərdə tutursansa "\\." yaz, əks halda naxış gözlədiyindən daha çoxunu tutur.',
+      message: 'Qaçırılmamış "." istənilən simvolu tutur: hərfi nöqtəni nəzərdə tutursansa "\\." yaz, əks halda naxış gözlədiyindən daha çoxunu tutur.',
     });
   }
 
@@ -462,7 +462,7 @@ export function findWarnings(flags: string, root: RegexNode): Warning[] {
     if (anchorStarts > 1 || anchorEnds > 1) {
       warnings.push({
         kind: "anchor-multiline",
-        message: '"^" və "$" `m` bayrağı olmadan yalnız mətnin mütləq əvvəlini/sonunu tutur, hər sətrin yox. Naxışda bir neçə "^" və ya "$" var — bu, hər sətrin əvvəlini/sonunu gözlədiyinin işarəsidir. Belədirsə naxışın sonuna "m" bayrağını əlavə et.',
+        message: '"^" və "$" `m` bayrağı olmadan yalnız mətnin mütləq əvvəlini/sonunu tutur, hər sətrin yox. Naxışda bir neçə "^" və ya "$" var: bu, hər sətrin əvvəlini/sonunu gözlədiyinin işarəsidir. Belədirsə naxışın sonuna "m" bayrağını əlavə et.',
       });
     }
   }

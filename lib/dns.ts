@@ -17,7 +17,7 @@ export type DnsType = (typeof DNS_TYPES)[number];
 
 /** Azerbaijani one-liners for the record types, shown beside each table. */
 export const DNS_TYPE_NOTES: Record<DnsType, string> = {
-  A: "Adı IPv4 ünvanına bağlayır — brauzer saytı burada axtarır.",
+  A: "Adı IPv4 ünvanına bağlayır. Brauzer saytı burada axtarır.",
   AAAA: "Adı IPv6 ünvanına bağlayır. Yoxdursa IPv6-only şəbəkədən giriş NAT64-dən keçir.",
   CNAME: "Adı başqa ada yönləndirir. Kök domendə (apex) qoyula bilməz.",
   MX: "Bu domenə gələn məktubu hansı server qəbul edir. Kiçik prioritet əvvəl sınanır.",
@@ -50,12 +50,12 @@ export type DomainCheck = { ok: true; domain: string } | { ok: false; error: str
  */
 export function normalizeDomain(raw: string): DomainCheck {
   const trimmed = raw.trim();
-  if (trimmed === "") return { ok: false, error: "Boş sahə — domen adı yaz." };
+  if (trimmed === "") return { ok: false, error: "Boş sahə: domen adı yaz." };
 
   /* Cut long before the length rules below, so a megabyte of pasted text does
      not get regex-scanned just to be told it is too long. */
   if (trimmed.length > 400) {
-    return { ok: false, error: "Mətn həddindən uzundur — domen adı 253 simvoldan çox ola bilməz." };
+    return { ok: false, error: "Mətn həddindən uzundur: domen adı 253 simvoldan çox ola bilməz." };
   }
 
   /* Four decorations arrive with a pasted domain and all four mean the same
@@ -70,7 +70,7 @@ export function normalizeDomain(raw: string): DomainCheck {
   if (colon !== -1) value = value.slice(0, colon);
 
   if (value === "") {
-    return { ok: false, error: "Domen adı tapılmadı — «example.com» formatında yaz." };
+    return { ok: false, error: "Domen adı tapılmadı: «example.com» formatında yaz." };
   }
 
   /*
@@ -90,7 +90,7 @@ export function normalizeDomain(raw: string): DomainCheck {
      survives as four numbers. Neither has a zone to read; a reverse lookup is
      a different question. */
   if (ascii.startsWith("[") || /^\d+(\.\d+){3}$/.test(ascii)) {
-    return { ok: false, error: "IP ünvanı deyil, domen adı lazımdır — məsələn «example.com»." };
+    return { ok: false, error: "IP ünvanı deyil, domen adı lazımdır (məsələn «example.com»)." };
   }
 
   if (ascii.length > MAX_DOMAIN_LENGTH) {
@@ -102,12 +102,12 @@ export function normalizeDomain(raw: string): DomainCheck {
 
   const labels = ascii.split(".");
   if (labels.length < 2) {
-    return { ok: false, error: "Domen ən azı iki hissədən ibarət olmalıdır — «example.com» kimi." };
+    return { ok: false, error: "Domen ən azı iki hissədən ibarət olmalıdır («example.com» kimi)." };
   }
 
   for (const label of labels) {
     if (label === "") {
-      return { ok: false, error: "Domendə boş hissə var — iki nöqtə yan-yana gəlib." };
+      return { ok: false, error: "Domendə boş hissə var, iki nöqtə yan-yana gəlib." };
     }
     if (label.length > MAX_LABEL_LENGTH) {
       return {
@@ -118,7 +118,7 @@ export function normalizeDomain(raw: string): DomainCheck {
     if (!LABEL.test(label)) {
       return {
         ok: false,
-        error: `«${label}» hissəsində icazə verilməyən simvol var — yalnız hərf, rəqəm və defis olur, defis hissənin əvvəlində və ya sonunda dura bilməz.`,
+        error: `«${label}» hissəsində icazə verilməyən simvol var: yalnız hərf, rəqəm və defis olur, defis hissənin əvvəlində və ya sonunda dura bilməz.`,
       };
     }
   }
@@ -127,7 +127,7 @@ export function normalizeDomain(raw: string): DomainCheck {
   if (tld.length < 2 || /^\d+$/.test(tld)) {
     return {
       ok: false,
-      error: "Domenin son hissəsi düzgün deyil — «.com», «.az», «.io» kimi olmalıdır.",
+      error: "Domenin son hissəsi düzgün deyil: «.com», «.az», «.io» kimi olmalıdır.",
     };
   }
 
@@ -164,10 +164,10 @@ const SPF_ALL_BY_QUALIFIER: Record<string, SpfAll> = {
 };
 
 export const SPF_ALL_LABELS: Record<SpfAll, string> = {
-  fail: "«-all» — siyahıdan kənar server rədd edilir",
-  softfail: "«~all» — siyahıdan kənar məktub spama düşür, amma qəbul edilir",
-  neutral: "«?all» — heç bir qərar verilmir, qeyd praktiki olaraq boşdur",
-  pass: "«+all» — istənilən server bu domenin adından göndərə bilər",
+  fail: "«-all»: siyahıdan kənar server rədd edilir",
+  softfail: "«~all»: siyahıdan kənar məktub spama düşür, amma qəbul edilir",
+  neutral: "«?all»: heç bir qərar verilmir, qeyd praktiki olaraq boşdur",
+  pass: "«+all»: istənilən server bu domenin adından göndərə bilər",
 };
 
 export type SpfReport = {
@@ -314,9 +314,9 @@ export function describeDkim(value: string): DkimReport {
 export type TxtKind = "spf" | "dmarc" | "dkim" | "verification" | "other";
 
 export const TXT_KIND_LABELS: Record<TxtKind, string> = {
-  spf: "SPF — göndərən serverlərin siyahısı",
-  dmarc: "DMARC — saxta məktuba münasibət",
-  dkim: "DKIM — imza açarı",
+  spf: "SPF: göndərən serverlərin siyahısı",
+  dmarc: "DMARC: saxta məktuba münasibət",
+  dkim: "DKIM: imza açarı",
   verification: "Sahiblik təsdiqi",
   other: "Digər",
 };
@@ -358,13 +358,13 @@ export function classifyTxt(value: string): TxtInsight {
   if (/^v=spf1(\s|$)/i.test(trimmed)) {
     const spf = describeSpf(trimmed);
     const pieces = [
-      spf.all ? SPF_ALL_LABELS[spf.all] : "«all» mexanizmi yoxdur — qeyd yarımçıqdır",
+      spf.all ? SPF_ALL_LABELS[spf.all] : "«all» mexanizmi yoxdur: qeyd yarımçıqdır",
       `${spf.includes.length} include`,
       `${spf.ipRanges.length} IP bloku`,
       `${spf.lookups}/${SPF_LOOKUP_LIMIT} DNS sorğusu`,
     ];
     if (spf.overLimit) {
-      pieces.push("limit aşılıb — qəbuledici SPF-i ümumiyyətlə nəzərə almır");
+      pieces.push("limit aşılıb: qəbuledici SPF-i ümumiyyətlə nəzərə almır");
     }
     return {
       kind: "spf",
@@ -378,8 +378,8 @@ export function classifyTxt(value: string): TxtInsight {
     const dmarc = describeDmarc(trimmed);
     const pieces = [
       dmarc.policy
-        ? `p=${dmarc.policy} — ${DMARC_POLICY_LABELS[dmarc.policy]}`
-        : "«p» tağı yoxdur — qeyd etibarsızdır",
+        ? `p=${dmarc.policy}: ${DMARC_POLICY_LABELS[dmarc.policy]}`
+        : "«p» tağı yoxdur: qeyd etibarsızdır",
       `${dmarc.percent}% məktuba tətbiq olunur`,
       dmarc.rua.length > 0 ? `${dmarc.rua.length} hesabat ünvanı` : "hesabat ünvanı yoxdur",
     ];
@@ -395,7 +395,7 @@ export function classifyTxt(value: string): TxtInsight {
     const dkim = describeDkim(trimmed);
     const pieces = [`açar tipi ${dkim.keyType}`];
     if (dkim.revoked) pieces.push("açar geri götürülüb (p= boşdur)");
-    if (dkim.testMode) pieces.push("test rejimi (t=y) — uğursuz imza nəzərə alınmır");
+    if (dkim.testMode) pieces.push("test rejimi (t=y): uğursuz imza nəzərə alınmır");
     return {
       kind: "dkim",
       value: trimmed,
@@ -516,7 +516,7 @@ export function dnsErrorMessage(code: string): string {
     case "ETIMEDOUT":
       return "Ad serveri vaxtında cavab vermədi.";
     case "ESERVFAIL":
-      return "Domenin ad serveri xəta qaytardı (SERVFAIL) — zona sıradan çıxmış ola bilər.";
+      return "Domenin ad serveri xəta qaytardı (SERVFAIL). Zona sıradan çıxmış ola bilər.";
     case "EREFUSED":
       return "Ad serveri sorğunu rədd etdi.";
     case "ECONNREFUSED":

@@ -31,10 +31,10 @@ const SAMPLE_ADDRESS = "2001:0db8:0000:0000:0000:ff00:0042:8329/64";
 const SAMPLE_SECOND = "2001:db8::/32";
 
 const RELATION_TEXT: Record<ContainmentRelation, string> = {
-  equal: "İki prefiks eynidir — eyni şəbəkəni göstərir.",
-  "a-contains-b": "Birinci prefiks ikincini əhatə edir — ikinci onun daxilindəki alt şəbəkədir.",
-  "b-contains-a": "İkinci prefiks birincini əhatə edir — birinci onun daxilindəki alt şəbəkədir.",
-  disjoint: "Biri digərini əhatə etmir — iki ayrı şəbəkədir.",
+  equal: "İki prefiks eynidir: eyni şəbəkəni göstərir.",
+  "a-contains-b": "Birinci prefiks ikincini əhatə edir: ikinci onun daxilindəki alt şəbəkədir.",
+  "b-contains-a": "İkinci prefiks birincini əhatə edir: birinci onun daxilindəki alt şəbəkədir.",
+  disjoint: "Biri digərini əhatə etmir: iki ayrı şəbəkədir.",
 };
 
 export function Ipv6Tool() {
@@ -105,7 +105,7 @@ export function Ipv6Tool() {
             <div className="space-y-4 p-4">
               {analysis.info.mappedFromIpv4 && (
                 <ToolNote tone="info">
-                  IPv4 ünvanı yazıldı — avtomatik olaraq IPv6-mapped formasına (::ffff:) çevrildi.
+                  IPv4 ünvanı yazıldı: avtomatik olaraq IPv6-mapped formasına (::ffff:) çevrildi.
                 </ToolNote>
               )}
               <div>
@@ -166,7 +166,7 @@ export function Ipv6Tool() {
                     <ToolStat
                       label="Ünvan sayı"
                       value={count.power}
-                      note={count.exact ?? "Çox böyük ədəd — yalnız üstlü formada göstərilir."}
+                      note={count.exact ?? "Çox böyük ədəd: yalnız üstlü formada göstərilir."}
                     />
                   );
                 })()}

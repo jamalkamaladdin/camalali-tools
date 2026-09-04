@@ -428,7 +428,7 @@ export function formatOklch(color: Rgba): string {
 
 export function parseColor(raw: string): ParsedColor {
   const trimmed = raw.trim();
-  if (trimmed === "") return { ok: false, error: "Boş sahə — rəng yapışdır." };
+  if (trimmed === "") return { ok: false, error: "Boş sahə: rəng yapışdır." };
 
   if (trimmed.startsWith("#")) {
     const color = parseHex(trimmed);
@@ -437,7 +437,7 @@ export function parseColor(raw: string): ParsedColor {
       : {
           ok: false,
           error:
-            "HEX formatı yanlışdır — #rgb, #rgba, #rrggbb və ya #rrggbbaa gözlənilir; onaltılıq olmayan simvol və ya yanlış uzunluq var.",
+            "HEX formatı yanlışdır: #rgb, #rgba, #rrggbb və ya #rrggbbaa gözlənilir; onaltılıq olmayan simvol və ya yanlış uzunluq var.",
         };
   }
 
@@ -448,7 +448,7 @@ export function parseColor(raw: string): ParsedColor {
       ? { ok: true, color, format: "rgb" }
       : {
           ok: false,
-          error: "rgb()/rgba() formatı yanlışdır — hər kanal 0-255 (və ya 0%-100%) aralığında olmalıdır.",
+          error: "rgb()/rgba() formatı yanlışdır: hər kanal 0-255 (və ya 0%-100%) aralığında olmalıdır.",
         };
   }
   if (lower.startsWith("hsl")) {
@@ -458,7 +458,7 @@ export function parseColor(raw: string): ParsedColor {
       : {
           ok: false,
           error:
-            "hsl()/hsla() formatı yanlışdır — çalar rəqəm, doyma və işıqlıq isə faiz (%) olmalıdır.",
+            "hsl()/hsla() formatı yanlışdır, çalar rəqəm, doyma və işıqlıq isə faiz (%) olmalıdır.",
         };
   }
   if (lower.startsWith("oklch")) {
@@ -468,13 +468,13 @@ export function parseColor(raw: string): ParsedColor {
       : {
           ok: false,
           error:
-            "oklch() formatı yanlışdır — L 0-1 (və ya 0%-100%), C mənfi olmayan ədəd, H bucaq olmalıdır.",
+            "oklch() formatı yanlışdır: L 0-1 (və ya 0%-100%), C mənfi olmayan ədəd, H bucaq olmalıdır.",
         };
   }
 
   return {
     ok: false,
-    error: "Format tanınmadı — HEX (#rrggbb), rgb(), hsl() və ya oklch() gözlənilir.",
+    error: "Format tanınmadı, HEX (#rrggbb), rgb(), hsl() və ya oklch() gözlənilir.",
   };
 }
 
@@ -577,7 +577,7 @@ export function checkContrast(text: Rgba, background: Rgba): ContrastResult {
     return {
       ok: false,
       error:
-        "Fon rəngi şəffafdır (alfa < 1) — kontrast fonun arxasında nə olduğunu bilmədən hesablana bilmir. Tam örtən (alfa 1) fon rəngi seçin.",
+        "Fon rəngi şəffafdır (alfa < 1): kontrast fonun arxasında nə olduğunu bilmədən hesablana bilmir. Tam örtən (alfa 1) fon rəngi seçin.",
     };
   }
 

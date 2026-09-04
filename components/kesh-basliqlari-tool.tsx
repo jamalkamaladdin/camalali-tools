@@ -26,7 +26,7 @@ type State =
 
 function formatFreshness(seconds: number | null): string {
   if (seconds === null) return "təzəlik göstəricisi yoxdur";
-  if (seconds === 0) return "0 saniyə — dərhal köhnəlmiş sayılır";
+  if (seconds === 0) return "0 saniyə: dərhal köhnəlmiş sayılır";
   if (seconds < 60) return `${seconds} saniyə`;
   if (seconds < 3600) return `${Math.round(seconds / 60)} dəqiqə`;
   if (seconds < 86_400) return `${Math.round(seconds / 3600)} saat`;
@@ -69,7 +69,7 @@ export function KeshBasliqlariTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu alət sorğunu serverə göndərir">
-        Yazdığın ünvana sənin brauzerin yox, bu saytın serveri bir HEAD sorğusu göndərir —
+        Yazdığın ünvana sənin brauzerin yox, bu saytın serveri bir HEAD sorğusu göndərir:
         səhifənin gövdəsi ümumiyyətlə yüklənmir, yalnız başlıqlar oxunur.
       </ToolNote>
 
@@ -202,7 +202,7 @@ function HeaderRow({ name, value }: { name: string; value: string | null }) {
   return (
     <div className="flex flex-wrap gap-2 border-b border-rule pb-2 last:border-0 last:pb-0">
       <dt className="w-40 shrink-0 text-muted">{name}</dt>
-      <dd className="min-w-0 flex-1 break-all">{value ?? "—"}</dd>
+      <dd className="min-w-0 flex-1 break-all">{value ?? ""}</dd>
     </div>
   );
 }

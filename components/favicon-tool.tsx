@@ -66,7 +66,7 @@ async function drawIconBlob(
   canvas.width = size;
   canvas.height = size;
   const context = canvas.getContext("2d");
-  if (!context) throw new Error("2D kontekst alınmadı — brauzer canvas-ı dəstəkləmir.");
+  if (!context) throw new Error("2D kontekst alınmadı: brauzer canvas-ı dəstəkləmir.");
 
   if (background) {
     context.fillStyle = background;
@@ -82,7 +82,7 @@ async function drawIconBlob(
   const blob = await new Promise<Blob | null>((resolve) => context.canvas.toBlob(resolve, "image/png"));
   if (!blob) {
     throw new Error(
-      "PNG hazırlana bilmədi — SVG xarici resurs daşıyırsa canvas «kirlənir» və brauzer piksel oxutmur.",
+      "PNG hazırlana bilmədi: SVG xarici resurs daşıyırsa canvas «kirlənir» və brauzer piksel oxutmur.",
     );
   }
   return blob;
@@ -120,7 +120,7 @@ function loadImageElement(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const image = new Image();
     image.onload = () => resolve(image);
-    image.onerror = () => reject(new Error("Şəkil açılmadı — fayl zədəli və ya format dəstəklənmir."));
+    image.onerror = () => reject(new Error("Şəkil açılmadı. Fayl zədəli və ya format dəstəklənmir."));
     image.src = src;
   });
 }
@@ -204,7 +204,7 @@ export function FaviconTool() {
     const file = Array.from(fileList)[0];
     if (!file) return;
     if (!isSupportedSource(file)) {
-      setRejectedNote("Bu fayl şəkil formatında deyil — PNG, JPG, WebP, GIF, BMP və ya SVG lazımdır.");
+      setRejectedNote("Bu fayl şəkil formatında deyil: PNG, JPG, WebP, GIF, BMP və ya SVG lazımdır.");
       return;
     }
     setRejectedNote(null);
@@ -307,7 +307,7 @@ export function FaviconTool() {
         <div className="grid gap-5 p-4 lg:grid-cols-[minmax(0,1fr)_260px]">
           <div className="min-w-0 space-y-4">
             <ToolNote>
-              Şəkil heç yerə göndərilmir — ölçü dəyişmə, ICO yığılması və PNG kodlaşdırma tamamilə
+              Şəkil heç yerə göndərilmir: ölçü dəyişmə, ICO yığılması və PNG kodlaşdırma tamamilə
               brauzerdə, canvas ilə aparılır.
             </ToolNote>
 
@@ -335,7 +335,7 @@ export function FaviconTool() {
                   {sourceName ? sourceName : "Şəkil seç və ya bura sürüşdür"}
                 </span>
                 <span className="font-ui text-xs text-muted">
-                  PNG · JPG · WebP · GIF · BMP · SVG — kvadrat şəkil ən yaxşı nəticəni verir
+                  PNG · JPG · WebP · GIF · BMP · SVG (kvadrat şəkil ən yaxşı nəticəni verir)
                 </span>
               </label>
             </div>

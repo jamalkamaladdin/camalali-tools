@@ -72,7 +72,7 @@ export function buildGradient(input: GradientInput): GradientBuildResult {
     if (!Number.isFinite(stop.position) || stop.position < 0 || stop.position > 100) {
       return {
         ok: false,
-        error: `Dayanacaq faizi 0-100 aralığında olmalıdır — "${stop.position}" yanlışdır.`,
+        error: `Dayanacaq faizi 0-100 aralığında olmalıdır: "${stop.position}" yanlışdır.`,
       };
     }
   }

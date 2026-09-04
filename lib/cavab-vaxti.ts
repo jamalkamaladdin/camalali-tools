@@ -71,17 +71,17 @@ function fieldOf(sample: PhaseSample, phase: PhaseName): number {
 
 const DIAGNOSIS: Record<PhaseName, string> = {
   dns:
-    "DNS həlli ən ağır mərhələdir — ad server yavaş cavab verir və ya qeydin TTL-i aşağıdır, hər sorğuda yenidən soruşulur. Sürətli, geniş coğrafi şəbəkəyə malik bir DNS provayderi bunu adətən aradan qaldırır.",
+    "DNS həlli ən ağır mərhələdir: ad server yavaş cavab verir və ya qeydin TTL-i aşağıdır, hər sorğuda yenidən soruşulur. Sürətli, geniş coğrafi şəbəkəyə malik bir DNS provayderi bunu adətən aradan qaldırır.",
   tcp:
-    "TCP əlsıxması ən ağır mərhələdir — server ziyarətçidən coğrafi olaraq uzaqdır və ya marşrut dolaşıqdır (gediş-gəliş vaxtı yüksəkdir). Fərqi CDN və ya ziyarətçiyə daha yaxın bir server verir.",
+    "TCP əlsıxması ən ağır mərhələdir: server ziyarətçidən coğrafi olaraq uzaqdır və ya marşrut dolaşıqdır (gediş-gəliş vaxtı yüksəkdir). Fərqi CDN və ya ziyarətçiyə daha yaxın bir server verir.",
   tls:
-    "TLS əlsıxması ən ağır mərhələdir — çox güman ki, aralıq sertifikat zənciri uzundur, ya da OCSP təsdiqi gecikir. Sertifikat zəncirini qısaltmaq və OCSP stapling açmaq bunu adətən sürətləndirir.",
+    "TLS əlsıxması ən ağır mərhələdir: çox güman ki, aralıq sertifikat zənciri uzundur, ya da OCSP təsdiqi gecikir. Sertifikat zəncirini qısaltmaq və OCSP stapling açmaq bunu adətən sürətləndirir.",
   ttfb:
-    "İlk baytadək vaxt (TTFB) ən ağır mərhələdir — bağlantı özü tez qurulub, gecikmə serverin cavabı hazırlamasındadır (backend hesablaması, baza sorğusu). Fərq şəbəkədə deyil, tətbiqin özündədir.",
+    "İlk baytadək vaxt (TTFB) ən ağır mərhələdir: bağlantı özü tez qurulub, gecikmə serverin cavabı hazırlamasındadır (backend hesablaması, baza sorğusu). Fərq şəbəkədə deyil, tətbiqin özündədir.",
 };
 
 const BALANCED_DIAGNOSIS =
-  "Heç bir mərhələ digərlərindən qat-qat ağır deyil — gecikmə dörd mərhələ arasında az-çox bərabər paylanıb.";
+  "Heç bir mərhələ digərlərindən qat-qat ağır deyil. Gecikmə dörd mərhələ arasında az-çox bərabər paylanıb.";
 
 /**
  * Reduces three measured samples to one median breakdown with a diagnosis.
@@ -99,7 +99,7 @@ export function buildBreakdown(samples: PhaseSample[]): BreakdownResult {
     for (const phase of PHASE_ORDER) {
       const value = fieldOf(sample, phase);
       if (!Number.isFinite(value) || value < 0) {
-        return { ok: false, error: "Etibarsız ölçmə dəyəri — mənfi və ya rəqəm olmayan vaxt gəldi." };
+        return { ok: false, error: "Etibarsız ölçmə dəyəri: mənfi və ya rəqəm olmayan vaxt gəldi." };
       }
     }
   }

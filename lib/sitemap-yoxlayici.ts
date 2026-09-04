@@ -443,14 +443,14 @@ function locIssues(kind: FeedKind, locs: string[], duplicates: number, hosts: st
   if (relative.length > 0) {
     issues.push({
       severity: sitemap ? "xeta" : "xeberdarliq",
-      message: `${relative.length} ünvan mütləq deyil (məsələn «${relative[0]}»). Sitemap protokolu tam ünvan tələb edir — «https://» ilə başlamalıdır.`,
+      message: `${relative.length} ünvan mütləq deyil (məsələn «${relative[0]}»). Sitemap protokolu tam ünvan tələb edir: «https://» ilə başlamalıdır.`,
     });
   }
 
   if (duplicates > 0) {
     issues.push({
       severity: "xeberdarliq",
-      message: `${duplicates} ünvan təkrarlanır. Təkrar sətir fayl həcmini artırır və axtarış sistemində eyni səhifəni iki dəfə göstərmir — sadəcə lazımsızdır.`,
+      message: `${duplicates} ünvan təkrarlanır. Təkrar sətir fayl həcmini artırır və axtarış sistemində eyni səhifəni iki dəfə göstərmir, sadəcə lazımsızdır.`,
     });
   }
 
@@ -485,7 +485,7 @@ export function parseSitemapDocument(
     issues.push({
       severity: "xeberdarliq",
       message:
-        "Fayl bayt həddindən böyükdür və yalnız başlanğıcı oxundu. Aşağıdakı saylar bütöv faylın deyil, oxunan hissənin saylarıdır — dəqiq rəqəm kimi götürmə.",
+        "Fayl bayt həddindən böyükdür və yalnız başlanğıcı oxundu. Aşağıdakı saylar bütöv faylın deyil, oxunan hissənin saylarıdır: dəqiq rəqəm kimi götürmə.",
     });
   }
 
@@ -493,7 +493,7 @@ export function parseSitemapDocument(
     issues.push({
       severity: "xeta",
       message:
-        "Fayl gzip ilə sıxılıb («.xml.gz»). Bu alət sıxılmış faylı açmır — sıxılmamış «sitemap.xml» ünvanını yoxla. Axtarış sistemləri sıxılmış variantı oxuyur, yəni bu, saytın qüsuru deyil.",
+        "Fayl gzip ilə sıxılıb («.xml.gz»). Bu alət sıxılmış faylı açmır: sıxılmamış «sitemap.xml» ünvanını yoxla. Axtarış sistemləri sıxılmış variantı oxuyur, yəni bu, saytın qüsuru deyil.",
     });
     return emptyReport(truncated, issues, null);
   }
@@ -508,7 +508,7 @@ export function parseSitemapDocument(
   if (parsed.error !== null) {
     structural.push({
       severity: "xeta",
-      message: `XML pozuqdur: ${parsed.error.message} — sətir ${parsed.error.line}, mövqe ${parsed.error.column}.`,
+      message: `XML pozuqdur: ${parsed.error.message}, sətir ${parsed.error.line}, mövqe ${parsed.error.column}.`,
     });
   }
   if (!truncated && parsed.unclosed.length > 0) {
@@ -522,7 +522,7 @@ export function parseSitemapDocument(
   if (root === null) {
     issues.push({
       severity: "xeta",
-      message: "Sənəddə bir dənə də XML elementi tapılmadı — ünvan boş cavab qaytardı və ya HTML səhifədir.",
+      message: "Sənəddə bir dənə də XML elementi tapılmadı: ünvan boş cavab qaytardı və ya HTML səhifədir.",
     });
     return emptyReport(truncated, issues, null);
   }
@@ -561,7 +561,7 @@ function buildReport(
     if (read.missingLoc > 0) {
       issues.push({
         severity: "xeta",
-        message: `${read.missingLoc} <url> elementində <loc> yoxdur. <loc> məcburidir — onsuz sətir tamamilə nəzərə alınmır.`,
+        message: `${read.missingLoc} <url> elementində <loc> yoxdur. <loc> məcburidir: onsuz sətir tamamilə nəzərə alınmır.`,
       });
     }
   } else if (kind === "sitemapindex") {
@@ -620,7 +620,7 @@ function countIssues(kind: FeedKind, count: number, truncated: boolean): Sitemap
   if (sitemap && count > MAX_URLS_PER_SITEMAP) {
     issues.push({
       severity: "xeberdarliq",
-      message: `Faylda ${count.toLocaleString("az-AZ")} ünvan var — protokolun həddi ${MAX_URLS_PER_SITEMAP.toLocaleString("az-AZ")}-dir. Faylı bölüb sitemap indeksi ilə birləşdirmək lazımdır.`,
+      message: `Faylda ${count.toLocaleString("az-AZ")} ünvan var: protokolun həddi ${MAX_URLS_PER_SITEMAP.toLocaleString("az-AZ")}-dir. Faylı bölüb sitemap indeksi ilə birləşdirmək lazımdır.`,
     });
   }
 

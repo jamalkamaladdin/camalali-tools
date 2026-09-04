@@ -26,7 +26,7 @@
  */
 
 const NO_SUBTLE_ERROR =
-  "Bu səhifə kriptoqrafiya funksiyasına icazə verməyən ünvandan açılıb — şifrələmək üçün https və ya localhost lazımdır.";
+  "Bu səhifə kriptoqrafiya funksiyasına icazə verməyən ünvandan açılıb: şifrələmək üçün https və ya localhost lazımdır.";
 
 const PBKDF2_ITERATIONS = 210_000;
 const SALT_BYTES = 16;
@@ -92,7 +92,7 @@ export async function encryptText(plaintext: string, password: string): Promise<
     const parts = [salt, iv, new Uint8Array(ciphertext)].map(bytesToBase64);
     return { ok: true, package: parts.join(".") };
   } catch {
-    return { ok: false, error: "Şifrələmə alınmadı — mətni qısaldıb yenidən sına." };
+    return { ok: false, error: "Şifrələmə alınmadı: mətni qısaldıb yenidən sına." };
   }
 }
 
@@ -107,7 +107,7 @@ export async function decryptText(pkg: string, password: string): Promise<Decryp
   if (parts.length !== 3) {
     return {
       ok: false,
-      error: `Paket 3 hissədən ibarət olmalıdır (duz.iv.şifrmətn) — tapılan hissə sayı: ${parts.length}.`,
+      error: `Paket 3 hissədən ibarət olmalıdır (duz.iv.şifrmətn), tapılan hissə sayı: ${parts.length}.`,
     };
   }
   const [saltPart, ivPart, ciphertextPart] = parts;
@@ -119,7 +119,7 @@ export async function decryptText(pkg: string, password: string): Promise<Decryp
     return { ok: false, error: "Paket düzgün Base64 deyil." };
   }
   if (iv.length !== IV_BYTES) {
-    return { ok: false, error: `IV uzunluğu ${IV_BYTES} bayt olmalıdır — tapılan: ${iv.length} bayt.` };
+    return { ok: false, error: `IV uzunluğu ${IV_BYTES} bayt olmalıdır, tapılan: ${iv.length} bayt.` };
   }
 
   const key = await deriveKey(subtle, password, salt);
@@ -131,6 +131,6 @@ export async function decryptText(pkg: string, password: string): Promise<Decryp
     // Wrong password and a tampered package fail the same GCM tag check, so
     // crypto.subtle gives no way to tell them apart — and telling them apart
     // would only help an attacker guessing the password.
-    return { ok: false, error: "Deşifrələmə alınmadı — parol səhvdir və ya paket dəyişdirilib." };
+    return { ok: false, error: "Deşifrələmə alınmadı: parol səhvdir və ya paket dəyişdirilib." };
   }
 }

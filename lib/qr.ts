@@ -894,7 +894,7 @@ export function readabilityWarning(
   if (ratio < 3) {
     return {
       severity: "bad",
-      message: `Kontrast ${ratio.toFixed(1)}:1 — QR oxunmayacaq. Modul və fon rəngləri arasında ən azı 3:1 lazımdır, qara/ağ isə 21:1 verir.`,
+      message: `Kontrast ${ratio.toFixed(1)}:1, QR oxunmayacaq. Modul və fon rəngləri arasında ən azı 3:1 lazımdır, qara/ağ isə 21:1 verir.`,
     };
   }
 
@@ -904,14 +904,14 @@ export function readabilityWarning(
     return {
       severity: "warn",
       message:
-        "Modullar fondan açıqdır — tərsinə QR. Kontrast kifayətdir, amma skanerlərin bir hissəsi yalnız açıq fonda tünd modul axtarır və bunu oxumur.",
+        "Modullar fondan açıqdır: tərsinə QR. Kontrast kifayətdir, amma skanerlərin bir hissəsi yalnız açıq fonda tünd modul axtarır və bunu oxumur.",
     };
   }
 
   if (ratio < 7) {
     return {
       severity: "warn",
-      message: `Kontrast ${ratio.toFixed(1)}:1 — işıq zəif olanda və ya çap kiçik olanda oxunmaya bilər. 7:1-dən yuxarı daha etibarlıdır.`,
+      message: `Kontrast ${ratio.toFixed(1)}:1, işıq zəif olanda və ya çap kiçik olanda oxunmaya bilər. 7:1-dən yuxarı daha etibarlıdır.`,
     };
   }
 

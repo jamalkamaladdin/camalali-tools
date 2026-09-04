@@ -105,7 +105,7 @@ export function HashTool() {
       {tooLong && (
         <ToolNote tone="accent" title="Mətn çox uzundur">
           {formatNumber(MAX_INPUT_CHARACTERS)} simvoldan uzun mətn hər düymə
-          basılışında yenidən hesablanarsa, yazı ləngiyir. Mətni qısalt — və ya
+          basılışında yenidən hesablanarsa, yazı ləngiyir. Mətni qısalt, və ya
           fayl üçün əməliyyat sistemindəki alətdən istifadə et:{" "}
           <code className="font-mono">sha256sum fayl.txt</code>.
         </ToolNote>
@@ -141,7 +141,7 @@ export function HashTool() {
 
           {text === "" && (
             <ToolNote title="Boş mətn">
-              Yuxarıdakılar boş sətrin hash-idir — bu, etibarlı nəticədir və
+              Yuxarıdakılar boş sətrin hash-idir: bu, etibarlı nəticədir və
               alqoritmlərin spesifikasiyasında yazılan sabitdir. Mətn yazan kimi
               dəyişəcək.
             </ToolNote>

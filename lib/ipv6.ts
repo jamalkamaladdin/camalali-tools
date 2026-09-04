@@ -59,12 +59,12 @@ function readGroups(side: string): { ok: true; groups: number[] } | { ok: false;
   const pieces = side.split(":");
   const groups: number[] = [];
   for (const piece of pieces) {
-    if (piece === "") return { ok: false, error: "Ünvanda tək qalmış «:» var — düzgün yerə «::» yaz." };
+    if (piece === "") return { ok: false, error: "Ünvanda tək qalmış «:» var: düzgün yerə «::» yaz." };
     if (piece.length > 4) {
       return { ok: false, error: `«${piece}» qrupu dörd onaltılıq rəqəmdən uzundur.` };
     }
     if (!/^[0-9a-fA-F]{1,4}$/.test(piece)) {
-      return { ok: false, error: `«${piece}» onaltılıq rəqəm deyil — yalnız 0-9 və a-f hərfləri olmalıdır.` };
+      return { ok: false, error: `«${piece}» onaltılıq rəqəm deyil, yalnız 0-9 və a-f hərfləri olmalıdır.` };
     }
     groups.push(Number.parseInt(piece, 16));
   }
@@ -79,7 +79,7 @@ function readGroups(side: string): { ok: true; groups: number[] } | { ok: false;
  */
 export function parseIpv6Address(raw: string): Ipv6ParseResult {
   let text = raw.trim();
-  if (text === "") return { ok: false, error: "Boş sahə — IPv6 ünvanı yaz." };
+  if (text === "") return { ok: false, error: "Boş sahə: IPv6 ünvanı yaz." };
 
   if (text.startsWith("[")) {
     const close = text.indexOf("]");
@@ -93,7 +93,7 @@ export function parseIpv6Address(raw: string): Ipv6ParseResult {
   if (zoneIndex !== -1) text = text.slice(0, zoneIndex);
 
   if (!text.includes(":")) {
-    return { ok: false, error: "İki nöqtə (:) yoxdur — bu IPv6 ünvanına oxşamır." };
+    return { ok: false, error: "İki nöqtə (:) yoxdur: bu IPv6 ünvanına oxşamır." };
   }
 
   let scan = 0;
@@ -105,7 +105,7 @@ export function parseIpv6Address(raw: string): Ipv6ParseResult {
     scan = at + 2;
   }
   if (doubleColonCount > 1) {
-    return { ok: false, error: "«::» ünvanda yalnız bir dəfə ola bilər — burada bir neçə dəfə görünür." };
+    return { ok: false, error: "«::» ünvanda yalnız bir dəfə ola bilər, burada bir neçə dəfə görünür." };
   }
 
   // A trailing IPv4 tail ("::ffff:192.0.2.1") is two groups written in
@@ -145,7 +145,7 @@ export function parseIpv6Address(raw: string): Ipv6ParseResult {
   } else {
     const filled = GROUP_COUNT - left.groups.length - right.groups.length;
     if (filled < 1) {
-      return { ok: false, error: "Səkkiz qrupdan çox yazılıb — «::» ən azı bir qrupu əvəz etməlidir." };
+      return { ok: false, error: "Səkkiz qrupdan çox yazılıb: «::» ən azı bir qrupu əvəz etməlidir." };
     }
     groups = [...left.groups, ...Array<number>(filled).fill(0), ...right.groups];
   }
@@ -238,18 +238,18 @@ export const IPV6_KIND_INFO: Record<Ipv6Kind, Ipv6KindInfo> = {
   unspecified: {
     label: "Naməlum ünvan (::)",
     meaning:
-      "Ünvan hələ təyin olunmayıb — məsələn, ünvanını gözləyən bir interfeys bunu göstərir. Yalnız mənbə kimi işlədilir, heç vaxt hədəf olmur.",
+      "Ünvan hələ təyin olunmayıb: məsələn, ünvanını gözləyən bir interfeys bunu göstərir. Yalnız mənbə kimi işlədilir, heç vaxt hədəf olmur.",
     reference: "RFC 4291",
   },
   loopback: {
     label: "Loopback (::1)",
-    meaning: "Cihazın özünə işarə edir — IPv4-dəki 127.0.0.1-in qarşılığı. Şəbəkə kartından heç vaxt xaricə çıxmır.",
+    meaning: "Cihazın özünə işarə edir: IPv4-dəki 127.0.0.1-in qarşılığı. Şəbəkə kartından heç vaxt xaricə çıxmır.",
     reference: "RFC 4291",
   },
   "ipv4-mapped": {
     label: "IPv4-mapped (::ffff:0:0/96)",
     meaning:
-      "Bir IPv4 ünvanını IPv6 sintaksisi ilə daşıyır — hər iki dəsti dəstəkləyən (dual-stack) server gələn IPv4 bağlantısını çox vaxt bu formada görür.",
+      "Bir IPv4 ünvanını IPv6 sintaksisi ilə daşıyır: hər iki dəsti dəstəkləyən (dual-stack) server gələn IPv4 bağlantısını çox vaxt bu formada görür.",
     reference: "RFC 4291",
   },
   "ipv4-compatible": {
@@ -261,7 +261,7 @@ export const IPV6_KIND_INFO: Record<Ipv6Kind, Ipv6KindInfo> = {
   multicast: {
     label: "Multicast (ff00::/8)",
     meaning:
-      "Tək ünvan bir qrup cihaza eyni anda çatdırılır. IPv6-da broadcast anlayışı yoxdur — onun yerini bütünlüklə multicast tutur.",
+      "Tək ünvan bir qrup cihaza eyni anda çatdırılır. IPv6-da broadcast anlayışı yoxdur, onun yerini bütünlüklə multicast tutur.",
     reference: "RFC 4291",
   },
   "link-local": {
@@ -273,7 +273,7 @@ export const IPV6_KIND_INFO: Record<Ipv6Kind, Ipv6KindInfo> = {
   "unique-local": {
     label: "Unique local (fc00::/7)",
     meaning:
-      "İctimai internetdə marşrutlanmır — IPv4-dəki 10.0.0.0/8 kimi şəxsi ünvanların IPv6 qarşılığı, yalnız daxili şəbəkə üçün.",
+      "İctimai internetdə marşrutlanmır: IPv4-dəki 10.0.0.0/8 kimi şəxsi ünvanların IPv6 qarşılığı, yalnız daxili şəbəkə üçün.",
     reference: "RFC 4193",
   },
   "global-unicast": {
@@ -283,7 +283,7 @@ export const IPV6_KIND_INFO: Record<Ipv6Kind, Ipv6KindInfo> = {
   },
   other: {
     label: "Ayrılmış / hələ bölüşdürülməmiş",
-    meaning: "Yuxarıdakı tanınan sahələrin heç birinə düşmür — IANA-nın hələ bölüşdürmədiyi ehtiyat aralığıdır.",
+    meaning: "Yuxarıdakı tanınan sahələrin heç birinə düşmür: IANA-nın hələ bölüşdürmədiyi ehtiyat aralığıdır.",
     reference: "IANA IPv6 Address Space",
   },
 };
@@ -428,7 +428,7 @@ export type Ipv6Analysis = { ok: true; info: Ipv6Info } | { ok: false; error: st
  */
 export function analyseIpv6(text: string): Ipv6Analysis {
   const trimmed = text.trim();
-  if (trimmed === "") return { ok: false, error: "Boş sahə — IPv6 ünvanı və ya IPv4 ünvanı yaz." };
+  if (trimmed === "") return { ok: false, error: "Boş sahə: IPv6 ünvanı və ya IPv4 ünvanı yaz." };
 
   const { addressPart, prefixPart } = splitAddressAndPrefix(trimmed);
 
@@ -443,7 +443,7 @@ export function analyseIpv6(text: string): Ipv6Analysis {
   let mappedFromIpv4 = false;
   if (!addressPart.includes(":")) {
     if (!addressPart.includes(".")) {
-      return { ok: false, error: "Bu ünvana oxşamır — IPv6 üçün «:» , IPv4 üçün «.» olmalıdır." };
+      return { ok: false, error: "Bu ünvana oxşamır: IPv6 üçün «:» , IPv4 üçün «.» olmalıdır." };
     }
     const ipv4 = parseDottedQuad(addressPart);
     if (!ipv4.ok) return ipv4;
@@ -545,7 +545,7 @@ function parsePrefixedForContainment(
   if (prefixPart === null) {
     return {
       ok: false,
-      error: `${which} prefiksdə «/n» yoxdur — əhatə yoxlaması üçün hər iki tərəf prefiksli olmalıdır, məsələn 2001:db8::/32.`,
+      error: `${which} prefiksdə «/n» yoxdur: əhatə yoxlaması üçün hər iki tərəf prefiksli olmalıdır, məsələn 2001:db8::/32.`,
     };
   }
   const validated = validatePrefix(prefixPart);

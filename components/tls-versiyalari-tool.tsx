@@ -65,7 +65,7 @@ export function TlsVersiyalariTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu alət sorğunu serverə göndərir">
-        Yazdığın domenin 443 portuna bu saytın serveri dörd ayrı TLS bağlantısı açır — hər dəfə
+        Yazdığın domenin 443 portuna bu saytın serveri dörd ayrı TLS bağlantısı açır: hər dəfə
         yalnız bir versiya təklif edərək. Sənin brauzerin heç bir versiyanı sınamır.
       </ToolNote>
 

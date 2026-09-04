@@ -115,7 +115,7 @@ const PHASES: { id: string; name: string; share: number }[] = [
 ];
 
 const ASSUMPTIONS = [
-  "Rəqəm iş həcminin təxminidir, təklif deyil — dəqiq müddət söhbətdən sonra verilir.",
+  "Rəqəm iş həcminin təxminidir, təklif deyil: dəqiq müddət söhbətdən sonra verilir.",
   "Ölçü iş günüdür: bir nəfərin süni intellektlə işlədiyi templə, komanda norması ilə yox.",
   "Dizayn faylı hazır deyilsə, dizayn mərhələsi bu aralığın içindədir; ayrıca brend işi daxil deyil.",
   "Mətn, şəkil və məhsul məlumatı sizin tərəfinizdən gəlir.",
@@ -143,7 +143,7 @@ function risks(answers: Answers): string[] {
 
   if (answers.deadline === "tecili") {
     found.push(
-      "Təcili tarix müddəti qısaltmır — əhatəni kiçildir. Birinci söhbətdə hansı hissənin birinci buraxılışdan kənarda qalacağını seçirəm.",
+      "Təcili tarix müddəti qısaltmır: əhatəni kiçildir. Birinci söhbətdə hansı hissənin birinci buraxılışdan kənarda qalacağını seçirəm.",
     );
   }
   if (answers.migration) {

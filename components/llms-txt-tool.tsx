@@ -157,9 +157,9 @@ export function LlmsTxtTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote tone="info" title="Bunu bilmək vacibdir">
-        llms.txt rəsmi standart deyil — 2024-də bir təşkilat tərəfindən irəli sürülmüş qeyri-rəsmi bir
+        llms.txt rəsmi standart deyil: 2024-də bir təşkilat tərəfindən irəli sürülmüş qeyri-rəsmi bir
         təklifdir, heç bir axtarış sistemi və ya AI model təminatçısı onu rəsmən qəbul etməyib. Fayl
-        zərərsizdir və hazırlanması ucuzdur, amma hazırda əsas model təminatçılarının çoxu onu oxumur —
+        zərərsizdir və hazırlanması ucuzdur, amma hazırda əsas model təminatçılarının çoxu onu oxumur:
         «AI axtarışında birinci olacaqsan» kimi bir nəticə vəd etmir.
       </ToolNote>
 
@@ -308,7 +308,7 @@ export function LlmsTxtTool() {
             {auditResult && (
               <div className="space-y-3">
                 <div className="grid gap-3 sm:grid-cols-3">
-                  <ToolStat label="Başlıq" value={auditResult.doc?.name.trim() || "—"} />
+                  <ToolStat label="Başlıq" value={auditResult.doc?.name.trim() || ""} />
                   <ToolStat label="Xəta" value={errorCount} tone={errorCount > 0 ? "warning" : "default"} />
                   <ToolStat
                     label="Xəbərdarlıq"
@@ -325,7 +325,7 @@ export function LlmsTxtTool() {
                       <ToolNote
                         key={index}
                         tone={issue.severity === "xeta" ? "accent" : "info"}
-                        title={`${issue.severity === "xeta" ? "Xəta" : "Xəbərdarlıq"} — sətir ${issue.line}`}
+                        title={`${issue.severity === "xeta" ? "Xəta" : "Xəbərdarlıq"} (sətir ${issue.line})`}
                       >
                         {issue.message}
                       </ToolNote>

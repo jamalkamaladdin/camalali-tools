@@ -231,7 +231,7 @@ export function DmarcOxucuTool() {
             {readParsed !== null && readParsed.ok && (
               <div className="space-y-4">
                 <FindingList findings={readFindings} />
-                <ToolResultPanel title="Teqlər" hint="11 teq — yazılan və defolt">
+                <ToolResultPanel title="Teqlər" hint="11 teq (yazılan və defolt)">
                   <div className="p-3">
                     <TagAccordion tags={readTags} />
                   </div>
@@ -374,7 +374,7 @@ export function DmarcOxucuTool() {
 
                 <FindingList findings={buildResult.findings} />
 
-                <ToolResultPanel title="Teqlər" hint="11 teq — yazılan və defolt">
+                <ToolResultPanel title="Teqlər" hint="11 teq (yazılan və defolt)">
                   <div className="p-3">
                     <TagAccordion tags={buildResult.tags} />
                   </div>

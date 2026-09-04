@@ -80,12 +80,12 @@ export type DottedQuadParse = { ok: true; value: number } | { ok: false; error: 
 /** Strict `a.b.c.d` parsing, reusing the SSRF-hardened octet reader every fetch on this site already trusts. */
 export function parseDottedQuadText(text: string): DottedQuadParse {
   const trimmed = text.trim();
-  if (trimmed === "") return { ok: false, error: "Boş sahə — dörd hissəli ünvan yaz (a.b.c.d)." };
+  if (trimmed === "") return { ok: false, error: "Boş sahə: dörd hissəli ünvan yaz (a.b.c.d)." };
   const value = parseIpv4Strict(trimmed);
   if (value === null) {
     return {
       ok: false,
-      error: `«${trimmed}» düzgün formatda deyil — dörd hissə, hər biri 0–255 arası rəqəm olmalıdır (məsələn 255.255.255.0).`,
+      error: `«${trimmed}» düzgün formatda deyil: dörd hissə, hər biri 0–255 arası rəqəm olmalıdır (məsələn 255.255.255.0).`,
     };
   }
   return { ok: true, value };
@@ -124,10 +124,10 @@ export type PrefixParse = { ok: true; prefix: number } | { ok: false; error: str
 
 export function parsePrefixText(text: string): PrefixParse {
   const trimmed = text.trim();
-  if (trimmed === "") return { ok: false, error: "Boş sahə — prefiks yaz, məsələn «/24»." };
+  if (trimmed === "") return { ok: false, error: "Boş sahə: prefiks yaz, məsələn «/24»." };
   const stripped = trimmed.startsWith("/") ? trimmed.slice(1) : trimmed;
   if (!/^\d{1,3}$/.test(stripped)) {
-    return { ok: false, error: `«${trimmed}» prefiks kimi oxunmadı — rəqəm yaz, məsələn «/24».` };
+    return { ok: false, error: `«${trimmed}» prefiks kimi oxunmadı: rəqəm yaz, məsələn «/24».` };
   }
   const prefix = Number.parseInt(stripped, 10);
   if (prefix < 0 || prefix > IPV4_BITS) {
@@ -145,7 +145,7 @@ export function parseSubnetMaskText(text: string): SubnetMaskParse {
   if (!isContiguousMask(dotted.value)) {
     return {
       ok: false,
-      error: `«${formatIpv4(dotted.value)}» etibarlı subnet maska deyil — 1-lərin arasında 0 var. Subnet maska soldan sağa ardıcıl 1, ardınca ardıcıl 0 olmalıdır (məsələn 255.255.255.0), araya sıfır girə bilməz.`,
+      error: `«${formatIpv4(dotted.value)}» etibarlı subnet maska deyil: 1-lərin arasında 0 var. Subnet maska soldan sağa ardıcıl 1, ardınca ardıcıl 0 olmalıdır (məsələn 255.255.255.0), araya sıfır girə bilməz.`,
     };
   }
   return { ok: true, prefix: leadingOnesCount(dotted.value) };
@@ -172,11 +172,11 @@ export type HexMaskParse = { ok: true; value: number } | { ok: false; error: str
 
 export function parseHexMaskText(text: string): HexMaskParse {
   const trimmed = text.trim();
-  if (trimmed === "") return { ok: false, error: "Boş sahə — hex maska yaz, məsələn «0xffffff00»." };
+  if (trimmed === "") return { ok: false, error: "Boş sahə: hex maska yaz, məsələn «0xffffff00»." };
   if (!/^0[xX][0-9a-fA-F]{1,8}$/.test(trimmed)) {
     return {
       ok: false,
-      error: `«${trimmed}» hex maska formatına uyğun deyil — «0x» ilə başlamalı, ardınca 8-ə qədər onaltılıq rəqəm gəlməlidir (məsələn 0xffffff00).`,
+      error: `«${trimmed}» hex maska formatına uyğun deyil: «0x» ilə başlamalı, ardınca 8-ə qədər onaltılıq rəqəm gəlməlidir (məsələn 0xffffff00).`,
     };
   }
   return { ok: true, value: Number.parseInt(trimmed.slice(2), 16) >>> 0 };
@@ -187,13 +187,13 @@ export type BinaryMaskParse = { ok: true; value: number } | { ok: false; error: 
 export function parseBinaryMaskText(text: string): BinaryMaskParse {
   const trimmed = text.trim();
   if (trimmed === "") {
-    return { ok: false, error: "Boş sahə — binary maska yaz, məsələn «11111111.11111111.11111111.00000000»." };
+    return { ok: false, error: "Boş sahə: binary maska yaz, məsələn «11111111.11111111.11111111.00000000»." };
   }
   const groups = trimmed.split(".");
   if (groups.length !== 4 || groups.some((group) => !/^[01]{8}$/.test(group))) {
     return {
       ok: false,
-      error: `«${trimmed}» binary maska formatına uyğun deyil — dörd qrup, hər biri düz 8 rəqəmdən (0 və ya 1) ibarət olmalıdır, nöqtə ilə ayrılmış (məsələn 11111111.11111111.11111111.00000000).`,
+      error: `«${trimmed}» binary maska formatına uyğun deyil: dörd qrup, hər biri düz 8 rəqəmdən (0 və ya 1) ibarət olmalıdır, nöqtə ilə ayrılmış (məsələn 11111111.11111111.11111111.00000000).`,
     };
   }
   // Multiplication rather than a shift, same reasoning as subnet.ts: a shift
@@ -332,7 +332,7 @@ export function convertMaskInput(kind: MaskKind, text: string, network = 0): Con
       if (!isContiguousMask(parsed.value)) {
         return {
           ok: false,
-          error: `«${text.trim()}» ardıcıl subnet maskaya uyğun gəlmir — hex forması yalnız 1-lərin ardıcıl olduğu maskaları ifadə edir. Qeyri-ardıcıl naxış lazımdırsa «Wildcard maska» sahəsini işlət.`,
+          error: `«${text.trim()}» ardıcıl subnet maskaya uyğun gəlmir: hex forması yalnız 1-lərin ardıcıl olduğu maskaları ifadə edir. Qeyri-ardıcıl naxış lazımdırsa «Wildcard maska» sahəsini işlət.`,
         };
       }
       return { ok: true, contiguous: true, forms: maskFormsFromPrefix(leadingOnesCount(parsed.value)) };
@@ -343,7 +343,7 @@ export function convertMaskInput(kind: MaskKind, text: string, network = 0): Con
       if (!isContiguousMask(parsed.value)) {
         return {
           ok: false,
-          error: `«${text.trim()}» ardıcıl subnet maskaya uyğun gəlmir — binary forması yalnız 1-lərin ardıcıl olduğu maskaları ifadə edir. Qeyri-ardıcıl naxış lazımdırsa «Wildcard maska» sahəsini işlət.`,
+          error: `«${text.trim()}» ardıcıl subnet maskaya uyğun gəlmir: binary forması yalnız 1-lərin ardıcıl olduğu maskaları ifadə edir. Qeyri-ardıcıl naxış lazımdırsa «Wildcard maska» sahəsini işlət.`,
         };
       }
       return { ok: true, contiguous: true, forms: maskFormsFromPrefix(leadingOnesCount(parsed.value)) };

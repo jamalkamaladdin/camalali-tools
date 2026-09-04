@@ -85,7 +85,7 @@ export function RobotsCanliTool() {
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu alət sorğunu serverə göndərir">
         Yazdığın domenin <span className="font-mono text-xs">/robots.txt</span> ünvanını sənin
-        brauzerin yox, bu saytın serveri açır — başqa heç bir səhifəyə toxunulmur. Aşağıdakı sınaq
+        brauzerin yox, bu saytın serveri açır: başqa heç bir səhifəyə toxunulmur. Aşağıdakı sınaq
         sahəsinə yazdığın yollar isə serverə ümumiyyətlə göndərilmir: onlar brauzerdə, artıq
         gətirilmiş faylın mətni üzərində yoxlanılır.
       </ToolNote>
@@ -182,7 +182,7 @@ function Report({ report }: { report: RobotsLiveReport }) {
 
       {missing && (
         <ToolNote tone="accent" title="robots.txt yoxdur">
-          Bu domendə fayl tapılmadı. Bu, xəta deyil — faylı olmayan sayt botlara tam açıq sayılır və
+          Bu domendə fayl tapılmadı. Bu, xəta deyil: faylı olmayan sayt botlara tam açıq sayılır və
           hər səhifəsi oxuna bilər. Nəyisə bağlamaq lazımdırsa əvvəlcə fayl yaradılmalıdır.
         </ToolNote>
       )}
@@ -214,7 +214,7 @@ function Report({ report }: { report: RobotsLiveReport }) {
             <ul className="space-y-1">
               {report.doc.sitemaps.map((sitemap) => (
                 <li key={`${sitemap.line}-${sitemap.url}`} className="text-xs break-all">
-                  <span className="text-muted">{sitemap.line}. sətir</span> —{" "}
+                  <span className="text-muted">{sitemap.line}. sətir:</span>{" "}
                   <span className="font-mono">{sitemap.url}</span>
                 </li>
               ))}
@@ -231,7 +231,7 @@ function Report({ report }: { report: RobotsLiveReport }) {
             <CopyButton value={report.text} label="mətni kopyala" disabled={report.text === ""} />
             {report.truncated && (
               <p className="font-ui text-[11px] text-muted">
-                Fayl büdcədən uzun idi və oxunuşu kəsildi — aşağıdakı mətn tam deyil.
+                Fayl büdcədən uzun idi və oxunuşu kəsildi: aşağıdakı mətn tam deyil.
               </p>
             )}
             <ToolOutput className="max-h-96 overflow-y-auto">
@@ -277,7 +277,7 @@ function GroupTable({ report }: { report: RobotsLiveReport }) {
 
             {group.rules.length === 0 ? (
               <p className="mt-2 text-sm/6 text-muted">
-                Bu qrupda qayda yoxdur — həmin botlar üçün heç nə bağlanmır.
+                Bu qrupda qayda yoxdur: həmin botlar üçün heç nə bağlanmır.
               </p>
             ) : (
               <ul className="mt-2 space-y-1">
@@ -288,7 +288,7 @@ function GroupTable({ report }: { report: RobotsLiveReport }) {
                       {rule.kind === "allow" ? "Allow" : "Disallow"}:
                     </span>{" "}
                     {rule.path === "" ? (
-                      <span className="text-muted">(boş — heç nəyə təsir etmir)</span>
+                      <span className="text-muted">(boş, heç nəyə təsir etmir)</span>
                     ) : (
                       rule.path
                     )}
@@ -375,7 +375,7 @@ function PathTester({ report }: { report: RobotsLiveReport }) {
       {verdicts.length > 0 && (
         <div className="border-t border-rule p-3">
           <ToolLabel className="mb-2">
-            Nəticə — {blocked} bloklanıb, {verdicts.length - blocked} açıqdır
+            Nəticə: {blocked} bloklanıb, {verdicts.length - blocked} açıqdır
           </ToolLabel>
           <ul className="space-y-2">
             {verdicts.map((verdict, index) => (
@@ -396,10 +396,10 @@ function PathTester({ report }: { report: RobotsLiveReport }) {
                 </div>
                 <p className="mt-1 text-[11px] break-all text-muted">
                   {verdict.rule === null ? (
-                    "heç bir qayda uyğun gəlmədi — defolt olaraq icazə verilir"
+                    "heç bir qayda uyğun gəlmədi: defolt olaraq icazə verilir"
                   ) : (
                     <>
-                      qalib qayda: {verdict.rule.line}. sətir —{" "}
+                      qalib qayda: {verdict.rule.line}. sətir:{" "}
                       <span className="font-mono">
                         {verdict.rule.kind === "allow" ? "Allow" : "Disallow"}: {verdict.rule.path}
                       </span>

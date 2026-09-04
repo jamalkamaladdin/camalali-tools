@@ -74,7 +74,7 @@ export function HostingTespitiTool() {
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu alət sorğunu serverə göndərir">
         Yazdığın domenə serverin özü HTTP sorğusu göndərir, sonra eyni domenin DNS qeydlərini və IP-nin
-        RDAP qeydini soruşur — sənin brauzerin heç nəyə toxunmur.
+        RDAP qeydini soruşur: sənin brauzerin heç nəyə toxunmur.
       </ToolNote>
 
       <ToolPanel>
@@ -218,7 +218,7 @@ function DetectionRow({ detection }: { detection: Detection }) {
         <span className="text-[11px] text-muted">{CATEGORY_LABELS[detection.category]}</span>
       </div>
       <p className="mt-1 text-[11px] text-muted">
-        {detection.reason} — <span className="font-mono">{detection.evidence}</span>
+        {detection.reason}: <span className="font-mono">{detection.evidence}</span>
       </p>
     </div>
   );

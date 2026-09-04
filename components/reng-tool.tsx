@@ -93,7 +93,7 @@ function ColorPickerField({
       <div className="flex items-center gap-2">
         <input
           type="color"
-          aria-label={`${label} — rəng seçici`}
+          aria-label={`${label} rəng seçicisi`}
           value={pickerValue}
           onChange={(event) => onChange(event.target.value)}
           className="h-9 w-10 shrink-0 cursor-pointer rounded border border-rule bg-surface p-0.5 transition-colors duration-200 ease-out hover:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
@@ -247,7 +247,7 @@ function ContrastPanel() {
             className="flex items-center justify-center rounded border border-rule p-8 font-ui text-lg font-semibold"
             style={{ backgroundColor: toCssColor(previewBackground), color: toCssColor(result.foreground) }}
           >
-            Nümunə mətn — Aa Bb Əə
+            Nümunə mətn: Aa Bb Əə
           </div>
 
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
@@ -272,7 +272,7 @@ function ContrastPanel() {
           {result.suggestion && (
             <ToolNote tone="accent" title="AA normal mətn üçün nə qədər dəyişməli">
               Mətni {result.suggestion.deltaL} faiz xal{" "}
-              {result.suggestion.direction === "tundlesdir" ? "tündləşdirin" : "açıqlaşdırın"} —
+              {result.suggestion.direction === "tundlesdir" ? "tündləşdirin" : "açıqlaşdırın"},
               məsələn <span className="font-mono">{formatHex(result.suggestion.color)}</span>.
             </ToolNote>
           )}

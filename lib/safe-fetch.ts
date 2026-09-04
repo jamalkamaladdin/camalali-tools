@@ -88,7 +88,7 @@ export async function publicAddressesOnly(hostname: string): Promise<string | nu
   try {
     addresses = await lookup(hostname, { all: true, verbatim: true });
   } catch {
-    return "Bu host adı IP ünvanına həll olunmur — domen adını yoxla.";
+    return "Bu host adı IP ünvanına həll olunmur: domen adını yoxla.";
   }
 
   if (addresses.length === 0) return "Bu host adı heç bir IP ünvanı qaytarmadı.";
@@ -126,7 +126,7 @@ function unreachable(error: unknown): SafeFail {
     status: 502,
     message: aborted
       ? "Sayt 8 saniyə ərzində cavab vermədi."
-      : "Saytla əlaqə qurulmadı — ünvan işləyirmi, yoxla.",
+      : "Saytla əlaqə qurulmadı: ünvan işləyirmi, yoxla.",
   };
 }
 

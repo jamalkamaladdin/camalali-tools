@@ -1088,7 +1088,7 @@ function decodeBytes(bytes: Uint8Array): string {
 }
 
 const TRUNCATED =
-  "Məlumat axını yarımçıq bitdi — QR oxundu, amma içindəki uzunluq sahəsi qalan bitlərdən çox simvol vəd edir.";
+  "Məlumat axını yarımçıq bitdi: QR oxundu, amma içindəki uzunluq sahəsi qalan bitlərdən çox simvol vəd edir.";
 
 function decodeSegments(
   data: Uint8Array,
@@ -1104,7 +1104,7 @@ function decodeSegments(
     if (mode === MODE_ECI) {
       return failure(
         "content",
-        "Bu QR ECI rejimi ilə kodlaşdırılıb — yəni içində ayrıca kodlaşdırma göstəricisi var. Alət üç əsas rejimi oxuyur: rəqəm, alfanumerik və bayt.",
+        "Bu QR ECI rejimi ilə kodlaşdırılıb: yəni içində ayrıca kodlaşdırma göstəricisi var. Alət üç əsas rejimi oxuyur: rəqəm, alfanumerik və bayt.",
       );
     }
     if (mode === MODE_KANJI) {
@@ -1116,13 +1116,13 @@ function decodeSegments(
     if (mode === MODE_STRUCTURED_APPEND) {
       return failure(
         "content",
-        "Bu, bölünmüş QR-in bir parçasıdır — mətn bir neçə simvola paylanıb və tək başına oxunmur.",
+        "Bu, bölünmüş QR-in bir parçasıdır: mətn bir neçə simvola paylanıb və tək başına oxunmur.",
       );
     }
     if (mode === MODE_FNC1_FIRST || mode === MODE_FNC1_SECOND) {
       return failure(
         "content",
-        "Bu QR FNC1 rejimindədir — GS1 ticarət kodlarında işlənən sahə ayırıcısı ilə. Alət adi mətn QR-lərini oxuyur.",
+        "Bu QR FNC1 rejimindədir, GS1 ticarət kodlarında işlənən sahə ayırıcısı ilə. Alət adi mətn QR-lərini oxuyur.",
       );
     }
 
@@ -1195,7 +1195,7 @@ function decodeSegments(
   if (segments.length === 0) {
     return failure(
       "content",
-      "QR düzgün oxundu, amma içində heç bir mətn seqmenti yoxdur — bu, boş simvoldur.",
+      "QR düzgün oxundu, amma içində heç bir mətn seqmenti yoxdur: bu, boş simvoldur.",
     );
   }
 
@@ -1216,14 +1216,14 @@ function decodeSegments(
 export function decodeQrMatrix(modules: boolean[][], moduleSize: number | null = null): QrDecodeResult {
   const size = modules.length;
   if (size === 0 || modules.some((row) => row.length !== size)) {
-    return failure("geometry", "Modul şəbəkəsi kvadrat deyil — QR həmişə kvadratdır.");
+    return failure("geometry", "Modul şəbəkəsi kvadrat deyil: QR həmişə kvadratdır.");
   }
 
   const version = qrVersionForSize(size);
   if (!Number.isInteger(version) || version < MIN_VERSION || version > MAX_QR_VERSION) {
     return failure(
       "geometry",
-      `Ölçülən şəbəkə ${size} moduldur. QR-in tərəfi 21, 25, 29 … 177 ola bilər (4 × versiya + 17), bu isə onların heç biri deyil — deməli şəbəkə səhv yerdən ölçülüb.`,
+      `Ölçülən şəbəkə ${size} moduldur. QR-in tərəfi 21, 25, 29 … 177 ola bilər (4 × versiya + 17), bu isə onların heç biri deyil: deməli şəbəkə səhv yerdən ölçülüb.`,
     );
   }
   if (version > MAX_SUPPORTED_VERSION) {
@@ -1268,7 +1268,7 @@ export function decodeQrMatrix(modules: boolean[][], moduleSize: number | null =
     if (repaired === null) {
       return failure(
         "correction",
-        `Xəta düzəlişi bərpa edə bilmədi: ${blocks.length > 1 ? `${index + 1}-ci blokda ` : ""}zədə xəta düzəltmə payından çoxdur. QR-in bir hissəsi örtülü, cırıq, bulanıq və ya kölgədədir — şəkli daha aydın çək və yenidən yoxla.`,
+        `Xəta düzəlişi bərpa edə bilmədi: ${blocks.length > 1 ? `${index + 1}-ci blokda ` : ""}zədə xəta düzəltmə payından çoxdur. QR-in bir hissəsi örtülü, cırıq, bulanıq və ya kölgədədir. Şəkli daha aydın çək və yenidən yoxla.`,
       );
     }
     corrected += repaired.corrected;
@@ -1305,7 +1305,7 @@ function decodeBinarised(dark: Uint8Array, width: number, height: number): QrDec
   if (candidates.length < 3) {
     return failure(
       "finder",
-      `Şəkildə QR-in üç künc kvadratı tapılmadı (${candidates.length} tapıldı, 3 lazımdır). QR-i kadrın ortasına al, ətrafındakı ağ haşiyəni kəsmə, kölgə salma və şəkli düz — kadra paralel — çək.`,
+      `Şəkildə QR-in üç künc kvadratı tapılmadı (${candidates.length} tapıldı, 3 lazımdır). QR-i kadrın ortasına al, ətrafındakı ağ haşiyəni kəsmə, kölgə salma və şəkli düz (kadra paralel) çək.`,
     );
   }
 
@@ -1323,7 +1323,7 @@ function decodeBinarised(dark: Uint8Array, width: number, height: number): QrDec
   ) {
     return failure(
       "geometry",
-      "Üç künc kvadratı düzbucaqlı düzülməyib — QR bucaq altından çəkilib və ya əyilib. Bu alət perspektivi düzəltmir: şəkli QR-in müstəvisinə paralel, düz yuxarıdan çək.",
+      "Üç künc kvadratı düzbucaqlı düzülməyib: QR bucaq altından çəkilib və ya əyilib. Bu alət perspektivi düzəltmir: şəkli QR-in müstəvisinə paralel, düz yuxarıdan çək.",
     );
   }
 
@@ -1335,7 +1335,7 @@ function decodeBinarised(dark: Uint8Array, width: number, height: number): QrDec
   if (measured < 1) {
     return failure(
       "image",
-      `Modul ölçüsü ${measured.toFixed(2)} piksel çıxdı — bir pikseldən kiçik. Şəkil çox kiçik və ya çox bulanıqdır; daha yüksək həlledicilikdə çək və ya QR-i böyüt.`,
+      `Modul ölçüsü ${measured.toFixed(2)} piksel çıxdı: bir pikseldən kiçik. Şəkil çox kiçik və ya çox bulanıqdır; daha yüksək həlledicilikdə çək və ya QR-i böyüt.`,
     );
   }
 
@@ -1344,7 +1344,7 @@ function decodeBinarised(dark: Uint8Array, width: number, height: number): QrDec
   if (version < MIN_VERSION) {
     return failure(
       "geometry",
-      `Ölçülən şəbəkə ${dimension} modul çıxdı — ən kiçik QR 21 moduldur. Künc kvadratları tapıldı, amma aralarındakı məsafə QR-ə uyğun gəlmir.`,
+      `Ölçülən şəbəkə ${dimension} modul çıxdı: ən kiçik QR 21 moduldur. Künc kvadratları tapıldı, amma aralarındakı məsafə QR-ə uyğun gəlmir.`,
     );
   }
   if (version > MAX_SUPPORTED_VERSION) {
@@ -1359,7 +1359,7 @@ function decodeBinarised(dark: Uint8Array, width: number, height: number): QrDec
   if (modules === null) {
     return failure(
       "geometry",
-      "QR-in bir hissəsi şəkildən kənarda qalır. Sakit zona — ətrafdakı 4 modulluq boş haşiyə — də kadra düşməlidir; şəkli bir az geniş kəs.",
+      "QR-in bir hissəsi şəkildən kənarda qalır. Sakit zona (ətrafdakı 4 modulluq boş haşiyə) də kadra düşməlidir; şəkli bir az geniş kəs.",
     );
   }
 
@@ -1383,7 +1383,7 @@ export function decodeQrImage(
   height: number,
 ): QrDecodeResult {
   if (!Number.isInteger(width) || !Number.isInteger(height) || width <= 0 || height <= 0) {
-    return failure("image", "Şəklin ölçüləri oxunmadı — en və hündürlük müsbət tam ədəd olmalıdır.");
+    return failure("image", "Şəklin ölçüləri oxunmadı: en və hündürlük müsbət tam ədəd olmalıdır.");
   }
   if (pixels.length !== width * height * 4) {
     return failure(
@@ -1394,7 +1394,7 @@ export function decodeQrImage(
   if (width < MIN_IMAGE_SIDE || height < MIN_IMAGE_SIDE) {
     return failure(
       "image",
-      `Şəkil çox kiçikdir: ${width}×${height}. Ən kiçik QR 21×21 moduldur, yəni şəkil ən azı 21×21 piksel olmalıdır — praktikada 200 pikseldən böyük lazımdır.`,
+      `Şəkil çox kiçikdir: ${width}×${height}. Ən kiçik QR 21×21 moduldur, yəni şəkil ən azı 21×21 piksel olmalıdır, praktikada 200 pikseldən böyük lazımdır.`,
     );
   }
 

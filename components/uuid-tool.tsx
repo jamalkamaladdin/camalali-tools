@@ -44,8 +44,8 @@ const VERSION_OPTIONS = [
  * lives in `lib/tools/uuid.ts`, where the RFC list is provable.
  */
 const VERSION_HINT: Record<number, string> = {
-  4: "Tam təsadüfi — indeks sırasını qorumur.",
-  7: "İlk 48 bit unix millisaniyə — vaxta görə sıralanır.",
+  4: "Tam təsadüfi: indeks sırasını qorumur.",
+  7: "İlk 48 bit unix millisaniyə: vaxta görə sıralanır.",
 };
 
 const PENDING = "UUID-lər brauzerdə yaradılır…";
@@ -246,7 +246,7 @@ function InspectResult({ inspection }: { inspection: UuidInspection | null }) {
   if (!inspection) {
     return (
       <p className="font-ui text-sm text-muted">
-        UUID yapışdır — versiya, variant və (v1/v7 üçün) vaxt möhürü burada
+        UUID yapışdır: versiya, variant və (v1/v7 üçün) vaxt möhürü burada
         görünəcək.
       </p>
     );
@@ -263,8 +263,8 @@ function InspectResult({ inspection }: { inspection: UuidInspection | null }) {
   if (inspection.special) {
     const label =
       inspection.special === "nil"
-        ? "nil UUID — bütün bitlər sıfırdır, «boş» dəyər kimi işlənir."
-        : "max UUID — bütün bitlər 1-dir, açıq intervalın yuxarı sərhədi kimi işlənir.";
+        ? "nil UUID: bütün bitlər sıfırdır, «boş» dəyər kimi işlənir."
+        : "max UUID: bütün bitlər 1-dir, açıq intervalın yuxarı sərhədi kimi işlənir.";
     return (
       <div className="space-y-4">
         <ToolNote tone="info" title={inspection.special === "nil" ? "Nil UUID" : "Max UUID"}>
@@ -286,7 +286,7 @@ function InspectResult({ inspection }: { inspection: UuidInspection | null }) {
               : `${inspection.version} (qeyri-standart)`
           }
         />
-        <ToolStat label="Variant" value={inspection.variantLabel ?? "—"} />
+        <ToolStat label="Variant" value={inspection.variantLabel ?? "yoxdur"} />
       </div>
 
       {inspection.timestamp && (

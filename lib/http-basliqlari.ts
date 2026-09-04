@@ -11,12 +11,12 @@ export const httpBasliqlariSections: ReferenceSection[] = [
   {
     id: "sorgu",
     label: "Sorğu",
-    hint: "Sorğu başlıqları — brauzerin serverə nə istədiyini və kim olduğunu bildirir.",
+    hint: "Sorğu başlıqları: brauzerin serverə nə istədiyini və kim olduğunu bildirir.",
   },
   {
     id: "cavab",
     label: "Cavab",
-    hint: "Cavab başlıqları — serverin sorğuya necə cavab verdiyini bildirir.",
+    hint: "Cavab başlıqları: serverin sorğuya necə cavab verdiyini bildirir.",
   },
   {
     id: "kes",

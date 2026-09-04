@@ -46,7 +46,7 @@ import {
 type Direction = "encode" | "decode";
 type Outcome = { ok: true; text: string } | { ok: false; error: string };
 
-const SAMPLE_TEXT = 'O\'Brien dedi: "Bu, <mətn> həm sətir, həm də URL üçündür — 5€ dəyərində."';
+const SAMPLE_TEXT = 'O\'Brien dedi: "Bu, <mətn> həm sətir, həm də URL üçündür, 5€ dəyərində."';
 
 export function EscapeTool() {
   const [text, setText] = useState(SAMPLE_TEXT);
@@ -236,7 +236,7 @@ export function EscapeTool() {
           action={<CopyButton value={outcome.text} label="nəticəni kopyala" />}
         >
           <div className="p-4">
-            <ToolOutput>{outcome.text || "—"}</ToolOutput>
+            <ToolOutput>{outcome.text || ""}</ToolOutput>
           </div>
         </ToolResultPanel>
       ) : (

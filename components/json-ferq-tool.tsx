@@ -47,7 +47,7 @@ const OP_LABEL: Record<DiffOp, string> = {
 };
 
 function formatValue(value: DiffEntry["before"]): string {
-  return value === undefined ? "—" : JSON.stringify(value);
+  return value === undefined ? "" : JSON.stringify(value);
 }
 
 export function JsonFerqTool() {
@@ -112,7 +112,7 @@ export function JsonFerqTool() {
                 onChange={(event) => setOrderSensitive(event.target.checked)}
                 className="mt-0.5 size-4 shrink-0 accent-[var(--color-accent)]"
               />
-              <span>Sıra dəyişikliyinə həssas — söndürülsə yalnız qarşılığı olmayan dəyərlər fərq sayılır.</span>
+              <span>Sıra dəyişikliyinə həssas: söndürülsə yalnız qarşılığı olmayan dəyərlər fərq sayılır.</span>
             </label>
           )}
         </div>

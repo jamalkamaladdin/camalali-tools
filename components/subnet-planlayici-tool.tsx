@@ -223,7 +223,7 @@ export function SubnetPlanlayiciTool() {
                 <ToolLabel>Qalan boş bloklar</ToolLabel>
                 <p className="mt-1 font-mono text-sm">
                   {planResult.freeBlocks.length === 0
-                    ? "yoxdur — şəbəkə tam dolub"
+                    ? "yoxdur: şəbəkə tam dolub"
                     : planResult.freeBlocks.map((block) => block.cidr).join(", ")}
                 </p>
               </div>
@@ -280,7 +280,7 @@ export function SubnetPlanlayiciTool() {
               {equalResult.actualCount !== equalResult.requestedCount && (
                 <div className="p-4 pb-0">
                   <ToolNote tone="info">
-                    {`${equalResult.requestedCount} deyil, ${equalResult.actualCount} bərabər hissəyə bölündü — CIDR yalnız 2-nin qüvvətlərini dəstəkləyir.`}
+                    {`${equalResult.requestedCount} deyil, ${equalResult.actualCount} bərabər hissəyə bölündü: CIDR yalnız 2-nin qüvvətlərini dəstəkləyir.`}
                   </ToolNote>
                 </div>
               )}
@@ -324,8 +324,8 @@ export function SubnetPlanlayiciTool() {
       )}
 
       <ToolNote tone="info" title="İki kənar qayda">
-        «/31» iki ünvanlıq blokdur və hər ikisi host sayılır — RFC 3021-ə görə nöqtə-nöqtə kanalın iki ucu. «/32»
-        tək ünvandır, tək bir hostu bildirir. Hər ikisi «0 host» deyil — alət onları elə hesablayır.
+        «/31» iki ünvanlıq blokdur və hər ikisi host sayılır (RFC 3021-ə görə nöqtə-nöqtə kanalın iki ucu). «/32»
+        tək ünvandır, tək bir hostu bildirir. Hər ikisi «0 host» deyil: alət onları elə hesablayır.
       </ToolNote>
     </div>
   );

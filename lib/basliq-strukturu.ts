@@ -99,7 +99,7 @@ export function auditOutline(headings: Heading[]): OutlineIssue[] {
     issues.push({
       severity: "xeta",
       kind: "h1-yoxdur",
-      message: "Səhifədə H1 yoxdur — səhifənin nədən bəhs etdiyini bildirən yeganə başlıq budur.",
+      message: "Səhifədə H1 yoxdur: səhifənin nədən bəhs etdiyini bildirən yeganə başlıq budur.",
       heading: null,
     });
   } else if (h1s.length > 1) {
@@ -138,14 +138,14 @@ export function auditOutline(headings: Heading[]): OutlineIssue[] {
       issues.push({
         severity: "xeberdarliq",
         kind: "sekil-alt-siz",
-        message: "Başlıq şəkil daşıyır, amma şəklin alt mətni yoxdur — başlıq mətni maşın üçün boşdur.",
+        message: "Başlıq şəkil daşıyır, amma şəklin alt mətni yoxdur: başlıq mətni maşın üçün boşdur.",
         heading,
       });
     } else if (heading.empty) {
       issues.push({
         severity: "xeta",
         kind: "bos-basliq",
-        message: "Başlıq boşdur — içində heç bir mətn yoxdur.",
+        message: "Başlıq boşdur, içində heç bir mətn yoxdur.",
         heading,
       });
     } else {
@@ -162,7 +162,7 @@ export function auditOutline(headings: Heading[]): OutlineIssue[] {
         issues.push({
           severity: "xeberdarliq",
           kind: "uzun-basliq",
-          message: `Başlıq ${heading.text.length} simvoldur — ${LONG_HEADING_LIMIT} simvol hədddən uzundur.`,
+          message: `Başlıq ${heading.text.length} simvoldur: ${LONG_HEADING_LIMIT} simvol hədddən uzundur.`,
           heading,
         });
       }

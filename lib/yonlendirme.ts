@@ -75,8 +75,8 @@ export function parseRedirectInput(
         line: index + 1,
         raw,
         message: hasWhitespace
-          ? "İki sahə gözlənilir (köhnə və yeni ünvan) — bu sətirdə daha çoxu var."
-          : "Yalnız bir tərəf var — yeni ünvan yoxdur.",
+          ? "İki sahə gözlənilir (köhnə və yeni ünvan): bu sətirdə daha çoxu var."
+          : "Yalnız bir tərəf var: yeni ünvan yoxdur.",
       });
       return;
     }

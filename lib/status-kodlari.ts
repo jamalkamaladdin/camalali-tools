@@ -13,27 +13,27 @@ export const statusKodlariSections: ReferenceSection[] = [
   {
     id: "1xx",
     label: "1xx",
-    hint: "İnformasiya — sorğu davam edir, əməliyyat hələ bitməyib.",
+    hint: "İnformasiya: sorğu davam edir, əməliyyat hələ bitməyib.",
   },
   {
     id: "2xx",
     label: "2xx",
-    hint: "Uğur — sorğu qəbul edildi və istənilən kimi icra olundu.",
+    hint: "Uğur: sorğu qəbul edildi və istənilən kimi icra olundu.",
   },
   {
     id: "3xx",
     label: "3xx",
-    hint: "Yönləndirmə — resurs başqa ünvandadır və ya keşdəki nüsxə etibarlıdır.",
+    hint: "Yönləndirmə: resurs başqa ünvandadır və ya keşdəki nüsxə etibarlıdır.",
   },
   {
     id: "4xx",
     label: "4xx",
-    hint: "Müştəri xətası — sorğuda problem var, server onu icra edə bilmir.",
+    hint: "Müştəri xətası: sorğuda problem var, server onu icra edə bilmir.",
   },
   {
     id: "5xx",
     label: "5xx",
-    hint: "Server xətası — sorğu düzgündür, server onu yerinə yetirə bilmədi.",
+    hint: "Server xətası: sorğu düzgündür, server onu yerinə yetirə bilmədi.",
   },
 ];
 

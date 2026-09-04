@@ -219,7 +219,7 @@ export function JwtTool() {
       </ToolPanel>
 
       <ToolNote tone="info" title="İmza yoxlanılmır">
-        Bu alət yalnız token-i oxuyur — header və payload-u dekod edir. İmzanın düzgünlüyünü
+        Bu alət yalnız token-i oxuyur: header və payload-u dekod edir. İmzanın düzgünlüyünü
         təsdiqləmək üçün onu yaradan gizli açar (və ya açıq açar) lazımdır; bu alət heç vaxt bunu
         istəmir və heç nəyi saxlamır.
       </ToolNote>
@@ -233,20 +233,20 @@ export function JwtTool() {
       {result && result.ok && header && payload && (
         <>
           <div className="grid gap-5 sm:grid-cols-3">
-            <ToolStat label="alg" value={typeof header.alg === "string" ? header.alg : "—"} />
-            <ToolStat label="typ" value={typeof header.typ === "string" ? header.typ : "—"} />
-            <ToolStat label="kid" value={typeof header.kid === "string" ? header.kid : "—"} />
+            <ToolStat label="alg" value={typeof header.alg === "string" ? header.alg : ""} />
+            <ToolStat label="typ" value={typeof header.typ === "string" ? header.typ : ""} />
+            <ToolStat label="kid" value={typeof header.kid === "string" ? header.kid : ""} />
           </div>
 
           {result.expired && expDate && (
             <ToolNote tone="accent" title="Token-in vaxtı bitib">
-              exp claim-i {formatAzDateTime(expDate)} tarixinə işarə edir — {formatRelative(expDate)}.
+              exp claim-i {formatAzDateTime(expDate)} tarixinə işarə edir ({formatRelative(expDate)}).
             </ToolNote>
           )}
 
           {result.notYetValid && nbfDate && (
             <ToolNote tone="accent" title="Token hələ qüvvəyə minməyib">
-              nbf claim-i {formatAzDateTime(nbfDate)} tarixinə işarə edir — {formatRelative(nbfDate)}.
+              nbf claim-i {formatAzDateTime(nbfDate)} tarixinə işarə edir ({formatRelative(nbfDate)}).
             </ToolNote>
           )}
 

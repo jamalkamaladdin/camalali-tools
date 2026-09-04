@@ -101,7 +101,7 @@ export function SitemapYoxlayiciTool() {
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu alət ünvanı serverə göndərir">
         Yazdığın faylı sənin brauzerin yox, bu saytın serveri açır və ilk 5 MB-ını oxuyur. Sitemap
-        indeksi tapılsa alt fayllar avtomatik gətirilmir — ünvanları sadalanır. Daxili şəbəkə
+        indeksi tapılsa alt fayllar avtomatik gətirilmir: ünvanları sadalanır. Daxili şəbəkə
         ünvanları (localhost, 10.x, 192.168.x) və 80/443-dən başqa portlar rədd edilir.
       </ToolNote>
 
@@ -186,7 +186,7 @@ function Report({
           <ToolStat
             label={isIndex ? "Alt sitemap" : "Ünvan"}
             value={report.truncated ? `${count}+` : String(count)}
-            note={report.truncated ? "fayl kəsildi — natamam say" : "faylda sayılan"}
+            note={report.truncated ? "fayl kəsildi: natamam say" : "faylda sayılan"}
             tone={report.truncated ? "warning" : "default"}
           />
           <ToolStat
@@ -231,9 +231,9 @@ function Report({
           <ul className="space-y-1 font-mono text-xs break-all">
             <li>ünvan: {payload.url}</li>
             <li>status: {payload.status}</li>
-            <li>content-type: {payload.contentType ?? "—"}</li>
+            <li>content-type: {payload.contentType ?? "yoxdur"}</li>
             <li>yönləndirmə: {payload.redirectedTo ?? "yoxdur"}</li>
-            <li>hostlar: {report.hosts.length === 0 ? "—" : report.hosts.join(", ")}</li>
+            <li>hostlar: {report.hosts.length === 0 ? "yoxdur" : report.hosts.join(", ")}</li>
           </ul>
         </ToolAccordionItem>
       </ToolAccordion>
@@ -254,7 +254,7 @@ function ChildList({
   return (
     <ToolResultPanel
       title="Alt sitemap-lar"
-      hint={`${payload.childCount} ədəd — avtomatik açılmır`}
+      hint={`${payload.childCount} ədəd: avtomatik açılmır`}
       action={<CopyButton value={childSitemaps.join("\n")} label="ünvanları kopyala" />}
     >
       <div className="space-y-3 p-4">
@@ -292,10 +292,10 @@ function ContentReport({ payload }: { payload: SitemapPayload }) {
     <>
       <div className="@container">
         <div className="grid gap-3 @md:grid-cols-2 @3xl:grid-cols-4">
-          <ToolStat label="Ən köhnə tarix" value={report.oldest ?? "—"} />
-          <ToolStat label="Ən yeni tarix" value={report.newest ?? "—"} />
+          <ToolStat label="Ən köhnə tarix" value={report.oldest ?? ""} />
+          <ToolStat label="Ən yeni tarix" value={report.newest ?? ""} />
           {feed ? (
-            <ToolStat label="Lentin başlığı" value={report.feedTitle ?? "—"} className="@md:col-span-2" />
+            <ToolStat label="Lentin başlığı" value={report.feedTitle ?? ""} className="@md:col-span-2" />
           ) : (
             <>
               <ToolStat

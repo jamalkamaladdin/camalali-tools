@@ -140,7 +140,7 @@ export function MetnTemizleyiciTool() {
         action={<CopyButton value={result.output} label="mətni kopyala" />}
       >
         <div className="p-4">
-          <ToolOutput>{result.output || "—"}</ToolOutput>
+          <ToolOutput>{result.output || ""}</ToolOutput>
         </div>
       </ToolResultPanel>
     </div>

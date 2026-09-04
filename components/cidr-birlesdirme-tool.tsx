@@ -166,7 +166,7 @@ function CidrToRangePanel() {
           </div>
           {result.blockCount > 1 && (
             <p className="px-4 pb-4 text-ios-footnote text-muted">
-              Bloklar üst-üstə düşürsə say təkrar sayılır — minimal, təkrarsız say üçün
+              Bloklar üst-üstə düşürsə say təkrar sayılır: minimal, təkrarsız say üçün
               «Aqreqasiya» sekmesini işlət.
             </p>
           )}
@@ -312,7 +312,7 @@ export function CidrBirlesdirmeTool() {
   return (
     <div className="mt-8">
       <ToolTabs items={tabs} idPrefix="cidr-birlesdirme" />
-      <ToolLabel className="mt-2">Hesab brauzerdə aparılır — heç nə serverə göndərilmir.</ToolLabel>
+      <ToolLabel className="mt-2">Hesab brauzerdə aparılır: heç nə serverə göndərilmir.</ToolLabel>
     </div>
   );
 }

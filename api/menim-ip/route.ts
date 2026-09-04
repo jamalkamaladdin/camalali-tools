@@ -147,7 +147,7 @@ export async function GET(request: Request) {
 
   if (parseIpv4(address) === null && parseIpv6(address) === null) {
     return fail(
-      "IP ünvanın tanınmadı — server heç bir etibarlı ünvan başlığı görmədi.",
+      "IP ünvanın tanınmadı: server heç bir etibarlı ünvan başlığı görmədi.",
       502,
     );
   }

@@ -76,7 +76,7 @@ function parseTomlDocument(text: string): Record<string, unknown> {
 
   function readBasicString(): string {
     const start = i;
-    if (text.startsWith('"""', i)) fail(start, 'Çoxsətirli sətir («"""») dəstəklənmir — tək sətirdə yaz.');
+    if (text.startsWith('"""', i)) fail(start, 'Çoxsətirli sətir («"""») dəstəklənmir: tək sətirdə yaz.');
     i++; // opening quote
     let out = "";
     while (i < n) {
@@ -85,7 +85,7 @@ function parseTomlDocument(text: string): Record<string, unknown> {
         i++;
         return out;
       }
-      if (ch === "\n") fail(start, "Sətir bu sətirdə bağlanmır — çoxsətirli sətir dəstəklənmir.");
+      if (ch === "\n") fail(start, "Sətir bu sətirdə bağlanmır: çoxsətirli sətir dəstəklənmir.");
       if (ch === "\\") {
         const escape = text[i + 1];
         if (escape === undefined) fail(i, "Sətir bağlanmayıb.");
@@ -114,13 +114,13 @@ function parseTomlDocument(text: string): Record<string, unknown> {
 
   function readLiteralString(): string {
     const start = i;
-    if (text.startsWith("'''", i)) fail(start, "Çoxsətirli literal sətir («'''») dəstəklənmir — tək sətirdə yaz.");
+    if (text.startsWith("'''", i)) fail(start, "Çoxsətirli literal sətir («'''») dəstəklənmir: tək sətirdə yaz.");
     i++; // opening quote
     const closeIdx = text.indexOf("'", i);
     const newlineIdx = text.indexOf("\n", i);
     if (closeIdx === -1) fail(start, "Literal sətir bağlanmayıb.");
     if (newlineIdx !== -1 && newlineIdx < closeIdx) {
-      fail(start, "Sətir bu sətirdə bağlanmır — çoxsətirli sətir dəstəklənmir.");
+      fail(start, "Sətir bu sətirdə bağlanmır: çoxsətirli sətir dəstəklənmir.");
     }
     const value = text.slice(i, closeIdx);
     i = closeIdx + 1;
@@ -158,7 +158,7 @@ function parseTomlDocument(text: string): Record<string, unknown> {
     if (DATE_RE.test(token) || TIME_RE.test(token)) return token;
 
     if (/^[+-]?(inf|nan)$/.test(token)) {
-      fail(start, `«${token}» JSON-da yazıla bilmir — JSON-un sonsuzluq və NaN dəyəri yoxdur.`);
+      fail(start, `«${token}» JSON-da yazıla bilmir: JSON-un sonsuzluq və NaN dəyəri yoxdur.`);
     }
 
     const cleaned = token.replace(/_/g, "");
@@ -239,7 +239,7 @@ function parseTomlDocument(text: string): Record<string, unknown> {
         continue;
       }
       if (typeof existing !== "object" || existing === null || Array.isArray(existing)) {
-        fail(pos, `«${key}» artıq sadə dəyər kimi təyin olunub — iç-içə açar üçün istifadə edilə bilməz.`);
+        fail(pos, `«${key}» artıq sadə dəyər kimi təyin olunub: iç-içə açar üçün istifadə edilə bilməz.`);
       }
       node = existing as Record<string, unknown>;
     }
@@ -378,7 +378,7 @@ export function tomlToJson(tomlText: string, indent: "2" | "4" | "tab" = "2"): T
       const loc = locate(tomlText, cause.position);
       return { ok: false, error: cause.message, line: loc.line, column: loc.column };
     }
-    return { ok: false, error: "TOML təhlil oluna bilmədi — quruluş gözlənilməz formadadır." };
+    return { ok: false, error: "TOML təhlil oluna bilmədi, quruluş gözlənilməz formadadır." };
   }
 }
 
@@ -412,7 +412,7 @@ function tomlKey(key: string): string {
  * where TOML's own grammar names it.
  */
 function tomlScalar(value: unknown): string {
-  if (value === null) throw new TomlBuildError('TOML-da "null" dəyəri yoxdur — sahəni sil, ya da boş sətir yaz.');
+  if (value === null) throw new TomlBuildError('TOML-da "null" dəyəri yoxdur: sahəni sil, ya da boş sətir yaz.');
   if (typeof value === "boolean") return value ? "true" : "false";
   if (typeof value === "number") {
     if (!Number.isFinite(value)) throw new TomlBuildError("Sonsuz və ya NaN ədəd TOML-da yazıla bilmir.");
@@ -476,7 +476,7 @@ export function jsonToToml(jsonText: string): JsonToTomlResult {
   const parsed = formatJson(jsonText, { mode: "pretty", indent: "2", sortKeys: false });
   if (!parsed.ok) return { ok: false, error: parsed.error.message };
   if (!isPlainObject(parsed.value)) {
-    return { ok: false, error: "TOML-a çevirmək üçün JSON-un kökü obyekt olmalıdır — massiv və ya sadə dəyər ola bilməz." };
+    return { ok: false, error: "TOML-a çevirmək üçün JSON-un kökü obyekt olmalıdır: massiv və ya sadə dəyər ola bilməz." };
   }
 
   try {

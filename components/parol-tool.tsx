@@ -233,7 +233,7 @@ export function ParolTool() {
 
       <ToolNote title="Parol yadda saxlanmır">
         Simvollar brauzerin kriptoqrafik təsadüf mənbəyindən gəlir və bu səhifə
-        heç bir sorğu göndərmir. Səhifəni yeniləyəndə parollar itir — istifadə
+        heç bir sorğu göndərmir. Səhifəni yeniləyəndə parollar itir: istifadə
         edəcəyin parolu əvvəlcə parol menecerinə köçür.
       </ToolNote>
     </div>

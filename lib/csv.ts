@@ -266,7 +266,7 @@ export type CsvResult = { ok: true; data: CsvInspection } | { ok: false; error: 
 
 export function inspectCsv(text: string, delimiterOverride?: CsvDelimiter): CsvResult {
   if (text.trim() === "") {
-    return { ok: false, error: "CSV mətni boşdur — cədvəli yapışdır." };
+    return { ok: false, error: "CSV mətni boşdur: cədvəli yapışdır." };
   }
 
   const delimiter = delimiterOverride ?? detectDelimiter(text);

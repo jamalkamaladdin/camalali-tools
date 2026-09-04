@@ -86,7 +86,7 @@ async function lookup(domain: string, tld: string): Promise<Outcome> {
   if (bootstrap.kind === "no-service") {
     return {
       ok: false,
-      message: `«.${tld}» zonasının reyestri RDAP xidməti dərc etmir — bu, domenin qeydə alınmadığı demək deyil, sadəcə bu yolla oxunacaq açıq qeydiyyat qeydi yoxdur.`,
+      message: `«.${tld}» zonasının reyestri RDAP xidməti dərc etmir: bu, domenin qeydə alınmadığı demək deyil, sadəcə bu yolla oxunacaq açıq qeydiyyat qeydi yoxdur.`,
       status: 404,
     };
   }

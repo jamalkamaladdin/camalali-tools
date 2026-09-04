@@ -116,7 +116,7 @@ export function buildTypeScale(basePx: number, ratio: number): TypeScaleResult {
   if (!Number.isFinite(ratio) || ratio < MIN_RATIO || ratio > MAX_RATIO) {
     return {
       ok: false,
-      error: `Nisbət ${MIN_RATIO}-${MAX_RATIO} aralığında olmalıdır — 1-ə bərabər və ya kiçik nisbət şkalanı düzləşdirir.`,
+      error: `Nisbət ${MIN_RATIO}-${MAX_RATIO} aralığında olmalıdır: 1-ə bərabər və ya kiçik nisbət şkalanı düzləşdirir.`,
     };
   }
 

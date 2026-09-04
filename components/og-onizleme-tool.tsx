@@ -128,7 +128,7 @@ export function OgOnizlemeTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu alət ünvanı serverə göndərir">
-        Yazdığın səhifəni sənin brauzerin yox, bu saytın serveri açır və ilk 256 KB-ını oxuyur —
+        Yazdığın səhifəni sənin brauzerin yox, bu saytın serveri açır və ilk 256 KB-ını oxuyur:
         meta teqlər orada yerləşir. Daxili şəbəkə ünvanları (localhost, 10.x, 192.168.x) və
         80/443-dən başqa portlar rədd edilir. Önizləmədəki şəkli isə brauzerin birbaşa həmin şəkil
         ünvanından yükləyəcək.
@@ -276,11 +276,11 @@ function Report({ report }: { report: OgReport }) {
 
         <ToolAccordionItem summary="Ehtiyat mənbələr" hint="teq yoxdursa buradan götürülür">
           <ul className="space-y-1 font-mono text-xs break-all">
-            <li>title: {report.data.title ?? "—"}</li>
-            <li>meta description: {report.data.description ?? "—"}</li>
-            <li>canonical: {report.data.canonical ?? "—"}</li>
-            <li>icon: {report.data.icon ?? "—"}</li>
-            <li>content-type: {report.contentType ?? "—"}</li>
+            <li>title: {report.data.title ?? "yoxdur"}</li>
+            <li>meta description: {report.data.description ?? "yoxdur"}</li>
+            <li>canonical: {report.data.canonical ?? "yoxdur"}</li>
+            <li>icon: {report.data.icon ?? "yoxdur"}</li>
+            <li>content-type: {report.contentType ?? "yoxdur"}</li>
           </ul>
         </ToolAccordionItem>
       </ToolAccordion>
@@ -318,7 +318,7 @@ function WideBody({ card, meta }: { card: OgCard; meta: CardMeta }) {
     <div className="overflow-hidden rounded border border-rule">
       <CardImage key={card.image ?? "yox"} src={card.image} shape="wide" />
       <div className="bg-hover p-3">
-        <p className="truncate font-ui text-[11px] text-muted">{card.host || "—"}</p>
+        <p className="truncate font-ui text-[11px] text-muted">{card.host || "yoxdur"}</p>
         <p className="mt-1 line-clamp-2 font-semibold">{card.title || "başlıq yoxdur"}</p>
         <CardDescription card={card} meta={meta} />
       </div>
@@ -333,7 +333,7 @@ function NarrowBody({ card, meta }: { card: OgCard; meta: CardMeta }) {
       <div className="min-w-0 flex-1 bg-hover p-3">
         <p className="line-clamp-2 font-semibold">{card.title || "başlıq yoxdur"}</p>
         <CardDescription card={card} meta={meta} />
-        <p className="mt-1 truncate font-ui text-[11px] text-muted">{card.host || "—"}</p>
+        <p className="mt-1 truncate font-ui text-[11px] text-muted">{card.host || "yoxdur"}</p>
       </div>
     </div>
   );

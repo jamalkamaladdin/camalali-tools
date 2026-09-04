@@ -14,7 +14,7 @@ export function GitEmrleriTool() {
       rows={gitEmrleriRows}
       sections={gitEmrleriSections}
       placeholder="Əmr və ya açar söz axtar (məsələn: rebase, geri, stash)"
-      footnote="Nümunələrdəki əmrlər işləkdir, amma budaq və fayl adları uydurmadır — öz adlarınla əvəz et."
+      footnote="Nümunələrdəki əmrlər işləkdir, amma budaq və fayl adları uydurmadır: öz adlarınla əvəz et."
     />
   );
 }

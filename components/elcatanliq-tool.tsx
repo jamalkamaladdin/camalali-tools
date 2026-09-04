@@ -108,7 +108,7 @@ export function ElcatanliqTool() {
                     const downtime = computeAllowedDowntime(tier, period);
                     return (
                       <td key={period} className="p-2 text-right tabular-nums">
-                        {downtime.ok ? formatDowntime(downtime.seconds) : "—"}
+                        {downtime.ok ? formatDowntime(downtime.seconds) : ""}
                       </td>
                     );
                   })}
@@ -136,7 +136,7 @@ export function ElcatanliqTool() {
             <ToolStat
               key={period}
               label={PERIOD_LABELS[period]}
-              value={result.ok ? formatDowntime(result.seconds) : "—"}
+              value={result.ok ? formatDowntime(result.seconds) : ""}
               note={result.ok ? undefined : result.error}
             />
           ))}
@@ -170,7 +170,7 @@ export function ElcatanliqTool() {
           {reverseResult.ok && reverseResult.percent !== undefined ? (
             <ToolStat label="Uyğun əlçatanlıq" value={formatPercent(reverseResult.percent)} />
           ) : (
-            <ToolNote tone="accent">{reverseResult.ok ? "—" : reverseResult.error}</ToolNote>
+            <ToolNote tone="accent">{reverseResult.ok ? "Nəticə yoxdur." : reverseResult.error}</ToolNote>
           )}
         </div>
       </ToolPanel>

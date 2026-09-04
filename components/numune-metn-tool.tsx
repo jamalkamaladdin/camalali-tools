@@ -122,7 +122,7 @@ export function NumuneMetnTool() {
         <div className="grid gap-5 p-4 lg:grid-cols-[220px_minmax(0,1fr)]">
           <ToolNote>
             Azərbaycan sözünün uzunluğu və şəkilçiləri latın lorem ipsum-dan
-            fərqlidir — maket üçün ölçü buradan daha doğru çıxır.
+            fərqlidir: maket üçün ölçü buradan daha doğru çıxır.
           </ToolNote>
 
           <ToolResultPanel

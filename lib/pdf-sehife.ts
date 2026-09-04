@@ -62,13 +62,13 @@ function findIndex(plan: PlanPage[], id: string): number {
 function deletePage(plan: PlanPage[], id: string): PlanResult {
   if (plan.length <= 1) return { ok: false, error: "Ən azı bir səhifə qalmalıdır." };
   const index = findIndex(plan, id);
-  if (index === -1) return { ok: false, error: "Səhifə tapılmadı — siyahı artıq dəyişib." };
+  if (index === -1) return { ok: false, error: "Səhifə tapılmadı: siyahı artıq dəyişib." };
   return { ok: true, plan: plan.filter((page) => page.id !== id) };
 }
 
 function movePage(plan: PlanPage[], id: string, direction: "up" | "down"): PlanResult {
   const index = findIndex(plan, id);
-  if (index === -1) return { ok: false, error: "Səhifə tapılmadı — siyahı artıq dəyişib." };
+  if (index === -1) return { ok: false, error: "Səhifə tapılmadı: siyahı artıq dəyişib." };
   const target = direction === "up" ? index - 1 : index + 1;
   if (target < 0 || target >= plan.length) return { ok: false, error: "Səhifə artıq kənardadır." };
   const next = [...plan];
@@ -78,7 +78,7 @@ function movePage(plan: PlanPage[], id: string, direction: "up" | "down"): PlanR
 
 function rotatePage(plan: PlanPage[], id: string, by: 90 | 180 | 270): PlanResult {
   const index = findIndex(plan, id);
-  if (index === -1) return { ok: false, error: "Səhifə tapılmadı — siyahı artıq dəyişib." };
+  if (index === -1) return { ok: false, error: "Səhifə tapılmadı: siyahı artıq dəyişib." };
   const page = plan[index] as PlanPage;
   const rotation = ((page.rotation + by) % 360) as RotationDelta;
   const next = [...plan];
@@ -93,7 +93,7 @@ function insertBlankPage(plan: PlanPage[], newId: string, afterId: string | null
   const blank: PlanPage = { id: newId, sourceIndex: null, rotation: 0 };
   if (afterId === null) return { ok: true, plan: [blank, ...plan] };
   const index = findIndex(plan, afterId);
-  if (index === -1) return { ok: false, error: "Səhifə tapılmadı — siyahı artıq dəyişib." };
+  if (index === -1) return { ok: false, error: "Səhifə tapılmadı: siyahı artıq dəyişib." };
   const next = [...plan];
   next.splice(index + 1, 0, blank);
   return { ok: true, plan: next };
@@ -104,7 +104,7 @@ function duplicatePage(plan: PlanPage[], id: string, newId: string): PlanResult 
     return { ok: false, error: `Plan ${MAX_PLAN_PAGES} səhifə həddinə çatıb.` };
   }
   const index = findIndex(plan, id);
-  if (index === -1) return { ok: false, error: "Səhifə tapılmadı — siyahı artıq dəyişib." };
+  if (index === -1) return { ok: false, error: "Səhifə tapılmadı: siyahı artıq dəyişib." };
   const clone: PlanPage = { ...(plan[index] as PlanPage), id: newId };
   const next = [...plan];
   next.splice(index + 1, 0, clone);
@@ -165,7 +165,7 @@ async function loadPdf(bytes: Uint8Array): Promise<LoadResult> {
     if (isEncryptedPdfError(cause)) {
       return { ok: false, error: "Fayl parolla qorunub, açılmadan üzərində iş görmək olmur." };
     }
-    return { ok: false, error: "Fayl PDF kimi oxunmadı — zədəli ola bilər və ya başqa formatdır." };
+    return { ok: false, error: "Fayl PDF kimi oxunmadı: zədəli ola bilər və ya başqa formatdır." };
   }
 }
 

@@ -153,7 +153,7 @@ export function parseDmarcRecord(raw: string): DmarcParseResult {
   const unquoted = raw.trim().replace(/^"([\s\S]*)"$/, "$1");
   const trimmed = unquoted.trim();
   if (trimmed === "") {
-    return { ok: false, error: "Boş sətir — DMARC qeydini yapışdır." };
+    return { ok: false, error: "Boş sətir: DMARC qeydini yapışdır." };
   }
 
   const entries = trimmed
@@ -161,7 +161,7 @@ export function parseDmarcRecord(raw: string): DmarcParseResult {
     .map((entry) => entry.trim())
     .filter((entry) => entry !== "");
   if (entries.length === 0) {
-    return { ok: false, error: "Boş sətir — DMARC qeydini yapışdır." };
+    return { ok: false, error: "Boş sətir: DMARC qeydini yapışdır." };
   }
 
   const parsedTags: { name: string; value: string }[] = [];
@@ -179,7 +179,7 @@ export function parseDmarcRecord(raw: string): DmarcParseResult {
     if (seenNames.has(name)) {
       return {
         ok: false,
-        error: `"${name}" teqi qeyddə iki dəfə keçir — RFC 7489-a görə bu qeyd etibarsızdır.`,
+        error: `"${name}" teqi qeyddə iki dəfə keçir: RFC 7489-a görə bu qeyd etibarsızdır.`,
       };
     }
     seenNames.add(name);
@@ -188,15 +188,15 @@ export function parseDmarcRecord(raw: string): DmarcParseResult {
 
   const vIndex = parsedTags.findIndex((tag) => tag.name === "v");
   if (vIndex === -1) {
-    return { ok: false, error: "v teqi yoxdur — DMARC qeydi mütləq v=DMARC1 ilə başlamalıdır." };
+    return { ok: false, error: "v teqi yoxdur: DMARC qeydi mütləq v=DMARC1 ilə başlamalıdır." };
   }
   if (vIndex !== 0) {
-    return { ok: false, error: "v teqi birinci olmalıdır — başqa teqdən sonra gələn v qeydi etibarsız edir." };
+    return { ok: false, error: "v teqi birinci olmalıdır, başqa teqdən sonra gələn v qeydi etibarsız edir." };
   }
   if (parsedTags[0].value !== "DMARC1") {
     return {
       ok: false,
-      error: `v dəyəri dəqiq "DMARC1" olmalıdır, "${parsedTags[0].value}" tapıldı — qeyd etibarsızdır.`,
+      error: `v dəyəri dəqiq "DMARC1" olmalıdır, "${parsedTags[0].value}" tapıldı, qeyd etibarsızdır.`,
     };
   }
 
@@ -204,7 +204,7 @@ export function parseDmarcRecord(raw: string): DmarcParseResult {
 
   const pRaw = byName.get("p");
   if (pRaw === undefined) {
-    return { ok: false, error: "p teqi yoxdur — DMARC qeydi siyasət (none/quarantine/reject) tələb edir." };
+    return { ok: false, error: "p teqi yoxdur: DMARC qeydi siyasət (none/quarantine/reject) tələb edir." };
   }
   const p = parsePolicyValue(pRaw);
   if (p === null) {
@@ -455,7 +455,7 @@ export function explainDmarcTags(record: DmarcRecord): DmarcTagExplanation[] {
       tag: "v",
       label: "v: versiya",
       meaning: "Qeydin DMARC olduğunu bildirir və protokolun versiyasını göstərir.",
-      hereText: `"${record.v}" — düzgün DMARC qeydinin ilk teqi.`,
+      hereText: `"${record.v}": düzgün DMARC qeydinin ilk teqi.`,
       defaultText: null,
       explicit: true,
     },
@@ -463,7 +463,7 @@ export function explainDmarcTags(record: DmarcRecord): DmarcTagExplanation[] {
       tag: "p",
       label: "p: siyasət",
       meaning: "Alıcı server SPF/DKIM uyğunsuzluğu tapanda nə edəcəyini deyir: `none`, `quarantine` və ya `reject`.",
-      hereText: `"${record.p}" — uyğunsuz mesaj ${policyLabel(record.p)}.`,
+      hereText: `"${record.p}": uyğunsuz mesaj ${policyLabel(record.p)}.`,
       defaultText: null,
       explicit: true,
     },
@@ -472,7 +472,7 @@ export function explainDmarcTags(record: DmarcRecord): DmarcTagExplanation[] {
       label: "sp: subdomen siyasəti",
       meaning: "Əsas domendən fərqli olaraq, yalnız subdomenlərdən gələn poçt üçün siyasəti göstərir.",
       hereText: record.spExplicit
-        ? `"${record.sp}" — subdomen mesajı ${policyLabel(record.sp)}.`
+        ? `"${record.sp}": subdomen mesajı ${policyLabel(record.sp)}.`
         : `Yazılmayıb, "p"-dən miras alınıb: "${record.sp}".`,
       defaultText: "Yoxdursa `p` teqinin dəyərini alır.",
       explicit: record.spExplicit,
@@ -482,8 +482,8 @@ export function explainDmarcTags(record: DmarcRecord): DmarcTagExplanation[] {
       label: "pct: faiz",
       meaning: "Siyasətin uyğunsuz mesajların neçə faizinə tətbiq olunacağını göstərir.",
       hereText: record.pctExplicit
-        ? `${record.pct}% — mesajların qalan ${100 - record.pct}%-i siyasətdən kənarda qalır.`
-        : `Yazılmayıb, defolt ${DMARC_DEFAULTS.pct}% qəbul edilir — bütün mesajlar.`,
+        ? `${record.pct}%: mesajların qalan ${100 - record.pct}%-i siyasətdən kənarda qalır.`
+        : `Yazılmayıb, defolt ${DMARC_DEFAULTS.pct}% qəbul edilir (bütün mesajlar).`,
       defaultText: `Yoxdursa ${DMARC_DEFAULTS.pct} qəbul edilir.`,
       explicit: record.pctExplicit,
     },
@@ -491,7 +491,7 @@ export function explainDmarcTags(record: DmarcRecord): DmarcTagExplanation[] {
       tag: "rua",
       label: "rua: məcmu hesabat ünvanı",
       meaning: "Gündəlik məcmu (aggregate) hesabatların göndəriləcəyi `mailto:` ünvan(lar)ı göstərir.",
-      hereText: record.ruaExplicit ? ruaText : "Yazılmayıb — heç bir məcmu hesabat gəlmir.",
+      hereText: record.ruaExplicit ? ruaText : "Yazılmayıb: heç bir məcmu hesabat gəlmir.",
       defaultText: "Yoxdursa heç bir hesabat göndərilmir.",
       explicit: record.ruaExplicit,
     },
@@ -499,7 +499,7 @@ export function explainDmarcTags(record: DmarcRecord): DmarcTagExplanation[] {
       tag: "ruf",
       label: "ruf: uğursuzluq hesabat ünvanı",
       meaning: "Hər bir uğursuz mesaj üçün ayrıca (forensic) hesabatın göndəriləcəyi ünvan(lar)ı göstərir.",
-      hereText: record.rufExplicit ? rufText : "Yazılmayıb — heç bir uğursuzluq hesabatı göndərilmir.",
+      hereText: record.rufExplicit ? rufText : "Yazılmayıb, heç bir uğursuzluq hesabatı göndərilmir.",
       defaultText: "Yoxdursa heç bir uğursuzluq hesabatı göndərilmir.",
       explicit: record.rufExplicit,
     },
@@ -508,7 +508,7 @@ export function explainDmarcTags(record: DmarcRecord): DmarcTagExplanation[] {
       label: "adkim: DKIM uyğunlaşma rejimi",
       meaning: "DKIM imzasının domeni ilə `From` başlığının domeninin necə üst-üstə düşməli olduğunu göstərir.",
       hereText: record.adkimExplicit
-        ? `"${record.adkim}" — ${alignmentLabel(record.adkim)} uyğunlaşma.`
+        ? `"${record.adkim}": ${alignmentLabel(record.adkim)} uyğunlaşma.`
         : `Yazılmayıb, defolt "${DMARC_DEFAULTS.adkim}" (${alignmentLabel(DMARC_DEFAULTS.adkim)}) qəbul edilir.`,
       defaultText: "Yoxdursa `r` (yumşaq) qəbul edilir.",
       explicit: record.adkimExplicit,
@@ -518,7 +518,7 @@ export function explainDmarcTags(record: DmarcRecord): DmarcTagExplanation[] {
       label: "aspf: SPF uyğunlaşma rejimi",
       meaning: "SPF-də təsdiqlənən domenin `From` başlığının domeninə necə uyğun gəlməli olduğunu göstərir.",
       hereText: record.aspfExplicit
-        ? `"${record.aspf}" — ${alignmentLabel(record.aspf)} uyğunlaşma.`
+        ? `"${record.aspf}": ${alignmentLabel(record.aspf)} uyğunlaşma.`
         : `Yazılmayıb, defolt "${DMARC_DEFAULTS.aspf}" (${alignmentLabel(DMARC_DEFAULTS.aspf)}) qəbul edilir.`,
       defaultText: "Yoxdursa `r` (yumşaq) qəbul edilir.",
       explicit: record.aspfExplicit,
@@ -529,7 +529,7 @@ export function explainDmarcTags(record: DmarcRecord): DmarcTagExplanation[] {
       meaning: "`ruf` hesabatının hansı halda göndəriləcəyini göstərir (`0` hər ikisi, `1` hər hansı biri uğursuz olanda).",
       hereText: record.foExplicit
         ? `"${record.fo}"`
-        : `Yazılmayıb, defolt "${DMARC_DEFAULTS.fo}" qəbul edilir — yalnız SPF və DKIM-in ikisi də uğursuz olanda.`,
+        : `Yazılmayıb, defolt "${DMARC_DEFAULTS.fo}" qəbul edilir: yalnız SPF və DKIM-in ikisi də uğursuz olanda.`,
       defaultText: `Yoxdursa "${DMARC_DEFAULTS.fo}" qəbul edilir.`,
       explicit: record.foExplicit,
     },

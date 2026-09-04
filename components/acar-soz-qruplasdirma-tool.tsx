@@ -42,7 +42,7 @@ function downloadCsv(csv: string, fileName: string): void {
 }
 
 function formatVolume(volume: number | null): string {
-  return volume === null ? "—" : volume.toLocaleString("az-AZ");
+  return volume === null ? "" : volume.toLocaleString("az-AZ");
 }
 
 export function AcarSozQruplasdirmaTool() {
@@ -119,7 +119,7 @@ export function AcarSozQruplasdirmaTool() {
           >
             {clusters.length === 0 ? (
               <p className="p-3 font-ui text-xs text-muted">
-                Heç bir açar söz başqası ilə ortaq söz paylaşmadı — hamısı aşağıda, tək qalanlar
+                Heç bir açar söz başqası ilə ortaq söz paylaşmadı: hamısı aşağıda, tək qalanlar
                 bölməsindədir.
               </p>
             ) : (
@@ -174,7 +174,7 @@ export function AcarSozQruplasdirmaTool() {
 
       <ToolNote tone="accent" title="Alqoritm sadədir, gizli deyil">
         Hər açar söz kökündən şəkilçi atılır və siyahıda ən çox təkrarlanan ortaq kökə görə qrupa
-        yerləşir — hər qrupun yanında görünən ortaq söz məhz bu hesabın nəticəsidir. Bu, tam
+        yerləşir: hər qrupun yanında görünən ortaq söz məhz bu hesabın nəticəsidir. Bu, tam
         linqvistik təhlil deyil: konservativ bir kökləmə qaydasıdır və nadir hallarda əlaqəsiz iki
         söz eyni kökə düşə bilər.
       </ToolNote>

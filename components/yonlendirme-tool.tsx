@@ -44,7 +44,7 @@ const FORMAT_LABELS: Record<OutputFormat, string> = {
 const SAMPLE_TEXT = ["/kohne-sehife  /yeni-sehife", "/bloq/*  /yazi/*"].join("\n");
 
 const EMPTY_HINT =
-  "Sol tərəfə köhnə və yeni ünvan cütlərini yaz — konfiqurasiya burada görünəcək.";
+  "Sol tərəfə köhnə və yeni ünvan cütlərini yaz: konfiqurasiya burada görünəcək.";
 
 export function YonlendirmeTool() {
   const [inputText, setInputText] = useState("");

@@ -55,7 +55,7 @@ export function PypiTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote>
-        Paket adı PyPI-nin öz reyestrinə (pypi.org) göndərilir — başqa heç yerə. Nəticə 10 dəqiqə
+        Paket adı PyPI-nin öz reyestrinə (pypi.org) göndərilir: başqa heç yerə. Nəticə 10 dəqiqə
         keşlənir.
       </ToolNote>
 
@@ -100,9 +100,9 @@ function PypiResult({ info }: { info: PypiPackageInfo }) {
         {info.summary && <p className="text-sm/6">{info.summary}</p>}
 
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <ToolStat label="Lisenziya" value={info.license ?? "—"} />
-          <ToolStat label="Tələb olunan Python" value={info.requiresPython ?? "—"} />
-          <ToolStat label="Son buraxılış" value={releaseDate ?? "—"} />
+          <ToolStat label="Lisenziya" value={info.license ?? ""} />
+          <ToolStat label="Tələb olunan Python" value={info.requiresPython ?? ""} />
+          <ToolStat label="Son buraxılış" value={releaseDate ?? ""} />
           <ToolStat
             label="Asılılıq"
             value={info.dependencies.length}

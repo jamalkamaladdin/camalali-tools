@@ -94,7 +94,7 @@ export function computeOutputDimensions(source: ParsedSvgDimensions, request: Si
   if (!intrinsic) {
     return {
       error:
-        "Bu SVG-nin nə width/height, nə də viewBox atributu var — ölçü təyin edilə bilmədi. Eni və ya hündürlüyü əl ilə yaz.",
+        "Bu SVG-nin nə width/height, nə də viewBox atributu var: ölçü təyin edilə bilmədi. Eni və ya hündürlüyü əl ilə yaz.",
     };
   }
 

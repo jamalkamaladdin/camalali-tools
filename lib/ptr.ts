@@ -30,7 +30,7 @@ export type IpCheck = { ok: true; ip: string; family: IpFamily } | { ok: false; 
  */
 export function checkIpAddress(raw: string): IpCheck {
   const trimmed = raw.trim();
-  if (trimmed === "") return { ok: false, error: "Boş sahə — IP ünvanı yaz." };
+  if (trimmed === "") return { ok: false, error: "Boş sahə: IP ünvanı yaz." };
 
   if (parseIpv4(trimmed) !== null) return { ok: true, ip: trimmed, family: 4 };
 
@@ -39,7 +39,7 @@ export function checkIpAddress(raw: string): IpCheck {
 
   return {
     ok: false,
-    error: "Bu IP ünvanına oxşamır — «93.184.216.34» və ya «2606:2800:220:1::248» kimi yaz.",
+    error: "Bu IP ünvanına oxşamır, «93.184.216.34» və ya «2606:2800:220:1::248» kimi yaz.",
   };
 }
 

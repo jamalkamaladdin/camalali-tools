@@ -239,7 +239,7 @@ async function resolveOne(domain: string, resolve: SpfResolver, state: ExpandSta
       ok: false,
       node: emptyNode(
         domain,
-        `Bu adda birdən çox SPF qeydi var (${candidates.length} ədəd) — RFC 7208-ə görə bu, permerror sayılır və SPF tamamilə nəzərə alınmır.`,
+        `Bu adda birdən çox SPF qeydi var (${candidates.length} ədəd): RFC 7208-ə görə bu, permerror sayılır və SPF tamamilə nəzərə alınmır.`,
       ),
     };
   }
@@ -309,7 +309,7 @@ async function fetchNode(domain: string, resolve: SpfResolver, state: ExpandStat
 
   if (state.visited.has(key)) {
     state.cycleDomains.push(domain);
-    return emptyNode(domain, "Bu domen artıq zəncirdə var — dövr aşkarlandı, budaq təkrar genişləndirilmədi.");
+    return emptyNode(domain, "Bu domen artıq zəncirdə var: dövr aşkarlandı, budaq təkrar genişləndirilmədi.");
   }
   if (depth > state.maxDepth) {
     state.depthExceeded = true;
@@ -365,7 +365,7 @@ function buildSpfFindings(expansion: ExpansionBase, sourcedFromText: boolean): S
         tone: "accent",
         title: root.isVoid ? "SPF sorğusuna cavab gəlmədi" : "SPF qeydi oxunmadı",
         text: root.isVoid
-          ? "TXT sorğusu bu ad üçün heç nə qaytarmadı — domen mövcud deyil, ya da bu adda ümumiyyətlə TXT qeydi yoxdur."
+          ? "TXT sorğusu bu ad üçün heç nə qaytarmadı: domen mövcud deyil, ya da bu adda ümumiyyətlə TXT qeydi yoxdur."
           : (root.error ?? "Bu domendə v=spf1 ilə başlayan etibarlı qeyd tapılmadı."),
       },
     ];

@@ -63,7 +63,7 @@ export function SslTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu alət sorğunu serverə göndərir">
-        Yazdığın domenin 443 portuna bu saytın serveri özü TLS bağlantısı açır — sənin brauzerin heç
+        Yazdığın domenin 443 portuna bu saytın serveri özü TLS bağlantısı açır: sənin brauzerin heç
         bir sertifikat mərkəzinə müraciət etmir. Ünvan əvvəlcə DNS-də həll olunur, bağlantı yalnız
         çıxan ünvana qurulur.
       </ToolNote>
@@ -136,7 +136,7 @@ function Report({ report }: { report: SslReport }) {
             tone={report.expiry.tone}
             note={report.expiry.tone === "warning" ? "diqqət" : undefined}
           />
-          <ToolStat label="Protokol" value={report.protocol ?? "—"} />
+          <ToolStat label="Protokol" value={report.protocol ?? ""} />
           <ToolStat label="Sertifikat sayı" value={String(report.chain.length)} />
           <ToolStat label="Əlsıxma vaxtı" value={`${report.ms} ms`} />
         </div>

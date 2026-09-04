@@ -96,19 +96,19 @@ function responseIssues(
   if (redirectedTo !== null) {
     issues.push({
       severity: "xeta",
-      message: `Ünvan ${status} yönləndirməsi qaytardı və faylın özü açılmadı. Yönləndirmə izlənmir — «${redirectedTo}» ünvanını olduğu kimi kopyalayıb yenidən yoxla.`,
+      message: `Ünvan ${status} yönləndirməsi qaytardı və faylın özü açılmadı. Yönləndirmə izlənmir. «${redirectedTo}» ünvanını olduğu kimi kopyalayıb yenidən yoxla.`,
     });
   } else if (status !== 200) {
     issues.push({
       severity: "xeta",
-      message: `Fayl HTTP ${status} qaytardı. Sitemap 200 qaytarmalıdır — axtarış robotu da eyni cavabı alacaq və faylı oxumayacaq.`,
+      message: `Fayl HTTP ${status} qaytardı. Sitemap 200 qaytarmalıdır: axtarış robotu da eyni cavabı alacaq və faylı oxumayacaq.`,
     });
   }
 
   if (redirectedTo === null && !looksLikeXml(contentType)) {
     issues.push({
       severity: "xeberdarliq",
-      message: `Cavabın növü «${contentType ?? "bildirilməyib"}» — XML deyil. Bir çox robot bunu qəbul edir, amma düzgün dəyər «application/xml» və ya «text/xml»-dir.`,
+      message: `Cavabın növü «${contentType ?? "bildirilməyib"}»: XML deyil. Bir çox robot bunu qəbul edir, amma düzgün dəyər «application/xml» və ya «text/xml»-dir.`,
     });
   }
 
@@ -116,7 +116,7 @@ function responseIssues(
   if (Number.isFinite(declared) && declared > MAX_SITEMAP_BYTES) {
     issues.push({
       severity: "xeberdarliq",
-      message: `Fayl ${Math.round(declared / 1_048_576)} MB-dır — protokolun həddi 50 MB-dır. Faylı bölüb sitemap indeksi ilə birləşdirmək lazımdır.`,
+      message: `Fayl ${Math.round(declared / 1_048_576)} MB-dır: protokolun həddi 50 MB-dır. Faylı bölüb sitemap indeksi ilə birləşdirmək lazımdır.`,
     });
   }
 

@@ -254,7 +254,7 @@ export function toGo(shape: ShapeResult, rootName: string): string {
           goType = `*${goType}`;
         }
         const tag = f.optional ? `\`json:"${f.key},omitempty"\`` : `\`json:"${f.key}"\``;
-        const comment = mixed ? " // mixed type in the sample — narrowed to interface{}" : "";
+        const comment = mixed ? " // mixed type in the sample, narrowed to interface{}" : "";
         return `  ${pascalCase(f.key)} ${goType} ${tag}${comment}`;
       })
       .join("\n");

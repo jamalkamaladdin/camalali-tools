@@ -100,7 +100,7 @@ export function CorsYoxlamaTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu alət iki sorğu göndərir">
-        Yazdığın hədəfə serverin özü Origin başlıqlı sadə GET və OPTIONS preflight göndərir — sənin
+        Yazdığın hədəfə serverin özü Origin başlıqlı sadə GET və OPTIONS preflight göndərir: sənin
         brauzerin heç nəyə toxunmur. Sınadığın mənbə (Origin) yalnız bu iki sorğunun başlığında gedir,
         başqa heç bir xidmətə ötürülmür.
       </ToolNote>

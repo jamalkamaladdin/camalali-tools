@@ -70,12 +70,12 @@ export type NetworkParse =
 export function parseNetworkCidr(text: string): NetworkParse {
   const trimmed = text.trim();
   if (trimmed === "") {
-    return { ok: false, error: "Boş sahə — şəbəkəni CIDR formatında yaz: 10.0.0.0/16." };
+    return { ok: false, error: "Boş sahə, şəbəkəni CIDR formatında yaz: 10.0.0.0/16." };
   }
 
   const slash = trimmed.indexOf("/");
   if (slash === -1) {
-    return { ok: false, error: `Prefiks yoxdur — CIDR formatında yaz: «${trimmed}/24».` };
+    return { ok: false, error: `Prefiks yoxdur, CIDR formatında yaz: «${trimmed}/24».` };
   }
 
   const addressPart = trimmed.slice(0, slash).trim();
@@ -178,7 +178,7 @@ function parseRequirementLine(raw: string): { ok: true; name: string; hosts: num
   if (!match) {
     return {
       ok: false,
-      error: `Format tanınmadı — «ad say» şəklində yaz, məsələn «ofis 500»: «${raw}».`,
+      error: `Format tanınmadı, «ad say» şəklində yaz, məsələn «ofis 500»: «${raw}».`,
     };
   }
 
@@ -189,7 +189,7 @@ function parseRequirementLine(raw: string): { ok: true; name: string; hosts: num
 
   const hosts = Number(match[2]);
   if (!Number.isFinite(hosts) || hosts <= 0) {
-    return { ok: false, error: `«${raw}» üçün host sayı düzgün deyil — 0-dan böyük tam ədəd yaz.` };
+    return { ok: false, error: `«${raw}» üçün host sayı düzgün deyil: 0-dan böyük tam ədəd yaz.` };
   }
 
   return { ok: true, name, hosts };
@@ -223,7 +223,7 @@ export function parseRequirements(text: string): RequirementsParse {
       issues.push({
         line,
         raw,
-        error: `«${parsed.name}» adı ${firstLine}-ci sətirdə artıq var — hər seqmentin adı unikal olmalıdır.`,
+        error: `«${parsed.name}» adı ${firstLine}-ci sətirdə artıq var: hər seqmentin adı unikal olmalıdır.`,
       });
       return;
     }
@@ -236,7 +236,7 @@ export function parseRequirements(text: string): RequirementsParse {
     issues.push({
       line: 0,
       raw: "",
-      error: `${requirements.length} seqment yazılıb, maksimum ${MAX_SEGMENTS}-dir — siyahını qısalt.`,
+      error: `${requirements.length} seqment yazılıb, maksimum ${MAX_SEGMENTS}-dir: siyahını qısalt.`,
     });
   }
 
@@ -327,7 +327,7 @@ export function planVlsm(networkText: string, segments: Segment[]): PlanResult {
   if (!parsedNetwork.ok) return fail(parsedNetwork.error);
 
   if (segments.length === 0) {
-    return fail("Ən azı bir seqment yaz — ad və host sayı, məsələn «ofis 500».");
+    return fail("Ən azı bir seqment yaz: ad və host sayı, məsələn «ofis 500».");
   }
   if (segments.length > MAX_SEGMENTS) {
     return fail(`${segments.length} seqment verilib, maksimum ${MAX_SEGMENTS}-dir.`);
@@ -337,7 +337,7 @@ export function planVlsm(networkText: string, segments: Segment[]): PlanResult {
   for (const segment of segments) {
     const key = segment.name.trim().toLocaleLowerCase("az");
     if (seen.has(key)) {
-      return fail(`«${segment.name}» adı təkrarlanır — hər seqmentin adı unikal olmalıdır.`, {
+      return fail(`«${segment.name}» adı təkrarlanır: hər seqmentin adı unikal olmalıdır.`, {
         failedSegment: segment.name,
       });
     }
@@ -375,7 +375,7 @@ export function planVlsm(networkText: string, segments: Segment[]): PlanResult {
         ? " Bütün IPv4 ünvan fəzası (/0) belə bu siyahını tutmur."
         : ` Ən azı /${suggestedPrefix} ölçüsündə şəbəkə lazımdır.`;
     return fail(
-      `«${overflowing.segment.name}» seqmenti sığmadı — bura qədər ${totalNeeded} ünvan lazımdır, ` +
+      `«${overflowing.segment.name}» seqmenti sığmadı: bura qədər ${totalNeeded} ünvan lazımdır, ` +
         `«${formatIpv4(networkBase)}/${parsedNetwork.prefix}» isə cəmi ${totalAddresses} ünvan tutur ` +
         `(${shortfall} ünvan çatışmır).${sizeNote}`,
       { failedSegment: overflowing.segment.name, shortfallAddresses: shortfall, suggestedPrefix },
@@ -529,7 +529,7 @@ export function splitByPrefix(networkText: string, newPrefix: number): EqualSpli
   if (newPrefix < parsed.prefix) {
     return {
       ok: false,
-      error: `Yeni prefiks «/${newPrefix}» əsas şəbəkədən («/${parsed.prefix}») böyük ola bilməz — bölmək daha dar prefiks tələb edir.`,
+      error: `Yeni prefiks «/${newPrefix}» əsas şəbəkədən («/${parsed.prefix}») böyük ola bilməz: bölmək daha dar prefiks tələb edir.`,
     };
   }
 
@@ -537,7 +537,7 @@ export function splitByPrefix(networkText: string, newPrefix: number): EqualSpli
   if (count > MAX_EQUAL_SPLIT_PARTS) {
     return {
       ok: false,
-      error: `«/${parsed.prefix}» şəbəkəsini «/${newPrefix}»-ə bölmək ${count} alt şəbəkə verir — bu, ${MAX_EQUAL_SPLIT_PARTS} həddini keçir.`,
+      error: `«/${parsed.prefix}» şəbəkəsini «/${newPrefix}»-ə bölmək ${count} alt şəbəkə verir: bu, ${MAX_EQUAL_SPLIT_PARTS} həddini keçir.`,
     };
   }
 
@@ -573,7 +573,7 @@ export function splitByCount(networkText: string, desiredCount: number): EqualSp
   if (newPrefix > IPV4_PREFIX_MAX) {
     return {
       ok: false,
-      error: `«/${parsed.prefix}» şəbəkəsi ${desiredCount} bərabər hissəyə bölünə bilmir — ünvan fəzası kifayət etmir.`,
+      error: `«/${parsed.prefix}» şəbəkəsi ${desiredCount} bərabər hissəyə bölünə bilmir: ünvan fəzası kifayət etmir.`,
     };
   }
 

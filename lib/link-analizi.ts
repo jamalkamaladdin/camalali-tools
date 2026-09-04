@@ -145,14 +145,14 @@ export function auditLinks(links: PageLink[], baseUrl: string): LinkIssue[] {
       issues.push({
         severity: "xeta",
         kind: "bos-anchor",
-        message: "Linkin mətni yoxdur və içində alt mətnli şəkil də yoxdur — hara apardığı bilinmir.",
+        message: "Linkin mətni yoxdur və içində alt mətnli şəkil də yoxdur: hara apardığı bilinmir.",
         link,
       });
     } else if (WEAK_ANCHORS.includes(normalizeAnchorText(link.anchor))) {
       issues.push({
         severity: "xeberdarliq",
         kind: "zeif-anchor",
-        message: `«${link.anchor}» linkin hara apardığını demir — anchor mətni məzmunu təsvir etməlidir.`,
+        message: `«${link.anchor}» linkin hara apardığını demir: anchor mətni məzmunu təsvir etməlidir.`,
         link,
       });
     }
@@ -163,8 +163,8 @@ export function auditLinks(links: PageLink[], baseUrl: string): LinkIssue[] {
         kind: "olu-href",
         message:
           link.href.trim() === ""
-            ? "href boşdur — link heç yerə getmir."
-            : "href «javascript:» ilə başlayır — axtarış sistemi bu linki izləyə bilmir.",
+            ? "href boşdur: link heç yerə getmir."
+            : "href «javascript:» ilə başlayır: axtarış sistemi bu linki izləyə bilmir.",
         link,
       });
     }
@@ -173,7 +173,7 @@ export function auditLinks(links: PageLink[], baseUrl: string): LinkIssue[] {
       issues.push({
         severity: "xeberdarliq",
         kind: "noopener-yoxdur",
-        message: 'target="_blank" var, rel="noopener" yoxdur — açılan səhifə bu pəncərəyə window.opener ilə çıxış əldə edə bilər.',
+        message: 'target="_blank" var, rel="noopener" yoxdur: açılan səhifə bu pəncərəyə window.opener ilə çıxış əldə edə bilər.',
         link,
       });
     }

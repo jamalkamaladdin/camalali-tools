@@ -51,7 +51,7 @@ async function resolveNsAddress(resolver: Resolver, hostname: string): Promise<s
 async function computeDelegation(domain: string): Promise<DelegationResult> {
   const parentZone = parentZoneOf(domain);
   if (parentZone === null) {
-    return { ok: false, parentZone: null, message: "Bu domenin valideyn zonası yoxdur — tək hissəlidir." };
+    return { ok: false, parentZone: null, message: "Bu domenin valideyn zonası yoxdur: tək hissəlidir." };
   }
 
   const resolver = new Resolver({ timeout: QUERY_TIMEOUT_MS, tries: QUERY_TRIES });
@@ -87,7 +87,7 @@ async function computeDelegation(domain: string): Promise<DelegationResult> {
     return { ok: false, parentZone, message: `Valideyn ad serveri (${parentNsHost}) IP ünvanına həll olunmadı.` };
   }
   if (isBlockedAddress(parentNsIp)) {
-    return { ok: false, parentZone, message: "Valideyn ad serverinin ünvanı daxili şəbəkəyə işarə edir — sorğu göndərilmədi." };
+    return { ok: false, parentZone, message: "Valideyn ad serverinin ünvanı daxili şəbəkəyə işarə edir: sorğu göndərilmədi." };
   }
 
   const directResolver = new Resolver({ timeout: QUERY_TIMEOUT_MS, tries: QUERY_TRIES });

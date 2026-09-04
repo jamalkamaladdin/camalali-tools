@@ -121,7 +121,7 @@ export function BasliqStrukturuTool() {
       )}
 
       <ToolNote title="Piksel həddi deyil, quruluş">
-        Bu alət yalnız H1-H6 quruluşunu oxuyur — vizual ölçünü (CSS-lə böyük yazılmış paraqraf da
+        Bu alət yalnız H1-H6 quruluşunu oxuyur: vizual ölçünü (CSS-lə böyük yazılmış paraqraf da
         başlıq kimi görünə bilər) yoxlamır. Yoxlanılan həmişə HTML tag-larının özüdür.
       </ToolNote>
     </div>

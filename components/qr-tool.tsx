@@ -51,7 +51,7 @@ const MODE_LABELS = {
 const SAMPLES: { label: string; value: string }[] = [
   { label: "Link", value: "https://camalali.com/aletler" },
   { label: "Wi-Fi", value: "WIFI:T:WPA;S:ofis-wifi;P:parol1234;;" },
-  { label: "Mətn", value: "Salam! Əşya, çiçək, ödəniş, İsmayıllı — hamısı bir sətirdə." },
+  { label: "Mətn", value: "Salam! Əşya, çiçək, ödəniş, İsmayıllı, hamısı bir sətirdə." },
 ];
 
 const DEFAULT_TEXT = SAMPLES[0].value;
@@ -304,7 +304,7 @@ export function QrTool() {
 
               {symbol && (
                 <p className="font-ui text-[11px] tabular-nums text-muted">
-                  PNG: {pngActual}×{pngActual} px ({pngScale} px/modul). SVG ölçüsüzdür —
+                  PNG: {pngActual}×{pngActual} px ({pngScale} px/modul). SVG ölçüsüzdür:
                   istənilən böyüklüyə itkisiz çıxır.
                 </p>
               )}

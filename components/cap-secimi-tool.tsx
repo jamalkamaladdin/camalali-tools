@@ -58,7 +58,7 @@ const LATENCY_OPTIONS = [
   { value: "relaxed", label: "Kritik deyil" },
 ] as const;
 
-const SIDE_LABEL: Record<CapResult["side"], string> = { CP: "CP — Consistency", AP: "AP — Availability" };
+const SIDE_LABEL: Record<CapResult["side"], string> = { CP: "CP: Consistency", AP: "AP: Availability" };
 
 function ReasonRow({ reason, winningSide }: { reason: CapReason; winningSide: CapResult["side"] }) {
   const agrees = reason.side === winningSide;
@@ -188,7 +188,7 @@ export function CapSecimiTool() {
 
             {result.tieBreak && (
               <ToolNote tone="accent" title="Bərabərlik">
-                Beş cavab tam bərabərləşdi — nəticə dönməz əməliyyat cavabı ilə həll olundu:
+                Beş cavab tam bərabərləşdi, nəticə dönməz əməliyyat cavabı ilə həll olundu:
                 dönməz əməliyyat varsa CP, yoxdursa AP.
               </ToolNote>
             )}
@@ -201,8 +201,8 @@ export function CapSecimiTool() {
 
             <ToolNote title="Bölünmə yoxdursa (PACELC)">
               {pacelc === "EL"
-                ? "Gecikmə büdcəsi sıx olduğu üçün adi gündə də gecikmə seçilir (EL) — konsensus gözləməkdən qaçınılır."
-                : "Gecikmə kritik olmadığı üçün adi gündə konsistentlik seçilir (EC) — konsensus gözləməyə dəyər."}
+                ? "Gecikmə büdcəsi sıx olduğu üçün adi gündə də gecikmə seçilir (EL): konsensus gözləməkdən qaçınılır."
+                : "Gecikmə kritik olmadığı üçün adi gündə konsistentlik seçilir (EC): konsensus gözləməyə dəyər."}
             </ToolNote>
           </div>
         </ToolPanel>

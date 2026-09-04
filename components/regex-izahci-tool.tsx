@@ -19,7 +19,7 @@ function ExplainBranch({ node, depth }: { node: ExplainedNode; depth: number }) 
       <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
         <code className="rounded-sm bg-fill-3 px-1 py-px text-[0.9em]">{node.token || "∅"}</code>
         <span className="text-ios-subhead text-ink">{node.description}</span>
-        {node.quantifier !== undefined && <span className="text-ios-footnote text-muted">— {node.quantifier}</span>}
+        {node.quantifier !== undefined && <span className="text-ios-footnote text-muted">({node.quantifier})</span>}
       </div>
       {node.children !== undefined && node.children.length > 0 && (
         <ul className="mt-1 ml-3 space-y-1.5 border-l border-rule pl-3">

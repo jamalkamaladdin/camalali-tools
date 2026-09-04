@@ -283,7 +283,7 @@ function parseRecordLine(
     case "MX": {
       const priority = Number(rest[0]);
       if (!Number.isInteger(priority) || rest[1] === undefined) {
-        issues.push({ severity: "xeta", line, message: `MX prioriteti tam ədəd olmalıdır — "${rest[0] ?? ""}" belə deyil.` });
+        issues.push({ severity: "xeta", line, message: `MX prioriteti tam ədəd olmalıdır: "${rest[0] ?? ""}" belə deyil.` });
         return null;
       }
       return { ...common, type, priority, target: rest[1] };
@@ -299,7 +299,7 @@ function parseRecordLine(
           issues.push({
             severity: "xeberdarliq",
             line,
-            message: `TXT sətri ${bytes} bayt — tək simvol-sətri 255 baytdan uzun ola bilməz, bölünməlidir.`,
+            message: `TXT sətri ${bytes} bayt: tək simvol-sətri 255 baytdan uzun ola bilməz, bölünməlidir.`,
           });
         }
       }
@@ -347,7 +347,7 @@ function parseRecordLine(
         issues.push({
           severity: "melumat",
           line,
-          message: `SOA seriyası (${serial}) YYYYMMDDnn konvensiyasına uymur — bu, xəta deyil, sadəcə adət fərqlidir.`,
+          message: `SOA seriyası (${serial}) YYYYMMDDnn konvensiyasına uymur: bu, xəta deyil, sadəcə adət fərqlidir.`,
         });
       }
       return { ...common, type, mname, rname, serial, refresh, retry, expire, minimum };
@@ -369,7 +369,7 @@ function checkCnameCoexistence(records: readonly ZoneRecord[], issues: ZoneIssue
       issues.push({
         severity: "xeta",
         line: null,
-        message: `"${name}" adında CNAME başqa qeydlə yanaşı var — CNAME olan ad başqa heç bir qeyd daşıya bilməz.`,
+        message: `"${name}" adında CNAME başqa qeydlə yanaşı var: CNAME olan ad başqa heç bir qeyd daşıya bilməz.`,
       });
     }
   }
@@ -418,7 +418,7 @@ export function parseZoneFile(text: string): ZoneParseResult {
   }
 
   if (unterminatedGroup) {
-    issues.push({ severity: "xeberdarliq", line: null, message: "Fayl açıq «(» ilə bitir — mötərizə bağlanmayıb." });
+    issues.push({ severity: "xeberdarliq", line: null, message: "Fayl açıq «(» ilə bitir: mötərizə bağlanmayıb." });
   }
 
   checkCnameCoexistence(records, issues);

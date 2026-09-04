@@ -74,7 +74,7 @@ export function BasliqlarTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu alət sorğunu serverə göndərir">
-        Yazdığın ünvana sorğunu sənin brauzerin yox, bu saytın serveri göndərir — bir HEAD sorğusu,
+        Yazdığın ünvana sorğunu sənin brauzerin yox, bu saytın serveri göndərir: bir HEAD sorğusu,
         yalnız başlıqları oxumaq üçün. Səhifənin gövdəsi yüklənmir. Daxili şəbəkə ünvanları
         (localhost, 10.x, 192.168.x) və 80/443-dən başqa portlar rədd edilir.
       </ToolNote>
@@ -151,7 +151,7 @@ function Report({ report }: { report: HeaderReport }) {
       {report.redirectedTo && (
         <ToolNote tone="accent" title={`Sayt ${report.status} yönləndirməsi qaytardı`}>
           Ünvan «{report.redirectedTo}» ünvanına yönləndirir. Aşağıdakı bal yönləndirmə cavabının
-          başlıqlarına aiddir — əsl səhifəni görmək üçün həmin ünvanı yoxla.
+          başlıqlarına aiddir: əsl səhifəni görmək üçün həmin ünvanı yoxla.
         </ToolNote>
       )}
 
@@ -161,7 +161,7 @@ function Report({ report }: { report: HeaderReport }) {
         <ToolStat label="Yoxlanıldı" value={formatAzStamp(new Date(report.checkedAt))} />
       </div>
 
-      <ToolNote title={`${report.grade} — ${report.score} xal`}>{GRADE_NOTES[report.grade]}</ToolNote>
+      <ToolNote title={`${report.grade}: ${report.score} xal`}>{GRADE_NOTES[report.grade]}</ToolNote>
 
       <ToolResultPanel title="Başlıqlar" hint={`${report.findings.length} yoxlama`}>
         <div className="space-y-3 p-3">
@@ -189,7 +189,7 @@ function Report({ report }: { report: HeaderReport }) {
                 <span className="font-mono text-xs">
                   {leak.name}: {leak.value}
                 </span>{" "}
-                — {leak.note}
+                , {leak.note}
               </li>
             ))}
           </ul>

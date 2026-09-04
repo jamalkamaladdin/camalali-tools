@@ -41,10 +41,10 @@ import {
  * text, and a class name assembled at runtime is a class it never generates.
  */
 
-const PDF_FAILED = "PDF hazırlanmadı — bir daha yoxla.";
+const PDF_FAILED = "PDF hazırlanmadı: bir daha yoxla.";
 
 const SAMPLE_WARNING =
-  "Nümunə alıcını, sətirləri və qeydi əvəz edəcək. Yazdıqların itəcək — davam edilsin?";
+  "Nümunə alıcını, sətirləri və qeydi əvəz edəcək. Yazdıqların itəcək. Davam edilsin?";
 
 export function FakturaTool() {
   /* Today's date and the remembered seller are browser facts, and the server

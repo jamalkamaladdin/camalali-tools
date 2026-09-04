@@ -275,7 +275,7 @@ export function generatePasswords(
     return {
       ok: false,
       error:
-        "Ən azı bir simvol dəsti seçilməlidir — hazırda seçimdən sonra iki simvol da qalmır.",
+        "Ən azı bir simvol dəsti seçilməlidir: hazırda seçimdən sonra iki simvol da qalmır.",
     };
   }
 

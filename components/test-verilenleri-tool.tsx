@@ -46,7 +46,7 @@ export function TestVerilenleriTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Uydurma verilənlər">
-        Bütün adlar, nömrələr, ünvanlar və IBAN-lar təsadüfi qurulur — real bir şəxsə və ya hesaba aid deyil.
+        Bütün adlar, nömrələr, ünvanlar və IBAN-lar təsadüfi qurulur: real bir şəxsə və ya hesaba aid deyil.
       </ToolNote>
 
       <ToolPanel>

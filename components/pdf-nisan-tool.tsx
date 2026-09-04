@@ -135,7 +135,7 @@ export function PdfNisanTool() {
     } catch (cause) {
       console.error("pdf-nisan: fayl oxunmadı", cause);
       setStatus("problem");
-      setProblem("Fayl oxunmadı — zədəli ola bilər.");
+      setProblem("Fayl oxunmadı. Zədəli ola bilər.");
     }
   }
 
@@ -154,7 +154,7 @@ export function PdfNisanTool() {
       return;
     }
     if (!watermarkEnabled && !pageNumberEnabled) {
-      setError("Nə su nişanı, nə də səhifə nömrəsi aktivdir — heç nə tətbiq olunmaz.");
+      setError("Nə su nişanı, nə də səhifə nömrəsi aktivdir: heç nə tətbiq olunmaz.");
       return;
     }
 
@@ -197,7 +197,7 @@ export function PdfNisanTool() {
       setDone({ pageCount: result.pageCount, bytes: result.bytes.byteLength });
     } catch (cause) {
       console.error("pdf-nisan: tətbiq alınmadı", cause);
-      setError("Tətbiq alınmadı — bir daha yoxla.");
+      setError("Tətbiq alınmadı. Bir daha yoxla.");
     } finally {
       setBusy(false);
     }
@@ -209,7 +209,7 @@ export function PdfNisanTool() {
         <ToolPanelHeader title="Fayl" />
         <div className="space-y-3 p-4">
           <ToolNote>
-            Fayl heç yerə göndərilmir — açılması, su nişanı çəkilməsi və endirmə linki tamamilə brauzerdə aparılır.
+            Fayl heç yerə göndərilmir: açılması, su nişanı çəkilməsi və endirmə linki tamamilə brauzerdə aparılır.
           </ToolNote>
 
           <div className="relative">
@@ -427,7 +427,7 @@ export function PdfNisanTool() {
       {done !== null && (
         <ToolResultPanel title="Hazırdır" hint={`${done.pageCount} səhifə`}>
           <p className="p-4 font-ui text-sm text-muted">
-            Fayl endirildi ({formatBytes(done.bytes)}) — brauzerin öz endirmə qovluğuna bax.
+            Fayl endirildi ({formatBytes(done.bytes)}): brauzerin öz endirmə qovluğuna bax.
           </p>
         </ToolResultPanel>
       )}

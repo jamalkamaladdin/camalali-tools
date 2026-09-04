@@ -108,7 +108,7 @@ export function runRegex(params: {
   const { pattern, flags, text, replacement } = params;
 
   if (pattern === "") {
-    return { ok: false, error: "Boş ifadə — regex yaz." };
+    return { ok: false, error: "Boş ifadə: regex yaz." };
   }
 
   let re: RegExp;

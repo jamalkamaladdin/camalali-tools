@@ -160,7 +160,7 @@ export function UrlTool() {
               >
                 <div className="p-3">
                   {row.ok ? (
-                    <ToolOutput className="break-all">{row.value || "—"}</ToolOutput>
+                    <ToolOutput className="break-all">{row.value || ""}</ToolOutput>
                   ) : (
                     <ToolNote tone="accent" title="Bu qaydaya görə açılmadı">
                       {row.value}
@@ -235,7 +235,7 @@ function ParsedUrlView({
   if (!parsed) {
     return (
       <p className="font-ui text-sm text-muted">
-        URL yapışdır — sxem, host, port, yol, sorğu və fraqment burada görünəcək.
+        URL yapışdır: sxem, host, port, yol, sorğu və fraqment burada görünəcək.
       </p>
     );
   }
@@ -257,15 +257,15 @@ function ParsedUrlView({
           value={parsed.hostname}
           note={parsed.hostnameUnicode ? `Açılmış: ${parsed.hostnameUnicode}` : undefined}
         />
-        <ToolStat label="Port" value={parsed.port || "— (defolt)"} />
+        <ToolStat label="Port" value={parsed.port || "(defolt)"} />
         <ToolStat label="Yol" value={parsed.pathname || "/"} />
-        <ToolStat label="Sorğu" value={parsed.search || "—"} />
-        <ToolStat label="Fraqment" value={parsed.hash || "—"} />
+        <ToolStat label="Sorğu" value={parsed.search || ""} />
+        <ToolStat label="Fraqment" value={parsed.hash || ""} />
       </div>
 
       {(parsed.username !== "" || parsed.password !== "") && (
         <ToolNote tone="info" title="URL-də istifadəçi məlumatı var">
-          İstifadəçi adı: {parsed.username || "—"}, parol: {parsed.password ? "●●●●" : "—"}.
+          İstifadəçi adı: {parsed.username || "yoxdur"}, parol: {parsed.password ? "●●●●" : "yoxdur"}.
         </ToolNote>
       )}
 

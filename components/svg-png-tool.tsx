@@ -40,7 +40,7 @@ function loadImageElement(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const image = new Image();
     image.onload = () => resolve(image);
-    image.onerror = () => reject(new Error("SVG açılmadı — mətn etibarlı SVG deyil."));
+    image.onerror = () => reject(new Error("SVG açılmadı: mətn etibarlı SVG deyil."));
     image.src = src;
   });
 }
@@ -106,7 +106,7 @@ export function SvgPngTool() {
         canvas.width = sizeResult.width;
         canvas.height = sizeResult.height;
         const context = canvas.getContext("2d");
-        if (!context) throw new Error("2D kontekst alınmadı — brauzer canvas-ı dəstəkləmir.");
+        if (!context) throw new Error("2D kontekst alınmadı: brauzer canvas-ı dəstəkləmir.");
 
         if (backgroundMode === "color") {
           context.fillStyle = backgroundColor;
@@ -116,7 +116,7 @@ export function SvgPngTool() {
 
         canvas.toBlob((blob) => {
           if (!blob) {
-            setDownloadError("PNG hazırlana bilmədi — brauzer kodlaşdırmadı.");
+            setDownloadError("PNG hazırlana bilmədi. Brauzer kodlaşdırmadı.");
             return;
           }
           const blobUrl = URL.createObjectURL(blob);
@@ -130,8 +130,8 @@ export function SvgPngTool() {
       .catch(() => {
         setDownloadError(
           externalRefs.length > 0
-            ? "PNG hazırlana bilmədi — canvas xarici resurs üzündən kirləndi, aşağıdakı xəbərdarlığa bax."
-            : "PNG hazırlana bilmədi — SVG açılmadı.",
+            ? "PNG hazırlana bilmədi, canvas xarici resurs üzündən kirləndi, aşağıdakı xəbərdarlığa bax."
+            : "PNG hazırlana bilmədi: SVG açılmadı.",
         );
       });
   }
@@ -170,7 +170,7 @@ export function SvgPngTool() {
       {externalRefs.length > 0 && (
         <ToolNote tone="accent" title="Bu SVG canvas-ı kirlədə bilər">
           Xarici resurs tapıldı: {externalRefs.join(", ")}. Nəticə önizlənə bilər, amma PNG endirmə
-          brauzer tərəfindən rədd oluna bilər — bu, təhlükəsizlik qaydasıdır, alətin xətası deyil.
+          brauzer tərəfindən rədd oluna bilər: bu, təhlükəsizlik qaydasıdır, alətin xətası deyil.
         </ToolNote>
       )}
 
@@ -253,7 +253,7 @@ export function SvgPngTool() {
               </ToolNote>
             ) : (
               <p className="font-ui text-sm text-muted tabular-nums">
-                Çıxış: {sizeResult.width}×{sizeResult.height} px — {filename}
+                Çıxış: {sizeResult.width}×{sizeResult.height} px ({filename})
               </p>
             )}
             {downloadError && <ToolNote tone="accent">{downloadError}</ToolNote>}
@@ -280,7 +280,7 @@ export function SvgPngTool() {
       </ToolResultPanel>
 
       <ToolNote>
-        SVG heç yerə göndərilmir — çəkilmə və PNG-yə kodlaşdırma brauzerin öz canvas-ında aparılır.
+        SVG heç yerə göndərilmir: çəkilmə və PNG-yə kodlaşdırma brauzerin öz canvas-ında aparılır.
       </ToolNote>
     </div>
   );

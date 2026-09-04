@@ -54,7 +54,7 @@ const draftKey = (id: string, field: NumberField) => `${id}:${field}`;
 const draftIsInvalid = (draft: string | undefined) =>
   draft !== undefined && parseDecimalInput(draft).kind === "invalid";
 
-const NOT_A_NUMBER = "Rəqəm yazın — 2,5 və ya 2.5.";
+const NOT_A_NUMBER = "Rəqəm yazın: 2,5 və ya 2.5.";
 
 /* The one grid the line row and its column headings both use. Written out
    rather than composed, because Tailwind reads the source as text and never
@@ -434,8 +434,8 @@ export function InvoiceForm({
                     }));
                   }}
                 >
-                  <option value="elave">18% — qiymətin üstünə əlavə olunur</option>
-                  <option value="daxil">18% — qiymətə daxildir</option>
+                  <option value="elave">18%: qiymətin üstünə əlavə olunur</option>
+                  <option value="daxil">18%: qiymətə daxildir</option>
                   <option value="yox">ƏDV tutulmur</option>
                 </ToolSelect>
               </ToolField>

@@ -245,13 +245,13 @@ export function auditRobots(
     issues.push({
       severity: "xeberdarliq",
       line: null,
-      message: `Server robots.txt üçün ${opts.status} qaytardı. Botlar 5xx cavabını «müvəqqəti bağlıdır» kimi oxuyur və bəziləri həmin müddətdə saytı ümumiyyətlə gəzmir — fayl ya 200, ya da 404 qaytarmalıdır.`,
+      message: `Server robots.txt üçün ${opts.status} qaytardı. Botlar 5xx cavabını «müvəqqəti bağlıdır» kimi oxuyur və bəziləri həmin müddətdə saytı ümumiyyətlə gəzmir. Fayl ya 200, ya da 404 qaytarmalıdır.`,
     });
   } else if (opts.status >= 300) {
     issues.push({
       severity: "xeberdarliq",
       line: null,
-      message: `robots.txt ${opts.status} ilə yönləndirir. Bir yönləndirməni əsas botlar izləyir, amma zəncir uzanarsa fayl oxunmamış qalır — faylı öz domenində birbaşa vermək daha etibarlıdır.`,
+      message: `robots.txt ${opts.status} ilə yönləndirir. Bir yönləndirməni əsas botlar izləyir, amma zəncir uzanarsa fayl oxunmamış qalır. Faylı öz domenində birbaşa vermək daha etibarlıdır.`,
     });
   }
 
@@ -260,7 +260,7 @@ export function auditRobots(
     issues.push({
       severity: "xeberdarliq",
       line: null,
-      message: `Cavabın növü «${opts.contentType}» — «text/plain» deyil. Ən çox rast gəlinən tələ budur: sayt olmayan fayl üçün 404 əvəzinə HTML səhifə qaytarır, həmin səhifə 200 ilə gəlir və mətn kimi oxunur. Aşağıdakı məzmun robots.txt-ə oxşamırsa, səbəb budur.`,
+      message: `Cavabın növü «${opts.contentType}»: «text/plain» deyil. Ən çox rast gəlinən tələ budur: sayt olmayan fayl üçün 404 əvəzinə HTML səhifə qaytarır, həmin səhifə 200 ilə gəlir və mətn kimi oxunur. Aşağıdakı məzmun robots.txt-ə oxşamırsa, səbəb budur.`,
     });
   }
 
@@ -268,7 +268,7 @@ export function auditRobots(
     issues.push({
       severity: "xeta",
       line: null,
-      message: `Fayl ${Math.round(opts.byteLength / 1024)} KB-dır. Google ilk 500 KB-ı oxuyur və qalanını görmür — həddən sonrakı qaydalar mövcud deyil kimidir.`,
+      message: `Fayl ${Math.round(opts.byteLength / 1024)} KB-dır. Google ilk 500 KB-ı oxuyur və qalanını görmür: həddən sonrakı qaydalar mövcud deyil kimidir.`,
     });
   }
 
@@ -287,7 +287,7 @@ export function auditRobots(
         severity: "xeta",
         line: null,
         message:
-          "Faylda NUL baytları var — bu, adətən UTF-16 kodlaşdırma deməkdir. robots.txt UTF-8 mətn olmalıdır; UTF-16 fayl botlar üçün oxunmaz zibildir və bütün qaydalar itir.",
+          "Faylda NUL baytları var: bu, adətən UTF-16 kodlaşdırma deməkdir. robots.txt UTF-8 mətn olmalıdır; UTF-16 fayl botlar üçün oxunmaz zibildir və bütün qaydalar itir.",
       });
     }
   }
@@ -297,7 +297,7 @@ export function auditRobots(
       severity: "xeberdarliq",
       line: null,
       message:
-        "Faylda heç bir «User-agent» qrupu yoxdur. Qrupsuz yazılmış Allow/Disallow sətirləri heç bir bota aid deyil və nəzərə alınmır — ən azı bir «User-agent: *» sətri lazımdır.",
+        "Faylda heç bir «User-agent» qrupu yoxdur. Qrupsuz yazılmış Allow/Disallow sətirləri heç bir bota aid deyil və nəzərə alınmır. Ən azı bir «User-agent: *» sətri lazımdır.",
     });
   }
 
@@ -309,8 +309,8 @@ export function auditRobots(
       severity: "xeta",
       line: blockAll.line,
       message: everyone
-        ? "«Disallow: /» bütün botlara yazılıb — bu sətir saytın hamısını axtarış sistemlərinə bağlayır. Sınaq mühitindən köçürülmüş fayl bu sətirlə canlıya çıxanda sayt indeksdən tamamilə düşür. Qəsdən deyilsə, sətri dərhal sil."
-        : `«Disallow: /» bu qrupa yazılıb (${group.agents.join(", ")}) — həmin botlar üçün saytın hamısı bağlıdır.`,
+        ? "«Disallow: /» bütün botlara yazılıb: bu sətir saytın hamısını axtarış sistemlərinə bağlayır. Sınaq mühitindən köçürülmüş fayl bu sətirlə canlıya çıxanda sayt indeksdən tamamilə düşür. Qəsdən deyilsə, sətri dərhal sil."
+        : `«Disallow: /» bu qrupa yazılıb (${group.agents.join(", ")}): həmin botlar üçün saytın hamısı bağlıdır.`,
     });
   }
 
@@ -319,7 +319,7 @@ export function auditRobots(
       severity: "melumat",
       line: null,
       message:
-        "«Sitemap:» sətri yoxdur. Məcburi deyil, amma sayt xəritəsini burada elan etmək botun onu tapmasının ən ucuz yoludur — xüsusən Search Console-a əlavə edilməmiş saytlarda.",
+        "«Sitemap:» sətri yoxdur. Məcburi deyil, amma sayt xəritəsini burada elan etmək botun onu tapmasının ən ucuz yoludur (xüsusən Search Console-a əlavə edilməmiş saytlarda).",
     });
   }
 
@@ -328,7 +328,7 @@ export function auditRobots(
     issues.push({
       severity: "xeta",
       line: sitemap.line,
-      message: `«Sitemap: ${sitemap.url}» nisbi ünvandır. Bu sətir mütləq ünvan tələb edir — «https://sayt.com/sitemap.xml» kimi. Nisbi yazılan sətir sadəcə nəzərə alınmır.`,
+      message: `«Sitemap: ${sitemap.url}» nisbi ünvandır. Bu sətir mütləq ünvan tələb edir, «https://sayt.com/sitemap.xml» kimi. Nisbi yazılan sətir sadəcə nəzərə alınmır.`,
     });
   }
 
@@ -337,7 +337,7 @@ export function auditRobots(
       severity: "melumat",
       line: null,
       message:
-        "«Crawl-delay» yazılıb. Google bu direktivi oxumur — gəzmə sürəti Search Console-dan idarə olunur. Bing və Yandex isə nəzərə alır, ona görə sətri silmək məcburi deyil.",
+        "«Crawl-delay» yazılıb. Google bu direktivi oxumur: gəzmə sürəti Search Console-dan idarə olunur. Bing və Yandex isə nəzərə alır, ona görə sətri silmək məcburi deyil.",
     });
   }
 
@@ -345,7 +345,7 @@ export function auditRobots(
     issues.push({
       severity: "melumat",
       line: entry.line,
-      message: `Tanınmayan sətir: «${entry.text}». Bu sətir qayda kimi sayılmır — nə icazə verir, nə bağlayır. Direktivin adı səhv yazılıbsa (məsələn «Dissalow»), qayda sadəcə işləmir.`,
+      message: `Tanınmayan sətir: «${entry.text}». Bu sətir qayda kimi sayılmır: nə icazə verir, nə bağlayır. Direktivin adı səhv yazılıbsa (məsələn «Dissalow»), qayda sadəcə işləmir.`,
     });
   }
 

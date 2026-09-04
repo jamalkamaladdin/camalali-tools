@@ -80,7 +80,7 @@ export function CavabVaxtiTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu alət üç bağlantı açır">
-        Yazdığın ünvana sənin brauzerin yox, bu saytın serveri qoşulur — ardıcıl üç dəfə, hər dəfə
+        Yazdığın ünvana sənin brauzerin yox, bu saytın serveri qoşulur: ardıcıl üç dəfə, hər dəfə
         yeni bir soketlə. Cavabın gövdəsi heç vaxt oxunmur, yalnız hansı anda nə baş verdiyi
         ölçülür.
       </ToolNote>
@@ -211,8 +211,8 @@ function Report({ report }: { report: CavabVaxtiReport }) {
               <ToolStat label="TCP əlsıxması" value={formatMs(median.tcpMs)} />
               <ToolStat
                 label="TLS əlsıxması"
-                value={report.secure ? formatMs(median.tlsMs) : "—"}
-                note={report.secure ? undefined : "http — şifrələmə yoxdur"}
+                value={report.secure ? formatMs(median.tlsMs) : ""}
+                note={report.secure ? undefined : "http: şifrələmə yoxdur"}
               />
               <ToolStat label="İlk baytadək (TTFB)" value={formatMs(median.ttfbMs)} />
             </div>

@@ -77,7 +77,7 @@ export function validateBezier(bezier: CubicBezier): BezierValidation {
   if (p1.x < 0 || p1.x > 1 || p2.x < 0 || p2.x > 1) {
     return {
       valid: false,
-      error: "x1 və x2 0 ilə 1 arasında olmalıdır — CSS bunu bu aralıqdan kənarda qəbul etmir.",
+      error: "x1 və x2 0 ilə 1 arasında olmalıdır: CSS bunu bu aralıqdan kənarda qəbul etmir.",
     };
   }
   return { valid: true, error: null };

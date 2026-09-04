@@ -102,7 +102,7 @@ export function AdFormatiTool() {
 function SingleResult({ conversions }: { conversions: NameConversions | null }) {
   if (!conversions) {
     return (
-      <ToolNote>Bir ad yaz — doqquz format burada bir anda görünəcək.</ToolNote>
+      <ToolNote>Bir ad yaz: doqquz format burada bir anda görünəcək.</ToolNote>
     );
   }
 

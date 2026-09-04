@@ -57,7 +57,7 @@ export function BasicAuthTool() {
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu şifrələmə deyil">
         {withInlineCode(
-          "`Authorization: Basic` başlığı Base64 ilə kodlaşdırılır, şifrələnmir — açar olmadan hər kəs onu bir saniyəyə geri açır. Başlığı görən hər tərəf (proksi, brauzer əlavəsi, server jurnalı) parolu da açıq mətn kimi görür, ona görə Basic Auth yalnız https üzərində işlədilməlidir.",
+          "`Authorization: Basic` başlığı Base64 ilə kodlaşdırılır, şifrələnmir: açar olmadan hər kəs onu bir saniyəyə geri açır. Başlığı görən hər tərəf (proksi, brauzer əlavəsi, server jurnalı) parolu da açıq mətn kimi görür, ona görə Basic Auth yalnız https üzərində işlədilməlidir.",
         )}
       </ToolNote>
 
@@ -151,7 +151,7 @@ export function BasicAuthTool() {
         <>
           <ToolResultPanel
             title="Authorization başlığı"
-            hint="UTF-8 — RFC 7617"
+            hint="UTF-8 (RFC 7617)"
             action={<CopyButton value={buildResult.utf8.header} label="Başlığı kopyala" className="shrink-0" />}
           >
             <ToolOutput className="m-4 break-all">{buildResult.utf8.header}</ToolOutput>
@@ -178,8 +178,8 @@ export function BasicAuthTool() {
               {buildResult.latin1.ok && (
                 <p className="text-ios-footnote text-muted">
                   {buildResult.differs
-                    ? "İki dəyər fərqlidir — parolda Latin-1-in ASCII-dən kənar bir hərfi var."
-                    : "İki dəyər eynidir — parol yalnız ASCII simvollardan ibarətdir."}
+                    ? "İki dəyər fərqlidir: parolda Latin-1-in ASCII-dən kənar bir hərfi var."
+                    : "İki dəyər eynidir: parol yalnız ASCII simvollardan ibarətdir."}
                 </p>
               )}
             </div>
@@ -196,7 +196,7 @@ export function BasicAuthTool() {
 
                 <ToolNote tone="info" title="Hash-i bu alət hesablamır">
                   {withInlineCode(
-                    "Caddy-nin `basic_auth` direktivi və nginx/Apache-nin oxuduğu `.htpasswd` sətri parolun özünü yox, onun hash-ini istəyir — Caddy bcrypt, `.htpasswd` isə ənənəvi olaraq APR1-MD5 (`$apr1$duz$hash`) formatını gözləyir. APR1-MD5 təsadüfi duzla başlayıb MD5-i dəfələrlə təkrarlayan bir konstruksiyadır; onu əl ilə yenidən yazmaq asanlıqla səhv nəticə verər, ona görə bu alət hash-i özü hesablamır. Əvəzinə: Caddy üçün `caddy hash-password --plaintext '<parol>'`, nginx/Apache üçün `htpasswd -nm istifadeci_adi` əmrini terminalda çalışdır — hər ikisi sınaqdan keçmiş, hazır alətlərdir və nəticə sətrini birbaşa yuxarıdakı yerə qoymaq kifayətdir.",
+                    "Caddy-nin `basic_auth` direktivi və nginx/Apache-nin oxuduğu `.htpasswd` sətri parolun özünü yox, onun hash-ini istəyir: Caddy bcrypt, `.htpasswd` isə ənənəvi olaraq APR1-MD5 (`$apr1$duz$hash`) formatını gözləyir. APR1-MD5 təsadüfi duzla başlayıb MD5-i dəfələrlə təkrarlayan bir konstruksiyadır; onu əl ilə yenidən yazmaq asanlıqla səhv nəticə verər, ona görə bu alət hash-i özü hesablamır. Əvəzinə: Caddy üçün `caddy hash-password --plaintext '<parol>'`, nginx/Apache üçün `htpasswd -nm istifadeci_adi` əmrini terminalda çalışdır, hər ikisi sınaqdan keçmiş, hazır alətlərdir və nəticə sətrini birbaşa yuxarıdakı yerə qoymaq kifayətdir.",
                   )}
                 </ToolNote>
               </div>
@@ -224,7 +224,7 @@ export function BasicAuthTool() {
             {parseResult.encoding === "latin1-fallback" && (
               <p className="mt-3 text-ios-footnote text-muted">
                 {withInlineCode(
-                  "Base64-ün içi düzgün UTF-8 deyildi, ona görə bayt-bayt Latin-1 kimi oxundu — bu, başlığı köhnə üslubda `ISO-8859-1` kodlaşdırma ilə quran bir server olduğunu göstərir.",
+                  "Base64-ün içi düzgün UTF-8 deyildi, ona görə bayt-bayt Latin-1 kimi oxundu: bu, başlığı köhnə üslubda `ISO-8859-1` kodlaşdırma ilə quran bir server olduğunu göstərir.",
                 )}
               </p>
             )}

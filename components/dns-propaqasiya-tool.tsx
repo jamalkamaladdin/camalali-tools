@@ -70,7 +70,7 @@ export function DnsPropaqasiyaTool() {
        that can safely resolve the name — this only saves a doomed round trip
        and a rate-limit slot for the one input that is obviously nothing. */
     if (trimmed === "") {
-      setState({ phase: "error", message: "Boş sahə — domen adı yaz." });
+      setState({ phase: "error", message: "Boş sahə, domen adı yaz." });
       return;
     }
 
@@ -101,7 +101,7 @@ export function DnsPropaqasiyaTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu alət sorğunu serverə göndərir">
-        Yazdığın domen adı və seçdiyin qeyd tipi bu saytın serverinə gedir — server sənin əvəzinə
+        Yazdığın domen adı və seçdiyin qeyd tipi bu saytın serverinə gedir. Server sənin əvəzinə
         yeddi ayrı DNS sorğusu göndərir: altı ictimai server və domenin öz ad serverləri. Başqa
         heç bir ünvana toxunulmur; cavab 30 saniyə saxlanılır.
       </ToolNote>
@@ -189,7 +189,7 @@ function Report({ report }: { report: PropagationReport }) {
             ? "(boş)"
             : resolver.answers.join(", ")
           : STATUS_LABELS[resolver.status];
-      return `${resolver.label}\t${resolver.address || "—"}\t${answer}\t${
+      return `${resolver.label}\t${resolver.address || ""}\t${answer}\t${
         resolver.ttlSeconds === null ? "-" : resolver.ttlSeconds
       }\t${resolver.ms === null ? "-" : resolver.ms}`;
     })
@@ -272,7 +272,7 @@ function ResolverRow({ resolver }: { resolver: ResolverResult }) {
         <div>{resolver.label}</div>
         <div className="text-[11px] text-muted">{RESOLVER_KIND_LABELS[resolver.kind]}</div>
       </td>
-      <td className="p-2 font-mono break-all">{resolver.address || "—"}</td>
+      <td className="p-2 font-mono break-all">{resolver.address || ""}</td>
       <td
         className={`max-w-64 p-2 font-mono break-all ${
           resolver.status === "error" ? "text-accent-text" : ""
@@ -282,12 +282,12 @@ function ResolverRow({ resolver }: { resolver: ResolverResult }) {
           ? resolver.answers.length === 0
             ? "(boş)"
             : resolver.answers.join(", ")
-          : `${STATUS_LABELS[resolver.status]}${resolver.message ? ` — ${resolver.message}` : ""}`}
+          : `${STATUS_LABELS[resolver.status]}${resolver.message ? `: ${resolver.message}` : ""}`}
       </td>
       <td className="p-2 tabular-nums">
-        {resolver.ttlSeconds === null ? "—" : formatDuration(resolver.ttlSeconds)}
+        {resolver.ttlSeconds === null ? "" : formatDuration(resolver.ttlSeconds)}
       </td>
-      <td className="p-2 tabular-nums">{resolver.ms === null ? "—" : resolver.ms}</td>
+      <td className="p-2 tabular-nums">{resolver.ms === null ? "" : resolver.ms}</td>
     </tr>
   );
 }

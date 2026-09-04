@@ -163,7 +163,7 @@ export function diffLines(
     const worst = Math.max(leftRaw.length, rightRaw.length);
     return {
       ok: false,
-      error: `Mətn həddi aşır: hər tərəf ən çox ${MAX_LINES} sətir ola bilər, ${worst} sətir verildi. Müqayisə cədvəli sətir sayının kvadratı qədər yaddaş tutur — bu hədd brauzerin donmaması üçündür. Mətni hissələrə bölüb müqayisə et.`,
+      error: `Mətn həddi aşır: hər tərəf ən çox ${MAX_LINES} sətir ola bilər, ${worst} sətir verildi. Müqayisə cədvəli sətir sayının kvadratı qədər yaddaş tutur, bu hədd brauzerin donmaması üçündür. Mətni hissələrə bölüb müqayisə et.`,
     };
   }
 
@@ -362,6 +362,6 @@ export function toSideBySide(lines: DiffLine[]): SideRow[] {
 
 /** The one-line count above the views. */
 export function summaryText(summary: DiffSummary): string {
-  if (summary.identical) return "Fərq yoxdur — iki mətn eynidir.";
+  if (summary.identical) return "Fərq yoxdur: iki mətn eynidir.";
   return `${summary.added} sətir əlavə, ${summary.removed} sətir silindi, ${summary.unchanged} sətir dəyişməyib.`;
 }

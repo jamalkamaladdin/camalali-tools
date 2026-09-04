@@ -260,16 +260,16 @@ export function describeMode(mode: ChmodMode): string {
   const sentences = [`${clauses.join("; ")}.`];
   if (mode.setuid) {
     sentences.push(
-      "Setuid qoyulub — fayl kimin işlətməsindən asılı olmayaraq sahibinin icazələri ilə işləyir.",
+      "Setuid qoyulub: fayl kimin işlətməsindən asılı olmayaraq sahibinin icazələri ilə işləyir.",
     );
   }
   if (mode.setgid) {
     sentences.push(
-      "Setgid qoyulub — qovluqda yaradılan yeni fayllar qrupu qovluqdan miras alır.",
+      "Setgid qoyulub: qovluqda yaradılan yeni fayllar qrupu qovluqdan miras alır.",
     );
   }
   if (mode.sticky) {
-    sentences.push("Sticky bit qoyulub — qovluqdakı faylı yalnız onun sahibi silə bilər.");
+    sentences.push("Sticky bit qoyulub: qovluqdakı faylı yalnız onun sahibi silə bilər.");
   }
 
   return sentences.join(" ");
@@ -305,27 +305,27 @@ export function modeWarnings(mode: ChmodMode): string[] {
 
   if (isFull(mode.owner) && isFull(mode.group) && isFull(mode.other)) {
     warnings.push(
-      "777 — sistemdəki hər istifadəçi bu faylı oxuya, dəyişə və icra edə bilər. Veb serverdə bu, demək olar həmişə səhvdir: sayta düşən istənilən skript faylın içinə öz kodunu yaza bilər.",
+      "777: sistemdəki hər istifadəçi bu faylı oxuya, dəyişə və icra edə bilər. Veb serverdə bu, demək olar həmişə səhvdir: sayta düşən istənilən skript faylın içinə öz kodunu yaza bilər.",
     );
   } else if (isReadWrite(mode.owner) && isReadWrite(mode.group) && isReadWrite(mode.other)) {
     warnings.push(
-      "666 — icra bayrağı yoxdur, amma faylın məzmununu sistemdəki hər istifadəçi əvəz edə bilər. Konfiqurasiya faylında bu, 777-dən az təhlükəli deyil.",
+      "666: icra bayrağı yoxdur, amma faylın məzmununu sistemdəki hər istifadəçi əvəz edə bilər. Konfiqurasiya faylında bu, 777-dən az təhlükəli deyil.",
     );
   } else if (mode.other.write) {
     warnings.push(
-      "Digərlərinə yazma icazəsi verilib (o+w) — faylı sistemdəki hər istifadəçi dəyişə bilər. Adətən düzgün qrup və g+w kifayət edir.",
+      "Digərlərinə yazma icazəsi verilib (o+w): faylı sistemdəki hər istifadəçi dəyişə bilər. Adətən düzgün qrup və g+w kifayət edir.",
     );
   }
 
   if (mode.setuid && mode.other.write) {
     warnings.push(
-      "Setuid ilə birlikdə digərlərinə yazma icazəsi verilib — hər istifadəçi faylın içini əvəz edib onu sahibin, çox vaxt root-un adı ilə icra etdirə bilər.",
+      "Setuid ilə birlikdə digərlərinə yazma icazəsi verilib: hər istifadəçi faylın içini əvəz edib onu sahibin, çox vaxt root-un adı ilə icra etdirə bilər.",
     );
   }
 
   if (mode.setuid && !mode.owner.execute) {
     warnings.push(
-      "Setuid qoyulub, amma sahib üçün icra bayrağı yoxdur — bit heç nə etmir. ls bunu kiçik s yerinə böyük S kimi göstərir.",
+      "Setuid qoyulub, amma sahib üçün icra bayrağı yoxdur: bit heç nə etmir. ls bunu kiçik s yerinə böyük S kimi göstərir.",
     );
   }
 

@@ -310,7 +310,7 @@ function drawHeader(sheet: Sheet, invoice: Invoice) {
 
   draw(sheet, "Hesab-faktura", top - 16, { size: 19, bold: true });
 
-  const number = sanitize(sheet, invoice.number.trim()) || "—";
+  const number = sanitize(sheet, invoice.number.trim()) || "";
   draw(sheet, sanitize(sheet, `№ ${number} · ${formatAzDate(invoice.date)}`), top - 32, {
     size: 9.5,
     color: INK_MUTED,
@@ -376,7 +376,7 @@ function drawParty(
   drawLabel(sheet, title, y, { x });
   y -= 14;
 
-  const name = sanitize(sheet, party.name.trim()) || "—";
+  const name = sanitize(sheet, party.name.trim()) || "";
   for (const line of wrapText(sheet.bold, name, 11, width)) {
     draw(sheet, line, y, { x, size: 11, bold: true });
     y -= 14;
@@ -441,7 +441,7 @@ function drawItems(sheet: Sheet, invoice: Invoice, totals: InvoiceTotals) {
   drawTableHead(sheet);
 
   invoice.items.forEach((item, index) => {
-    const description = sanitize(sheet, item.description.trim()) || "—";
+    const description = sanitize(sheet, item.description.trim()) || "";
     const lines = wrapText(
       sheet.regular,
       description,
@@ -591,7 +591,7 @@ function drawSignatures(sheet: Sheet) {
   (["Satıcı", "Alıcı"] as const).forEach((role, index) => {
     const x = MARGIN_X + index * (width + gap);
     drawRule(sheet, sheet.y, x, x + width);
-    draw(sheet, sanitize(sheet, `${role} — imza, ad, soyad`), sheet.y - 11, {
+    draw(sheet, sanitize(sheet, `${role}: imza, ad, soyad`), sheet.y - 11, {
       x,
       size: 7.5,
       color: INK_FAINT,

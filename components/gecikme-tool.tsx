@@ -34,7 +34,7 @@ function formatNs(ns: number): string {
 }
 
 function formatMs(ms: number): string {
-  if (!Number.isFinite(ms)) return "—";
+  if (!Number.isFinite(ms)) return "";
   if (Math.abs(ms) < 10) return `${ms.toFixed(1)} ms`;
   return `${Math.round(ms)} ms`;
 }
@@ -182,7 +182,7 @@ export function GecikmeTool() {
             <ToolStat
               label="Ən ağır mərhələ"
               value={result.heaviestStage.name}
-              note={`${formatMs(result.heaviestStage.ms)} — cəmin ${result.heaviestSharePercent.toFixed(1)}%-i`}
+              note={`${formatMs(result.heaviestStage.ms)} (cəmin ${result.heaviestSharePercent.toFixed(1)}%-i)`}
             />
             <ToolStat
               label="Hədəflə fərq"

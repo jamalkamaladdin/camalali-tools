@@ -218,7 +218,7 @@ export function HreflangTool() {
                 </>
               }
             >
-              <ToolOutput className="m-3 break-all">{output || "—"}</ToolOutput>
+              <ToolOutput className="m-3 break-all">{output || ""}</ToolOutput>
             </ToolResultPanel>
           </div>
         ) : (

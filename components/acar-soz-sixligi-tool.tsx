@@ -129,7 +129,7 @@ export function AcarSozSixligiTool() {
         <ToolStat label="Ümumi söz" value={report.totalWords} />
         <ToolStat label="Unikal söz" value={report.uniqueWords} />
         <ToolStat label="Stopword payı" value={`${report.stopwordShare}%`} />
-        <ToolStat label="Ən uzun ifadə" value={longest ? longest.phrase : "—"} />
+        <ToolStat label="Ən uzun ifadə" value={longest ? longest.phrase : ""} />
       </div>
 
       <ToolResultPanel
@@ -182,7 +182,7 @@ export function AcarSozSixligiTool() {
 
       <ToolNote tone="accent" title="Sıxlıq reytinq amili deyil">
         Bu cədvəl mətnin sözlərini necə paylandığını göstərir, hədəf faiz vermir. Google açar söz
-        sıxlığına görə sıralamır — süni şəkildə eyni ifadəni artırmaq oxunaqlığı pozur və faydası
+        sıxlığına görə sıralamır: süni şəkildə eyni ifadəni artırmaq oxunaqlığı pozur və faydası
         yoxdur. Rəqəmə deyil, nəticəyə bax: gözlədiyin söz cədvəldə heç görünmürsə, mətn
         mövzudan yayınıb deməkdir.
       </ToolNote>

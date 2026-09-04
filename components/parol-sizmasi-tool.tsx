@@ -53,7 +53,7 @@ export function PasswordBreachTool() {
   /* Shown live under the button, so the visitor watches the five characters
      change as they type and can see for themselves that the rest never moves. */
   const outgoing = useMemo(
-    () => (password === "" ? "—" : splitPasswordHash(password).prefix),
+    () => (password === "" ? "" : splitPasswordHash(password).prefix),
     [password],
   );
 
@@ -108,7 +108,7 @@ export function PasswordBreachTool() {
         Yoxlama <strong>k-anonymity</strong> üsulu ilə aparılır. Parolun SHA-1 hash-i
         sənin brauzerində hesablanır və şəbəkəyə yalnız onun{" "}
         <strong>ilk 5 simvolu</strong> göndərilir. Cavabda həmin 5 simvolla başlayan
-        minlərlə hash gəlir; sənin hash-in onların arasında var-yoxdur — bunu brauzer
+        minlərlə hash gəlir; sənin hash-in onların arasında var-yoxdur: bunu brauzer
         özü yoxlayır. Nə parolun, nə də onun tam hash-i heç yerə çıxmır.
       </ToolNote>
 

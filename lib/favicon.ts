@@ -91,7 +91,7 @@ export function faviconSlots(): FaviconSlot[] {
     {
       fileName: "favicon.ico",
       size: 48,
-      purpose: "Brauzer tabı və köhnə sistemlər — 16, 32 və 48 piksel bir faylın içindədir",
+      purpose: "Brauzer tabı və köhnə sistemlər: 16, 32 və 48 piksel bir faylın içindədir",
       googleFriendly: true,
     },
     {

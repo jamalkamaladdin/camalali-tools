@@ -52,7 +52,7 @@ export function PackagistTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote>
-        Ad Packagist-in öz reyestrinə (packagist.org) göndərilir — başqa heç yerə. Nəticə 10 dəqiqə
+        Ad Packagist-in öz reyestrinə (packagist.org) göndərilir: başqa heç yerə. Nəticə 10 dəqiqə
         keşlənir.
       </ToolNote>
 
@@ -98,7 +98,7 @@ function PackagistResult({ info }: { info: PackagistPackageInfo }) {
           <ToolNote tone="accent" title="Tərk edilib">
             {info.abandonedReplacement
               ? `Müəllif bu paketi tərk edilmiş elan edib. Tövsiyə olunan əvəzedici: ${info.abandonedReplacement}.`
-              : "Müəllif bu paketi tərk edilmiş elan edib — əvəzedici göstərilməyib."}
+              : "Müəllif bu paketi tərk edilmiş elan edib: əvəzedici göstərilməyib."}
           </ToolNote>
         )}
         {info.abandoned === null && (
@@ -108,13 +108,13 @@ function PackagistResult({ info }: { info: PackagistPackageInfo }) {
         )}
 
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <ToolStat label="Tələb olunan PHP" value={info.requiresPhp ?? "—"} />
-          <ToolStat label="Lisenziya" value={info.license.length > 0 ? info.license.join(" / ") : "—"} />
+          <ToolStat label="Tələb olunan PHP" value={info.requiresPhp ?? ""} />
+          <ToolStat label="Lisenziya" value={info.license.length > 0 ? info.license.join(" / ") : ""} />
           <ToolStat
             label="Yükləmə"
-            value={info.downloadsTotal !== null ? formatCompact(info.downloadsTotal) : "—"}
+            value={info.downloadsTotal !== null ? formatCompact(info.downloadsTotal) : ""}
           />
-          <ToolStat label="Buraxılış" value={releaseDate ?? "—"} />
+          <ToolStat label="Buraxılış" value={releaseDate ?? ""} />
         </div>
 
         {info.dependencies.length > 0 && (

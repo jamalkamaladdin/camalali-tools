@@ -176,7 +176,7 @@ export function CspQurucuTool() {
               ))}
               {CSP_DIRECTIVE_ORDER.every((name) => raw[name] === undefined) && (
                 <ToolNote tone="info">
-                  {withInlineCode("Yuxarıdan ən azı bir direktiv seç — məsələn `default-src`.")}
+                  {withInlineCode("Yuxarıdan ən azı bir direktiv seç, məsələn `default-src`.")}
                 </ToolNote>
               )}
             </div>
@@ -262,7 +262,7 @@ export function CspQurucuTool() {
             {parsed.unknownDirectives.length > 0 && (
               <p className="p-3 text-ios-footnote text-muted">
                 {withInlineCode(
-                  `Tanınmayan direktiv(lər): ${parsed.unknownDirectives.map((d) => `\`${d}\``).join(", ")} — siyahıda saxlanılır, amma miras və zəiflik yoxlamasına daxil edilmir.`,
+                  `Tanınmayan direktiv(lər): ${parsed.unknownDirectives.map((d) => `\`${d}\``).join(", ")}, siyahıda saxlanılır, amma miras və zəiflik yoxlamasına daxil edilmir.`,
                 )}
               </p>
             )}
@@ -336,7 +336,7 @@ function DirectiveEditor({
         </div>
       )}
 
-      {isFlag && <p className="mt-2 text-ios-footnote text-muted">Mənbə siyahısı götürmür — yalnız aktivdir/deyil.</p>}
+      {isFlag && <p className="mt-2 text-ios-footnote text-muted">Mənbə siyahısı götürmür: yalnız aktivdir/deyil.</p>}
     </div>
   );
 }
@@ -371,7 +371,7 @@ function InheritanceTable({
               <tr key={row.directive} className="border-b border-rule align-top last:border-0">
                 <td className="p-2 font-mono">{row.directive}</td>
                 <td className="p-2 font-mono break-all">
-                  {row.effectiveValues.length > 0 ? row.effectiveValues.join(" ") : "— (məhdudiyyətsiz)"}
+                  {row.effectiveValues.length > 0 ? row.effectiveValues.join(" ") : "(məhdudiyyətsiz)"}
                 </td>
                 <td className="p-2 text-muted">{row.inherited ? "default-src-dən miras" : "özü təyin olunub"}</td>
               </tr>
@@ -380,10 +380,10 @@ function InheritanceTable({
               <tr key={name} className="border-b border-rule align-top last:border-0">
                 <td className="p-2 font-mono">{name}</td>
                 <td className="p-2 font-mono break-all">
-                  {directives[name] !== undefined ? (directives[name] ?? []).join(" ") || "(boş)" : "— (məhdudiyyətsiz)"}
+                  {directives[name] !== undefined ? (directives[name] ?? []).join(" ") || "(boş)" : "(məhdudiyyətsiz)"}
                 </td>
                 <td className="p-2 text-muted">
-                  {isNonInheritingDirectiveSet(directives, name) ? "özü təyin olunub" : "miras almır — heç vaxt"}
+                  {isNonInheritingDirectiveSet(directives, name) ? "özü təyin olunub" : "miras almır: heç vaxt"}
                 </td>
               </tr>
             ))}
@@ -398,7 +398,7 @@ function WeaknessList({ weaknesses }: { weaknesses: { directive: CspDirective; m
   if (weaknesses.length === 0) {
     return (
       <ToolNote tone="info" title="Aşkar edilmiş zəiflik yoxdur">
-        Bu, siyasətin təhlükəsiz olduğunu sübut etmir — yalnız bu alətin tanıdığı naxışlardan heç biri tapılmadı.
+        Bu, siyasətin təhlükəsiz olduğunu sübut etmir: yalnız bu alətin tanıdığı naxışlardan heç biri tapılmadı.
       </ToolNote>
     );
   }

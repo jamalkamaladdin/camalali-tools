@@ -47,8 +47,8 @@ export function KolgeQatiTool() {
           </ToolResultPanel>
 
           <ToolNote title="Tailwind qarşılığı">
-            Ən yaxın standart sinif: <span className="font-mono">{reference.className}</span> —{" "}
-            <span className="font-mono">{reference.css}</span>
+            Ən yaxın standart sinif: <span className="font-mono">{reference.className}</span> (
+            <span className="font-mono">{reference.css}</span>)
           </ToolNote>
 
           <ToolPanel>

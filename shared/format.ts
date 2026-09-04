@@ -5,7 +5,7 @@
 
 /** Grouped with a non-breaking thin space: 12 400 000. */
 export function formatNumber(value: number, fractionDigits = 0): string {
-  if (!Number.isFinite(value)) return "—";
+  if (!Number.isFinite(value)) return "";
 
   const fixed = value.toFixed(fractionDigits);
   const [whole, fraction] = fixed.split(".");
@@ -19,7 +19,7 @@ export function formatNumber(value: number, fractionDigits = 0): string {
  * clearer than a rounded one, so it is left alone.
  */
 export function formatCompact(value: number): string {
-  if (!Number.isFinite(value)) return "—";
+  if (!Number.isFinite(value)) return "";
   const abs = Math.abs(value);
 
   if (abs >= 1e9) return `${trim(value / 1e9)} mlrd`;
@@ -31,7 +31,7 @@ export function formatCompact(value: number): string {
 
 /** Binary units — the ones a disk quota is actually written in. */
 export function formatBytes(bytes: number): string {
-  if (!Number.isFinite(bytes)) return "—";
+  if (!Number.isFinite(bytes)) return "";
   if (bytes < 1024) return `${formatNumber(bytes)} B`;
 
   const units = ["KiB", "MiB", "GiB", "TiB", "PiB"];

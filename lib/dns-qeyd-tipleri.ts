@@ -28,14 +28,14 @@ export const dnsQeydTipleriSections: ReferenceSection[] = [
   {
     id: "poct",
     label: "Poçt",
-    hint: "SPF, DKIM, DMARC, BIMI, MTA-STS və TLSRPT — heç birinin öz DNS tipi yoxdur, hamısı TXT qeydinin üstündə qurulub.",
+    hint: "SPF, DKIM, DMARC, BIMI, MTA-STS və TLSRPT: heç birinin öz DNS tipi yoxdur, hamısı TXT qeydinin üstündə qurulub.",
   },
   { id: "xidmet-kesf", label: "Xidmət və kəşf" },
   { id: "tehlukesizlik", label: "Təhlükəsizlik" },
   {
     id: "sorgu-nezaret",
     label: "Sorğu və nəzarət",
-    hint: "Bunlar zonada saxlanan qeydlər deyil — resolver və server arasında gedən sorğu tipləridir.",
+    hint: "Bunlar zonada saxlanan qeydlər deyil: resolver və server arasında gedən sorğu tipləridir.",
   },
   {
     id: "kohne",

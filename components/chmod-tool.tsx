@@ -201,7 +201,7 @@ export function ChmodTool() {
                           <input
                             type="checkbox"
                             checked={mode[row.key][column.key]}
-                            aria-label={`${row.label} — ${column.label}`}
+                            aria-label={`${row.label}: ${column.label}`}
                             onChange={(event) =>
                               applyMode(
                                 withPermission(mode, row.key, {
@@ -276,7 +276,7 @@ export function ChmodTool() {
                 note={
                   symbolicBroken
                     ? "rwxr-xr-x formatında doqquz simvol gözlənilir; s, S, t və T də qəbul edilir."
-                    : "ls -l sətrini olduğu kimi yapışdıra bilərsən — baş hərf özü kəsilir."
+                    : "ls -l sətrini olduğu kimi yapışdıra bilərsən: baş hərf özü kəsilir."
                 }
               >
                 <ToolInput
@@ -348,7 +348,7 @@ export function ChmodTool() {
         {readWithoutExecute && (
           <ToolNote title="Bu, qovluqdursa">
             Qovluqda oxu bayrağı yalnız adları göstərir. Qovluğa girmək, ora cd etmək və
-            içindəki fayla toxunmaq üçün icra bayrağı lazımdır — ona görə qovluqlar demək
+            içindəki fayla toxunmaq üçün icra bayrağı lazımdır: ona görə qovluqlar demək
             olar həmişə 755 və ya 700 olur. Fayl ilə qovluğa eyni əmrdə rejim verəndə
             simvolik böyük X işlədilir: o, icra bayrağını yalnız qovluqlara qoyur.
           </ToolNote>

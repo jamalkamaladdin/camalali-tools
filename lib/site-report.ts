@@ -252,7 +252,7 @@ function checkHttpsRedirect(input: SiteReportInput): SiteCheck {
       value,
       detail: permanent
         ? "http ünvanı daimi yönləndirmə ilə https-ə göndərilir."
-        : "Yönləndirmə var, amma müvəqqətidir — brauzer də, axtarış robotu da növbəti dəfə yenə http ilə soruşacaq.",
+        : "Yönləndirmə var, amma müvəqqətidir: brauzer də, axtarış robotu da növbəti dəfə yenə http ilə soruşacaq.",
       fix: permanent ? null : "302/307 əvəzinə 301 (və ya 308) qaytar.",
     };
   }
@@ -271,7 +271,7 @@ function checkHttpsRedirect(input: SiteReportInput): SiteCheck {
     ...base,
     status: "kecmedi",
     value,
-    detail: "Səhifə http üzərindən birbaşa açılır — məzmun şifrələnmədən gedir.",
+    detail: "Səhifə http üzərindən birbaşa açılır: məzmun şifrələnmədən gedir.",
     fix: "80 portundan gələn bütün sorğuları 301 ilə eyni yolun https variantına yönləndir.",
   };
 }
@@ -286,7 +286,7 @@ function checkHsts(map: Map<string, string>, secure: boolean): SiteCheck {
       status: "kecmedi",
       value: null,
       detail:
-        "Sayt https ilə açılmadığı üçün bu başlıq ümumiyyətlə tətbiq olunmur — brauzer onu yalnız şifrələnmiş cavabda qəbul edir.",
+        "Sayt https ilə açılmadığı üçün bu başlıq ümumiyyətlə tətbiq olunmur: brauzer onu yalnız şifrələnmiş cavabda qəbul edir.",
       fix: "Əvvəlcə saytı https-ə keçir, sonra başlığı əlavə et.",
     };
   }
@@ -312,7 +312,7 @@ function checkHsts(map: Map<string, string>, secure: boolean): SiteCheck {
       value,
       detail:
         seconds === 0
-          ? "«max-age=0» yazılıb — bu, HSTS-i söndürən və brauzerdəki köhnə qaydanı silən dəyərdir."
+          ? "«max-age=0» yazılıb: bu, HSTS-i söndürən və brauzerdəki köhnə qaydanı silən dəyərdir."
           : "Başlıq var, amma «max-age» oxunmur, ona görə brauzer onu tətbiq etmir.",
       fix: "«max-age» dəyərini saniyə ilə yaz: bir il üçün 31536000.",
     };
@@ -323,7 +323,7 @@ function checkHsts(map: Map<string, string>, secure: boolean): SiteCheck {
       ...base,
       status: "xeberdarliq",
       value: `max-age ${formatMaxAge(seconds)}`,
-      detail: `Müddət ${formatMaxAge(seconds)} — tövsiyə olunan minimum 180 gündür, qısa müddət isə ziyarətlər arasında bitir.`,
+      detail: `Müddət ${formatMaxAge(seconds)}. Tövsiyə olunan minimum 180 gündür, qısa müddət isə ziyarətlər arasında bitir.`,
       fix: "«max-age» dəyərini ən azı 15552000 (180 gün) et.",
     };
   }
@@ -358,7 +358,7 @@ function checkCsp(map: Map<string, string>): SiteCheck {
       detail:
         reportOnly === null
           ? "Content-Security-Policy başlığı yoxdur: səhifəyə yeridilən skript heç nə tərəfindən dayandırılmır."
-          : "Yalnız «Report-Only» versiyası var — pozuntular hesabata düşür, amma heç nə bloklanmır.",
+          : "Yalnız «Report-Only» versiyası var: pozuntular hesabata düşür, amma heç nə bloklanmır.",
       fix: "Ən azı «default-src 'self'» ilə başla, sonra saytın həqiqətən işlətdiyi mənbələri bir-bir əlavə et.",
     };
   }
@@ -372,7 +372,7 @@ function checkCsp(map: Map<string, string>): SiteCheck {
       status: "xeberdarliq",
       value,
       detail:
-        "Siyasət var, amma nə «script-src», nə də «default-src» yazılıb — skriptlər üçün heç bir məhdudiyyət qalmır.",
+        "Siyasət var, amma nə «script-src», nə də «default-src» yazılıb: skriptlər üçün heç bir məhdudiyyət qalmır.",
       fix: "Siyasətə «default-src 'self'» və ya konkret «script-src» direktivi əlavə et.",
     };
   }
@@ -390,7 +390,7 @@ function checkCsp(map: Map<string, string>): SiteCheck {
     status: unsafe ? "xeberdarliq" : "kecdi",
     value,
     detail: unsafe
-      ? "Siyasət qurulub, amma skript mənbələrində «unsafe-inline» və ya «unsafe-eval» var — səhifəyə yeridilən skript yenə işləyir."
+      ? "Siyasət qurulub, amma skript mənbələrində «unsafe-inline» və ya «unsafe-eval» var: səhifəyə yeridilən skript yenə işləyir."
       : "Siyasət var və skript mənbələri konkretdir.",
     fix: unsafe
       ? "Inline skriptləri ayrıca fayla çıxar və ya onlara nonce/hash ver, sonra «unsafe-inline» sətrini sil."
@@ -423,7 +423,7 @@ function checkNosniff(map: Map<string, string>): SiteCheck {
     detail:
       value === null
         ? "Başlıq yoxdur: brauzer faylın növünü təxmin edə bilir və yüklənən şəkil skript kimi icra oluna bilər."
-        : `Dəyər «${value}» tanınmır — yeganə etibarlı dəyər «nosniff»-dir.`,
+        : `Dəyər «${value}» tanınmır: yeganə etibarlı dəyər «nosniff»-dir.`,
     fix: "Cavaba «X-Content-Type-Options: nosniff» başlığını əlavə et.",
   };
 }
@@ -482,7 +482,7 @@ function checkFraming(map: Map<string, string>): SiteCheck {
       status: open ? "kecmedi" : "kecdi",
       value: `frame-ancestors ${ancestors.join(" ")}`,
       detail: open
-        ? "«frame-ancestors *» yazılıb — istənilən sayt bu səhifəni öz çərçivəsinə sala bilər."
+        ? "«frame-ancestors *» yazılıb: istənilən sayt bu səhifəni öz çərçivəsinə sala bilər."
         : "CSP-dəki «frame-ancestors» kimin bu səhifəni çərçivəyə sala biləcəyini məhdudlaşdırır.",
       fix: open ? "«*» əvəzinə «'self'» yaz, kənar sayt lazımdırsa onu ad-ad sadala." : null,
     };
@@ -522,7 +522,7 @@ function checkMixedContent(input: SiteReportInput, map: Map<string, string>, sec
       status: "kecmedi",
       value: null,
       detail:
-        "Səhifənin özü http ilə açılır, ona görə «qarışıq məzmun» anlayışı burada tətbiq olunmur — bütün resurslar şifrələnməmiş gedir.",
+        "Səhifənin özü http ilə açılır, ona görə «qarışıq məzmun» anlayışı burada tətbiq olunmur: bütün resurslar şifrələnməmiş gedir.",
       fix: "Saytı https-ə keçir; qarışıq məzmun yoxlaması ondan sonra məna kəsb edir.",
     };
   }
@@ -547,7 +547,7 @@ function checkMixedContent(input: SiteReportInput, map: Map<string, string>, sec
       value: `${total} resurs`,
       detail:
         "http ilə yazılmış resurslar var, amma CSP-dəki «upgrade-insecure-requests» brauzeri onları https ilə istəməyə məcbur edir.",
-      fix: "Markup-dakı ünvanları da «https://» ilə yaz — direktiv köməkçidir, düzəliş deyil.",
+      fix: "Markup-dakı ünvanları da «https://» ilə yaz (direktiv köməkçidir, düzəliş deyil).",
     };
   }
 
@@ -557,8 +557,8 @@ function checkMixedContent(input: SiteReportInput, map: Map<string, string>, sec
     value: `${total} resurs (${report.blockedCount} bloklanır)`,
     detail:
       report.blockedCount > 0
-        ? `${report.blockedCount} aktiv resurs (skript və ya iframe) http ilə çağırılır — brauzer onları yükləmir, yəni səhifənin bir hissəsi işləmir.`
-        : `${report.passiveCount} passiv resurs (şəkil, media) http ilə çağırılır — yüklənir, amma ünvan sətrindəki kilid işarəsini qırır.`,
+        ? `${report.blockedCount} aktiv resurs (skript və ya iframe) http ilə çağırılır: brauzer onları yükləmir, yəni səhifənin bir hissəsi işləmir.`
+        : `${report.passiveCount} passiv resurs (şəkil, media) http ilə çağırılır: yüklənir, amma ünvan sətrindəki kilid işarəsini qırır.`,
     fix: "Səhifədəki «http://» ünvanlarını «https://» ilə əvəz et.",
   };
 }
@@ -610,7 +610,7 @@ function checkCertificate(input: SiteReportInput, secure: boolean): SiteCheck {
       status: "xeberdarliq",
       value,
       detail: verdict.message,
-      fix: "Yenilənməni avtomatlaşdır — əl ilə yeniləmə unudulan ilk işdir.",
+      fix: "Yenilənməni avtomatlaşdır: əl ilə yeniləmə unudulan ilk işdir.",
     };
   }
 
@@ -641,7 +641,7 @@ function checkResponseTime(input: SiteReportInput): SiteCheck {
       ...base,
       status: "kecdi",
       value,
-      detail: `Səhifə ${ms} millisaniyəyə gəldi — bu server üçün sürətli sayılır.`,
+      detail: `Səhifə ${ms} millisaniyəyə gəldi: bu server üçün sürətli sayılır.`,
       fix: null,
     };
   }
@@ -660,7 +660,7 @@ function checkResponseTime(input: SiteReportInput): SiteCheck {
     ...base,
     status: "kecmedi",
     value,
-    detail: `Səhifə ${ms} millisaniyə çəkdi — ziyarətçi boş ekrana baxır.`,
+    detail: `Səhifə ${ms} millisaniyə çəkdi: ziyarətçi boş ekrana baxır.`,
     fix: "Serverin cavabını keşlə, ağır sorğuları arxa fona çıxar və hostinqin coğrafi məsafəsini yoxla.",
   };
 }
@@ -687,7 +687,7 @@ function checkCompression(map: Map<string, string>, htmlBytes: number): SiteChec
       ...base,
       status: "kecdi",
       value: "sıxılmayıb",
-      detail: `Cavab ${formatBytes(htmlBytes)}-dır — bu ölçüdə sıxılma qazanc vermir.`,
+      detail: `Cavab ${formatBytes(htmlBytes)}-dır: bu ölçüdə sıxılma qazanc vermir.`,
       fix: null,
     };
   }
@@ -696,7 +696,7 @@ function checkCompression(map: Map<string, string>, htmlBytes: number): SiteChec
     ...base,
     status: "kecmedi",
     value: "sıxılmayıb",
-    detail: `HTML ${formatBytes(htmlBytes)} olduğu halda «Content-Encoding» başlığı yoxdur — mətn olduğu kimi göndərilir.`,
+    detail: `HTML ${formatBytes(htmlBytes)} olduğu halda «Content-Encoding» başlığı yoxdur: mətn olduğu kimi göndərilir.`,
     fix: "Serverdə gzip və ya brotli sıxılmasını aç; mətn tipli cavablarda çəki adətən üç-dörd dəfə azalır.",
   };
 }
@@ -711,7 +711,7 @@ function checkHtmlSize(input: SiteReportInput, htmlBytes: number): SiteCheck {
       status: "kecmedi",
       value,
       detail:
-        "Səhifə oxuma büdcəsindən böyük olduğu üçün kəsildi — yəni HTML-in özü yarım meqabaytdan çoxdur.",
+        "Səhifə oxuma büdcəsindən böyük olduğu üçün kəsildi: yəni HTML-in özü yarım meqabaytdan çoxdur.",
       fix: "Səhifəni bölmələrə ayır, siyahıları səhifələ və markup-a yerləşdirilmiş böyük məlumatı ayrıca sorğuya çıxar.",
     };
   }
@@ -721,7 +721,7 @@ function checkHtmlSize(input: SiteReportInput, htmlBytes: number): SiteCheck {
       ...base,
       status: "kecdi",
       value,
-      detail: `Markup ${formatBytes(htmlBytes)}-dır — brauzer onu bir anda oxuyur.`,
+      detail: `Markup ${formatBytes(htmlBytes)}-dır: brauzer onu bir anda oxuyur.`,
       fix: null,
     };
   }
@@ -733,7 +733,7 @@ function checkHtmlSize(input: SiteReportInput, htmlBytes: number): SiteCheck {
     value,
     detail: heavy
       ? `Markup ${formatBytes(htmlBytes)}-dır: bu ölçüdə səhifənin ilk görünüşü təkcə HTML-i gözləyir.`
-      : `Markup ${formatBytes(htmlBytes)}-dır — 100 KB-dan yuxarıdır, amma hələ idarə oluna bilər.`,
+      : `Markup ${formatBytes(htmlBytes)}-dır: 100 KB-dan yuxarıdır, amma hələ idarə oluna bilər.`,
     fix: "Səhifəyə yerləşdirilmiş stil və məlumat bloklarını ayrıca fayla çıxar, uzun siyahıları səhifələ.",
   };
 }
@@ -748,7 +748,7 @@ function checkTitle(title: string | null): SiteCheck {
       ...base,
       status: "kecmedi",
       value: null,
-      detail: "Səhifənin başlığı yoxdur — axtarış nəticəsində ünvanın özü görünəcək.",
+      detail: "Səhifənin başlığı yoxdur: axtarış nəticəsində ünvanın özü görünəcək.",
       fix: "<head> içində 50-60 simvolluq, səhifəni təsvir edən <title> yaz.",
     };
   }
@@ -762,7 +762,7 @@ function checkTitle(title: string | null): SiteCheck {
       ...base,
       status: "xeberdarliq",
       value,
-      detail: `Başlıq ${trimmed.length} simvoldur — bu qısalıqda o, səhifəni təsvir etmir, sadəcə adlandırır.`,
+      detail: `Başlıq ${trimmed.length} simvoldur: bu qısalıqda o, səhifəni təsvir etmir, sadəcə adlandırır.`,
       fix: "Başlığa səhifənin mövzusunu və sayt adını əlavə et.",
     };
   }
@@ -796,7 +796,7 @@ function checkDescription(description: string | null): SiteCheck {
       value: null,
       detail:
         "Təsvir yoxdur: axtarış sistemi nəticədə göstərəcək mətni səhifədən özü seçəcək.",
-      fix: "<meta name=\"description\" content=\"...\"> yaz — 120-155 simvol arası kifayətdir.",
+      fix: "<meta name=\"description\" content=\"...\"> yaz (120-155 simvol arası kifayətdir).",
     };
   }
 
@@ -809,7 +809,7 @@ function checkDescription(description: string | null): SiteCheck {
       ...base,
       status: "xeberdarliq",
       value,
-      detail: `Təsvir ${trimmed.length} simvoldur — bu qədər yerdə səhifənin nə təklif etdiyi deyilmir.`,
+      detail: `Təsvir ${trimmed.length} simvoldur: bu qədər yerdə səhifənin nə təklif etdiyi deyilmir.`,
       fix: "Təsviri 120-155 simvola çatdır və səhifənin konkret faydasını yaz.",
     };
   }
@@ -845,7 +845,7 @@ function checkLang(html: string): SiteCheck {
       value: null,
       detail:
         "<html> etiketində «lang» yoxdur: ekran oxuyucusu mətni hansı dildə tələffüz edəcəyini bilmir, brauzer isə tərcümə təklifini səhv verir.",
-      fix: "<html lang=\"az\"> yaz — dili səhifənin əsas mətninə görə seç.",
+      fix: "<html lang=\"az\"> yaz (dili səhifənin əsas mətninə görə seç).",
     };
   }
 
@@ -892,7 +892,7 @@ function checkCanonical(canonical: string | null, pageUrl: string): SiteCheck {
     value: canonical,
     detail: sameHost
       ? "Səhifə öz əsas ünvanını elan edir."
-      : "Canonical başqa domenə işarə edir — bu, məzmunun həmin sayta aid olduğunu bildirir və səhv yazılıbsa səhifəni indeksdən çıxarır.",
+      : "Canonical başqa domenə işarə edir: bu, məzmunun həmin sayta aid olduğunu bildirir və səhv yazılıbsa səhifəni indeksdən çıxarır.",
     fix: sameHost ? null : "Canonical ünvanının doğrudan da bu səhifənin əsas nüsxəsi olduğunu təsdiqlə.",
   };
 }
@@ -920,7 +920,7 @@ function checkOpenGraph(tags: Record<string, string>): SiteCheck {
       ...base,
       status: "xeberdarliq",
       value,
-      detail: `Paylaşım kartı yarımçıqdır — ${missing.join(", ")} yazılmayıb.`,
+      detail: `Paylaşım kartı yarımçıqdır: ${missing.join(", ")} yazılmayıb.`,
       fix: `Çatmayan etiketləri əlavə et: ${missing.join(", ")}.`,
     };
   }
@@ -929,7 +929,7 @@ function checkOpenGraph(tags: Record<string, string>): SiteCheck {
     ...base,
     status: "kecdi",
     value,
-    detail: "Başlıq, təsvir və şəkil — paylaşım kartının üç hissəsi də var.",
+    detail: "Başlıq, təsvir və şəkil: paylaşım kartının üç hissəsi də var.",
     fix: null,
   };
 }
@@ -969,7 +969,7 @@ function checkRobots(file: FetchedFile | null): SiteCheck {
       status: "kecmedi",
       value: "Disallow: /",
       detail:
-        "robots.txt bütün robotlara saytın hamısını qadağan edir — sayt axtarışdan tamamilə çıxır.",
+        "robots.txt bütün robotlara saytın hamısını qadağan edir: sayt axtarışdan tamamilə çıxır.",
       fix: "«User-agent: *» qrupundakı «Disallow: /» sətrini sil.",
     };
   }
@@ -1010,7 +1010,7 @@ function checkSitemap(file: FetchedFile | null): SiteCheck {
       ...base,
       status: "xeberdarliq",
       value: "format tanınmadı",
-      detail: "Ünvan cavab verir, amma sənəd sitemap kimi oxunmur — kök element gözlənilən deyil.",
+      detail: "Ünvan cavab verir, amma sənəd sitemap kimi oxunmur: kök element gözlənilən deyil.",
       fix: "Faylın <urlset> və ya <sitemapindex> ilə başladığını və XML kimi verildiyini yoxla.",
     };
   }
@@ -1043,7 +1043,7 @@ function checkSitemap(file: FetchedFile | null): SiteCheck {
     value: `${count} ünvan`,
     detail:
       errors > 0
-        ? `Faylda ${count} ünvan var, amma ${errors} qüsur tapıldı — təfərrüat üçün sitemap yoxlayıcısına bax.`
+        ? `Faylda ${count} ünvan var, amma ${errors} qüsur tapıldı, təfərrüat üçün sitemap yoxlayıcısına bax.`
         : `Fayl düzgündür və ${count} ünvan sadalayır.`,
     fix: errors > 0 ? "Sitemap yoxlayıcısı ilə faylı ayrıca aç və göstərilən sətirləri düzəlt." : null,
   };
@@ -1070,7 +1070,7 @@ function checkH1(html: string): SiteCheck {
       value: "0",
       detail:
         "Səhifədə H1 yoxdur: nə axtarış robotu, nə də ekran oxuyucusu səhifənin nədən bəhs etdiyini bir cümlə ilə öyrənə bilir.",
-      fix: "Səhifənin əsas başlığını <h1> ilə yaz — səhifədə bir dənə olsun.",
+      fix: "Səhifənin əsas başlığını <h1> ilə yaz, səhifədə bir dənə olsun.",
     };
   }
 
@@ -1078,7 +1078,7 @@ function checkH1(html: string): SiteCheck {
     ...base,
     status: "xeberdarliq",
     value: String(count),
-    detail: `Səhifədə ${count} H1 var — hansının əsas başlıq olduğu bilinmir.`,
+    detail: `Səhifədə ${count} H1 var: hansının əsas başlıq olduğu bilinmir.`,
     fix: "Yalnız birini H1 saxla, qalanlarını H2-yə çevir.",
   };
 }
@@ -1119,7 +1119,7 @@ function checkAltText(html: string): SiteCheck {
     ...base,
     status: ratio >= ALT_WARNING_RATIO ? "xeberdarliq" : "kecmedi",
     value,
-    detail: `${missing} şəkildə «alt» atributu yoxdur — ekran oxuyucusu onların yerinə fayl adını oxuyur.`,
+    detail: `${missing} şəkildə «alt» atributu yoxdur: ekran oxuyucusu onların yerinə fayl adını oxuyur.`,
     fix: "Məzmun daşıyan şəklə şəkli izah edən alt mətn yaz; bəzək şəkli üçün «alt=\"\"» qoy.",
   };
 }

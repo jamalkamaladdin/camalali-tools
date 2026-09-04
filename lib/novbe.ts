@@ -91,8 +91,8 @@ export function computeQueue(input: QueueInput): QueueComputation {
       rho,
       reason:
         rho === 1
-          ? "Gəliş sürəti tam tutum qədərdir (ρ = 1) — növbə sabitləşmir, sonsuza doğru böyüyür."
-          : "Gəliş sürəti tutumdan yüksəkdir (ρ > 1) — sistem heç vaxt sabitləşmir, növbə sonsuza gedir.",
+          ? "Gəliş sürəti tam tutum qədərdir (ρ = 1): növbə sabitləşmir, sonsuza doğru böyüyür."
+          : "Gəliş sürəti tutumdan yüksəkdir (ρ > 1): sistem heç vaxt sabitləşmir, növbə sonsuza gedir.",
     };
   }
 

@@ -255,7 +255,7 @@ function PipelineTab() {
         action={<CopyButton value={result.text} label="kopyala" />}
       >
         <div className="p-3">
-          <ToolOutput>{result.text === "" ? "—" : result.text}</ToolOutput>
+          <ToolOutput>{result.text === "" ? "" : result.text}</ToolOutput>
         </div>
       </ToolResultPanel>
     </div>
@@ -303,13 +303,13 @@ function IntersectionTab() {
 
       <ToolResultPanel title="Kəsişmə (hər ikisində)">
         <div className="p-3">
-          <ToolOutput>{intersection.length === 0 ? "—" : intersection.join("\n")}</ToolOutput>
+          <ToolOutput>{intersection.length === 0 ? "" : intersection.join("\n")}</ToolOutput>
         </div>
       </ToolResultPanel>
 
       <ToolResultPanel title="Fərq (yalnız A-da)">
         <div className="p-3">
-          <ToolOutput>{difference.length === 0 ? "—" : difference.join("\n")}</ToolOutput>
+          <ToolOutput>{difference.length === 0 ? "" : difference.join("\n")}</ToolOutput>
         </div>
       </ToolResultPanel>
     </div>

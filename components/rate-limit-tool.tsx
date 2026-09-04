@@ -171,7 +171,7 @@ export function RateLimitTool() {
                         <ToolStat label="Rədd edilən" value={formatCount(burstResult.rejected)} tone={burstResult.rejected > 0 ? "warning" : "default"} />
                       </div>
                       <ToolNote>
-                        Vedrə heç vaxt tutumundan çox buraxmır — partlayış nə qədər böyük olsa da, bir anda ən çox{" "}
+                        Vedrə heç vaxt tutumundan çox buraxmır: partlayış nə qədər böyük olsa da, bir anda ən çox{" "}
                         {formatCount(result.tokenBucket.capacity)} sorğu keçir, qalanı sıradan kənarda qalıb rədd olunur (növbəyə düşmür).
                       </ToolNote>
                     </div>
@@ -191,7 +191,7 @@ export function RateLimitTool() {
                         />
                       </div>
                       <ToolNote>
-                        Əvvəlki və cari pəncərənin sayğacları çəkili orta ilə birləşir — sərhəd anında (elapsed=0)
+                        Əvvəlki və cari pəncərənin sayğacları çəkili orta ilə birləşir: sərhəd anında (elapsed=0)
                         çəki hələ tamamilə əvvəlki pəncərəyə aiddir, ona görə həmin an üçün əlavə sorğuya yer qalmır.
                       </ToolNote>
                     </div>
@@ -214,7 +214,7 @@ export function RateLimitTool() {
                       <ToolNote tone="accent">
                         Ən sadə, ən qüsurlu üsul: sayğac hər pəncərədə sıfırdan başlayır və əvvəlkini unudur. Bir
                         pəncərənin son anında tam hədd, sonra dərhal yeni pəncərənin ilk anında yenə tam hədd
-                        keçə bilər — qısa bir intervalda hədddən iki qat çox sorğu.
+                        keçə bilər: qısa bir intervalda hədddən iki qat çox sorğu.
                       </ToolNote>
                     </div>
                   ),

@@ -77,7 +77,7 @@ export function validateUsername(username: string): UsernameCheck {
     return {
       ok: false,
       error:
-        "İstifadəçi adında `:` ola bilməz — RFC 7617-də dekodlanmış mətndəki İLK `:` ayırıcı sayılır, ad özü `:` daşısa parolun bir hissəsi adın içinə düşər.",
+        "İstifadəçi adında `:` ola bilməz: RFC 7617-də dekodlanmış mətndəki İLK `:` ayırıcı sayılır, ad özü `:` daşısa parolun bir hissəsi adın içinə düşər.",
     };
   }
   return { ok: true };
@@ -101,7 +101,7 @@ function encodeLatin1(username: string, password: string): Latin1Result {
       const hex = point.toString(16).toUpperCase().padStart(4, "0");
       return {
         ok: false,
-        error: `"${char}" hərfi Latin-1-də yoxdur (kod nöqtəsi U+${hex}) — Latin-1 gözləyən köhnə server bu parolu ümumiyyətlə kodlaşdıra bilməz, UTF-8 isə bilər.`,
+        error: `"${char}" hərfi Latin-1-də yoxdur (kod nöqtəsi U+${hex}): Latin-1 gözləyən köhnə server bu parolu ümumiyyətlə kodlaşdıra bilməz, UTF-8 isə bilər.`,
       };
     }
   }
@@ -153,13 +153,13 @@ export type ParseResult =
 export function parseBasicAuthHeader(raw: string): ParseResult {
   const trimmed = raw.trim();
   if (trimmed === "") {
-    return { ok: false, error: "Boş sahə — `Authorization` başlığını və ya onun Base64 hissəsini yapışdır." };
+    return { ok: false, error: "Boş sahə: `Authorization` başlığını və ya onun Base64 hissəsini yapışdır." };
   }
 
   const withoutScheme = trimmed.replace(/^basic\s+/i, "").trim();
   const bytes = base64ToBytes(withoutScheme);
   if (bytes === null) {
-    return { ok: false, error: "Bu düzgün Base64 deyil — «Basic » sözündən sonrakı hissəni yapışdır." };
+    return { ok: false, error: "Bu düzgün Base64 deyil: «Basic » sözündən sonrakı hissəni yapışdır." };
   }
 
   let text: string;
@@ -174,7 +174,7 @@ export function parseBasicAuthHeader(raw: string): ParseResult {
 
   const colonIndex = text.indexOf(":");
   if (colonIndex === -1) {
-    return { ok: false, error: "Dekodlanmış mətndə `:` yoxdur — bu düzgün istifadəçi_adı:parol cütü deyil." };
+    return { ok: false, error: "Dekodlanmış mətndə `:` yoxdur: bu düzgün istifadəçi_adı:parol cütü deyil." };
   }
 
   return { ok: true, username: text.slice(0, colonIndex), password: text.slice(colonIndex + 1), encoding };

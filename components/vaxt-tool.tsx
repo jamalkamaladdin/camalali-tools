@@ -135,7 +135,7 @@ function TimestampResult({
   if (!parsed) {
     return (
       <p className="font-ui text-sm text-muted">
-        Vaxt möhürü yaz — ISO, UTC, Bakı vaxtı, nisbi vaxt, həftənin günü və ilin günü burada
+        Vaxt möhürü yaz: ISO, UTC, Bakı vaxtı, nisbi vaxt, həftənin günü və ilin günü burada
         görünəcək.
       </p>
     );
@@ -156,7 +156,7 @@ function TimestampResult({
       title="Nəticə"
       hint={
         <span className="tabular-nums">
-          {parsed.digits} rəqəm — {parsed.unit === "seconds" ? "saniyə" : "millisaniyə"} kimi
+          {parsed.digits} rəqəm: {parsed.unit === "seconds" ? "saniyə" : "millisaniyə"} kimi
           oxundu
         </span>
       }
@@ -166,7 +166,7 @@ function TimestampResult({
         <ToolStat label="ISO 8601" value={breakdown.iso} />
         <ToolStat label="UTC" value={breakdown.utc} />
         <ToolStat label="Bakı vaxtı (UTC+4)" value={breakdown.baku} />
-        <ToolStat label="Nisbi vaxt" value={relative ?? "—"} />
+        <ToolStat label="Nisbi vaxt" value={relative ?? ""} />
         <ToolStat label="Həftənin günü" value={breakdown.weekday} />
         <ToolStat label="İlin günü" value={`${breakdown.dayOfYear} / ${breakdown.daysInYear}`} />
       </div>
@@ -183,7 +183,7 @@ function ReverseResult({ result }: { result: TimestampFromDateResult | null }) {
   if (!result) {
     return (
       <p className="font-ui text-sm text-muted">
-        Tarix və saat seç — nəticədə həmin anın Unix vaxt möhürü saniyə və millisaniyə ilə
+        Tarix və saat seç: nəticədə həmin anın Unix vaxt möhürü saniyə və millisaniyə ilə
         görünəcək.
       </p>
     );

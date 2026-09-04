@@ -135,7 +135,7 @@ export function KanonikTool() {
               <tbody>
                 {results.map((result, index) => (
                   <tr key={index} className="border-b border-result-rule align-top last:border-0">
-                    <td className="max-w-64 p-2 font-mono break-all">{result.input || "—"}</td>
+                    <td className="max-w-64 p-2 font-mono break-all">{result.input || ""}</td>
                     {result.error ? (
                       <td className="p-2 text-accent-text" colSpan={2}>
                         {result.error}

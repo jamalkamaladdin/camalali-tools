@@ -51,7 +51,7 @@ async function loadPdf(bytes: Uint8Array): Promise<LoadResult> {
     if (isEncryptedPdfError(cause)) {
       return { ok: false, error: "Fayl parolla qorunub, açılmadan üzərində iş görmək olmur." };
     }
-    return { ok: false, error: "Fayl PDF kimi oxunmadı — zədəli ola bilər və ya başqa formatdır." };
+    return { ok: false, error: "Fayl PDF kimi oxunmadı: zədəli ola bilər və ya başqa formatdır." };
   }
 }
 
@@ -82,7 +82,7 @@ export function parsePageSelector(
     .map((piece) => piece.trim())
     .filter((piece) => piece !== "");
   if (pieces.length === 0) {
-    return { ok: false, error: "Səhifə aralığı boşdur — məsələn 1-3, 5, 8-10 yaz." };
+    return { ok: false, error: "Səhifə aralığı boşdur, məsələn 1-3, 5, 8-10 yaz." };
   }
 
   const groups: PageGroup[] = [];
@@ -98,17 +98,17 @@ export function parsePageSelector(
       from = Number(singleMatch[1]);
       to = from;
     } else {
-      return { ok: false, error: `"${piece}" oxunmadı — "3" və ya "1-3" formatında yaz.` };
+      return { ok: false, error: `"${piece}" oxunmadı, "3" və ya "1-3" formatında yaz.` };
     }
 
     if (from < 1 || to < 1) {
-      return { ok: false, error: `"${piece}" — səhifə nömrələri 1-dən başlayır.` };
+      return { ok: false, error: `"${piece}": səhifə nömrələri 1-dən başlayır.` };
     }
     if (from > to) {
-      return { ok: false, error: `"${piece}" — başlanğıc səhifə son səhifədən böyükdür.` };
+      return { ok: false, error: `"${piece}": başlanğıc səhifə son səhifədən böyükdür.` };
     }
     if (to > pageCount) {
-      return { ok: false, error: `"${piece}" — sənəddə cəmi ${pageCount} səhifə var.` };
+      return { ok: false, error: `"${piece}": sənəddə cəmi ${pageCount} səhifə var.` };
     }
     groups.push({ from, to });
   }
@@ -192,7 +192,7 @@ export async function splitPdf(
   if (resolved.groups.length > MAX_SPLIT_PARTS) {
     return {
       ok: false,
-      error: `Nəticə ${resolved.groups.length} fayl olardı — ${MAX_SPLIT_PARTS}-dən çox faylı brauzerdə eyni anda yaratmaq olmur.`,
+      error: `Nəticə ${resolved.groups.length} fayl olardı: ${MAX_SPLIT_PARTS}-dən çox faylı brauzerdə eyni anda yaratmaq olmur.`,
     };
   }
 

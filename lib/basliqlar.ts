@@ -77,7 +77,7 @@ export function gradeFor(score: number): Grade {
 }
 
 export const GRADE_NOTES: Record<Grade, string> = {
-  A: "Başlıqlar tam qurulub — bu səviyyəyə saytların çox az hissəsi çatır.",
+  A: "Başlıqlar tam qurulub: bu səviyyəyə saytların çox az hissəsi çatır.",
   B: "Əsas qoruma var, bir-iki başlıq çatmır.",
   C: "Yarısı qurulub. Çatmayanlar sadə əlavələrdir.",
   D: "Yalnız ucuz başlıqlar var, əsas qoruma yoxdur.",
@@ -104,7 +104,7 @@ function cspDirectives(value: string): Map<string, string[]> {
 function assessCsp(map: ReadonlyMap<string, string>): HeaderFinding {
   const base = {
     header: "Content-Security-Policy",
-    purpose: "Səhifənin hansı mənbədən skript, stil və şəkil yükləyə biləcəyini məhdudlaşdırır — XSS-ə qarşı ən güclü başlıq.",
+    purpose: "Səhifənin hansı mənbədən skript, stil və şəkil yükləyə biləcəyini məhdudlaşdırır (XSS-ə qarşı ən güclü başlıq).",
     max: 25,
   };
 
@@ -118,7 +118,7 @@ function assessCsp(map: ReadonlyMap<string, string>): HeaderFinding {
       points: 0,
       note: reportOnly
         ? "Yalnız «Report-Only» versiyası var: pozuntular hesabata düşür, amma heç nə bloklanmır. Sınaq bitibsə əsl başlığa keçmək lazımdır."
-        : "Başlıq yoxdur — səhifəyə düşən istənilən skript icra olunur.",
+        : "Başlıq yoxdur: səhifəyə düşən istənilən skript icra olunur.",
     };
   }
 
@@ -151,8 +151,8 @@ function assessCsp(map: ReadonlyMap<string, string>): HeaderFinding {
         value,
         points: 12,
         note: sources.includes("*")
-          ? "Skript mənbəyi «*» — hər ünvandan skript yüklənə bilir, siyasət praktiki olaraq boşdur."
-          : "«unsafe-inline» var və nonce/hash ilə müşayiət olunmur — səhifəyə yazılan inline skript yenə də işləyir.",
+          ? "Skript mənbəyi «*»: hər ünvandan skript yüklənə bilir, siyasət praktiki olaraq boşdur."
+          : "«unsafe-inline» var və nonce/hash ilə müşayiət olunmur: səhifəyə yazılan inline skript yenə də işləyir.",
       };
     }
   }
@@ -189,7 +189,7 @@ const HSTS_STRONG_SECONDS = 15_552_000;
 function assessHsts(map: ReadonlyMap<string, string>, https: boolean): HeaderFinding {
   const base = {
     header: "Strict-Transport-Security",
-    purpose: "Brauzerə bu domenə yalnız HTTPS ilə müraciət etməyi əmr edir — http keçidi ümumiyyətlə qurulmur.",
+    purpose: "Brauzerə bu domenə yalnız HTTPS ilə müraciət etməyi əmr edir: http keçidi ümumiyyətlə qurulmur.",
     max: 20,
   };
 
@@ -227,8 +227,8 @@ function assessHsts(map: ReadonlyMap<string, string>, https: boolean): HeaderFin
       value,
       points: 0,
       note: Number.isFinite(maxAge)
-        ? "max-age=0 — bu, HSTS-i söndürən dəyərdir, brauzer yaddaşındakı qaydanı silir."
-        : "«max-age» yoxdur və ya oxunmur — başlıq etibarsızdır.",
+        ? "max-age=0: bu, HSTS-i söndürən dəyərdir, brauzer yaddaşındakı qaydanı silir."
+        : "«max-age» yoxdur və ya oxunmur, başlıq etibarsızdır.",
     };
   }
 
@@ -259,7 +259,7 @@ function assessHsts(map: ReadonlyMap<string, string>, https: boolean): HeaderFin
     value,
     points: includeSubDomains ? 20 : 18,
     note: includeSubDomains
-      ? `max-age ${days} gün, includeSubDomains da var — bütün alt domenlər əhatə olunur.`
+      ? `max-age ${days} gün, includeSubDomains da var: bütün alt domenlər əhatə olunur.`
       : `max-age ${days} gün. «includeSubDomains» əlavə edilsə alt domenlər də qorunar.`,
   };
 }
@@ -267,7 +267,7 @@ function assessHsts(map: ReadonlyMap<string, string>, https: boolean): HeaderFin
 function assessFrameOptions(map: ReadonlyMap<string, string>): HeaderFinding {
   const base = {
     header: "X-Frame-Options",
-    purpose: "Saytın başqa səhifənin iframe-inə salınmasının qarşısını alır — clickjacking-ə qarşı.",
+    purpose: "Saytın başqa səhifənin iframe-inə salınmasının qarşısını alır (clickjacking-ə qarşı).",
     max: 15,
   };
 
@@ -283,7 +283,7 @@ function assessFrameOptions(map: ReadonlyMap<string, string>): HeaderFinding {
       value: value ?? `CSP frame-ancestors ${frameAncestors.join(" ")}`,
       points: open ? 6 : 15,
       note: open
-        ? "CSP-də «frame-ancestors *» yazılıb — hər sayt bu səhifəni iframe-ə sala bilər."
+        ? "CSP-də «frame-ancestors *» yazılıb: hər sayt bu səhifəni iframe-ə sala bilər."
         : "CSP-nin «frame-ancestors» direktivi bu işi görür; X-Frame-Options köhnə brauzerlər üçün əlavə qalır.",
     };
   }
@@ -567,7 +567,7 @@ export function buildHeaderReport(input: HeaderReportInput): HeaderReport {
       name,
       value,
       note: /\d/.test(value)
-        ? `${LEAK_HEADERS[name.toLowerCase()]} — versiya nömrəsi ilə birlikdə açıqlanır.`
+        ? `${LEAK_HEADERS[name.toLowerCase()]}: versiya nömrəsi ilə birlikdə açıqlanır.`
         : `${LEAK_HEADERS[name.toLowerCase()]} açıqlanır.`,
     }));
 

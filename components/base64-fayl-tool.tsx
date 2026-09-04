@@ -96,7 +96,7 @@ function EncodeTab() {
         exceeded: exceedsLimit(bytes.length),
       });
     } catch {
-      setState({ phase: "error", message: "Fayl oxunmadı — başqa fayl sına." });
+      setState({ phase: "error", message: "Fayl oxunmadı. Başqa fayl sına." });
     }
   };
 
@@ -158,7 +158,7 @@ function EncodeResult({
       <div className="space-y-4 p-4">
         {exceeded && (
           <ToolNote tone="accent" title="Fayl böyükdür">
-            {formatBytes(byteLength)} — {formatBytes(MAX_FILE_BYTES)} rahatlıq həddini keçir. Çevirmə
+            {formatBytes(byteLength)}, {formatBytes(MAX_FILE_BYTES)} rahatlıq həddini keçir. Çevirmə
             baş tutdu, amma aşağıdakı mətn çox uzundur və bəzi sahələrdə yavaş görünə bilər.
           </ToolNote>
         )}
@@ -166,7 +166,7 @@ function EncodeResult({
         {mime.mismatch && (
           <ToolNote tone="accent" title="Uzantı ilə məzmun uyğun gəlmir">
             Fayl adının uzantısı başqa formatı bildirir, amma baytların özü{" "}
-            <span className="font-mono text-xs">{mime.mime}</span> formatını göstərir — baytlara güvənilib.
+            <span className="font-mono text-xs">{mime.mime}</span> formatını göstərir: baytlara güvənilib.
           </ToolNote>
         )}
 
@@ -287,7 +287,7 @@ export function Base64FaylTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote>
-        Fayl seçilən kimi, base64-ə çevrilən kimi — hamısı brauzerdə baş verir. Bu alətin şəbəkə
+        Fayl seçilən kimi, base64-ə çevrilən kimi: hamısı brauzerdə baş verir. Bu alətin şəbəkə
         marşrutu yoxdur, heç nə serverə göndərilmir.
       </ToolNote>
 

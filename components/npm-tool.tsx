@@ -65,7 +65,7 @@ export function NpmTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote>
-        Paket adı npm-in öz reyestrinə (registry.npmjs.org) göndərilir — başqa heç yerə. Nəticə 10
+        Paket adı npm-in öz reyestrinə (registry.npmjs.org) göndərilir: başqa heç yerə. Nəticə 10
         dəqiqə keşlənir.
       </ToolNote>
 
@@ -116,13 +116,13 @@ function NpmResult({ info }: { info: NpmPackageInfo }) {
         {info.description && <p className="text-sm/6">{info.description}</p>}
 
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-          <ToolStat label="Lisenziya" value={info.license ?? "—"} />
+          <ToolStat label="Lisenziya" value={info.license ?? ""} />
           <ToolStat
             label="Asılılıq"
             value={info.dependencyNames.length}
             tone={info.dependencyNames.length > 20 ? "warning" : "default"}
           />
-          <ToolStat label="Son buraxılış" value={releaseDate ?? "—"} />
+          <ToolStat label="Son buraxılış" value={releaseDate ?? ""} />
         </div>
 
         {(info.repositoryUrl || info.homepage) && (

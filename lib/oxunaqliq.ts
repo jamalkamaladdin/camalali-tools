@@ -305,11 +305,11 @@ export const READABILITY_GUIDANCE: Record<
   | "passiveVoice",
   string
 > = {
-  averageSentenceLength: "20 sözdən uzun orta cümlə oxucunu yorur — cümləni ikiyə böl.",
+  averageSentenceLength: "20 sözdən uzun orta cümlə oxucunu yorur: cümləni ikiyə böl.",
   longestSentence: "35 sözdən uzun tək cümlə çətin izlənir, hətta orta uzunluq normal olsa belə.",
   averageWordLength: "Orta söz uzunluğu 7 hərfi keçirsə, mətn termin sıxlığından ağırlaşır.",
   longWordShare: "Uzun sözlərin payı 25%-i keçirsə, sadə sinonimlə əvəzləməyi düşün.",
-  averageParagraphLength: "120 sözdən uzun abzas ekranda divar kimi görünür — böl.",
+  averageParagraphLength: "120 sözdən uzun abzas ekranda divar kimi görünür, böl.",
   repeatedWords: "Eyni söz 3-dən çox təkrarlanırsa, sinonim və ya əvəzlik işlət.",
   repeatedPhrases: "Eyni ifadə iki dəfədən çox keçirsə, çox güman ki fərqinə varmadan təkrarlanıb.",
   passiveVoice: "Passiv fellərin payı yüksəkdirsə, fail bəlli olan cümlələri fəal formaya çevir.",

@@ -83,10 +83,10 @@ const SPF_ALL_BY_QUALIFIER: Record<string, SpfAllQualifier> = {
 
 /** One sentence per qualifier, for the record next to whichever one is present. */
 export const SPF_ALL_EXPLANATIONS: Record<SpfAllQualifier, string> = {
-  fail: "«-all» — siyahıda olmayan server bu domenin adından yazsa, məktub rədd edilir.",
-  softfail: "«~all» — siyahıda olmayan server yazsa, məktub adətən spama düşür, amma qəbul edilir.",
-  neutral: "«?all» — heç bir qərar verilmir, SPF praktiki olaraq heç nəyi süzmür.",
-  pass: "«+all» — istənilən server bu domenin adından yaza bilər, SPF siyasəti faktiki olaraq söndürülüb.",
+  fail: "«-all»: siyahıda olmayan server bu domenin adından yazsa, məktub rədd edilir.",
+  softfail: "«~all»: siyahıda olmayan server yazsa, məktub adətən spama düşür, amma qəbul edilir.",
+  neutral: "«?all»: heç bir qərar verilmir, SPF praktiki olaraq heç nəyi süzmür.",
+  pass: "«+all»: istənilən server bu domenin adından yaza bilər, SPF siyasəti faktiki olaraq söndürülüb.",
 };
 
 /** A TXT value is an SPF record only when it STARTS WITH `v=spf1` — a mention further in is somebody else's text. */
@@ -266,11 +266,11 @@ export const MAIL_RECORD_NOTES = {
   mx: "Bu domenə gələn məktubu hansı server qəbul edir. Kiçik prioritet əvvəl sınanır.",
   spf: "Bu domenin adından hansı serverlərin məktub göndərə biləcəyini elan edir.",
   dmarc: "SPF və ya DKIM uğursuz olan məktuba nə ediləcəyini deyir və hesabatın hara göndəriləcəyini bildirir.",
-  dkim: "Göndərilən məktubun imzasını yoxlamaq üçün açıq açar. Seçici adı DNS-dən oxuna bilmir — bu tanınan adları sınayır.",
-  mtaSts: "SMTP-də TLS-i məcburi edən siyasət — göndərən server şifrəsiz əlaqəyə keçə bilmir.",
+  dkim: "Göndərilən məktubun imzasını yoxlamaq üçün açıq açar. Seçici adı DNS-dən oxuna bilmir: bu tanınan adları sınayır.",
+  mtaSts: "SMTP-də TLS-i məcburi edən siyasət: göndərən server şifrəsiz əlaqəyə keçə bilmir.",
   tlsRpt: "TLS əlaqə xətaları haqqında hesabatın hara göndəriləcəyini bildirir.",
-  bimi: "Məktubun yanında görünəcək marka loqosunu elan edir — yalnız güclü DMARC olan domendə işə yarayır.",
-  domainkey: "«_domainkey» altındakı ümumi qeyd — köhnə ADSP siyasətinin (RFC 5617) izi ola bilər.",
+  bimi: "Məktubun yanında görünəcək marka loqosunu elan edir: yalnız güclü DMARC olan domendə işə yarayır.",
+  domainkey: "«_domainkey» altındakı ümumi qeyd: köhnə ADSP siyasətinin (RFC 5617) izi ola bilər.",
 } as const;
 
 /* ---------- the assembled report ---------- */

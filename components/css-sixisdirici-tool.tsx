@@ -75,7 +75,7 @@ export function CssSixisdiriciTool() {
   const savingsLabel =
     minifyResult.inputBytes > 0
       ? `${minifyResult.savingsPercent >= 0 ? "-" : "+"}${Math.abs(minifyResult.savingsPercent).toFixed(1)}%`
-      : "—";
+      : "";
 
   return (
     <div className="mt-8 space-y-5">
@@ -112,7 +112,7 @@ export function CssSixisdiriciTool() {
         {mode === "gozellesdir" && (
           <div className="p-4">
             <ToolNote>
-              Gözəlləşdirmə hər bəyanatı öz sətrinə çıxarır və girinti qoyur — heç bir bayt
+              Gözəlləşdirmə hər bəyanatı öz sətrinə çıxarır və girinti qoyur: heç bir bayt
               silinmir, yalnız yenidən formatlanır.
             </ToolNote>
           </div>
@@ -157,7 +157,7 @@ export function CssSixisdiriciTool() {
 
       {mode === "sixisdir" && !minifyResult.braceBalanced && source.trim() !== "" && (
         <ToolNote tone="accent" title="Mötərizə balanslaşmır">
-          Girişdə açılan və bağlanan <code>{"{"}</code>/<code>{"}"}</code> sayı bərabər deyil —
+          Girişdə açılan və bağlanan <code>{"{"}</code>/<code>{"}"}</code> sayı bərabər deyil:
           nəticə yenə göstərilir, amma etibarlı CSS olmaya bilər.
         </ToolNote>
       )}
@@ -168,7 +168,7 @@ export function CssSixisdiriciTool() {
         action={<CopyButton value={output} label="CSS-i kopyala" />}
       >
         <div className="space-y-3 p-4">
-          <ToolOutput className="max-h-72 overflow-y-auto">{output || "—"}</ToolOutput>
+          <ToolOutput className="max-h-72 overflow-y-auto">{output || ""}</ToolOutput>
 
           {mode === "sixisdir" && minifyResult.ruleSavings.length > 0 && (
             <div className="overflow-x-auto">
@@ -188,7 +188,7 @@ export function CssSixisdiriciTool() {
                     <tr key={entry.rule} className="border-b border-result-rule last:border-0">
                       <td className="p-1.5">{CSS_MINIFY_RULE_LABELS[entry.rule]}</td>
                       <td className="p-1.5 text-right tabular-nums">
-                        {entry.bytesSaved > 0 ? `-${formatBytes(entry.bytesSaved)}` : "—"}
+                        {entry.bytesSaved > 0 ? `-${formatBytes(entry.bytesSaved)}` : ""}
                       </td>
                     </tr>
                   ))}
@@ -200,8 +200,8 @@ export function CssSixisdiriciTool() {
       </ToolResultPanel>
 
       <ToolNote>
-        CSS heç yerə göndərilmir — bütün qaydalar mətn üzərində, brauzerin öz yaddaşında işləyir.
-        Rəng, sıfır vahid və aparıcı sıfır qaydaları yalnız bəyanat gövdəsinə toxunur — seçici və{" "}
+        CSS heç yerə göndərilmir: bütün qaydalar mətn üzərində, brauzerin öz yaddaşında işləyir.
+        Rəng, sıfır vahid və aparıcı sıfır qaydaları yalnız bəyanat gövdəsinə toxunur: seçici və{" "}
         <code>@media</code> şərti hər zaman toxunulmaz qalır.
       </ToolNote>
     </div>

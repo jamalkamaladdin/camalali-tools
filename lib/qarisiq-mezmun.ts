@@ -78,8 +78,8 @@ function linkFindings(html: string, pageUrl: string): MixedContentFinding[] {
     const imageLike = relTokens.some((token) => IMAGE_LIKE_LINK_RELS.has(token));
     const kind: MixedContentKind = "link";
     const note = imageLike
-      ? `<link rel="${relTokens.join(" ")}"> şəkil sorğusu sayılır — passiv, adətən yüklənir amma kilid işarəsini qırır.`
-      : `<link href> (${relTokens.join(" ") || "rel yoxdur"}) aktiv məzmun sayılır — brauzer bunu bloklayır.`;
+      ? `<link rel="${relTokens.join(" ")}"> şəkil sorğusu sayılır: passiv, adətən yüklənir amma kilid işarəsini qırır.`
+      : `<link href> (${relTokens.join(" ") || "rel yoxdur"}) aktiv məzmun sayılır: brauzer bunu bloklayır.`;
     findings.push({
       kind,
       tag: "link",
@@ -156,8 +156,8 @@ function buildFinding(
 ): MixedContentFinding {
   const blocked = kind === "script" || kind === "iframe";
   const note = blocked
-    ? `<${tag} ${attribute}> aktiv məzmun sayılır — müasir brauzer bunu avtomatik bloklayır, resurs heç yüklənmir.`
-    : `<${tag} ${attribute}> passiv (optionally-blockable) sayılır — əksər brauzerdə yüklənir, amma səhifənin kilid işarəsini qırır.`;
+    ? `<${tag} ${attribute}> aktiv məzmun sayılır: müasir brauzer bunu avtomatik bloklayır, resurs heç yüklənmir.`
+    : `<${tag} ${attribute}> passiv (optionally-blockable) sayılır: əksər brauzerdə yüklənir, amma səhifənin kilid işarəsini qırır.`;
   return { kind, tag, attribute, raw, url, blocked, note, index };
 }
 

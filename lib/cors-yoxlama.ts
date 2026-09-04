@@ -55,14 +55,14 @@ export type OriginCheck = { ok: true; origin: string } | { ok: false; error: str
  */
 export function normalizeOriginInput(raw: string): OriginCheck {
   const trimmed = raw.trim();
-  if (trimmed === "") return { ok: false, error: "Mənbə (Origin) boşdur — «https://sayt.com» kimi yaz." };
+  if (trimmed === "") return { ok: false, error: "Mənbə (Origin) boşdur: «https://sayt.com» kimi yaz." };
 
   const withScheme = /^[a-z][a-z0-9+.-]*:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
   let parsed: URL;
   try {
     parsed = new URL(withScheme);
   } catch {
-    return { ok: false, error: "Mənbə ünvanı oxunmadı — «https://sayt.com» formatında yaz." };
+    return { ok: false, error: "Mənbə ünvanı oxunmadı: «https://sayt.com» formatında yaz." };
   }
   if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
     return { ok: false, error: `«${parsed.protocol.replace(":", "")}» sxemi Origin üçün keçərli deyil.` };
@@ -87,7 +87,7 @@ export function parseRequestHeadersInput(raw: string): RequestHeadersCheck {
 
   for (const token of tokens) {
     if (!HEADER_TOKEN.test(token)) {
-      return { ok: false, error: `«${token}» keçərli başlıq adı deyil — hərf, rəqəm və -  işarəsindən ibarət olmalıdır.` };
+      return { ok: false, error: `«${token}» keçərli başlıq adı deyil: hərf, rəqəm və -  işarəsindən ibarət olmalıdır.` };
     }
   }
   return { ok: true, headers: tokens };
@@ -113,7 +113,7 @@ export function evaluateOriginAllowed(allowOriginHeader: string | null, requestO
 
   const value = allowOriginHeader.trim();
   if (value === "*") {
-    return { allowed: true, reason: "Access-Control-Allow-Origin dəyəri «*» — hər mənbəyə icazə var." };
+    return { allowed: true, reason: "Access-Control-Allow-Origin dəyəri «*»: hər mənbəyə icazə var." };
   }
 
   const normalized = tryNormalizeOrigin(value);
@@ -147,7 +147,7 @@ export function evaluateMethodAllowed(allowMethodsHeader: string | null, method:
   if (upperMethods.includes("*")) {
     return {
       allowed: true,
-      reason: "Access-Control-Allow-Methods dəyəri «*» — hər metoda icazə var.",
+      reason: "Access-Control-Allow-Methods dəyəri «*»: hər metoda icazə var.",
       allowedMethods: methods,
     };
   }
@@ -212,7 +212,7 @@ export function evaluateCredentialsRisk(
       id: "wildcard-with-credentials",
       severity: "xeta",
       message:
-        "Access-Control-Allow-Origin «*» və Access-Control-Allow-Credentials «true» birlikdə göndərilib — bu kombinasiya spesifikasiyaya ziddir və brauzer cavabı özü rədd edir. Konkret mənbə adı yazılmalıdır.",
+        "Access-Control-Allow-Origin «*» və Access-Control-Allow-Credentials «true» birlikdə göndərilib: bu kombinasiya spesifikasiyaya ziddir və brauzer cavabı özü rədd edir. Konkret mənbə adı yazılmalıdır.",
     };
   }
   return null;
@@ -273,7 +273,7 @@ export function buildCorsReport(
     findings.push({
       id: "preflight-http-error",
       severity: "xeta",
-      message: `Preflight sorğusu HTTP ${preflight.status} qaytardı — brauzer bunu rədd sayır, əsl sorğu heç göndərilmir.`,
+      message: `Preflight sorğusu HTTP ${preflight.status} qaytardı: brauzer bunu rədd sayır, əsl sorğu heç göndərilmir.`,
     });
   }
 

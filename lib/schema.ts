@@ -44,7 +44,7 @@ export const SCHEMA_FIELDS: Record<SchemaType, FieldRule[]> = {
     {
       name: "headline",
       required: true,
-      why: "Başlıq olmadan qeydin hansı yazıya aid olduğu bilinmir — bu, düyünün özünü adlandıran yeganə sahədir.",
+      why: "Başlıq olmadan qeydin hansı yazıya aid olduğu bilinmir; bu, düyünün özünü adlandıran yeganə sahədir.",
     },
     {
       name: "datePublished",
@@ -54,7 +54,7 @@ export const SCHEMA_FIELDS: Record<SchemaType, FieldRule[]> = {
     {
       name: "author",
       required: true,
-      why: "Müəllif mətnin arxasında kimin durduğunu göstərir — mənbəyi olmayan yazı yoxlanıla bilməz.",
+      why: "Müəllif mətnin arxasında kimin durduğunu göstərir; mənbəyi olmayan yazı yoxlanıla bilməz.",
     },
     {
       name: "description",
@@ -69,7 +69,7 @@ export const SCHEMA_FIELDS: Record<SchemaType, FieldRule[]> = {
     {
       name: "dateModified",
       required: false,
-      why: "Yenilənmə tarixi köhnə yazının sonradan düzəldildiyini bildirir — dərc tarixi bunu deyə bilmir.",
+      why: "Yenilənmə tarixi köhnə yazının sonradan düzəldildiyini bildirir; dərc tarixi bunu deyə bilmir.",
     },
     {
       name: "publisher",
@@ -110,7 +110,7 @@ export const SCHEMA_FIELDS: Record<SchemaType, FieldRule[]> = {
     {
       name: "address",
       required: true,
-      why: "Ünvan yerli biznesi digərlərindən ayırır — küçə və şəhər olmadan qeyd xəritədə heç bir nöqtəyə bağlanmır.",
+      why: "Ünvan yerli biznesi digərlərindən ayırır; küçə və şəhər olmadan qeyd xəritədə heç bir nöqtəyə bağlanmır.",
     },
     {
       name: "telephone",
@@ -597,19 +597,19 @@ function collectNodes(value: unknown): Node[] {
  */
 function translateParseFailure(message: string): string {
   if (/Unexpected end of JSON input/i.test(message)) {
-    return "JSON yarımçıqdır — mötərizə və ya kvadrat mötərizə bağlanmayıb.";
+    return "JSON yarımçıqdır: mötərizə və ya kvadrat mötərizə bağlanmayıb.";
   }
   if (/Expected (double-quoted )?property name/i.test(message)) {
-    return "Açar adı cüt dırnaqla yazılmalıdır — dırnaqsız açar və ya artıq vergül JSON-da qadağandır.";
+    return "Açar adı cüt dırnaqla yazılmalıdır: dırnaqsız açar və ya artıq vergül JSON-da qadağandır.";
   }
   if (message.includes("Expected ','")) {
-    return "Elementlər arasında vergül çatışmır — və ya sonuncudan sonra artıq vergül var.";
+    return "Elementlər arasında vergül çatışmır. Ya da sonuncudan sonra artıq vergül var.";
   }
   if (/Unexpected non-whitespace character/i.test(message)) {
-    return "Düzgün JSON-dan sonra əlavə mətn var — bir sənəddə yalnız bir dəyər ola bilər.";
+    return "Düzgün JSON-dan sonra əlavə mətn var (bir sənəddə yalnız bir dəyər ola bilər).";
   }
   if (/Unexpected token/i.test(message)) {
-    return "Gözlənilməz simvol var — sintaksis bu nöqtədə pozulub.";
+    return "Gözlənilməz simvol var: sintaksis bu nöqtədə pozulub.";
   }
   return message;
 }
@@ -639,7 +639,7 @@ function typeNotes(type: SchemaType, node: Node, notes: string[]): void {
     const published = node.datePublished;
     if (typeof published === "string" && published !== "" && !ISO_DATE.test(published)) {
       notes.push(
-        "«datePublished» ISO-8601 formatında deyil — 2026-09-03 və ya 2026-09-03T10:00:00+04:00 gözlənilir.",
+        "«datePublished» ISO-8601 formatında deyil: 2026-09-03 və ya 2026-09-03T10:00:00+04:00 gözlənilir.",
       );
     }
   }
@@ -650,7 +650,7 @@ function typeNotes(type: SchemaType, node: Node, notes: string[]): void {
     ).length;
     if (broken > 0) {
       notes.push(
-        `${broken} sualın adı və ya «acceptedAnswer.text» cavabı boşdur — belə sual-cavab cütü oxunmur.`,
+        `${broken} sualın adı və ya «acceptedAnswer.text» cavabı boşdur, belə sual-cavab cütü oxunmur.`,
       );
     }
   }
@@ -662,14 +662,14 @@ function typeNotes(type: SchemaType, node: Node, notes: string[]): void {
     const ordered = positions.every((value, index) => value === index + 1);
     if (!ordered) {
       notes.push(
-        "«position» dəyərləri 1-dən başlayıb ardıcıl getmir — pillələr ayrı-ayrı addım kimi oxunur.",
+        "«position» dəyərləri 1-dən başlayıb ardıcıl getmir: pillələr ayrı-ayrı addım kimi oxunur.",
       );
     }
   }
 
   if (type === "LocalBusiness" && typeof node.address === "string") {
     notes.push(
-      "«address» mətn kimi yazılıb — küçə, şəhər və indeks ayrı-ayrı sahələr olanda ünvan daha etibarlı oxunur.",
+      "«address» mətn kimi yazılıb (küçə, şəhər və indeks ayrı-ayrı sahələr olanda ünvan daha etibarlı oxunur).",
     );
   }
 }
@@ -679,7 +679,7 @@ function unwrap(text: string, notes: string[]): string {
   const trimmed = text.trim();
   const wrapped = SCRIPT_WRAPPER.exec(trimmed);
   if (!wrapped) return trimmed;
-  notes.push("«script» sarğısı kənara qoyuldu — yalnız içindəki JSON yoxlanıldı.");
+  notes.push("«script» sarğısı kənara qoyuldu, yalnız içindəki JSON yoxlanıldı.");
   return wrapped[1].trim();
 }
 
@@ -712,33 +712,33 @@ export function validateSchema(text: string): Validation {
      and the choice is stated, rather than a silent "the first one". */
   const chosen = nodes.find((node) => resolveType(typeNameOf(node)) !== null) ?? nodes[0];
   if (nodes.length > 1) {
-    notes.push(`Girişdə ${nodes.length} qeyd var — yoxlama tanınan ilk qeyd üzərində aparıldı.`);
+    notes.push(`Girişdə ${nodes.length} qeyd var: yoxlama tanınan ilk qeyd üzərində aparıldı.`);
   }
 
   const rootHasContext = isNode(parsed.value) && isMeaningful(parsed.value["@context"]);
   const hasContext = rootHasContext || isMeaningful(chosen["@context"]);
   if (!hasContext) {
     notes.push(
-      "«@context» yoxdur — schema.org ünvanı göstərilmədən açarların hansı lüğətə aid olduğu bilinmir.",
+      "«@context» yoxdur: schema.org ünvanı göstərilmədən açarların hansı lüğətə aid olduğu bilinmir.",
     );
   }
 
   const rawType = typeNameOf(chosen);
   if (rawType === null) {
-    notes.push("«@type» yoxdur — qeydin nəyi təsvir etdiyi bəlli deyil.");
+    notes.push("«@type» yoxdur: qeydin nəyi təsvir etdiyi bəlli deyil.");
     return { ok: false, type: null, missing: [], notes, parseError: null };
   }
 
   const known = resolveType(rawType);
   if (known === null) {
     notes.push(
-      `«${rawType}» tipini tanımıram — yalnız JSON düzgünlüyünü yoxladım, sahə siyahısı çıxarmadım.`,
+      `«${rawType}» tipini tanımıram: yalnız JSON düzgünlüyünü yoxladım, sahə siyahısı çıxarmadım.`,
     );
     return { ok: hasContext, type: rawType, missing: [], notes, parseError: null };
   }
 
   if (known !== rawType) {
-    notes.push(`«${rawType}» — «${known}» tipinin alt növüdür, ona görə ${known} qaydaları ilə yoxlanıldı.`);
+    notes.push(`«${rawType}»: «${known}» tipinin alt növüdür, ona görə ${known} qaydaları ilə yoxlanıldı.`);
   }
 
   const missing = SCHEMA_FIELDS[known].filter((rule) => !hasValue(chosen, rule.name));

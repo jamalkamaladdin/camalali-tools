@@ -97,11 +97,11 @@ const PRIVATE_KEY_PATTERN = /-----BEGIN [A-Z0-9 ]*PRIVATE KEY-----/;
  */
 const OPTION_NOTES: Record<string, string> = {
   command:
-    "Bu açarla girişdə istənilən əmr əvəzinə YALNIZ bu əmr işə salınır — istifadəçinin öz seçdiyi heç nə işləmir.",
+    "Bu açarla girişdə istənilən əmr əvəzinə YALNIZ bu əmr işə salınır: istifadəçinin öz seçdiyi heç nə işləmir.",
   restrict:
-    "Bütün əlavə imkanlar (port yönləndirmə, agent yönləndirmə, X11, pty, istifadəçi rc) qabaqcadan söndürülür — sonra yalnız açıq şəkildə icazə verilən qayıdır.",
-  from: "Bu açarla yalnız göstərilən host və ya şəbəkədən bağlanmaq mümkündür — başqa ünvandan gələn cəhd rədd edilir.",
-  "no-pty": "Terminal (pty) ayrılmır — bu açarla interaktiv seans açıla bilmir.",
+    "Bütün əlavə imkanlar (port yönləndirmə, agent yönləndirmə, X11, pty, istifadəçi rc) qabaqcadan söndürülür. Sonra yalnız açıq şəkildə icazə verilən qayıdır.",
+  from: "Bu açarla yalnız göstərilən host və ya şəbəkədən bağlanmaq mümkündür, başqa ünvandan gələn cəhd rədd edilir.",
+  "no-pty": "Terminal (pty) ayrılmır: bu açarla interaktiv seans açıla bilmir.",
   "no-port-forwarding": "Port yönləndirməsi bu açarla qadağandır.",
   "no-x11-forwarding": "X11 yönləndirməsi bu açarla qadağandır.",
   "no-agent-forwarding": "SSH agent yönləndirməsi bu açarla qadağandır.",
@@ -109,7 +109,7 @@ const OPTION_NOTES: Record<string, string> = {
   permitopen: "Port yönləndirməsi yalnız göstərilən host və porta icazəlidir, qalanı rədd edilir.",
   permitlisten: "Uzaq port yönləndirməsi yalnız göstərilən portda dinləməyə icazəlidir.",
   environment: "Girişdə seansa əlavə bir mühit dəyişəni ötürülür.",
-  "expiry-time": "Açarın son istifadə tarixi göstərilib — bu tarixdən sonra server açarı qəbul etmir.",
+  "expiry-time": "Açarın son istifadə tarixi göstərilib: bu tarixdən sonra server açarı qəbul etmir.",
   tunnel: "Bu açarla tun cihazı yönləndirməsinə icazə verilir.",
 };
 
@@ -148,7 +148,7 @@ function base64ToBytes(value: string): { ok: true; bytes: Uint8Array } | { ok: f
   if (remainder === 1) {
     return {
       ok: false,
-      error: "Base64 blokunun uzunluğu yanlışdır — kopyalama zamanı kəsilmiş ola bilər.",
+      error: "Base64 blokunun uzunluğu yanlışdır: kopyalama zamanı kəsilmiş ola bilər.",
     };
   }
   const padded = remainder === 0 ? cleaned : cleaned + "=".repeat(4 - remainder);
@@ -159,7 +159,7 @@ function base64ToBytes(value: string): { ok: true; bytes: Uint8Array } | { ok: f
     for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
     return { ok: true, bytes };
   } catch {
-    return { ok: false, error: "Base64 dekodlaşdırılmadı — blok zədələnmiş ola bilər." };
+    return { ok: false, error: "Base64 dekodlaşdırılmadı: blok zədələnmiş ola bilər." };
   }
 }
 
@@ -242,7 +242,7 @@ function parseKeyBlob(declaredType: SshKeyType, bytes: Uint8Array): BlobParse {
   if (innerType !== declaredType) {
     return {
       ok: false,
-      error: `Struktur uyğunsuzluğu: sətirdə "${declaredType}" yazılıb, amma blokun daxilindəki tip sahəsi "${innerType}" — açar zədələnmiş və ya əl ilə redaktə edilib.`,
+      error: `Struktur uyğunsuzluğu: sətirdə "${declaredType}" yazılıb, amma blokun daxilindəki tip sahəsi "${innerType}". Açar zədələnmiş və ya əl ilə redaktə edilib.`,
     };
   }
 
@@ -322,8 +322,8 @@ function describeKeyType(type: SshKeyType, bits: number | null): { label: string
         label: bits !== null ? `RSA (${bits} bit)` : "RSA",
         adequate,
         note: adequate
-          ? `${bits} bitlik modul 2048 bit həddini keçir — hələ də qəbul ediləndir, yeni açar üçün isə Ed25519 seçilməlidir.`
-          : `${bits} bitlik modul 2048 bit həddindən aşağıdır — bu açar zəif sayılır və dəyişdirilməlidir.`,
+          ? `${bits} bitlik modul 2048 bit həddini keçir: hələ də qəbul ediləndir, yeni açar üçün isə Ed25519 seçilməlidir.`
+          : `${bits} bitlik modul 2048 bit həddindən aşağıdır: bu açar zəif sayılır və dəyişdirilməlidir.`,
       };
     }
     case "ssh-dss":
@@ -419,13 +419,13 @@ function parseOptions(raw: string): SshKeyOption[] {
 function restrictionSummary(options: SshKeyOption[]): string | null {
   const command = options.find((option) => option.name === "command");
   if (command && command.value) {
-    return `Bu açar yalnız bir əmri işə sala bilər: \`${command.value}\` — sahibi bu açarla başqa heç nə edə bilməz.`;
+    return `Bu açar yalnız bir əmri işə sala bilər: \`${command.value}\`. Sahibi bu açarla başqa heç nə edə bilməz.`;
   }
   if (options.some((option) => option.name === "restrict")) {
     return "Bu açar `restrict` seçimi ilə minimuma endirilib: port yönləndirmə, agent, X11, pty və istifadəçi rc-si söndürülüb.";
   }
   if (options.length > 0) {
-    return "Bu açara giriş şərtləri əlavə olunub — aşağıdakı seçimlərə bax.";
+    return "Bu açara giriş şərtləri əlavə olunub: aşağıdakı seçimlərə bax.";
   }
   return null;
 }
@@ -457,11 +457,11 @@ export function parseSshKeyLine(line: string): SshLineResult {
     return {
       input: line,
       ok: false,
-      error: `Açar növü tanınmadı${typeToken ? ` ("${typeToken}")` : ""} — dəstəklənən növlər: ${KNOWN_KEY_TYPES.join(", ")}.`,
+      error: `Açar növü tanınmadı${typeToken ? ` ("${typeToken}")` : ""}, dəstəklənən növlər: ${KNOWN_KEY_TYPES.join(", ")}.`,
     };
   }
   if (blobToken === undefined || blobToken === "") {
-    return { input: line, ok: false, error: "Base64 blok tapılmadı — sətir yarımçıqdır." };
+    return { input: line, ok: false, error: "Base64 blok tapılmadı: sətir yarımçıqdır." };
   }
 
   const decoded = base64ToBytes(blobToken);
@@ -510,7 +510,7 @@ export function inspectSshInput(rawInput: string): SshInspection {
     return {
       refused: true,
       reason:
-        "Bu, açıq (public) açar deyil — özəl (private) açar görünür. Özəl açar heç vaxt bir veb səhifəyə yapışdırılmamalıdır: yapışdırdığın an mətn bu səhifənin brauzer yaddaşına düşür. Bu alət onu oxumayıb, emal etmədi — amma ehtiyat üçün həmin açarı sil və ya yenisi ilə əvəz et (rotate et).",
+        "Bu, açıq (public) açar deyil. Özəl (private) açar görünür. Özəl açar heç vaxt bir veb səhifəyə yapışdırılmamalıdır: yapışdırdığın an mətn bu səhifənin brauzer yaddaşına düşür. Bu alət onu oxumayıb, emal etmədi. Ehtiyat üçün isə həmin açarı sil və ya yenisi ilə əvəz et (rotate et).",
     };
   }
 

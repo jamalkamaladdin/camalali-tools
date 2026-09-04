@@ -52,7 +52,7 @@ export function expiryVerdict(daysLeft: number): ExpiryVerdict {
     return {
       daysLeft,
       tone: "warning",
-      message: `Sertifikatın müddətinə ${daysLeft} gün qalıb — bu, ${EXPIRY_WARNING_DAYS} gündən azdır.`,
+      message: `Sertifikatın müddətinə ${daysLeft} gün qalıb: bu, ${EXPIRY_WARNING_DAYS} gündən azdır.`,
     };
   }
   return { daysLeft, tone: "default", message: `Sertifikatın müddətinə ${daysLeft} gün qalıb.` };
@@ -79,13 +79,13 @@ export function chainVerdict(chain: readonly CertificateInfo[]): ChainVerdict {
     return {
       hasIntermediate,
       message:
-        "Server yalnız öz sertifikatını göndərir — heç bir aralıq sertifikat yoxdur. Bu, ən çox rast gəlinən konfiqurasiya səhvidir: bəzi brauzer əvvəlcədən keşlədiyi üçün fərqinə varmır, amma köhnə cihaz və server-server bağlantısı sertifikatı rədd edə bilər.",
+        "Server yalnız öz sertifikatını göndərir: heç bir aralıq sertifikat yoxdur. Bu, ən çox rast gəlinən konfiqurasiya səhvidir: bəzi brauzer əvvəlcədən keşlədiyi üçün fərqinə varmır, amma köhnə cihaz və server-server bağlantısı sertifikatı rədd edə bilər.",
     };
   }
   const extra = chain.length - 1;
   return {
     hasIntermediate,
-    message: `Server ${chain.length} sertifikat göndərir — leaf sertifikatdan başqa ${extra} aralıq/kök sertifikat.`,
+    message: `Server ${chain.length} sertifikat göndərir: leaf sertifikatdan başqa ${extra} aralıq/kök sertifikat.`,
   };
 }
 
@@ -101,7 +101,7 @@ export function nameVerdict(hostname: string, matches: boolean, names: readonly 
   const list = names.length > 0 ? names.join(", ") : "heç bir ad tapılmadı";
   return {
     matches,
-    message: `«${hostname}» sertifikatın SAN siyahısında yoxdur (siyahıda: ${list}) — brauzer bu sertifikatı bu ad üçün rədd edəcək.`,
+    message: `«${hostname}» sertifikatın SAN siyahısında yoxdur (siyahıda: ${list}): brauzer bu sertifikatı bu ad üçün rədd edəcək.`,
   };
 }
 
@@ -133,7 +133,7 @@ export function assessKey(bits: number | null, curve: string | null): KeyAssessm
       curve,
       weak,
       message: weak
-        ? `Əyri ${curve}, ${sizeText} — bu, tövsiyə edilən minimumdan (${WEAK_EC_BITS} bit) kiçikdir.`
+        ? `Əyri ${curve}, ${sizeText}: bu, tövsiyə edilən minimumdan (${WEAK_EC_BITS} bit) kiçikdir.`
         : `Əyri ${curve}, ${sizeText}.`,
     };
   }
@@ -144,7 +144,7 @@ export function assessKey(bits: number | null, curve: string | null): KeyAssessm
       curve: null,
       weak,
       message: weak
-        ? `Açar ${bits} bit — tövsiyə edilən minimumdan (${WEAK_RSA_BITS} bit) kiçikdir.`
+        ? `Açar ${bits} bit: tövsiyə edilən minimumdan (${WEAK_RSA_BITS} bit) kiçikdir.`
         : `Açar ${bits} bit.`,
     };
   }
@@ -159,11 +159,11 @@ export function assessKey(bits: number | null, curve: string | null): KeyAssessm
  * guess.
  */
 const TRUST_ERROR_LABELS: Record<string, string> = {
-  DEPTH_ZERO_SELF_SIGNED_CERT: "Sertifikat özü-özünü imzalayıb — heç bir mərkəzə bağlı deyil.",
-  SELF_SIGNED_CERT_IN_CHAIN: "Zəncirdə özü-özünü imzalayan sertifikat var — kök tanınan mərkəzlərdən deyil.",
+  DEPTH_ZERO_SELF_SIGNED_CERT: "Sertifikat özü-özünü imzalayıb: heç bir mərkəzə bağlı deyil.",
+  SELF_SIGNED_CERT_IN_CHAIN: "Zəncirdə özü-özünü imzalayan sertifikat var: kök tanınan mərkəzlərdən deyil.",
   UNABLE_TO_GET_ISSUER_CERT_LOCALLY: "Verən mərkəzin kök sertifikatı bu maşının etibar mağazasında tapılmadı.",
   UNABLE_TO_GET_ISSUER_CERT: "Zəncirdəki bir sertifikatın verəni tapılmadı.",
-  UNABLE_TO_VERIFY_LEAF_SIGNATURE: "Zəncirdəki imzalardan biri doğrulanmadı — çox güman aralıq sertifikat çatışmır.",
+  UNABLE_TO_VERIFY_LEAF_SIGNATURE: "Zəncirdəki imzalardan biri doğrulanmadı: çox güman aralıq sertifikat çatışmır.",
   CERT_HAS_EXPIRED: "Sertifikatın etibarlılıq müddəti bitib.",
   CERT_NOT_YET_VALID: "Sertifikatın etibarlılığı hələ başlamayıb.",
   CERT_UNTRUSTED: "Kök sertifikat bu maşının etibar mağazasında yoxdur.",

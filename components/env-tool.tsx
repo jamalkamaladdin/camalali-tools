@@ -79,7 +79,7 @@ function JsonTab() {
 
           {envResult.duplicateKeys.length > 0 && (
             <ToolNote tone="accent">
-              Təkrarlanan açar: {envResult.duplicateKeys.join(", ")} — sonuncu dəyər qalıb.
+              Təkrarlanan açar: {envResult.duplicateKeys.join(", ")}, sonuncu dəyər qalıb.
             </ToolNote>
           )}
           {envResult.unsupportedLines.length > 0 && (
@@ -153,7 +153,7 @@ function ExampleTab() {
         <ToolNote tone="accent">
           {result.unsupportedLines.map((line) => (
             <div key={line.lineNumber}>
-              Sətir {line.lineNumber}: {line.reason} — bu sətir dəyəri təmizlənmədən olduğu kimi
+              Sətir {line.lineNumber}: {line.reason}, bu sətir dəyəri təmizlənmədən olduğu kimi
               köçürülüb, əl ilə yoxla.
             </div>
           ))}

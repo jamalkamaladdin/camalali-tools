@@ -192,7 +192,7 @@ export function tokenizeSql(source: string): SqlTokenizeResult {
         return {
           ok: false,
           error: {
-            message: "Blok şərhi bağlanmayıb — «*/» tapılmadı.",
+            message: "Blok şərhi bağlanmayıb: «*/» tapılmadı.",
             line: startLine,
             column: startColumn,
           },
@@ -208,7 +208,7 @@ export function tokenizeSql(source: string): SqlTokenizeResult {
         return {
           ok: false,
           error: {
-            message: "Sətir dəyəri bağlanmayıb — tək dırnaq açıq qalıb.",
+            message: "Sətir dəyəri bağlanmayıb: tək dırnaq açıq qalıb.",
             line: startLine,
             column: startColumn,
           },
@@ -226,8 +226,8 @@ export function tokenizeSql(source: string): SqlTokenizeResult {
           error: {
             message:
               char === '"'
-                ? "Qoşa dırnaq bağlanmayıb — sütun və ya cədvəl adı yarımçıqdır."
-                : "Tərs dırnaq bağlanmayıb — MySQL adı yarımçıqdır.",
+                ? "Qoşa dırnaq bağlanmayıb: sütun və ya cədvəl adı yarımçıqdır."
+                : "Tərs dırnaq bağlanmayıb: MySQL adı yarımçıqdır.",
             line: startLine,
             column: startColumn,
           },
@@ -248,7 +248,7 @@ export function tokenizeSql(source: string): SqlTokenizeResult {
           return {
             ok: false,
             error: {
-              message: `Dollar dırnaq bağlanmayıb — «${tag[0]}» qapanmayıb.`,
+              message: `Dollar dırnaq bağlanmayıb: «${tag[0]}» qapanmayıb.`,
               line: startLine,
               column: startColumn,
             },

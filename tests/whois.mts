@@ -160,7 +160,7 @@ export const checks: CheckSuite = (check) => {
 
   check(
     "whois: naməlum status kodu xam kod + 'izah yoxdur' kimi qayıdır, boş sətir deyil",
-    unknown.code === "qeyri-adi-status" && unknown.explanation === "qeyri-adi-status — izah yoxdur.",
+    unknown.code === "qeyri-adi-status" && unknown.explanation === "qeyri-adi-status: izah yoxdur.",
     `unknown: ${JSON.stringify(unknown)}`,
   );
 

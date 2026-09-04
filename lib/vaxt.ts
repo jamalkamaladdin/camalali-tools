@@ -33,12 +33,12 @@ export type TimestampParseResult =
 export function parseTimestamp(raw: string): TimestampParseResult {
   const trimmed = raw.trim();
   if (trimmed === "") {
-    return { ok: false, error: "Boş sahə — Unix vaxt möhürünü yaz." };
+    return { ok: false, error: "Boş sahə, Unix vaxt möhürünü yaz." };
   }
   if (!INTEGER_PATTERN.test(trimmed)) {
     return {
       ok: false,
-      error: "Yalnız tam ədəd qəbul olunur — onluq nöqtə, hərf və boşluq olmadan.",
+      error: "Yalnız tam ədəd qəbul olunur: onluq nöqtə, hərf və boşluq olmadan.",
     };
   }
 
@@ -164,7 +164,7 @@ export function timestampFromLocalInput(value: string, zone: Zone): TimestampFro
   if (!parts) {
     return {
       ok: false,
-      error: "Tarix formatı tanınmadı — gözlənilən forma: YYYY-AA-GGTSS:DD.",
+      error: "Tarix formatı tanınmadı, gözlənilən forma: YYYY-AA-GGTSS:DD.",
     };
   }
 
@@ -188,7 +188,7 @@ export function timestampFromLocalInput(value: string, zone: Zone): TimestampFro
   if (!roundTripped) {
     return {
       ok: false,
-      error: "Bu tarix mövcud deyil — məsələn, sıçrayış ili olmayan ildə 29 fevral.",
+      error: "Bu tarix mövcud deyil: məsələn, sıçrayış ili olmayan ildə 29 fevral.",
     };
   }
 

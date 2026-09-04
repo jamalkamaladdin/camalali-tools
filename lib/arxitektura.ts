@@ -50,7 +50,7 @@ const strictQuestions = [
   {
     id: "shape",
     label: "Məlumatın forması",
-    hint: "Əsas həcmi hansı forma tutur — hamısı yox, ən böyüyü.",
+    hint: "Əsas həcmi hansı forma tutur: hamısı yox, ən böyüyü.",
     options: [
       { value: "relational", label: "Relyasion: cədvəl və əlaqələr" },
       { value: "document", label: "Sənəd: iç-içə, dəyişkən sxem" },
@@ -103,7 +103,7 @@ const strictQuestions = [
   {
     id: "ops",
     label: "Əməliyyat yetkinliyi",
-    hint: "Serveri kim saxlayacaq — siz, yoxsa provayder?",
+    hint: "Serveri kim saxlayacaq: siz, yoxsa provayder?",
     options: [
       { value: "managed", label: "İdarə olunan servis istəyirik" },
       { value: "selfHosted", label: "Öz serverimizi saxlaya bilərik" },
@@ -289,7 +289,7 @@ const databaseCard: CardSpec = {
             : `${L(a, "load")} yükdə tək instans və gündəlik ehtiyat nüsxə kifayət edir.`
         }`,
       wrongWhen:
-        "Bir cədvəldə milyardlarla sətir üzərində aqreqasiya gedirsə — sütunlu baza həmin taramanı on dəfələrlə sürətli edir. Sxemi hər həftə dəyişən, hələ formalaşmamış məlumat üçün də ağırdır.",
+        "Bir cədvəldə milyardlarla sətir üzərində aqreqasiya gedirsə: sütunlu baza həmin taramanı on dəfələrlə sürətli edir. Sxemi hər həftə dəyişən, hələ formalaşmamış məlumat üçün də ağırdır.",
       insteadWhen:
         "sxem sabitdirsə və tranzaksiya sərhədi bir sənəddən genişdirsə",
     },
@@ -350,7 +350,7 @@ const databaseCard: CardSpec = {
         w(a.team, { solo: 1, small: 1 }) +
         w(a.budget, { high: 1 }),
       why: (a) =>
-        `Vaxt sırası, amma ${L(a, "load")} yük və «${L(a, "consistency")}» tələbi ilə: TimescaleDB PostgreSQL uzantısıdır — eyni SQL, eyni tranzaksiya, üstəlik vaxta görə avtomatik parçalama və sıxılma. Komanda yeni bir baza öyrənmir.`,
+        `Vaxt sırası, amma ${L(a, "load")} yük və «${L(a, "consistency")}» tələbi ilə: TimescaleDB PostgreSQL uzantısıdır: eyni SQL, eyni tranzaksiya, üstəlik vaxta görə avtomatik parçalama və sıxılma. Komanda yeni bir baza öyrənmir.`,
       wrongWhen:
         "Gündəlik həcm terabaytlara qalxanda: bu, hələ də sətir əsaslı Postgres-dir və sütunlu mühərrikin tarama sürətini vermir.",
       insteadWhen:
@@ -438,7 +438,7 @@ const cacheCard: CardSpec = {
       why: (a) =>
         `${L(a, "load")} yük və «${L(a, "latency")}» hədəf ilə keş sürət yox, ikinci həqiqət mənbəyi gətirir. ${
           a.shape === "keyvalue"
-            ? "Seçilən saxlama onsuz da yaddaşda işləyir — üstünə keş qoymaq eyni işi iki dəfə görməkdir."
+            ? "Seçilən saxlama onsuz da yaddaşda işləyir: üstünə keş qoymaq eyni işi iki dəfə görməkdir."
             : "Əvvəlcə itən indeksləri və N+1 sorğuları düzəlt: ölçmə göstərir ki, cavab vaxtının çoxu adətən oradadır."
         }`,
       wrongWhen:
@@ -472,7 +472,7 @@ const cacheCard: CardSpec = {
         w(a.shape, { timeseries: -1 }) +
         w(a.budget, { high: 2 }),
       why: (a) =>
-        `«${L(a, "workload")}» profil və ${L(a, "load")} yük: cavab hamı üçün eynidirsə, onu istifadəçiyə ən yaxın nöqtədə saxlamaq həm gecikməni, həm də mənşə serverə düşən sorğu sayını azaldır — ən ucuz keş budur.`,
+        `«${L(a, "workload")}» profil və ${L(a, "load")} yük: cavab hamı üçün eynidirsə, onu istifadəçiyə ən yaxın nöqtədə saxlamaq həm gecikməni, həm də mənşə serverə düşən sorğu sayını azaldır. Ən ucuz keş budur.`,
       wrongWhen:
         "Cavab hər istifadəçi üçün fərqli olanda: şəxsi məlumat CDN-də keşlənməməlidir, səhvən keşlənsə başqasına göstərilə bilər. Dərhal yenilənməli məzmun üçün də invalidasiya gecikməsi problemdir.",
       insteadWhen:
@@ -493,7 +493,7 @@ const deploymentCard: CardSpec = {
         w(a.budget, { high: 1, medium: 1 }) +
         w(a.ops, { selfHosted: 1 }),
       why: (a) =>
-        `${L(a, "team")} komanda + ${L(a, "load")} yük: modulların sərhədi kodda qoyulur — ayrı sxem, ayrı servis qatı, aydın interfeys — amma deploy tək qalır. Şəbəkə gecikməsi və paylanmış tranzaksiya problemi yaranmır, sərhəd səhv çəkilibsə düzəlişi bir refaktordur.`,
+        `${L(a, "team")} komanda + ${L(a, "load")} yük: modulların sərhədi kodda qoyulur (ayrı sxem, ayrı servis qatı, aydın interfeys), amma deploy tək qalır. Şəbəkə gecikməsi və paylanmış tranzaksiya problemi yaranmır, sərhəd səhv çəkilibsə düzəlişi bir refaktordur.`,
       wrongWhen:
         "Hissələr həqiqətən fərqli miqyaslanma tələb edəndə: video emalı ilə API-ni eyni prosesdə saxlamaq hər ikisini bahalaşdırır. Bir modulun yaddaş sızması bütün prosesi yıxır.",
       insteadWhen:
@@ -507,7 +507,7 @@ const deploymentCard: CardSpec = {
         w(a.budget, { high: 2, medium: 1 }) +
         w(a.ops, { selfHosted: 1 }),
       why: (a) =>
-        `${L(a, "team")} komanda və ${L(a, "load")} yük: bir repo, bir deploy, bir log axını. Bu ölçüdə arxitekturanın əsas məsələsi miqyas yox, sürətdir — paylanmış sistem burada yalnız gecikmə və əməliyyat işi əlavə edir.`,
+        `${L(a, "team")} komanda və ${L(a, "load")} yük: bir repo, bir deploy, bir log axını. Bu ölçüdə arxitekturanın əsas məsələsi miqyas yox, sürətdir: paylanmış sistem burada yalnız gecikmə və əməliyyat işi əlavə edir.`,
       wrongWhen:
         "Komanda böyüyəndə və bir neçə dəstə eyni fayllara toxunanda: hər deploy növbəyə düşür, release qorxulu hadisəyə çevrilir. Sərhədsiz kod bazası iki ildən sonra yenidən yazılır.",
       insteadWhen:
@@ -521,9 +521,9 @@ const deploymentCard: CardSpec = {
         w(a.budget, { high: -3, medium: -1, low: 1 }) +
         w(a.ops, { managed: 1, selfHosted: -2 }),
       why: (a) =>
-        `${L(a, "team")} komanda və ${L(a, "load")} yük: bu ölçüdə deploy növbəsi real itkidir və hissələr ayrıca miqyaslanmalıdır. Servis sərhədi komanda sərhədini əks etdirməlidir — texniki qatlara görə bölmə (auth-servis, baza-servisi) əvəzinə biznes sahəsinə görə.`,
+        `${L(a, "team")} komanda və ${L(a, "load")} yük: bu ölçüdə deploy növbəsi real itkidir və hissələr ayrıca miqyaslanmalıdır. Servis sərhədi komanda sərhədini əks etdirməlidir: texniki qatlara görə bölmə (auth-servis, baza-servisi) əvəzinə biznes sahəsinə görə.`,
       wrongWhen:
-        "Komanda 10 nəfərdən azdırsa: paylanmış izləmə, servislərarası kontrakt, ayrıca CI, ayrıca baza və şəbəkə xətalarının idarəsi — bunların hamısı məhsul işindən oğurlanan vaxtdır. Yanlış çəkilmiş sərhəd isə refaktorla yox, miqrasiya ilə düzəlir.",
+        "Komanda 10 nəfərdən azdırsa: paylanmış izləmə, servislərarası kontrakt, ayrıca CI, ayrıca baza və şəbəkə xətalarının idarəsi. Bunların hamısı məhsul işindən oğurlanan vaxtdır. Yanlış çəkilmiş sərhəd isə refaktorla yox, miqrasiya ilə düzəlir.",
       insteadWhen:
         "komanda sərhədləri bir deploy-a sığmırsa və hissələr ayrıca miqyaslanmalıdırsa",
     },
@@ -564,8 +564,8 @@ const queueCard: CardSpec = {
       why: (a) =>
         `${L(a, "load")} yük + «${L(a, "consistency")}» tələbi: iş elementi eyni tranzaksiyada yazılır, ona görə «baza yazıldı, növbəyə düşmədi» halı ümumiyyətlə mümkün olmur. ${
           a.budget === "high"
-            ? "Yeni servis qaldırılmır — mövcud baza kifayətdir."
-            : "Bir cədvəl, bir indeks və FOR UPDATE SKIP LOCKED — bütün quruluş budur."
+            ? "Yeni servis qaldırılmır: mövcud baza kifayətdir."
+            : "Bir cədvəl, bir indeks və FOR UPDATE SKIP LOCKED: bütün quruluş budur."
         }`,
       wrongWhen:
         "Saniyədə minlərlə iş elementi yazılanda: növbə cədvəli əsas bazanı yeyir, vacuum yükü artır və bir sistemin problemi hər ikisini dayandırır.",
@@ -612,7 +612,7 @@ const queueCard: CardSpec = {
         w(a.budget, { high: -3, medium: -1, low: 1 }) +
         w(a.ops, { managed: 1, selfHosted: -1 }),
       why: (a) =>
-        `${L(a, "load")} yük və «${L(a, "workload")}» profil: Kafka növbə yox, saxlanan hadisə jurnalıdır — eyni axını bir neçə müstəqil istehlakçı öz sürəti ilə oxuyur, yeni istehlakçı isə keçmişi əvvəldən təkrar oxuya bilir.`,
+        `${L(a, "load")} yük və «${L(a, "workload")}» profil: Kafka növbə yox, saxlanan hadisə jurnalıdır: eyni axını bir neçə müstəqil istehlakçı öz sürəti ilə oxuyur, yeni istehlakçı isə keçmişi əvvəldən təkrar oxuya bilir.`,
       wrongWhen:
         "Yük bu səviyyəyə çatmayanda: bölmə (partition), istehlakçı qrupu, offset idarəsi və saxlama siyasəti kiçik komandanın gündəlik problemi olur. «Sadəcə fon işi» üçün bu, artıq alətdir.",
       insteadWhen:
@@ -656,7 +656,7 @@ const searchCard: CardSpec = {
         w(a.consistency, { strong: 1 }) +
         w(a.workload, { readHeavy: 1 }),
       why: (a) =>
-        `${L(a, "load")} yük + «${L(a, "budget")}»: axtarış indeksi məlumatın yanında, eyni tranzaksiyada yenilənir — sinxronizasiya boru xətti yoxdur, gecikmə yoxdur, yeni servis yoxdur.`,
+        `${L(a, "load")} yük + «${L(a, "budget")}»: axtarış indeksi məlumatın yanında, eyni tranzaksiyada yenilənir: sinxronizasiya boru xətti yoxdur, gecikmə yoxdur, yeni servis yoxdur.`,
       wrongWhen:
         "Azərbaycan dilində söz kökü lazım olanda: Postgres-də hazır azərbaycan konfiqurasiyası yoxdur, «simple» isə «kitabları» ilə «kitab» sözünü fərqli sayır. Səhv yazıya dözüm və faset filtrləri də burada zəifdir.",
       insteadWhen:
@@ -748,7 +748,7 @@ export function profileSummary(answers: Answers): string {
 
 export function formatReport(answers: Answers): string {
   const lines = [
-    "Arxitektura seçimi — ilkin istiqamət",
+    "Arxitektura seçimi: ilkin istiqamət",
     "",
     profileSummary(answers),
     "",
@@ -759,7 +759,7 @@ export function formatReport(answers: Answers): string {
       `## ${item.area}: ${item.pick} (${confidenceLabels[item.confidence]})`,
       `Niyə: ${item.why}`,
       `Nə vaxt səhv olar: ${item.wrongWhen}`,
-      `Alternativ: ${item.alternative} — ${item.alternativeWhen}.`,
+      `Alternativ: ${item.alternative} (${item.alternativeWhen}).`,
       "",
     );
   }

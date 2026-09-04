@@ -31,16 +31,16 @@ export function encodeJsonString(text: string): string {
 
 export function decodeJsonString(text: string): EscapeResult {
   const trimmed = text.trim();
-  if (trimmed === "") return { ok: false, error: "Boş sahə — qaçırılmış JSON sətrini yapışdır." };
+  if (trimmed === "") return { ok: false, error: "Boş sahə: qaçırılmış JSON sətrini yapışdır." };
   const candidate = trimmed.startsWith('"') ? trimmed : `"${trimmed}"`;
   try {
     const value = JSON.parse(candidate);
     if (typeof value !== "string") {
-      return { ok: false, error: "Bu düzgün JSON sətri deyil — nəticə string tipində çıxmadı." };
+      return { ok: false, error: "Bu düzgün JSON sətri deyil: nəticə string tipində çıxmadı." };
     }
     return { ok: true, text: value };
   } catch {
-    return { ok: false, error: "Bu düzgün JSON sətri deyil — qaçırma ardıcıllığı yarımçıqdır." };
+    return { ok: false, error: "Bu düzgün JSON sətri deyil. Qaçırma ardıcıllığı yarımçıqdır." };
   }
 }
 
@@ -113,7 +113,7 @@ export function decodeXml(text: string): EscapeResult {
   if (sawUnknown) {
     return {
       ok: false,
-      error: "Naməlum entity var — XML-də yalnız &amp; &lt; &gt; &quot; &apos; və ədədi istinadlar tanınır.",
+      error: "Naməlum entity var: XML-də yalnız &amp; &lt; &gt; &quot; &apos; və ədədi istinadlar tanınır.",
     };
   }
   return { ok: true, text: result };
@@ -155,7 +155,7 @@ export function decodeSqlString(text: string, dialect: SqlEscapeDialect): Escape
     while (index < text.length) {
       if (text[index] === "\\") {
         if (index + 1 >= text.length) {
-          return { ok: false, error: "Sətir tək tərs slashla bitir — qaçırma ardıcıllığı yarımçıqdır." };
+          return { ok: false, error: "Sətir tək tərs slashla bitir: qaçırma ardıcıllığı yarımçıqdır." };
         }
         out += text[index + 1];
         index += 2;
@@ -179,7 +179,7 @@ export function decodeSqlString(text: string, dialect: SqlEscapeDialect): Escape
       }
       return {
         ok: false,
-        error: "Tək qalan dırnaq var — standart SQL-də daxili dırnaq iki dəfə yazılmalıdır (''), tək yox.",
+        error: "Tək qalan dırnaq var: standart SQL-də daxili dırnaq iki dəfə yazılmalıdır (''), tək yox.",
       };
     }
     out += char;
@@ -211,7 +211,7 @@ export function decodeShellSingleQuote(text: string): EscapeResult {
   const inner = trimmed.slice(1, -1);
   const restored = inner.split(`'\\''`).join("'");
   if (encodeShellSingleQuote(restored) !== trimmed) {
-    return { ok: false, error: "Tək dırnaq düzgün qaçırılmayıb — `'\\''` ardıcıllığı gözlənilir." };
+    return { ok: false, error: "Tək dırnaq düzgün qaçırılmayıb: `'\\''` ardıcıllığı gözlənilir." };
   }
   return { ok: true, text: restored };
 }
@@ -245,7 +245,7 @@ export function encodeCsvCell(text: string): string {
 export function decodeCsvCell(text: string): EscapeResult {
   if (!text.startsWith('"')) {
     if (text.includes('"')) {
-      return { ok: false, error: "Dırnaqla başlamayan xanada dırnaq işarəsi var — bu düzgün CSV xanası deyil." };
+      return { ok: false, error: "Dırnaqla başlamayan xanada dırnaq işarəsi var, bu düzgün CSV xanası deyil." };
     }
     return { ok: true, text };
   }
@@ -261,12 +261,12 @@ export function decodeCsvCell(text: string): EscapeResult {
         continue;
       }
       if (index === text.length - 1) return { ok: true, text: out };
-      return { ok: false, error: "Qapanan dırnaqdan sonra artıq mətn var — xana düzgün bağlanmayıb." };
+      return { ok: false, error: "Qapanan dırnaqdan sonra artıq mətn var, xana düzgün bağlanmayıb." };
     }
     out += char;
     index += 1;
   }
-  return { ok: false, error: "Qapanmayan dırnaq — CSV xanası bağlanmayıb." };
+  return { ok: false, error: "Qapanmayan dırnaq: CSV xanası bağlanmayıb." };
 }
 
 /* ---------- Base64 ---------- */
@@ -330,7 +330,7 @@ export function decodeJsString(text: string): EscapeResult {
 
     const next = body[index + 1];
     if (next === undefined) {
-      return { ok: false, error: "Sətir tək tərs slashla bitir — qaçırma ardıcıllığı yarımçıqdır." };
+      return { ok: false, error: "Sətir tək tərs slashla bitir: qaçırma ardıcıllığı yarımçıqdır." };
     }
 
     if (next === "u" && body[index + 2] === "{") {

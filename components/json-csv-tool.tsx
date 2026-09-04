@@ -147,7 +147,7 @@ export function JsonCsvTool() {
                 <ToolStat label="Sütun" value={result.columns.length} />
               </div>
             )}
-            <ToolOutput>{result.output || "—"}</ToolOutput>
+            <ToolOutput>{result.output || ""}</ToolOutput>
           </div>
         </ToolResultPanel>
       )}

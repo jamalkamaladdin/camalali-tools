@@ -116,7 +116,7 @@ export function PdfSehifeTool() {
     } catch (cause) {
       console.error("pdf-sehife: file read failed", cause);
       setStatus("problem");
-      setProblem("Fayl oxunmadı — zədəli ola bilər.");
+      setProblem("Fayl oxunmadı: zədəli ola bilər.");
     }
   }
 
@@ -160,7 +160,7 @@ export function PdfSehifeTool() {
       setDone({ pageCount: result.pageCount });
     } catch (cause) {
       console.error("pdf-sehife: build failed", cause);
-      setBuildError("Sənəd hazırlanmadı — bir daha yoxla.");
+      setBuildError("Sənəd hazırlanmadı, bir daha yoxla.");
     } finally {
       setBusy(false);
     }
@@ -201,7 +201,7 @@ export function PdfSehifeTool() {
           {file !== null && (
             <p className="font-ui text-sm">
               {file.name} <span className="text-muted tabular-nums">({formatBytes(file.size)})</span>
-              {status === "checking" && <span className="text-muted"> — yoxlanılır…</span>}
+              {status === "checking" && <span className="text-muted">: yoxlanılır…</span>}
             </p>
           )}
           {status === "problem" && problem !== null && <ToolNote tone="accent">{problem}</ToolNote>}
@@ -314,7 +314,7 @@ export function PdfSehifeTool() {
       {done !== null && (
         <ToolResultPanel title="Hazırdır" hint={`${done.pageCount} səhifə`}>
           <p className="p-4 font-ui text-sm text-muted">
-            Redaktə edilmiş fayl endirildi — brauzerin öz endirmə qovluğuna baxa bilərsən.
+            Redaktə edilmiş fayl endirildi: brauzerin öz endirmə qovluğuna baxa bilərsən.
           </p>
         </ToolResultPanel>
       )}

@@ -65,7 +65,7 @@ export function SixilmaTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu alət dörd sorğu göndərir">
-        Yazdığın ünvana sənin brauzerin yox, bu saytın serveri dörd ayrı GET sorğusu göndərir — hər
+        Yazdığın ünvana sənin brauzerin yox, bu saytın serveri dörd ayrı GET sorğusu göndərir: hər
         dəfə fərqli <span className="font-mono text-xs">Accept-Encoding</span> ilə. Cavabın
         başlıqları oxunur, gövdəsi isə atılır.
       </ToolNote>
@@ -147,7 +147,7 @@ function VerdictRow({ verdict }: { verdict: EncodingVerdict }) {
       </p>
       <p className="mt-0.5 text-sm/6">
         {formatBytes(verdict.byteSize)}
-        {verdict.savingsPercent !== null && ` — sıxılmasızdan ${verdict.savingsPercent}% kiçik`}
+        {verdict.savingsPercent !== null && `, sıxılmasızdan ${verdict.savingsPercent}% kiçik`}
       </p>
     </div>
   );
@@ -174,7 +174,7 @@ function Report({ report }: { report: CompressionLiveReport }) {
           <div className="grid gap-3 @min-[30rem]:grid-cols-2 @min-[52rem]:grid-cols-3">
             <ToolStat
               label="Ən yaxşı kodlaşdırma"
-              value={bestEncoding ?? "—"}
+              value={bestEncoding ?? "yoxdur"}
               tone={bestEncoding ? "default" : "warning"}
             />
             <ToolStat label="Sıxılmasız ölçü" value={formatBytes(identityByteSize)} />
@@ -190,7 +190,7 @@ function Report({ report }: { report: CompressionLiveReport }) {
       {!anyCompressionOffered && (
         <ToolNote tone="accent" title="Sıxılma tapılmadı">
           Nə gzip, nə Brotli, nə də Zstandard istəyinə cavab olaraq server sıxılmış nüsxə göndərmədi.
-          Mətn əsaslı cavablar adətən sıxılanda xeyli kiçilir — bu boşluq real ötürmə vaxtı itkisidir.
+          Mətn əsaslı cavablar adətən sıxılanda xeyli kiçilir: bu boşluq real ötürmə vaxtı itkisidir.
         </ToolNote>
       )}
 

@@ -70,7 +70,7 @@ export function jsonToCsv(jsonText: string, options: JsonToCsvOptions): JsonToCs
 
   const value = parsed.value;
   if (!Array.isArray(value)) {
-    return { ok: false, error: "CSV-yə çevirmək üçün JSON-un kökü massiv olmalıdır — məsələn [{...}, {...}]." };
+    return { ok: false, error: "CSV-yə çevirmək üçün JSON-un kökü massiv olmalıdır: məsələn [{...}, {...}]." };
   }
   if (value.length === 0) {
     return { ok: true, output: "", columns: [], rowCount: 0 };
@@ -80,7 +80,7 @@ export function jsonToCsv(jsonText: string, options: JsonToCsvOptions): JsonToCs
     if (item === null || typeof item !== "object" || Array.isArray(item)) {
       return {
         ok: false,
-        error: `Massivin ${index + 1}-ci elementi obyekt deyil — CSV sütunları yalnız obyekt sahələrindən qurula bilir.`,
+        error: `Massivin ${index + 1}-ci elementi obyekt deyil: CSV sütunları yalnız obyekt sahələrindən qurula bilir.`,
       };
     }
   }
@@ -230,7 +230,7 @@ export function csvToJson(csvText: string, options: CsvToJsonOptions): CsvToJson
     if (row.length !== header.length) {
       return {
         ok: false,
-        error: `${rowIndex + 2}-ci sətirdə ${row.length} sütun var, başlıqda ${header.length} — say uyğun gəlmir.`,
+        error: `${rowIndex + 2}-ci sətirdə ${row.length} sütun var, başlıqda ${header.length}: say uyğun gəlmir.`,
         line: rowIndex + 2,
       };
     }

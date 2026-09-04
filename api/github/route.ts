@@ -34,7 +34,7 @@ type LoadOutcome =
  */
 function githubErrorMessage(result: Extract<Fetched, { ok: false }>): string {
   if (result.reason === "status" && result.status === 403) {
-    return "GitHub bizi bir müddət gözlədir — açarsız limitə çatdıq (saatda 60 sorğu, bütün ziyarətçilər üçün ortaq). Bir azdan yenidən yoxla.";
+    return "GitHub bizi bir müddət gözlədir: açarsız limitə çatdıq (saatda 60 sorğu, bütün ziyarətçilər üçün ortaq). Bir azdan yenidən yoxla.";
   }
   return upstreamMessage("GitHub", result);
 }

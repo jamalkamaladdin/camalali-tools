@@ -197,7 +197,7 @@ export function auditChain(steps: ChainStep[], truncated: boolean): ChainIssue[]
     issues.push({
       severity: "xeta",
       step: steps.length,
-      message: `Hop həddi keçildi: ${steps.length} addımdan sonra zəncir hələ də bitmirdi. Bu qədər uzun zəncir praktikada həmişə konfiqurasiya səhvidir — bir qayda digərini qidalandırır.`,
+      message: `Hop həddi keçildi: ${steps.length} addımdan sonra zəncir hələ də bitmirdi. Bu qədər uzun zəncir praktikada həmişə konfiqurasiya səhvidir: bir qayda digərini qidalandırır.`,
     });
   }
 
@@ -206,7 +206,7 @@ export function auditChain(steps: ChainStep[], truncated: boolean): ChainIssue[]
     issues.push({
       severity: "xeberdarliq",
       step: null,
-      message: `Zəncirdə ${redirects} yönləndirmə var. Hər əlavə addım bir gediş-gəliş vaxtı əlavə edir və axtarış sistemləri üçün siqnal itkisidir — köhnə ünvanı birbaşa son ünvana yönləndir, aradakı pillələri saxlama.`,
+      message: `Zəncirdə ${redirects} yönləndirmə var. Hər əlavə addım bir gediş-gəliş vaxtı əlavə edir və axtarış sistemləri üçün siqnal itkisidir. Köhnə ünvanı birbaşa son ünvana yönləndir, aradakı pillələri saxlama.`,
     });
   }
 
@@ -217,7 +217,7 @@ export function auditChain(steps: ChainStep[], truncated: boolean): ChainIssue[]
       issues.push({
         severity: "xeberdarliq",
         step: index + 1,
-        message: `${index + 1}. addım ${step.status} qaytarır — bu, «müvəqqəti» deməkdir. Köçürmə daimidirsə köhnə ünvan indeksdə qalır və sıralama yeni ünvana keçmir; daimi köçürmə üçün 301 (və ya metodu saxlamaq lazımdırsa 308) yazılmalıdır.`,
+        message: `${index + 1}. addım ${step.status} qaytarır: bu, «müvəqqəti» deməkdir. Köçürmə daimidirsə köhnə ünvan indeksdə qalır və sıralama yeni ünvana keçmir; daimi köçürmə üçün 301 (və ya metodu saxlamaq lazımdırsa 308) yazılmalıdır.`,
       });
     }
 
@@ -228,7 +228,7 @@ export function auditChain(steps: ChainStep[], truncated: boolean): ChainIssue[]
       issues.push({
         severity: "xeta",
         step: index + 2,
-        message: `${index + 1}. addım https-dən http-yə enir. Bu addımda bağlantı şifrələnmir — aradakı şəbəkə həm ünvanı, həm də kukiləri oxuya bilir. Yönləndirmə heç vaxt sxemi aşağı salmamalıdır.`,
+        message: `${index + 1}. addım https-dən http-yə enir. Bu addımda bağlantı şifrələnmir: aradakı şəbəkə həm ünvanı, həm də kukiləri oxuya bilir. Yönləndirmə heç vaxt sxemi aşağı salmamalıdır.`,
       });
     }
 
@@ -243,7 +243,7 @@ export function auditChain(steps: ChainStep[], truncated: boolean): ChainIssue[]
       issues.push({
         severity: "xeberdarliq",
         step: index + 1,
-        message: `${index + 1}. və ${index + 2}. addım bir işi ikiyə bölür: biri yalnız sxemi (http/https), digəri yalnız domeni dəyişir. İkisini bir qaydada birləşdirmək olar — məsələn http://sayt.com birbaşa https://www.sayt.com ünvanına.`,
+        message: `${index + 1}. və ${index + 2}. addım bir işi ikiyə bölür: biri yalnız sxemi (http/https), digəri yalnız domeni dəyişir. İkisini bir qaydada birləşdirmək olar (məsələn http://sayt.com birbaşa https://www.sayt.com ünvanına).`,
       });
     }
   }
@@ -253,7 +253,7 @@ export function auditChain(steps: ChainStep[], truncated: boolean): ChainIssue[]
     issues.push({
       severity: "xeta",
       step: steps.length,
-      message: `Zəncir ${last.status} ilə bitir — «${last.label}». Yönləndirmə işləyən səhifəyə çatmır, yəni köhnə ünvana gələn hər ziyarətçi və hər bot bu xətanı görür.`,
+      message: `Zəncir ${last.status} ilə bitir: «${last.label}». Yönləndirmə işləyən səhifəyə çatmır, yəni köhnə ünvana gələn hər ziyarətçi və hər bot bu xətanı görür.`,
     });
   }
 

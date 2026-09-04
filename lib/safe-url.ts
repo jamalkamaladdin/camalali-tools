@@ -43,7 +43,7 @@ export type UrlCheck =
  */
 export function normalizeTargetUrl(raw: string): UrlCheck {
   const trimmed = raw.trim();
-  if (trimmed === "") return { ok: false, error: "Boş sahə — ünvan yaz." };
+  if (trimmed === "") return { ok: false, error: "Boş sahə: ünvan yaz." };
   if (trimmed.length > MAX_URL_LENGTH) {
     return { ok: false, error: "Ünvan həddindən uzundur (2000 simvoldan çox)." };
   }
@@ -57,26 +57,26 @@ export function normalizeTargetUrl(raw: string): UrlCheck {
   try {
     parsed = new URL(withScheme);
   } catch {
-    return { ok: false, error: "Ünvan oxunmadı — «https://example.com» formatında yaz." };
+    return { ok: false, error: "Ünvan oxunmadı: «https://example.com» formatında yaz." };
   }
 
   if (!ALLOWED_PROTOCOLS.has(parsed.protocol)) {
     return {
       ok: false,
-      error: `«${parsed.protocol.replace(":", "")}» sxemi qəbul edilmir — yalnız http və https yoxlanılır.`,
+      error: `«${parsed.protocol.replace(":", "")}» sxemi qəbul edilmir: yalnız http və https yoxlanılır.`,
     };
   }
 
   /* Credentials in the address would be sent to the target as a header the
      tool then prints back to the visitor. Nothing good comes of carrying them. */
   if (parsed.username !== "" || parsed.password !== "") {
-    return { ok: false, error: "Ünvanda istifadəçi adı və ya parol var — onları çıxarıb yenidən yoxla." };
+    return { ok: false, error: "Ünvanda istifadəçi adı və ya parol var: onları çıxarıb yenidən yoxla." };
   }
 
   if (!ALLOWED_PORTS.has(parsed.port)) {
     return {
       ok: false,
-      error: `${parsed.port} portu yoxlanmır — yalnız standart 80 və 443 portları açıqdır.`,
+      error: `${parsed.port} portu yoxlanmır: yalnız standart 80 və 443 portları açıqdır.`,
     };
   }
 

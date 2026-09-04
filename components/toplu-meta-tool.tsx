@@ -44,7 +44,7 @@ const VISIBLE_ROWS = 200;
 
 const SAMPLE = [
   "url,title,description",
-  "https://sayt.com/,Ana səhifə — sayt adı,Şirkət haqqında qısa məlumat və xidmətlərin siyahısı.",
+  "https://sayt.com/,Ana səhifə: sayt adı,Şirkət haqqında qısa məlumat və xidmətlərin siyahısı.",
   'https://sayt.com/xidmetler,Xidmətlər | Sayt adı,"Backend, verilənlər bazası və sistem dizaynı üzrə xidmətlər."',
   "https://sayt.com/xidmetler/backend,Xidmətlər | Sayt adı,Backend xidmətləri haqqında ətraflı məlumat.",
   "https://sayt.com/haqqimizda,Haqqımızda,",
@@ -117,7 +117,7 @@ export function TopluMetaTool() {
           <ToolField
             label="url, başlıq, təsvir"
             htmlFor="toplu-meta-input"
-            note={`Vergül, nöqtəli vergül və ya tab — ayırıcı özü tanınır. Başlıq sətri varsa atılır. Bir dəfəyə ${MAX_ROWS} sətir.`}
+            note={`Vergül, nöqtəli vergül və ya tab: ayırıcı özü tanınır. Başlıq sətri varsa atılır. Bir dəfəyə ${MAX_ROWS} sətir.`}
           >
             <ToolTextArea
               id="toplu-meta-input"
@@ -225,7 +225,7 @@ export function TopluMetaTool() {
       )}
 
       <ToolNote tone="accent" title="Piksel eni təxmindir">
-        Hər sətrin eni hərflərin Arial cədvəlindəki enlərinin cəmidir — azərbaycan hərfləri də
+        Hər sətrin eni hərflərin Arial cədvəlindəki enlərinin cəmidir: azərbaycan hərfləri də
         cədvəldədir, ona görə azərbaycanca başlıq düzgün ölçülür. Google öz şrifti ilə çəkdiyinə görə
         rəqəm bir neçə faiz fərqlə düşə bilər. «Boş» və «təkrar» hökmləri isə təxmin deyil: onlar
         yapışdırdığın cədvəldəki faktdır.
@@ -246,15 +246,15 @@ function AuditRow({
 }) {
   return (
     <tr className="border-b border-result-rule align-top last:border-0">
-      <td className="max-w-64 p-2 break-all font-mono">{audit.row.url || "—"}</td>
+      <td className="max-w-64 p-2 break-all font-mono">{audit.row.url || ""}</td>
       <td className="p-2">
-        <span className="block max-w-80 truncate">{audit.row.title || "—"}</span>
+        <span className="block max-w-80 truncate">{audit.row.title || ""}</span>
         <span className="mt-0.5 block text-muted tabular-nums">
           {Array.from(audit.row.title).length} simvol · {audit.titlePx} / {titleLimit} px
         </span>
       </td>
       <td className="p-2">
-        <span className="block max-w-96 truncate">{audit.row.description || "—"}</span>
+        <span className="block max-w-96 truncate">{audit.row.description || ""}</span>
         <span className="mt-0.5 block text-muted tabular-nums">
           {Array.from(audit.row.description).length} simvol · {audit.descriptionPx} /{" "}
           {descriptionLimit} px

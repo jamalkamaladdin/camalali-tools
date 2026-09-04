@@ -57,7 +57,7 @@ export function GithubTool() {
   return (
     <div className="mt-8 space-y-5">
       <ToolNote>
-        İstifadəçi adı və ya owner/repo GitHub-un açıq API-sinə (api.github.com) göndərilir —
+        İstifadəçi adı və ya owner/repo GitHub-un açıq API-sinə (api.github.com) göndərilir:
         açarsız, saatda 60 sorğuluq ortaq kota ilə. Nəticə 15 dəqiqə keşlənir.
       </ToolNote>
 
@@ -131,7 +131,7 @@ function ProfileCard({ profile }: { profile: Extract<GithubResult, { kind: "user
           <ToolStat label="İzləyici" value={formatCompact(profile.followers)} />
           <ToolStat
             label="Qeydiyyat"
-            value={profile.createdAt ? formatAzDate(profile.createdAt.slice(0, 10)) : "—"}
+            value={profile.createdAt ? formatAzDate(profile.createdAt.slice(0, 10)) : ""}
           />
         </div>
       </div>
@@ -152,20 +152,20 @@ function RepoCard({ repo }: { repo: Extract<GithubResult, { kind: "repo" }> }) {
       <div className="space-y-4 p-4">
         {repo.archived && (
           <ToolNote tone="accent" title="Arxivləşdirilib">
-            Bu repo salt-oxunan rejimə keçirilib — yeni commit qəbul etmir.
+            Bu repo salt-oxunan rejimə keçirilib: yeni commit qəbul etmir.
           </ToolNote>
         )}
         {repo.description && <p className="text-sm/6">{repo.description}</p>}
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
           <ToolStat label="Ulduz" value={formatCompact(repo.stars)} />
           <ToolStat label="Fork" value={formatCompact(repo.forks)} />
-          <ToolStat label="Dil" value={repo.language ?? "—"} />
+          <ToolStat label="Dil" value={repo.language ?? ""} />
           <ToolStat label="Açıq issue" value={formatCompact(repo.openIssues)} />
-          <ToolStat label="Lisenziya" value={repo.licenseName ?? "—"} />
+          <ToolStat label="Lisenziya" value={repo.licenseName ?? ""} />
         </div>
         <ToolStat
           label="Son yenilənmə (push)"
-          value={repo.pushedAt ? formatAzDate(repo.pushedAt.slice(0, 10)) : "—"}
+          value={repo.pushedAt ? formatAzDate(repo.pushedAt.slice(0, 10)) : ""}
         />
       </div>
     </ToolResultPanel>

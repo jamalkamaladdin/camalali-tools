@@ -146,7 +146,7 @@ export function describeExposure(count: number): Exposure {
       count: 0,
       headline: "Bu parol məlum sızmalarda tapılmadı.",
       advice:
-        "Bu, parolun güclü olduğunu göstərmir — yalnız onun hələ ictimai sızma siyahılarına düşmədiyini göstərir. Dünən oğurlanmış, hələ dərc edilməmiş baza da bu cavabı dəyişmir. Parolun etibarlılığını uzunluq, təsadüfilik və hər hesabda ayrı parol işlətmək təyin edir, bu cavab yox.",
+        "Bu, parolun güclü olduğunu göstərmir: yalnız onun hələ ictimai sızma siyahılarına düşmədiyini göstərir. Dünən oğurlanmış, hələ dərc edilməmiş baza da bu cavabı dəyişmir. Parolun etibarlılığını uzunluq, təsadüfilik və hər hesabda ayrı parol işlətmək təyin edir, bu cavab yox.",
     };
   }
 
@@ -175,6 +175,6 @@ export function describeExposure(count: number): Exposure {
     count,
     headline: `Bu parol məlum sızmalarda ${count} dəfə göründü.`,
     advice:
-      "Bu parol hücum lüğətlərinin ilk sətirlərindədir — onu tapmaq üçün heç bir hesablama lazım deyil, sadəcə siyahıdan oxunur. Hansı hesabda işlədilirsə orada təhlükəsizlik faktiki olaraq yoxdur. İndi dəyişdir və parol menecerinin yaratdığı təsadüfi parolu götür.",
+      "Bu parol hücum lüğətlərinin ilk sətirlərindədir: onu tapmaq üçün heç bir hesablama lazım deyil, sadəcə siyahıdan oxunur. Hansı hesabda işlədilirsə orada təhlükəsizlik faktiki olaraq yoxdur. İndi dəyişdir və parol menecerinin yaratdığı təsadüfi parolu götür.",
   };
 }

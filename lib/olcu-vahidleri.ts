@@ -272,7 +272,7 @@ export function timeToSeconds(value: number, unit: TimeUnit): number {
  * while the minutes slot has already been decided as 0.
  */
 export function humanDuration(seconds: number): string {
-  if (!Number.isFinite(seconds)) return "—";
+  if (!Number.isFinite(seconds)) return "";
 
   const sign = seconds < 0 ? "−" : "";
   const total = Math.abs(seconds);
@@ -358,9 +358,9 @@ export function parseAmount(raw: string, { allowZero = true } = {}): ParsedAmoun
 
   const value = Number(cleaned);
   if (!Number.isFinite(value)) {
-    return { value: null, error: "Bu, rəqəm deyil — vahidi yanındakı siyahıdan seç." };
+    return { value: null, error: "Bu, rəqəm deyil: vahidi yanındakı siyahıdan seç." };
   }
-  if (value < 0) return { value: null, error: "Mənfi ölçü olmur — sıfırdan böyük rəqəm yaz." };
+  if (value < 0) return { value: null, error: "Mənfi ölçü olmur: sıfırdan böyük rəqəm yaz." };
   if (!allowZero && value === 0) return { value: null, error: "Sıfırdan böyük rəqəm yaz." };
 
   return { value, error: null };
@@ -383,7 +383,7 @@ function trimZeros(text: string): string {
  * to a different kind of question.
  */
 export function formatAmount(value: number): string {
-  if (!Number.isFinite(value)) return "—";
+  if (!Number.isFinite(value)) return "";
   if (value === 0) return "0";
 
   const abs = Math.abs(value);
@@ -424,12 +424,12 @@ export const olcuSections: ReferenceSection[] = [
   {
     id: "suret",
     label: "Tipik sürətlər",
-    hint: "Real şəraitdə görünən sürətlər — qutunun üstündə yazılan nəzəri hədd deyil.",
+    hint: "Real şəraitdə görünən sürətlər: qutunun üstündə yazılan nəzəri hədd deyil.",
   },
   {
     id: "vaxt",
     label: "Gecikmə şkalası",
-    hint: "Bir prosessor taktından qitələrarası paketə qədər — Jeff Dean-in məşhur siyahısının yenilənmiş rəqəmləri.",
+    hint: "Bir prosessor taktından qitələrarası paketə qədər: Jeff Dean-in məşhur siyahısının yenilənmiş rəqəmləri.",
   },
   {
     id: "uptime",
@@ -722,7 +722,7 @@ export const olcuRows: ReferenceRow[] = [
     match: [...latencyMatch, "yaddas", "memory"],
   },
   {
-    term: "1 MB — RAM-dan",
+    term: "1 MB (RAM-dan)",
     label: "≈ 100 µs",
     note: "Yaddaşdan ardıcıl bir meqabayt oxumaq. Eyni həcm SSD-dən on dəfə uzun çəkir.",
     section: "vaxt",
@@ -736,7 +736,7 @@ export const olcuRows: ReferenceRow[] = [
     match: [...latencyMatch, "disk", "nvme"],
   },
   {
-    term: "1 MB — SSD-dən",
+    term: "1 MB (SSD-dən)",
     label: "≈ 1 ms",
     note: "Diskdən ardıcıl bir meqabayt. Bir səhifə açılışında bunlardan onlarla olur.",
     section: "vaxt",

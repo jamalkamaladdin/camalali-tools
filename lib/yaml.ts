@@ -112,7 +112,7 @@ function checkTabs(line: Line): void {
     throw new YamlSyntaxError(
       line.no,
       line.indent + 1,
-      "Girintidə tab simvolu var — YAML girinti üçün yalnız boşluq qəbul edir.",
+      "Girintidə tab simvolu var: YAML girinti üçün yalnız boşluq qəbul edir.",
     );
   }
 }
@@ -153,7 +153,7 @@ function splitDocuments(lines: Line[]): Range[] {
       throw new YamlSyntaxError(
         line.no,
         1,
-        "Direktiv (%YAML, %TAG) dəstəklənmir — sətri sil, məlumat ondan asılı deyil.",
+        "Direktiv (%YAML, %TAG) dəstəklənmir: sətri sil, məlumat ondan asılı deyil.",
       );
     }
 
@@ -169,7 +169,7 @@ function splitDocuments(lines: Line[]): Range[] {
       throw new YamlSyntaxError(
         line.no,
         5,
-        "«---» sətrində dəyər dəstəklənmir — dəyəri növbəti sətirdən yaz.",
+        "«---» sətrində dəyər dəstəklənmir: dəyəri növbəti sətirdən yaz.",
       );
     }
   }
@@ -247,7 +247,7 @@ function parseRange(lines: Line[], range: Range, warn: Warn): unknown {
         fail(
           line,
           line.indent + 1,
-          "Siyahının içində açar gözlənilmir — hər element «- » ilə başlamalıdır.",
+          "Siyahının içində açar gözlənilmir: hər element «- » ilə başlamalıdır.",
         );
       }
 
@@ -289,7 +289,7 @@ function parseRange(lines: Line[], range: Range, warn: Warn): unknown {
         fail(
           line,
           line.indent + 1,
-          "Açarların arasında «- » elementi var — siyahı öz açarının altında yazılır.",
+          "Açarların arasında «- » elementi var. Siyahı öz açarının altında yazılır.",
         );
       }
 
@@ -301,7 +301,7 @@ function parseRange(lines: Line[], range: Range, warn: Warn): unknown {
         fail(
           line,
           line.indent + 1,
-          `Təkrarlanan açar: «${found.key}». Oxuyanların bir hissəsi sonuncunu saxlayır, digərləri xəta verir — adı dəyiş.`,
+          `Təkrarlanan açar: «${found.key}». Oxuyanların bir hissəsi sonuncunu saxlayır, digərləri xəta verir: adı dəyiş.`,
         );
       }
 
@@ -349,18 +349,18 @@ function parseRange(lines: Line[], range: Range, warn: Warn): unknown {
         line,
         column + 1,
         first === "&"
-          ? "Anchor (&ad) dəstəklənmir — JSON-da istinad yoxdur, dəyəri təkrar yazmaq lazımdır."
-          : "Alias (*ad) dəstəklənmir — istinad etdiyi dəyəri bura köçür.",
+          ? "Anchor (&ad) dəstəklənmir: JSON-da istinad yoxdur, dəyəri təkrar yazmaq lazımdır."
+          : "Alias (*ad) dəstəklənmir: istinad etdiyi dəyəri bura köçür.",
       );
     }
     if (first === "!") {
-      fail(line, column + 1, "Teq (!tag, !!str) dəstəklənmir — dəyəri teqsiz yaz.");
+      fail(line, column + 1, "Teq (!tag, !!str) dəstəklənmir: dəyəri teqsiz yaz.");
     }
     if (rest === "-" || rest.startsWith("- ")) {
       fail(
         line,
         column + 1,
-        "Siyahı açarla eyni sətirdə başlaya bilməz — «- » növbəti sətirdən, girinti ilə yazılır.",
+        "Siyahı açarla eyni sətirdə başlaya bilməz: «- » növbəti sətirdən, girinti ilə yazılır.",
       );
     }
 
@@ -394,7 +394,7 @@ function parseRange(lines: Line[], range: Range, warn: Warn): unknown {
       fail(
         next,
         next.indent + 1,
-        "Çoxsətirli sadə mətn dəstəklənmir — bir sətirdə yaz, ya da «|» blokundan istifadə et.",
+        "Çoxsətirli sadə mətn dəstəklənmir: bir sətirdə yaz, ya da «|» blokundan istifadə et.",
       );
     }
 
@@ -405,13 +405,13 @@ function parseRange(lines: Line[], range: Range, warn: Warn): unknown {
 
   function findKeyEnd(line: Line, content: string): { key: string; end: number } | null {
     if (content === "?" || content.startsWith("? ")) {
-      fail(line, line.indent + 1, "Mürəkkəb açar («? ») dəstəklənmir — açar sadə mətn olmalıdır.");
+      fail(line, line.indent + 1, "Mürəkkəb açar («? ») dəstəklənmir: açar sadə mətn olmalıdır.");
     }
     if (content.startsWith("<<:")) {
       fail(
         line,
         line.indent + 1,
-        "Birləşdirmə açarı («<<») dəstəklənmir — o, anchor-a istinad edir, JSON-da qarşılığı yoxdur.",
+        "Birləşdirmə açarı («<<») dəstəklənmir. O, anchor-a istinad edir, JSON-da qarşılığı yoxdur.",
       );
     }
     if (content.startsWith("[") || content.startsWith("{")) return null;
@@ -515,7 +515,7 @@ function parseRange(lines: Line[], range: Range, warn: Warn): unknown {
       return fail(
         line,
         at(),
-        "Axın kolleksiyası bu sətirdə bağlanmır — çoxsətirli «[ ]» / «{ }» dəstəklənmir.",
+        "Axın kolleksiyası bu sətirdə bağlanmır: çoxsətirli «[ ]» / «{ }» dəstəklənmir.",
       );
     }
 
@@ -705,7 +705,7 @@ function parseRange(lines: Line[], range: Range, warn: Warn): unknown {
     return fail(
       line,
       column + start + 1,
-      "Dırnaq bu sətirdə bağlanmır — çoxsətirli dırnaqlı mətn dəstəklənmir.",
+      "Dırnaq bu sətirdə bağlanmır: çoxsətirli dırnaqlı mətn dəstəklənmir.",
     );
   }
 
@@ -724,14 +724,14 @@ function parseRange(lines: Line[], range: Range, warn: Warn): unknown {
       throw new YamlSyntaxError(
         lineNo,
         column + 1,
-        `«${text}» JSON-da yazıla bilmir — JSON-un sonsuzluq və NaN dəyəri yoxdur.`,
+        `«${text}» JSON-da yazıla bilmir: JSON-un sonsuzluq və NaN dəyəri yoxdur.`,
       );
     }
 
     if (lower === "yes" || lower === "no" || lower === "on" || lower === "off") {
       warn(
         lineNo,
-        `«${text}» sətir kimi oxundu (YAML 1.2). PyYAML kimi 1.1 oxuyanlar onu true/false sayır — dəyər bul olmalıdırsa true/false yaz.`,
+        `«${text}» sətir kimi oxundu (YAML 1.2). PyYAML kimi 1.1 oxuyanlar onu true/false sayır. Dəyər bul olmalıdırsa true/false yaz.`,
       );
       return text;
     }
@@ -739,7 +739,7 @@ function parseRange(lines: Line[], range: Range, warn: Warn): unknown {
     if (/^[-+]?0[0-9_]+$/.test(text)) {
       warn(
         lineNo,
-        `«${text}» sıfırla başlayır və sətir kimi saxlanıldı. YAML 1.1 onu səkkizlik ədəd oxuyur (0755 → 493) — rəqəm lazımdırsa baş sıfırı sil.`,
+        `«${text}» sıfırla başlayır və sətir kimi saxlanıldı. YAML 1.1 onu səkkizlik ədəd oxuyur (0755 → 493): rəqəm lazımdırsa baş sıfırı sil.`,
       );
       return text;
     }
@@ -747,7 +747,7 @@ function parseRange(lines: Line[], range: Range, warn: Warn): unknown {
     if (/^[-+]?[0-9]+(:[0-5]?[0-9])+$/.test(text)) {
       warn(
         lineNo,
-        `«${text}» sətir kimi oxundu. YAML 1.1 iki nöqtəli rəqəmi altmışlıq ədədə çevirir (12:30 → 750) — vaxt yazırsansa dırnağa al.`,
+        `«${text}» sətir kimi oxundu. YAML 1.1 iki nöqtəli rəqəmi altmışlıq ədədə çevirir (12:30 → 750): vaxt yazırsansa dırnağa al.`,
       );
       return text;
     }
@@ -755,7 +755,7 @@ function parseRange(lines: Line[], range: Range, warn: Warn): unknown {
     if (text.includes("_") && /^[-+]?[0-9][0-9_]*$/.test(text)) {
       warn(
         lineNo,
-        `«${text}» sətir kimi oxundu. YAML 1.1 alt xətti rəqəm ayırıcısı sayır (1_000 → 1000) — rəqəm lazımdırsa alt xətti sil.`,
+        `«${text}» sətir kimi oxundu. YAML 1.1 alt xətti rəqəm ayırıcısı sayır (1_000 → 1000): rəqəm lazımdırsa alt xətti sil.`,
       );
       return text;
     }
@@ -768,7 +768,7 @@ function parseRange(lines: Line[], range: Range, warn: Warn): unknown {
       if (!Number.isSafeInteger(value)) {
         warn(
           lineNo,
-          `«${text}» təhlükəsiz tam ədəd həddindən (2^53) böyükdür və sətir kimi saxlanıldı — rəqəm kimi yazılsaydı son rəqəmləri dəyişərdi.`,
+          `«${text}» təhlükəsiz tam ədəd həddindən (2^53) böyükdür və sətir kimi saxlanıldı. Rəqəm kimi yazılsaydı son rəqəmləri dəyişərdi.`,
         );
         return text;
       }
@@ -787,7 +787,7 @@ function parseRange(lines: Line[], range: Range, warn: Warn): unknown {
 
   const leftover = peek();
   if (leftover) {
-    fail(leftover, leftover.indent + 1, "Sənədin quruluşuna uyğun gəlməyən sətir — girintini yoxla.");
+    fail(leftover, leftover.indent + 1, "Sənədin quruluşuna uyğun gəlməyən sətir: girintini yoxla.");
   }
 
   return root;
@@ -881,7 +881,7 @@ function parseSource(source: string): ParseSuccess | ParseFailure {
         ok: false,
         lineNo: 1,
         column: 1,
-        message: "Quruluş həddindən artıq dərindir — çevirmə dayandırıldı.",
+        message: "Quruluş həddindən artıq dərindir, çevirmə dayandırıldı.",
       };
     }
     /* Anything else is a defect in this parser rather than in the document. It
@@ -891,7 +891,7 @@ function parseSource(source: string): ParseSuccess | ParseFailure {
       ok: false,
       lineNo: 1,
       column: 1,
-      message: "Sənəd təhlil oluna bilmədi — quruluş gözlənilməz formadadır.",
+      message: "Sənəd təhlil oluna bilmədi, quruluş gözlənilməz formadadır.",
     };
   }
 }

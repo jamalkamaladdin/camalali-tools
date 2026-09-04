@@ -140,7 +140,7 @@ export function LogBudcesiTool() {
         </div>
         {Math.abs(levelSum - 100) > 0.01 && (
           <div className="p-4 pt-0">
-            <ToolNote tone="accent">Faizlərin cəmi 100 olmalıdır — indi {levelSum.toFixed(1)}.</ToolNote>
+            <ToolNote tone="accent">Faizlərin cəmi 100 olmalıdır: indi {levelSum.toFixed(1)}.</ToolNote>
           </div>
         )}
       </ToolPanel>
@@ -210,9 +210,9 @@ export function LogBudcesiTool() {
                   {samplingRows.map(({ percent, impact, captureAtLeastOne }) => (
                     <tr key={percent} className="border-b border-result-rule align-top last:border-0">
                       <td className="p-2 tabular-nums">{percent}%</td>
-                      <td className="p-2 tabular-nums">{impact.ok ? formatGb(impact.volumeGb) : "—"}</td>
-                      <td className="p-2 tabular-nums">{impact.ok ? formatPercent(impact.volumeReductionPercent) : "—"}</td>
-                      <td className="p-2 tabular-nums">{impact.ok ? formatPercent(impact.captureProbabilitySingleEvent * 100) : "—"}</td>
+                      <td className="p-2 tabular-nums">{impact.ok ? formatGb(impact.volumeGb) : ""}</td>
+                      <td className="p-2 tabular-nums">{impact.ok ? formatPercent(impact.volumeReductionPercent) : ""}</td>
+                      <td className="p-2 tabular-nums">{impact.ok ? formatPercent(impact.captureProbabilitySingleEvent * 100) : ""}</td>
                       <td className="p-2 tabular-nums">{formatPercent(captureAtLeastOne * 100)}</td>
                     </tr>
                   ))}
@@ -221,7 +221,7 @@ export function LogBudcesiTool() {
             </div>
             <div className="px-4 pb-4">
               <ToolNote>
-                Nümunələmə hər hadisəni müstəqil ehtimalla saxlayır — az sayda təkrarlanan nadir hadisələr aşağı
+                Nümunələmə hər hadisəni müstəqil ehtimalla saxlayır: az sayda təkrarlanan nadir hadisələr aşağı
                 nümunələmə faizində demək olar ki, görünmür, tez-tez təkrarlanan hadisələr isə hələ də tutulur.
               </ToolNote>
             </div>

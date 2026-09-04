@@ -33,7 +33,7 @@ import {
  * presses it once has seen what the tool is for without reading anything.
  */
 const SAMPLE_TEXT =
-  "Şəhərin adı — «Bakı».\u00A0Əvvəlki boşluq adi boşluq deyil.\n" +
+  "Şəhərin adı: «Bakı».\u00A0Əvvəlki boşluq adi boşluq deyil.\n" +
   "Burada\u200Bsıfır enli boşluq gizlənib.\n" +
   "\uFEFFBOM, \u201cağıllı dırnaq\u201d və 👨\u200d👩\u200d👦 emojisi.";
 
@@ -259,7 +259,7 @@ export function AsciiUnicodeTool() {
                 rows={asciiUnicodeRows}
                 sections={asciiUnicodeSections}
                 placeholder="simvol, ad, kod nöqtəsi və ya onluq dəyər"
-                footnote="Kod nöqtələri və baytlar cədvəldə əl ilə yazılmır — hər sətir simvolun özündən hesablanır. Adlar Unicode kateqoriyalarına əsaslanır və azərbaycanca verilib."
+                footnote="Kod nöqtələri və baytlar cədvəldə əl ilə yazılmır: hər sətir simvolun özündən hesablanır. Adlar Unicode kateqoriyalarına əsaslanır və azərbaycanca verilib."
               />
             ),
           },

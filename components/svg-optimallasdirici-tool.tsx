@@ -66,7 +66,7 @@ export function SvgOptimallasdiriciTool() {
   const savingsLabel =
     result.inputBytes > 0
       ? `${result.savingsPercent >= 0 ? "-" : "+"}${Math.abs(result.savingsPercent).toFixed(1)}%`
-      : "—";
+      : "";
 
   return (
     <div className="mt-8 space-y-5">
@@ -133,7 +133,7 @@ export function SvgOptimallasdiriciTool() {
 
       {!result.wellFormed && source.trim() !== "" && (
         <ToolNote tone="accent" title="SVG kimi tanınmadı">
-          Mətndə etibarlı bir `&lt;svg&gt;` tapılmadı — heç bir qayda tətbiq olunmadı.
+          Mətndə etibarlı bir `&lt;svg&gt;` tapılmadı: heç bir qayda tətbiq olunmadı.
         </ToolNote>
       )}
 
@@ -175,7 +175,7 @@ export function SvgOptimallasdiriciTool() {
                       <tr key={entry.rule} className="border-b border-result-rule last:border-0">
                         <td className="p-1.5">{SVG_OPTIMIZE_RULE_LABELS[entry.rule]}</td>
                         <td className="p-1.5 text-right tabular-nums">
-                          {entry.bytesSaved > 0 ? `-${formatBytes(entry.bytesSaved)}` : "—"}
+                          {entry.bytesSaved > 0 ? `-${formatBytes(entry.bytesSaved)}` : ""}
                         </td>
                       </tr>
                     ))}
@@ -188,7 +188,7 @@ export function SvgOptimallasdiriciTool() {
       )}
 
       <ToolNote>
-        SVG heç yerə göndərilmir — bütün qaydalar mətn üzərində, brauzerin öz yaddaşında işləyir.
+        SVG heç yerə göndərilmir: bütün qaydalar mətn üzərində, brauzerin öz yaddaşında işləyir.
       </ToolNote>
     </div>
   );

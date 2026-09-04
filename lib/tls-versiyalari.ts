@@ -21,10 +21,10 @@ export type TlsVersionId = (typeof TLS_VERSIONS)[number];
 
 /** One line per version: when it was published, so the table needs no separate footnote. */
 export const TLS_VERSION_LABELS: Record<TlsVersionId, string> = {
-  TLSv1: "TLS 1.0 — 1999",
-  "TLSv1.1": "TLS 1.1 — 2006",
-  "TLSv1.2": "TLS 1.2 — 2008",
-  "TLSv1.3": "TLS 1.3 — 2018",
+  TLSv1: "TLS 1.0 (1999)",
+  "TLSv1.1": "TLS 1.1 (2006)",
+  "TLSv1.2": "TLS 1.2 (2008)",
+  "TLSv1.3": "TLS 1.3 (2018)",
 };
 
 /** The two versions every current guideline (PCI DSS, NIST, the major browsers) treats as retired. */
@@ -104,7 +104,7 @@ export function buildRow(version: TlsVersionId, outcome: TlsResult | ProbeFail):
     cipher: null,
     note:
       verdict === "unknown"
-        ? "Server bu cəhdə heç cavab vermədi — dəstəklənib-dəstəklənmədiyi bu sınaqdan bilinmir."
+        ? "Server bu cəhdə heç cavab vermədi: dəstəklənib-dəstəklənmədiyi bu sınaqdan bilinmir."
         : "Server bu versiyanı açıq şəkildə rədd etdi.",
   };
 }
@@ -128,12 +128,12 @@ export function summarizeVerdict(rows: readonly TlsVersionRow[]): string {
   if (modernSupported.length === rows.filter((row) => !row.risky).length && modernSupported.length > 0) {
     return anyUnknown
       ? "Yoxlanan versiyalardan dəstəklənənlər yalnız müasir TLS-dir, amma bəzi cəhd cavabsız qaldı."
-      : "Server yalnız müasir TLS versiyalarını qəbul edir — köhnə protokol açıq deyil.";
+      : "Server yalnız müasir TLS versiyalarını qəbul edir: köhnə protokol açıq deyil.";
   }
   if (modernSupported.length === 0 && riskySupported.length === 0) {
-    return "Heç bir versiya bu sınaqda dəstəklənmiş kimi görünmədi — server bu cəhdlərin heç birinə TLS səviyyəsində cavab vermədi.";
+    return "Heç bir versiya bu sınaqda dəstəklənmiş kimi görünmədi: server bu cəhdlərin heç birinə TLS səviyyəsində cavab vermədi.";
   }
-  return "Nəticə qarışıqdır — cədvələ bax: bəzi versiya dəstəklənir, bəzisi bu sınaqdan cavabsız qaldı.";
+  return "Nəticə qarışıqdır, cədvələ bax: bəzi versiya dəstəklənir, bəzisi bu sınaqdan cavabsız qaldı.";
 }
 
 export type TlsVersionReport = {

@@ -37,15 +37,15 @@ export type IpVersion = "v4" | "v6";
 export type IpClassification = { version: IpVersion; kind: AddressKind; label: string };
 
 export const ADDRESS_KIND_LABELS: Record<AddressKind, string> = {
-  public: "İctimai (public) — internetdə marşrutlana bilir",
-  private: "Xüsusi şəbəkə (RFC 1918) — yalnız yerli şəbəkədə",
-  loopback: "Loopback — maşının öz-özünə ünvanı",
-  "link-local": "Link-local — yalnız birbaşa qoşulu seqmentdə",
-  cgnat: "Operator NAT-ı (CGNAT, RFC 6598) — bir çox müştəri arasında paylaşılır",
-  multicast: "Multicast — bir yox, bir qrup alıcı üçün",
-  reserved: "Ayrılmış (reserved) — IANA tərəfindən xüsusi məqsədə saxlanılıb",
-  documentation: "Sənədləşmə bloku (RFC 5737 / RFC 3849) — nümunələrdə işlədilir, real şəbəkədə olmamalıdır",
-  "unique-local": "Unikal lokal (IPv6 ULA, fc00::/7) — IPv4-ün xüsusi şəbəkəsinin IPv6 qarşılığı",
+  public: "İctimai (public): internetdə marşrutlana bilir",
+  private: "Xüsusi şəbəkə (RFC 1918): yalnız yerli şəbəkədə",
+  loopback: "Loopback: maşının öz-özünə ünvanı",
+  "link-local": "Link-local: yalnız birbaşa qoşulu seqmentdə",
+  cgnat: "Operator NAT-ı (CGNAT, RFC 6598): bir çox müştəri arasında paylaşılır",
+  multicast: "Multicast: bir yox, bir qrup alıcı üçün",
+  reserved: "Ayrılmış (reserved): IANA tərəfindən xüsusi məqsədə saxlanılıb",
+  documentation: "Sənədləşmə bloku (RFC 5737 / RFC 3849): nümunələrdə işlədilir, real şəbəkədə olmamalıdır",
+  "unique-local": "Unikal lokal (IPv6 ULA, fc00::/7): IPv4-ün xüsusi şəbəkəsinin IPv6 qarşılığı",
 };
 
 type Ipv4Range = { base: string; bits: number; kind: AddressKind };

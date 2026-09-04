@@ -83,7 +83,7 @@ const groups: GroupSpec[] = [
       {
         key: "dau",
         label: "Gündəlik aktiv istifadəçi",
-        hint: "DAU — bir gün ərzində servisə toxunan istifadəçi sayı.",
+        hint: "DAU: bir gün ərzində servisə toxunan istifadəçi sayı.",
       },
       {
         key: "actionsPerUser",
@@ -98,7 +98,7 @@ const groups: GroupSpec[] = [
       {
         key: "peakFactor",
         label: "Pik əmsalı",
-        hint: "Pik saatın orta yükə nisbəti — adətən 2–5.",
+        hint: "Pik saatın orta yükə nisbəti, adətən 2–5.",
       },
     ],
   },
@@ -311,7 +311,7 @@ export function MiqyasTool() {
               sıxlıq yalnız pik əmsalı ilə verilir.
             </li>
             <li>
-              Diskdə yalnız yazılan gövdə qalır — indeks, WAL, sıxılma və backup
+              Diskdə yalnız yazılan gövdə qalır: indeks, WAL, sıxılma və backup
               bu hesaba daxil deyil.
             </li>
             <li>Keş yalnız oxuya təsir edir, yazma həmişə bazaya düşür.</li>
@@ -466,7 +466,7 @@ export function MiqyasTool() {
               {invalid.length > 0 && (
                 <div className="mb-3">
                   <ToolNote tone="accent" title="Rəqəm oxunmadı">
-                    Bu sahələr rəqəm kimi başa düşülmədi — mötərizədə hesabın
+                    Bu sahələr rəqəm kimi başa düşülmədi: mötərizədə hesabın
                     onların yerinə işlətdiyi dəyər var:{" "}
                     <strong className="font-semibold text-ink">
                       {invalid.join(", ")}
@@ -514,7 +514,7 @@ export function MiqyasTool() {
                 one reading on this rail that deserves the louder tone. */}
             <ToolStat
               label="Lazım olan node"
-              value={result.nodes === null ? "—" : formatNumber(result.nodes)}
+              value={result.nodes === null ? "" : formatNumber(result.nodes)}
               /* With no capacity there is no division to describe: the note
                  used to read "pik RPS ÷ 0 RPS" under a value of "—". */
               note={

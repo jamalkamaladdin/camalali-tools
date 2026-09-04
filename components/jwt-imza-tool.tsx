@@ -120,7 +120,7 @@ export function JwtImzaTool() {
     <div className="mt-8 space-y-5">
       <ToolNote tone="info" title="Ayrı alət, ayrı iş">
         Saytdakı <span className="font-mono text-xs">jwt</span> aləti yalnız token-i oxuyur, imzaya
-        toxunmur. Bu alət isə açarla işləyir — yeni token imzalayır və ya mövcud token-in imzasını
+        toxunmur. Bu alət isə açarla işləyir: yeni token imzalayır və ya mövcud token-in imzasını
         həmin açarla yoxlayır.
       </ToolNote>
 

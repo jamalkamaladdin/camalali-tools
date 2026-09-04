@@ -88,7 +88,7 @@ function PartyBlock({ title, party }: { title: string; party: Party }) {
         {title}
       </p>
       <p className="mt-1.5 text-[14px] font-medium" style={ink}>
-        {party.name.trim() || "—"}
+        {party.name.trim() || ""}
       </p>
       {party.taxId.trim() && <p className="mt-1">VÖEN {party.taxId}</p>}
       {party.address.trim() && <p>{party.address}</p>}
@@ -123,7 +123,7 @@ export function InvoiceSheet({ invoice }: { invoice: Invoice }) {
         <div>
           <h2 className="text-[22px] leading-tight">Hesab-faktura</h2>
           <p className="mt-1 text-[12px] tabular-nums" style={monoMuted}>
-            № {invoice.number.trim() || "—"} · {formatAzDate(invoice.date)}
+            № {invoice.number.trim() || ""} · {formatAzDate(invoice.date)}
           </p>
         </div>
         {invoice.dueDate && (
@@ -156,7 +156,7 @@ export function InvoiceSheet({ invoice }: { invoice: Invoice }) {
         <tbody>
           {invoice.items.map((item, index) => (
             <tr key={item.id} className="border-b align-top" style={rule}>
-              <td className="py-2.5 pr-2">{item.description.trim() || "—"}</td>
+              <td className="py-2.5 pr-2">{item.description.trim() || ""}</td>
               <td className="px-2 py-2.5 text-right tabular-nums" style={mono}>
                 {formatQuantity(item.quantity)}
               </td>
@@ -236,7 +236,7 @@ export function InvoiceSheet({ invoice }: { invoice: Invoice }) {
           <div key={role}>
             <div className="h-10 border-b" style={ruleStrong} />
             <p className="mt-1.5 text-[11px]" style={faint}>
-              {role} — imza, ad, soyad
+              {role}: imza, ad, soyad
             </p>
           </div>
         ))}

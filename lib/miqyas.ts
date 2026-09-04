@@ -181,7 +181,7 @@ export function calculateScale(raw: ScaleInput): ScaleResult {
   }
   if (tooLarge) {
     warnings.push(
-      "Çox böyük dəyər həddə salındı — nəticəni real plan kimi yox, yuxarı sərhəd kimi oxu.",
+      "Çox böyük dəyər həddə salındı: nəticəni real plan kimi yox, yuxarı sərhəd kimi oxu.",
     );
   }
 
@@ -222,7 +222,7 @@ export function calculateScale(raw: ScaleInput): ScaleResult {
     const needed = Math.ceil(peakRps / input.nodeCapacityRps);
     nodes = Number.isFinite(needed) ? needed : null;
   } else {
-    warnings.push("Node tutumu sıfırdır — node sayı hesablana bilmir.");
+    warnings.push("Node tutumu sıfırdır: node sayı hesablana bilmir.");
   }
 
   return {

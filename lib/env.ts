@@ -85,7 +85,7 @@ function parseEntryLine(line: string, lineNumber: number): EnvLine {
         kind: "unsupported",
         raw: line,
         lineNumber,
-        reason: "dırnaq bağlanmayıb — çoxsətirli dəyər dəstəklənmir",
+        reason: "dırnaq bağlanmayıb: çoxsətirli dəyər dəstəklənmir",
       };
     }
     const value = unescapeDoubleQuoted(trimmedRest.slice(1, closing));
@@ -101,7 +101,7 @@ function parseEntryLine(line: string, lineNumber: number): EnvLine {
         kind: "unsupported",
         raw: line,
         lineNumber,
-        reason: "dırnaq bağlanmayıb — çoxsətirli dəyər dəstəklənmir",
+        reason: "dırnaq bağlanmayıb: çoxsətirli dəyər dəstəklənmir",
       };
     }
     const value = trimmedRest.slice(1, closing);
@@ -206,7 +206,7 @@ export function jsonToEnv(jsonText: string): JsonToEnvResult {
   }
 
   if (parsed === null || typeof parsed !== "object" || Array.isArray(parsed)) {
-    return { ok: false, error: "JSON kökdə açar-dəyər obyekti olmalıdır — massiv və ya sadə dəyər deyil." };
+    return { ok: false, error: "JSON kökdə açar-dəyər obyekti olmalıdır: massiv və ya sadə dəyər deyil." };
   }
 
   const entries = Object.entries(parsed as Record<string, unknown>);
@@ -215,7 +215,7 @@ export function jsonToEnv(jsonText: string): JsonToEnvResult {
     if (value !== null && typeof value === "object") {
       return {
         ok: false,
-        error: `"${key}" açarının dəyəri iç-içə obyekt və ya massivdir — .env yalnız düz (sətir, ədəd, boolean) dəyərləri dəstəkləyir.`,
+        error: `"${key}" açarının dəyəri iç-içə obyekt və ya massivdir: .env yalnız düz (sətir, ədəd, boolean) dəyərləri dəstəkləyir.`,
       };
     }
     const stringValue = value === null ? "" : String(value);

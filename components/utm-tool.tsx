@@ -213,7 +213,7 @@ export function UtmTool() {
 
           {parsed === null ? (
             <p className="font-ui text-sm text-muted">
-              Kampaniya linki yapışdır — utm_ parametrləri və təmiz ünvan burada görünəcək.
+              Kampaniya linki yapışdır: utm_ parametrləri və təmiz ünvan burada görünəcək.
             </p>
           ) : parsed.error !== null ? (
             <ToolNote tone="accent" title="Düzgün URL deyil">
@@ -252,7 +252,7 @@ export function UtmTool() {
                   <ToolLabel>Digər sorğu parametrləri</ToolLabel>
                   <div className="mt-1.5 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
                     {parsed.extras.map(([key, value]) => (
-                      <ToolStat key={key} label={key} value={value || "—"} />
+                      <ToolStat key={key} label={key} value={value || ""} />
                     ))}
                   </div>
                 </div>

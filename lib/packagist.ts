@@ -38,7 +38,7 @@ export function parsePackagistName(raw: string): PackagistNameResult {
 
   const parts = value.split("/");
   if (parts.length !== 2) {
-    return { ok: false, error: "Ad vendor/paket formatındadır — tək '/' işarəsi olmalıdır." };
+    return { ok: false, error: "Ad vendor/paket formatındadır: tək '/' işarəsi olmalıdır." };
   }
 
   const [vendor, name] = parts;

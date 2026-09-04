@@ -161,7 +161,7 @@ export type Base64ToBytesResult = { ok: true; bytes: Uint8Array } | { ok: false;
 export function base64ToBytes(value: string): Base64ToBytesResult {
   const cleaned = value.replace(/\s+/g, "");
   if (cleaned === "") {
-    return { ok: false, error: "Boş sahə — Base64 mətnini yapışdır." };
+    return { ok: false, error: "Boş sahə: Base64 mətnini yapışdır." };
   }
 
   const normalised = cleaned.replaceAll("-", "+").replaceAll("_", "/");
@@ -181,7 +181,7 @@ export function base64ToBytes(value: string): Base64ToBytesResult {
     const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
     return { ok: true, bytes };
   } catch {
-    return { ok: false, error: "Base64 dekodlanmadı — mətn pozulmuş ola bilər." };
+    return { ok: false, error: "Base64 dekodlanmadı: mətn pozulmuş ola bilər." };
   }
 }
 

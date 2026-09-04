@@ -118,7 +118,7 @@ export function auditUtm(fields: UtmFields): UtmWarning[] {
     if (value !== foldCase(value)) {
       warnings.push({
         field,
-        message: `${fieldLabel(field)} böyük hərflə yazılıb — Google Analytics "Facebook" ilə "facebook"-u iki ayrı mənbə sayır, halbuki eyni kampaniyadır.`,
+        message: `${fieldLabel(field)} böyük hərflə yazılıb: Google Analytics "Facebook" ilə "facebook"-u iki ayrı mənbə sayır, halbuki eyni kampaniyadır.`,
         suggestion: foldCase(value),
       });
     }
@@ -126,7 +126,7 @@ export function auditUtm(fields: UtmFields): UtmWarning[] {
     if (/\s/.test(value)) {
       warnings.push({
         field,
-        message: `${fieldLabel(field)} boşluq daşıyır — keçiddə "%20" və ya "+" kimi görünüb hesabatı çirkləndirir.`,
+        message: `${fieldLabel(field)} boşluq daşıyır: keçiddə "%20" və ya "+" kimi görünüb hesabatı çirkləndirir.`,
         suggestion: slugifyParam(value),
       });
     }
@@ -152,7 +152,7 @@ export function auditUtm(fields: UtmFields): UtmWarning[] {
 export function buildUtmUrl(fields: UtmFields): { url: string | null; error: string | null } {
   const rawUrl = fields.url.trim();
   if (rawUrl === "") {
-    return { url: null, error: "Hədəf URL boşdur — kampaniyanın apardığı ünvanı yaz." };
+    return { url: null, error: "Hədəf URL boşdur: kampaniyanın apardığı ünvanı yaz." };
   }
 
   let target: URL;
@@ -161,7 +161,7 @@ export function buildUtmUrl(fields: UtmFields): { url: string | null; error: str
   } catch {
     return {
       url: null,
-      error: "Bu düzgün mütləq URL deyil — sxem daxil olmalıdır (https://…).",
+      error: "Bu düzgün mütləq URL deyil: sxem daxil olmalıdır (https://…).",
     };
   }
 
@@ -211,7 +211,7 @@ export function parseUtmUrl(raw: string): {
       fields: EMPTY_UTM,
       extras: [],
       cleanUrl: "",
-      error: "Boş sahə — hazır kampaniya linkini yapışdır.",
+      error: "Boş sahə, hazır kampaniya linkini yapışdır.",
     };
   }
 
@@ -223,7 +223,7 @@ export function parseUtmUrl(raw: string): {
       fields: EMPTY_UTM,
       extras: [],
       cleanUrl: "",
-      error: "Bu düzgün mütləq URL deyil — sxem daxil olmalıdır (https://…).",
+      error: "Bu düzgün mütləq URL deyil: sxem daxil olmalıdır (https://…).",
     };
   }
 

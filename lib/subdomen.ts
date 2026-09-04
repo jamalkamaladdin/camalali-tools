@@ -120,14 +120,14 @@ export function readDomain(value: string): DomainCheck {
   const domain = normaliseDomain(value);
 
   if (domain === "") {
-    return { ok: false, error: "Domen adı yaz — məsələn camalali.com." };
+    return { ok: false, error: "Domen adı yaz: məsələn camalali.com." };
   }
 
   if (!ASCII.test(domain)) {
     return {
       ok: false,
       error:
-        "Latın əlifbasından kənar hərf var. Sertifikat loqu belə domenləri punycode formasında saxlayır — «xn--» ilə başlayan formanı yaz.",
+        "Latın əlifbasından kənar hərf var. Sertifikat loqu belə domenləri punycode formasında saxlayır: «xn--» ilə başlayan formanı yaz.",
     };
   }
 

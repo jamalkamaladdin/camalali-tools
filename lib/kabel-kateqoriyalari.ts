@@ -102,7 +102,7 @@ export const kabelKateqoriyalariRows: ReferenceRow[] = [
     label: "25/40 Gbit/s, 30 m (2000 MHz), RJ45-uyğun",
     note: "ISO/IEC-in Class I spesifikasiyasıdır, 25GBASE-T və 40GBASE-T sürətini yalnız 30 metrə qədər verir. Bina kabeli deyil, data-mərkəzində top-of-rack switch ilə server arasındakı qısa bağlantı üçün nəzərdə tutulub. Adi RJ45 ilə geriyə uyğundur.",
     section: "mis",
-    example: "Top-of-rack switch — server rack bağlantısı",
+    example: "Top-of-rack switch: server rack bağlantısı",
     match: ["class i", "kateqoriya 8", "25gbase-t", "40gbase-t"],
   },
   {

@@ -214,10 +214,10 @@ export function SerpOnizlemeTool() {
       )}
 
       <ToolNote tone="accent" title="Rəqəm təxmindir, qutu isə deyil">
-        Piksel eni hər hərfin Arial cədvəlindəki eninin cəmidir — azərbaycan hərfləri də cədvəldədir.
+        Piksel eni hər hərfin Arial cədvəlindəki eninin cəmidir: azərbaycan hərfləri də cədvəldədir.
         Google öz şrifti ilə çəkdiyinə görə rəqəm adətən bir neçə faiz fərqlə düşür, yəni bu, təxmindir.
         Yuxarıdakı önizləmə isə təxmin deyil: qutu bildirilən sətir enində sabit saxlanılır və mətni
-        brauzerin öz kəsmə qaydası kəsir. Dar pəncərədə qutu daralmır — sətir sürüşür, çünki eni
+        brauzerin öz kəsmə qaydası kəsir. Dar pəncərədə qutu daralmır: sətir sürüşür, çünki eni
         dəyişsə kəsilmə də yalan olardı.
       </ToolNote>
     </div>
@@ -276,7 +276,7 @@ function SnippetPreview({ device, fields }: { device: SerpDevice; fields: Fields
         </p>
 
         <p className="mt-1 overflow-hidden" style={clampToLines}>
-          {date !== "" && <span className="text-muted">{date} — </span>}
+          {date !== "" && <span className="text-muted">{date} · </span>}
           {description}
         </p>
       </div>

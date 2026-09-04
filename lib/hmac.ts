@@ -32,7 +32,7 @@ export type HmacVerification =
   | { ok: false; error: string };
 
 const NO_SUBTLE_ERROR =
-  "Bu səhifə kriptoqrafiya funksiyasına icazə verməyən ünvandan açılıb — HMAC hesablamaq üçün https və ya localhost lazımdır.";
+  "Bu səhifə kriptoqrafiya funksiyasına icazə verməyən ünvandan açılıb: HMAC hesablamaq üçün https və ya localhost lazımdır.";
 
 const HEX_PATTERN = /^[0-9a-fA-F]*$/;
 
@@ -90,7 +90,7 @@ function decodeKey(
   if (bytes === null) {
     return {
       ok: false,
-      error: "Açar düzgün hex deyil — yalnız 0-9, a-f simvolları və cüt sayda simvol qəbul edilir.",
+      error: "Açar düzgün hex deyil: yalnız 0-9, a-f simvolları və cüt sayda simvol qəbul edilir.",
     };
   }
   return { ok: true, bytes };

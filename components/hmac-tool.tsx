@@ -140,8 +140,8 @@ export function HmacTool() {
               htmlFor="hmac-key"
               note={
                 keyEncoding === "hex"
-                  ? "Cüt sayda hex simvol (0-9, a-f) — məsələn Stripe kimi xidmətlərin verdiyi açar formatı."
-                  : "Adi mətn — hər hərf öz UTF-8 baytına çevrilir."
+                  ? "Cüt sayda hex simvol (0-9, a-f), məsələn Stripe kimi xidmətlərin verdiyi açar formatı."
+                  : "Adi mətn: hər hərf öz UTF-8 baytına çevrilir."
               }
             >
               <ToolInput
@@ -194,7 +194,7 @@ export function HmacTool() {
         <ToolNote tone={state.matches ? "info" : "accent"} title={state.matches ? "Uyğundur" : "Uyğun deyil"}>
           {state.matches
             ? "Hesablanan HMAC yazdığın gözlənilən dəyərlə eynidir."
-            : "Hesablanan HMAC yazdığın gözlənilən dəyərdən fərqlidir — açar, alqoritm və ya mətn səhv ola bilər."}
+            : "Hesablanan HMAC yazdığın gözlənilən dəyərdən fərqlidir: açar, alqoritm və ya mətn səhv ola bilər."}
         </ToolNote>
       )}
 

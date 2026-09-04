@@ -59,7 +59,7 @@ function loadImageElement(source: string): Promise<HTMLImageElement> {
     const image = new Image();
     image.onload = () => resolve(image);
     image.onerror = () =>
-      reject(new Error("Şəkil açılmadı — fayl zədəlidir və ya brauzer bu formatı tanımır."));
+      reject(new Error("Şəkil açılmadı: fayl zədəlidir və ya brauzer bu formatı tanımır."));
     image.src = source;
   });
 }
@@ -80,7 +80,7 @@ async function readFromFile(file: File): Promise<QrDecodeResult> {
       return {
         ok: false,
         stage: "image",
-        error: "Şəklin ölçüsü sıfır çıxdı — fayl boşdur və ya zədəlidir.",
+        error: "Şəklin ölçüsü sıfır çıxdı: fayl boşdur və ya zədəlidir.",
       };
     }
 
@@ -96,7 +96,7 @@ async function readFromFile(file: File): Promise<QrDecodeResult> {
       return {
         ok: false,
         stage: "image",
-        error: "2D kontekst alınmadı — brauzer canvas-ı dəstəkləmir, ona görə piksellər oxunmadı.",
+        error: "2D kontekst alınmadı: brauzer canvas-ı dəstəkləmir, ona görə piksellər oxunmadı.",
       };
     }
     // A transparent PNG would otherwise read as black over black; the paper is
@@ -229,7 +229,7 @@ export function QrOxuyucuTool() {
               >
                 <span className="font-ui text-sm">QR şəklini seç və ya bura sürüşdür</span>
                 <span className="font-ui text-xs text-muted">
-                  PNG · JPEG · WebP — ekran görüntüsü də olar
+                  PNG · JPEG · WebP, ekran görüntüsü də olar
                 </span>
               </label>
             </div>
@@ -244,14 +244,14 @@ export function QrOxuyucuTool() {
             )}
 
             <ToolNote>
-              Şəkil heç yerə göndərilmir — brauzerin öz canvas-ında oxunur, QR-in modul şəbəkəsi və
+              Şəkil heç yerə göndərilmir: brauzerin öz canvas-ında oxunur, QR-in modul şəbəkəsi və
               mətni elə burada qurulur.
             </ToolNote>
 
             <ToolNote title="Nə oxunur">
               Versiya 1–10 (21×21 … 57×57 modul), rəqəm, alfanumerik və bayt rejimləri. Şəkil
               QR-in müstəvisinə paralel olmalıdır: 90 dərəcəlik dönmə problem deyil, bucaq altından
-              çəkilmiş foto isə oxunmur — alət perspektivi düzəltmir və səhv mətn qaytarmaqdansa
+              çəkilmiş foto isə oxunmur: alət perspektivi düzəltmir və səhv mətn qaytarmaqdansa
               səbəbi deyir.
             </ToolNote>
           </div>
@@ -283,7 +283,7 @@ export function QrOxuyucuTool() {
 
                 {looksLikeAddress && (
                   <ToolNote tone="accent">
-                    Bu QR ünvan daşıyır. Açmazdan əvvəl ünvanı oxu — QR-in özündən domenin kimə aid
+                    Bu QR ünvan daşıyır. Açmazdan əvvəl ünvanı oxu: QR-in özündən domenin kimə aid
                     olduğu görünmür, ona görə alət onu link kimi vermir.
                   </ToolNote>
                 )}
@@ -341,7 +341,7 @@ export function QrOxuyucuTool() {
                 {decoded.moduleSize !== null && (
                   <ToolNote>
                     Şəbəkə {decoded.moduleSize.toFixed(1)} piksel/modul ölçüsü ilə oxundu. Bu rəqəm
-                    2-dən aşağı düşəndə oxunuş kövrəkləşir — belə halda QR-i daha yaxından çək.
+                    2-dən aşağı düşəndə oxunuş kövrəkləşir: belə halda QR-i daha yaxından çək.
                   </ToolNote>
                 )}
               </>

@@ -163,7 +163,7 @@ export function parseDelimited(text: string): {
     return {
       rows,
       delimiter,
-      error: "Dırnaq bağlanmayıb — mətnin sonuna qədər bir sahə açıq qaldı. Nəticə natamam ola bilər.",
+      error: "Dırnaq bağlanmayıb: mətnin sonuna qədər bir sahə açıq qaldı. Nəticə natamam ola bilər.",
     };
   }
 

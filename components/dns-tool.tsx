@@ -235,7 +235,7 @@ function Section({ section }: { section: DnsSection }) {
               <span className="font-ui text-[11px] text-muted">
                 {/* A dash is the honest reading here: Node's resolver simply
                     does not report TTL outside A and AAAA. */}
-                {record.ttl === null ? "TTL —" : `TTL ${formatDuration(record.ttl)}`}
+                {record.ttl === null ? "TTL yoxdur" : `TTL ${formatDuration(record.ttl)}`}
               </span>
               {record.note !== undefined && (
                 <p className="w-full font-ui text-[11px] text-muted">{record.note}</p>

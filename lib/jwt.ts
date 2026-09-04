@@ -83,14 +83,14 @@ export function claimToDate(value: unknown): Date | null {
 export function decodeJwt(token: string, now: Date = new Date()): JwtResult {
   const trimmed = token.trim();
   if (trimmed === "") {
-    return { ok: false, error: "Boş sahə — JWT token yapışdır." };
+    return { ok: false, error: "Boş sahə: JWT token yapışdır." };
   }
 
   const parts = trimmed.split(".");
   if (parts.length !== 3) {
     return {
       ok: false,
-      error: `Token 3 hissədən ibarət olmalıdır (header.payload.imza) — tapılan hissə sayı: ${parts.length}.`,
+      error: `Token 3 hissədən ibarət olmalıdır (header.payload.imza), tapılan hissə sayı: ${parts.length}.`,
     };
   }
 
@@ -112,14 +112,14 @@ export function decodeJwt(token: string, now: Date = new Date()): JwtResult {
 
   if (header.value.alg === "none") {
     warnings.push(
-      'Header-də alg dəyəri "none" — bu token imzasızdır, məzmununu heç bir açar olmadan dəyişmək mümkündür.',
+      'Header-də alg dəyəri "none": bu token imzasızdır, məzmununu heç bir açar olmadan dəyişmək mümkündür.',
     );
   }
 
   const checkNumericClaim = (claim: "iat" | "exp" | "nbf") => {
     const raw = payload.value[claim];
     if (raw !== undefined && claimToDate(raw) === null) {
-      warnings.push(`${claim} claim-i rəqəm deyil — vaxt hesablana bilmədi.`);
+      warnings.push(`${claim} claim-i rəqəm deyil: vaxt hesablana bilmədi.`);
     }
   };
   checkNumericClaim("iat");
@@ -142,10 +142,10 @@ export function decodeJwt(token: string, now: Date = new Date()): JwtResult {
 
 /** Short Azerbaijani gloss for the handful of registered claims worth calling out. */
 export const STANDARD_CLAIM_NOTES: Record<string, string> = {
-  iss: "İssuer — token-i buraxan xidmət.",
-  sub: "Subject — token-in aid olduğu istifadəçi və ya varlıq.",
-  aud: "Audience — token-i qəbul etməli olan xidmət.",
-  jti: "JWT ID — bu konkret token-in unikal identifikatoru.",
-  scope: "Scope — token-in icazə verdiyi əməliyyatların siyahısı.",
-  azp: "Authorized party — token-i tələb edən client tətbiq.",
+  iss: "İssuer: token-i buraxan xidmət.",
+  sub: "Subject: token-in aid olduğu istifadəçi və ya varlıq.",
+  aud: "Audience: token-i qəbul etməli olan xidmət.",
+  jti: "JWT ID: bu konkret token-in unikal identifikatoru.",
+  scope: "Scope: token-in icazə verdiyi əməliyyatların siyahısı.",
+  azp: "Authorized party: token-i tələb edən client tətbiq.",
 };

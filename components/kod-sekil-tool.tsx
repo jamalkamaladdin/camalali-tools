@@ -333,7 +333,7 @@ export function KodSekilTool() {
     if (!canvas) return;
     canvas.toBlob((blob) => {
       if (!blob) {
-        setActionNote("PNG hazırlanmadı — brauzer bu kodlaşdırmanı dəstəkləmədi.");
+        setActionNote("PNG hazırlanmadı: brauzer bu kodlaşdırmanı dəstəkləmədi.");
         return;
       }
       const url = URL.createObjectURL(blob);
@@ -349,19 +349,19 @@ export function KodSekilTool() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     if (typeof window === "undefined" || !("ClipboardItem" in window) || !navigator.clipboard?.write) {
-      setActionNote("Bu brauzer şəkli birbaşa panoya kopyalamağı dəstəkləmir — PNG kimi endir.");
+      setActionNote("Bu brauzer şəkli birbaşa panoya kopyalamağı dəstəkləmir, PNG kimi endir.");
       return;
     }
     canvas.toBlob(async (blob) => {
       if (!blob) {
-        setActionNote("Şəkil hazırlanmadı — panoya kopyalama alınmadı.");
+        setActionNote("Şəkil hazırlanmadı: panoya kopyalama alınmadı.");
         return;
       }
       try {
         await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
         setActionNote("Şəkil panoya kopyalandı.");
       } catch {
-        setActionNote("Panoya kopyalama alınmadı — brauzer icazə vermədi.");
+        setActionNote("Panoya kopyalama alınmadı: brauzer icazə vermədi.");
       }
     }, "image/png");
   }
@@ -528,7 +528,7 @@ export function KodSekilTool() {
             </div>
 
             <ToolNote>
-              Kod heç yerə göndərilmir — sintaksis vurğulanması və şəkil generasiyası tamamilə
+              Kod heç yerə göndərilmir: sintaksis vurğulanması və şəkil generasiyası tamamilə
               brauzerdə aparılır, dil və tema qrammatikaları artıq saytın öz JS-inə yığılıb.
             </ToolNote>
 

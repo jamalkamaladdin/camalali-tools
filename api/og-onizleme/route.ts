@@ -96,7 +96,7 @@ export async function GET(request: Request) {
     if (fetched.redirectedTo !== null) {
       issues.unshift({
         severity: "xeta",
-        message: `Ünvan ${fetched.status} yönləndirməsi qaytardı və səhifənin özü açılmadı. Yönləndirmə izlənmir — «${fetched.redirectedTo}» ünvanını olduğu kimi kopyalayıb yenidən yoxla.`,
+        message: `Ünvan ${fetched.status} yönləndirməsi qaytardı və səhifənin özü açılmadı. Yönləndirmə izlənmir: «${fetched.redirectedTo}» ünvanını olduğu kimi kopyalayıb yenidən yoxla.`,
       });
     } else if (fetched.status !== 200) {
       issues.unshift({
@@ -108,7 +108,7 @@ export async function GET(request: Request) {
     if (!looksLikeHtml(contentType)) {
       issues.unshift({
         severity: "xeberdarliq",
-        message: `Cavabın növü «${contentType}» — HTML deyil. Meta teqləri yalnız HTML səhifədə axtarmaq mənalıdır.`,
+        message: `Cavabın növü «${contentType}»: HTML deyil. Meta teqləri yalnız HTML səhifədə axtarmaq mənalıdır.`,
       });
     }
 

@@ -39,7 +39,7 @@ export function decodeWithStyle(text: string, style: EncodingStyle): DecodeOutco
   } catch {
     return {
       ok: false,
-      error: "Yanlış faiz-kodlaşdırma ardıcıllığı — % işarəsindən sonra iki onaltılıq rəqəm gözlənilir.",
+      error: "Yanlış faiz-kodlaşdırma ardıcıllığı: % işarəsindən sonra iki onaltılıq rəqəm gözlənilir.",
     };
   }
 }
@@ -171,7 +171,7 @@ export type ParsedUrl =
 export function parseUrl(raw: string): ParsedUrl {
   const trimmed = raw.trim();
   if (trimmed === "") {
-    return { ok: false, error: "Boş sahə — URL yapışdır." };
+    return { ok: false, error: "Boş sahə: URL yapışdır." };
   }
 
   let url: URL;
@@ -180,7 +180,7 @@ export function parseUrl(raw: string): ParsedUrl {
   } catch {
     return {
       ok: false,
-      error: "Bu düzgün mütləq URL deyil — sxem daxil olmalıdır (https://, mailto: və s.).",
+      error: "Bu düzgün mütləq URL deyil: sxem daxil olmalıdır (https://, mailto: və s.).",
     };
   }
 

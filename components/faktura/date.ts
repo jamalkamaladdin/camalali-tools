@@ -15,7 +15,7 @@ import { dateToIso, isoAddDays, isoToDate } from "../../shared/invoice/dates";
 /** "2026-09-01" → "1 sentyabr 2026". An empty or broken date reads as a dash. */
 export function formatAzDate(iso: string): string {
   const date = isoToDate(iso);
-  if (!date) return iso.trim() || "—";
+  if (!date) return iso.trim() || "";
   return azLongDate(date);
 }
 

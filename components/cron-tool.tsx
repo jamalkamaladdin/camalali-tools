@@ -129,7 +129,7 @@ export function CronTool() {
         <div className="mt-4">
           {empty ? (
             <ToolNote>
-              İfadəni yaz və ya nümunələrdən birini seç — izah və növbəti icra
+              İfadəni yaz və ya nümunələrdən birini seç: izah və növbəti icra
               vaxtları dərhal görünəcək.
             </ToolNote>
           ) : parsed.ok ? (
@@ -191,7 +191,7 @@ function NextRunsContent({
     return (
       <ToolNote tone="accent" title="Bu ifadə heç vaxt icra olunmur">
         Növbəti {schedule.horizonYears} il ərzində bu şərtə uyğun bir tarix
-        yoxdur. Adətən səbəb ayın günü ilə ayın uyğunsuzluğudur — məsələn 30
+        yoxdur. Adətən səbəb ayın günü ilə ayın uyğunsuzluğudur: məsələn 30
         fevral və ya 31 aprel.
       </ToolNote>
     );
@@ -231,7 +231,7 @@ function NextRunsContent({
       </ToolResultPanel>
 
       <p className="mt-3 font-ui text-xs text-muted">
-        Vaxtlar bu cihazın yerli saatı ilədir. Server çox vaxt UTC-də işləyir —
+        Vaxtlar bu cihazın yerli saatı ilədir. Server çox vaxt UTC-də işləyir:
         fərqi nəzərə al.
       </p>
     </>

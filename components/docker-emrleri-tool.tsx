@@ -14,7 +14,7 @@ export function DockerEmrleriTool() {
       rows={dockerEmrleriRows}
       sections={dockerEmrleriSections}
       placeholder="Əmr və ya açar söz axtar (məsələn: prune, compose, volume)"
-      footnote="Nümunələrdəki əmrlər işləkdir, amma konteyner və şəkil adları uydurmadır — öz adlarınla əvəz et."
+      footnote="Nümunələrdəki əmrlər işləkdir, amma konteyner və şəkil adları uydurmadır: öz adlarınla əvəz et."
     />
   );
 }

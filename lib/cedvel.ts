@@ -123,7 +123,7 @@ export function parseMarkdownTable(text: string): TableParseResult {
   if (aligns.length !== headers.length) {
     return {
       ok: false,
-      error: `Ayırıcı sətirdə ${aligns.length} sütun var, başlıqda ${headers.length} — say uyğun gəlmir.`,
+      error: `Ayırıcı sətirdə ${aligns.length} sütun var, başlıqda ${headers.length}: say uyğun gəlmir.`,
       line: headerIndex + 2,
     };
   }
@@ -137,7 +137,7 @@ export function parseMarkdownTable(text: string): TableParseResult {
     if (cells.length !== headers.length) {
       return {
         ok: false,
-        error: `${i + 1}-ci sətirdə ${cells.length} sütun var, başlıqda ${headers.length} — say uyğun gəlmir.`,
+        error: `${i + 1}-ci sətirdə ${cells.length} sütun var, başlıqda ${headers.length}: say uyğun gəlmir.`,
         line: i + 1,
       };
     }
@@ -227,7 +227,7 @@ export function parseHtmlTable(text: string): TableParseResult {
   );
 
   if (parsedRows[0].length === 0 || !parsedRows[0].some((cell) => cell.isHeader)) {
-    return { ok: false, error: "Başlıq sətri tapılmadı — ilk <tr> ən azı bir <th> xanası daşımalıdır." };
+    return { ok: false, error: "Başlıq sətri tapılmadı: ilk <tr> ən azı bir <th> xanası daşımalıdır." };
   }
 
   const headers = parsedRows[0].map((cell) => cell.text);
@@ -237,7 +237,7 @@ export function parseHtmlTable(text: string): TableParseResult {
     if (cells.length !== headers.length) {
       return {
         ok: false,
-        error: `${r + 1}-ci <tr> sətrində ${cells.length} xana var, başlıqda ${headers.length} — say uyğun gəlmir.`,
+        error: `${r + 1}-ci <tr> sətrində ${cells.length} xana var, başlıqda ${headers.length}: say uyğun gəlmir.`,
       };
     }
     rows.push(cells);
@@ -345,7 +345,7 @@ export function parseCsvTable(text: string, delimiter: CsvDelimiter): TableParse
     if (row.length !== header.length) {
       return {
         ok: false,
-        error: `${index + 2}-ci sətirdə ${row.length} sütun var, başlıqda ${header.length} — say uyğun gəlmir.`,
+        error: `${index + 2}-ci sətirdə ${row.length} sütun var, başlıqda ${header.length}: say uyğun gəlmir.`,
         line: index + 2,
       };
     }
@@ -381,7 +381,7 @@ export function parseJsonTable(text: string): TableParseResult {
 
   const value = parsed.value;
   if (!Array.isArray(value)) {
-    return { ok: false, error: "Cədvələ çevirmək üçün JSON-un kökü massiv olmalıdır — məsələn [{...}, {...}]." };
+    return { ok: false, error: "Cədvələ çevirmək üçün JSON-un kökü massiv olmalıdır, məsələn [{...}, {...}]." };
   }
   if (value.length === 0) return { ok: true, table: { headers: [], aligns: [], rows: [] } };
 

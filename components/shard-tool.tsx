@@ -147,7 +147,7 @@ export function ShardTool() {
           <div className="p-4 pt-0">
             <ToolNote>
               Bir şarda düşən orta yük indi {formatGb(plan.projections[0].avgLoadPerShardGb)}-dir. Şard sayı yalnız
-              tutum dolduqda artır — ona görə proqnozlar pilləli, hamar deyil.
+              tutum dolduqda artır: ona görə proqnozlar pilləli, hamar deyil.
             </ToolNote>
           </div>
         </ToolResultPanel>

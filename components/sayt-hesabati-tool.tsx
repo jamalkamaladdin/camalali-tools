@@ -129,7 +129,7 @@ export function SaytHesabatiTool() {
     <div className="mt-8 space-y-5">
       <ToolNote tone="accent" title="Bu alət ünvanı serverə göndərir">
         Yazdığın saytı sənin brauzerin yox, bu saytın serveri açır: səhifənin özü, onun http
-        variantı, /robots.txt və sitemap faylı — dörd sorğu, üstəgəl sertifikat üçün bir TLS
+        variantı, /robots.txt və sitemap faylı: dörd sorğu, üstəgəl sertifikat üçün bir TLS
         əlaqəsi. Ona görə burada dəqiqədə cəmi beş hesabat qurmaq olar. Daxili şəbəkə ünvanları
         (localhost, 10.x, 192.168.x) və 80/443-dən başqa portlar rədd edilir.
       </ToolNote>
@@ -181,7 +181,7 @@ export function SaytHesabatiTool() {
 
       {state.phase === "loading" && (
         <p className="font-ui text-sm text-muted">
-          <span className="font-mono">{state.url}</span> yoxlanır — beş əlaqə qurulur, bu bir neçə
+          <span className="font-mono">{state.url}</span> yoxlanır: beş əlaqə qurulur, bu bir neçə
           saniyə çəkir…
         </p>
       )}
@@ -226,7 +226,7 @@ function Report({ payload }: { payload: SiteReportPayload }) {
   /* The plain-text copy is the report's portable form: somebody who wants to
      hand it to a developer should not have to screenshot four panels. */
   const asText = [
-    `${report.url} — ${formatAzStamp(new Date(report.checkedAt))}`,
+    `${report.url} (${formatAzStamp(new Date(report.checkedAt))})`,
     report.headline,
     "",
     ...SECTION_ORDER.flatMap((section) => [
@@ -235,7 +235,7 @@ function Report({ payload }: { payload: SiteReportPayload }) {
         .filter((check) => check.section === section)
         .map(
           (check) =>
-            `- [${STATUS_LABELS[check.status]}] ${check.label}${check.value === null ? "" : `: ${check.value}`} — ${check.detail}${check.fix === null ? "" : ` Düzəliş: ${check.fix}`}`,
+            `- [${STATUS_LABELS[check.status]}] ${check.label}${check.value === null ? "" : `: ${check.value}`}: ${check.detail}${check.fix === null ? "" : ` Düzəliş: ${check.fix}`}`,
         ),
       "",
     ]),
@@ -267,8 +267,8 @@ function Report({ payload }: { payload: SiteReportPayload }) {
           <ul className="space-y-1 font-mono text-xs break-all">
             <li>səhifə: {report.url}</li>
             <li>http variantı: {payload.httpUrl ?? "yoxlanmadı"}</li>
-            <li>robots: {payload.robotsUrl ?? "—"}</li>
-            <li>sitemap: {payload.sitemapUrl ?? "—"}</li>
+            <li>robots: {payload.robotsUrl ?? "yoxdur"}</li>
+            <li>sitemap: {payload.sitemapUrl ?? "yoxdur"}</li>
             <li>yönləndirmə: {payload.redirectedTo ?? "yoxdur"}</li>
             <li>oxunma vaxtı: {formatAzStamp(new Date(report.checkedAt))}</li>
           </ul>

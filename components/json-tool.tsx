@@ -238,7 +238,7 @@ export function JsonTool() {
 
             {byteLength(input) > LARGE_INPUT_BYTES && (
               <ToolNote tone="info" title="Böyük giriş" className="mt-4">
-                Giriş {formatBytes(byteLength(input))} ölçüsündədir — emal davam edir, amma bu
+                Giriş {formatBytes(byteLength(input))} ölçüsündədir: emal davam edir, amma bu
                 qədər böyük mətndə brauzer bir az yavaşlaya bilər.
               </ToolNote>
             )}
@@ -254,7 +254,7 @@ export function JsonTool() {
                 <strong className="font-semibold text-ink">
                   {result.duplicateKeys.join(", ")}
                 </strong>
-                . JSON oxunanda yalnız sonuncu dəyər saxlanılır, əvvəlkilər itir — nəticədə
+                . JSON oxunanda yalnız sonuncu dəyər saxlanılır, əvvəlkilər itir: nəticədə
                 onlar görünməyəcək.
               </ToolNote>
             )}

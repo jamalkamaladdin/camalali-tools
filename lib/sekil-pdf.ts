@@ -262,7 +262,7 @@ export async function buildImagesPdf(
   options: SekilPdfOptions,
 ): Promise<SekilPdfResult> {
   if (images.length === 0) {
-    return { ok: false, error: "Heç bir şəkil yoxdur — əvvəlcə şəkil əlavə et." };
+    return { ok: false, error: "Heç bir şəkil yoxdur: əvvəlcə şəkil əlavə et." };
   }
   if (images.length > MAX_IMAGES) {
     return { ok: false, error: `Ən çoxu ${MAX_IMAGES} şəkil bir PDF-ə yığıla bilər.` };
@@ -290,14 +290,14 @@ export async function buildImagesPdf(
       if (format === null) {
         return {
           ok: false,
-          error: `"${source.name}" PNG və ya JPEG deyil — yalnız bu iki format dəstəklənir.`,
+          error: `"${source.name}" PNG və ya JPEG deyil: yalnız bu iki format dəstəklənir.`,
         };
       }
       try {
         const image = format === "png" ? await doc.embedPng(source.bytes) : await doc.embedJpg(source.bytes);
         embedded.push({ image, pixels: { width: image.width, height: image.height } });
       } catch {
-        return { ok: false, error: `"${source.name}" açıla bilmədi — fayl zədəli ola bilər.` };
+        return { ok: false, error: `"${source.name}" açıla bilmədi: fayl zədəli ola bilər.` };
       }
     }
 
@@ -306,7 +306,7 @@ export async function buildImagesPdf(
     const marginPt = mmToPoints(Math.max(0, options.marginMm));
     const box = contentBox(pageSize, marginPt);
     if (!box) {
-      return { ok: false, error: "Kənar boşluq səhifədən böyükdür — daha kiçik dəyər seç." };
+      return { ok: false, error: "Kənar boşluq səhifədən böyükdür: daha kiçik dəyər seç." };
     }
 
     const gapPt = mmToPoints(Math.max(0, options.gapMm));
@@ -323,7 +323,7 @@ export async function buildImagesPdf(
     if (perPage > 1 && gridCells(box, grid, gapPt).length === 0) {
       return {
         ok: false,
-        error: "Şəbəkə xanaları hesablana bilmədi — sətir/sütun sayını azalt və ya xanalar arası boşluğu kiçilt.",
+        error: "Şəbəkə xanaları hesablana bilmədi: sətir/sütun sayını azalt və ya xanalar arası boşluğu kiçilt.",
       };
     }
 
@@ -361,6 +361,6 @@ export async function buildImagesPdf(
     // allocates a fresh, concrete `ArrayBuffer` and narrows the type with it.
     return { ok: true, bytes: new Uint8Array(saved), pageCount };
   } catch {
-    return { ok: false, error: "PDF qurula bilmədi — naməlum xəta baş verdi." };
+    return { ok: false, error: "PDF qurula bilmədi: naməlum xəta baş verdi." };
   }
 }

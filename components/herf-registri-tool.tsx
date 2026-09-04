@@ -77,7 +77,7 @@ export function HerfRegistriTool() {
         action={<CopyButton value={output} label="nəticəni kopyala" />}
       >
         <div className="p-4">
-          <ToolOutput>{output || "—"}</ToolOutput>
+          <ToolOutput>{output || ""}</ToolOutput>
         </div>
       </ToolResultPanel>
 
@@ -120,7 +120,7 @@ export function HerfRegistriTool() {
           <ToolNote tone={agreement.agrees ? "info" : "accent"}>
             {agreement.agrees
               ? "Bu brauzerin öz lokal funksiyası (toLocaleLowerCase/\"az\") bu dörd hərfdə alətin öz cədvəli ilə üst-üstə düşür."
-              : `Bu brauzerin lokal funksiyası bu dörd hərfin bəzisində alətin öz cədvəlindən fərqlənir (${agreement.mismatches.join(", ")}) — ona görə nəticə həmişə alətin öz cədvəlinə görə hesablanır, lokal funksiyaya görə yox.`}
+              : `Bu brauzerin lokal funksiyası bu dörd hərfin bəzisində alətin öz cədvəlindən fərqlənir (${agreement.mismatches.join(", ")}): ona görə nəticə həmişə alətin öz cədvəlinə görə hesablanır, lokal funksiyaya görə yox.`}
           </ToolNote>
         </div>
       </ToolResultPanel>

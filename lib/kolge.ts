@@ -61,7 +61,7 @@ export function hexOpacityToRgba(
 ): { ok: true; color: Rgba } | { ok: false; error: string } {
   const parsed = parseHex(hex.trim());
   if (!parsed) {
-    return { ok: false, error: "Rəng HEX formatında deyil — #rrggbb gözlənilir." };
+    return { ok: false, error: "Rəng HEX formatında deyil: #rrggbb gözlənilir." };
   }
   if (!Number.isFinite(opacity) || opacity < 0 || opacity > 1) {
     return { ok: false, error: "Qatılıq 0 ilə 1 arasında olmalıdır." };

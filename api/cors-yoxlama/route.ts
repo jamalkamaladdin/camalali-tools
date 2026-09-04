@@ -67,7 +67,7 @@ async function callOnce(url: string, method: string, extraHeaders: Record<string
     const aborted = error instanceof Error && error.name === "AbortError";
     return {
       ok: false,
-      message: aborted ? "Sayt 8 saniyə ərzində cavab vermədi." : "Saytla əlaqə qurulmadı — ünvan işləyirmi, yoxla.",
+      message: aborted ? "Sayt 8 saniyə ərzində cavab vermədi." : "Saytla əlaqə qurulmadı: ünvan işləyirmi, yoxla.",
     };
   } finally {
     clearTimeout(deadline);
@@ -92,7 +92,7 @@ export async function GET(request: Request) {
 
   const rawMethod = (params.get("metod") ?? "").toUpperCase();
   if (!ALLOWED_METHODS.has(rawMethod)) {
-    return fail(`«${rawMethod}» metodu dəstəklənmir — GET, POST, PUT, PATCH və ya DELETE seç.`);
+    return fail(`«${rawMethod}» metodu dəstəklənmir: GET, POST, PUT, PATCH və ya DELETE seç.`);
   }
 
   const headersCheck = parseRequestHeadersInput(params.get("basliqlar") ?? "");

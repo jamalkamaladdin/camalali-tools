@@ -62,7 +62,7 @@ export function SecurityTxtTool() {
       <ToolNote tone="accent" title="Bu alət sorğunu serverə göndərir">
         Yazdığın domenin <span className="font-mono text-xs">/.well-known/security.txt</span> və
         lazım gələrsə <span className="font-mono text-xs">/security.txt</span> ünvanını sənin
-        brauzerin yox, bu saytın serveri açır — başqa heç bir səhifəyə toxunulmur.
+        brauzerin yox, bu saytın serveri açır: başqa heç bir səhifəyə toxunulmur.
       </ToolNote>
 
       <ToolPanel>
@@ -131,13 +131,13 @@ function Report({ report }: { report: SecurityTxtLiveReport }) {
         <ToolNote tone="accent" title="security.txt tapılmadı">
           Nə <span className="font-mono text-xs">/.well-known/security.txt</span>, nə də köhnə{" "}
           <span className="font-mono text-xs">/security.txt</span> ünvanında fayl var. Bir zəiflik
-          tapan araşdırmaçı bunu bilmirsə, ünvanı özü axtarmalı olur — bir çoxu bu axtarışa vaxt
+          tapan araşdırmaçı bunu bilmirsə, ünvanı özü axtarmalı olur: bir çoxu bu axtarışa vaxt
           sərf etmədən problemi ictimai edir.
         </ToolNote>
         <ul className="space-y-1 text-[11px] text-muted">
           {report.tried.map((attempt) => (
             <li key={attempt.url} className="font-mono break-all">
-              {attempt.status ?? "—"} · {attempt.url}
+              {attempt.status ?? ""} · {attempt.url}
             </li>
           ))}
         </ul>
@@ -186,7 +186,7 @@ function Report({ report }: { report: SecurityTxtLiveReport }) {
 
       {evaluation.missingRequired.length > 0 && (
         <ToolNote tone="accent" title="Məcburi sahə çatmır">
-          {evaluation.missingRequired.join(", ")} sahəsi faylda yoxdur — RFC 9116-ya görə bu, faylı
+          {evaluation.missingRequired.join(", ")} sahəsi faylda yoxdur: RFC 9116-ya görə bu, faylı
           tam saymır.
         </ToolNote>
       )}

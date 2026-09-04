@@ -24,7 +24,7 @@ export type TotpDigits = 6 | 8;
 export type TotpStep = 30 | 60;
 
 const NO_SUBTLE_ERROR =
-  "Bu səhifə kriptoqrafiya funksiyasına icazə verməyən ünvandan açılıb — kod hesablamaq üçün https və ya localhost lazımdır.";
+  "Bu səhifə kriptoqrafiya funksiyasına icazə verməyən ünvandan açılıb: kod hesablamaq üçün https və ya localhost lazımdır.";
 
 const BASE32_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
 
@@ -65,7 +65,7 @@ export function decodeBase32Secret(raw: string): Base32Decode {
   }
 
   if (bytes.length === 0) {
-    return { ok: false, error: "Gizli açar çox qısadır — heç olmasa 8 bit (bir bayt) tam olmalıdır." };
+    return { ok: false, error: "Gizli açar çox qısadır: heç olmasa 8 bit (bir bayt) tam olmalıdır." };
   }
 
   return { ok: true, bytes: Uint8Array.from(bytes) };

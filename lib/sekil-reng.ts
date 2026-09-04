@@ -207,7 +207,7 @@ export function lightestAndDarkest(palette: readonly PaletteColor[]): {
   darkest: PaletteColor;
 } {
   if (palette.length === 0) {
-    throw new Error("lightestAndDarkest: empty palette — extractPalette returned no swatches to rank.");
+    throw new Error("lightestAndDarkest: empty palette (extractPalette returned no swatches to rank).");
   }
 
   let lightest = palette[0];
