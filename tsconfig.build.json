@@ -18,8 +18,7 @@
   },
   "include": [
     "index.ts",
-    "lib/**/*.ts",
-    "shared/**/*.ts"
+    "lib/**/*.ts"
   ],
   "exclude": [
     "node_modules",

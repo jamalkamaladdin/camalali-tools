@@ -1,6 +1,6 @@
 {
   "name": "zero-dep-devtools",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "type": "module",
   "description": "166 developer tools as one dependency free TypeScript library: JWT decoder, cron parser, regex tester, Base64, hash, UUID, JSON formatter, DNS lookup, SSL checker, CIDR calculator, colour converter, QR code and more.",
