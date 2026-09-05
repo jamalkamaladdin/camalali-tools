@@ -16,9 +16,9 @@
  * error rather than arbitrary code running or a wrong destination's rules
  * silently applying.
  */
-import { decodeBase64, encodeBase64, type Base64Options, type DecodeResult as Base64DecodeResult } from "./base64";
-import { decodeEntities } from "./html";
-import { decodeWithStyle, encodeWithStyle } from "./url";
+import { decodeBase64, encodeBase64, type Base64Options, type DecodeResult as Base64DecodeResult } from "./base64.js";
+import { decodeEntities } from "./html.js";
+import { decodeWithStyle, encodeWithStyle } from "./url.js";
 
 export type EscapeResult = { ok: true; text: string } | { ok: false; error: string };
 

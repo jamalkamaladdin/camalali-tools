@@ -33,7 +33,7 @@
  * comes back a `null` field rather than a guess dressed up as a browser
  * name — a wrong guess of "Chrome" is worse than an honest unknown result.
  */
-import { parseIpv4, parseIpv6 } from "./safe-url";
+import { parseIpv4, parseIpv6 } from "./safe-url.js";
 
 /* ---------- Team Cymru: origin ASN lookup ---------- */
 

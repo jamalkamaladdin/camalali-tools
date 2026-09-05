@@ -5,7 +5,7 @@
  * governs caching, what governs cross-origin access, what describes the body,
  * and what protects the page.
  */
-import type { ReferenceRow, ReferenceSection } from "./reference";
+import type { ReferenceRow, ReferenceSection } from "./reference.js";
 
 export const httpBasliqlariSections: ReferenceSection[] = [
   {

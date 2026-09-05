@@ -1,5 +1,5 @@
-import { roundMoney } from "./money";
-import type { Invoice, LineItem } from "./types";
+import { roundMoney } from "./money.js";
+import type { Invoice, LineItem } from "./types.js";
 
 export type InvoiceTotals = {
   lineTotals: number[];

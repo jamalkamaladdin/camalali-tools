@@ -5,7 +5,7 @@
  * data file: the drawing lives in `reference-table.tsx`, this file only holds
  * the list.
  */
-import type { ReferenceRow, ReferenceSection } from "./reference";
+import type { ReferenceRow, ReferenceSection } from "./reference.js";
 
 export const linuxEmrleriSections: ReferenceSection[] = [
   { id: "fayl", label: "Fayl və qovluq" },

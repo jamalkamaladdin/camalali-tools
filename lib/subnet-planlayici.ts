@@ -28,7 +28,7 @@
  * one address short of it still computes a broadcast that does.
  */
 
-import { parseIpv4 } from "./safe-url";
+import { parseIpv4 } from "./safe-url.js";
 
 /** IPv4 is 32 bits, so a prefix names 0 through 32 of them. */
 const IPV4_PREFIX_MAX = 32;

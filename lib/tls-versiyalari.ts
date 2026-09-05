@@ -13,7 +13,7 @@
  * "unsupported" for that case would be a number this file did not actually
  * compute. `classifyFailure` is the line between the two.
  */
-import type { ProbeFail, TlsResult } from "./socket-probe";
+import type { ProbeFail, TlsResult } from "./socket-probe.js";
 
 export const TLS_VERSIONS = ["TLSv1", "TLSv1.1", "TLSv1.2", "TLSv1.3"] as const;
 

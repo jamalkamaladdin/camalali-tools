@@ -17,7 +17,7 @@
  * triple.
  */
 
-import { formatHex, rgbToHsl, type Hsla, type Rgba } from "./reng";
+import { formatHex, rgbToHsl, type Hsla, type Rgba } from "./reng.js";
 
 /** An alpha below this is treated as "not really there" — see `sampleOpaqueTriples`. */
 const MIN_OPAQUE_ALPHA = 10;

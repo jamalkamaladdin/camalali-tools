@@ -22,7 +22,7 @@
  * which method produced the answer on screen, rather than a silent
  * assumption.
  */
-import { splitWords } from "./ad-formati";
+import { splitWords } from "./ad-formati.js";
 
 /* Only the I/i family needs an override: the other five Azerbaijani letter
    pairs each have a single, unambiguous Unicode case mapping with no locale

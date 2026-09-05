@@ -30,7 +30,7 @@
  * numbers and `scripts/tools-checks/bant-genisliyi` runs them, and neither
  * should need the other.
  */
-import { formatBytes, formatNumber } from "../shared/format";
+import { formatBytes, formatNumber } from "../shared/format.js";
 
 /* ---------- units ---------- */
 

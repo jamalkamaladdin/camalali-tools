@@ -19,7 +19,7 @@ import {
   SERP_LIMITS,
   TITLE_FONT_PX,
   type SerpDevice,
-} from "./serp-onizleme";
+} from "./serp-onizleme.js";
 
 /**
  * Where a paste stops being parsed.

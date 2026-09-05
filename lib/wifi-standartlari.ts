@@ -17,7 +17,7 @@
  * answer for two of nine rows there is simply no. "What does this word in
  * the admin panel mean" goes to `terim`.
  */
-import type { ReferenceRow, ReferenceSection } from "./reference";
+import type { ReferenceRow, ReferenceSection } from "./reference.js";
 
 export const wifiStandartlariSections: ReferenceSection[] = [
   {

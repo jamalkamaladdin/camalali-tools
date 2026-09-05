@@ -1,6 +1,6 @@
 # camalali-tools
 
-![tools](https://img.shields.io/badge/tools-166-3584e4) ![categories](https://img.shields.io/badge/categories-12-3584e4) ![test cases](https://img.shields.io/badge/test_cases-2335%2B-12a5a5) ![dependency-free](https://img.shields.io/badge/dependency--free-160_tools-6c5ce7) ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6) ![license](https://img.shields.io/badge/license-MIT-2ec27e)
+[![npm](https://img.shields.io/npm/v/zero-dep-devtools?color=cb3837&label=npm)](https://www.npmjs.com/package/zero-dep-devtools) ![tools](https://img.shields.io/badge/tools-166-3584e4) ![categories](https://img.shields.io/badge/categories-12-3584e4) ![test cases](https://img.shields.io/badge/test_cases-2350%2B-12a5a5) ![dependency-free](https://img.shields.io/badge/dependency--free-160_tools-6c5ce7) ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6) ![license](https://img.shields.io/badge/license-MIT-2ec27e)
 
 ![](assets/hero.gif)
 
@@ -14,14 +14,31 @@ The tool names and the site are in Azerbaijani, because that is who they were wr
 
 ## Quick start
 
-Copy `lib/cron.ts` into your project, import it, call it. No third-party dependency:
+```sh
+npm i zero-dep-devtools
+```
+
+Nothing is installed alongside it. One tool per subpath:
 
 ```ts
-import { parseCron, describeCron } from "./lib/cron";
+import { parseCron, describeCron } from "zero-dep-devtools/cron";
 
 const cron = parseCron("*/15 9-17 * * 1-5");
 if (cron.ok) console.log(describeCron(cron.cron));
 ```
+
+Or reach the tools through the barrel, one namespace each:
+
+```ts
+import { cron, jwt, base64 } from "zero-dep-devtools";
+```
+
+Six tools need an optional peer (`pdf-lib` for the five PDF tools, `shiki` for
+the code screenshot). Install the peer and import them by subpath; they stay out
+of the barrel so that a plain install of this package brings nothing with it.
+
+Copying `lib/cron.ts` straight into a project also still works: no file in
+`lib/` imports anything but its own siblings.
 
 ## Examples
 
@@ -443,7 +460,7 @@ MIT. See [LICENSE](LICENSE).
 
 # camalali-tools (Azərbaycanca)
 
-![alət](https://img.shields.io/badge/al%C9%99t-166-3584e4) ![kateqoriya](https://img.shields.io/badge/kateqoriya-12-3584e4) ![test halı](https://img.shields.io/badge/test_hal%C4%B1-2335%2B-12a5a5) ![asılılıqsız](https://img.shields.io/badge/as%C4%B1l%C4%B1l%C4%B1qs%C4%B1z-160_al%C9%99t-6c5ce7) ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6) ![lisenziya](https://img.shields.io/badge/lisenziya-MIT-2ec27e)
+[![npm](https://img.shields.io/npm/v/zero-dep-devtools?color=cb3837&label=npm)](https://www.npmjs.com/package/zero-dep-devtools) ![alət](https://img.shields.io/badge/al%C9%99t-166-3584e4) ![kateqoriya](https://img.shields.io/badge/kateqoriya-12-3584e4) ![test halı](https://img.shields.io/badge/test_hal%C4%B1-2350%2B-12a5a5) ![asılılıqsız](https://img.shields.io/badge/as%C4%B1l%C4%B1l%C4%B1qs%C4%B1z-160_al%C9%99t-6c5ce7) ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6) ![lisenziya](https://img.shields.io/badge/lisenziya-MIT-2ec27e)
 
 166 kiçik alət var: JWT açmaq, DNS yoxlamaq, hash hesablamaq, hesab-faktura yaratmaq və başqa işlər üçün. Hamısı camalali.com üçün yazılıb və öz mənbəyindən buraya generasiya olunub. Kod eynidir, saytın pəncərə sistemi daxil edilməyib.
 
@@ -455,14 +472,31 @@ Canlı nümunə: hər alətin işlək halına burada bax → https://camalali.co
 
 ## Sürətli başlanğıc
 
-`lib/cron.ts` faylını layihənə köçür, idxal et və çağır. Üçüncü tərəf asılılığı yoxdur:
+```sh
+npm i zero-dep-devtools
+```
+
+Yanında heç nə quraşdırılmır. Hər alət öz alt yolundadır:
 
 ```ts
-import { parseCron, describeCron } from "./lib/cron";
+import { parseCron, describeCron } from "zero-dep-devtools/cron";
 
 const cron = parseCron("*/15 9-17 * * 1-5");
 if (cron.ok) console.log(describeCron(cron.cron));
 ```
+
+Və ya hamısına kök idxalından çat, hər alət bir ad sahəsidir:
+
+```ts
+import { cron, jwt, base64 } from "zero-dep-devtools";
+```
+
+Altı alətin opsional asılılığı var (beş PDF aləti üçün `pdf-lib`, kod şəkli üçün
+`shiki`). Onu quraşdırıb həmin alətləri alt yolla idxal et; kök idxalında
+yoxdurlar ki, sadə quraşdırma boş qalsın.
+
+`lib/cron.ts` faylını birbaşa layihəyə köçürmək də işləyir: `lib/` altındakı
+heç bir fayl öz qonşularından başqa nəyisə idxal etmir.
 
 ## Nümunələr
 

@@ -13,7 +13,7 @@
  * it cannot explain.
  */
 
-import { locate } from "./json";
+import { locate } from "./json.js";
 
 export type SchemaType =
   | "Article"

@@ -15,8 +15,8 @@
  * registry's JSON a second way; only the substring match against known cloud
  * providers is new here.
  */
-import type { RdapInfo } from "./menim-ip";
-import { attr, collectTags } from "./html";
+import type { RdapInfo } from "./menim-ip.js";
+import { attr, collectTags } from "./html.js";
 
 export type DetectionCategory = "proksi-cdn" | "server-proqrami" | "cercive" | "cms" | "bulud-provayder";
 

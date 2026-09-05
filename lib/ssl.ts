@@ -12,7 +12,7 @@
  * `scripts/tools-checks/ssl.mts` can prove it against constructed
  * certificates instead of a live server that changes underneath the test.
  */
-import type { CertificateInfo, TlsResult } from "./socket-probe";
+import type { CertificateInfo, TlsResult } from "./socket-probe.js";
 
 /** Below this many days the expiry reading switches from informational to a warning. */
 const EXPIRY_WARNING_DAYS = 30;

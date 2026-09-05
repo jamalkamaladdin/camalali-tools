@@ -14,7 +14,7 @@
  * text (to report the longest one and to measure each one), not only a
  * count, so the split has to produce substrings rather than a tally.
  */
-import { estimateReadingTime, wordCount, WORDS_PER_MINUTE, type ReadingTime } from "./metn-statistikasi";
+import { estimateReadingTime, wordCount, WORDS_PER_MINUTE, type ReadingTime } from "./metn-statistikasi.js";
 
 export { WORDS_PER_MINUTE };
 export type { ReadingTime };

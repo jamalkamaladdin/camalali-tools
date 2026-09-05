@@ -10,7 +10,7 @@
  * inference is a switch the visitor controls rather than a guess this file
  * always makes.
  */
-import { formatJson } from "./json";
+import { formatJson } from "./json.js";
 
 export type CsvDelimiter = "," | ";" | "\t";
 

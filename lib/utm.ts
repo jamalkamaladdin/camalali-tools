@@ -12,7 +12,7 @@
  * None of the three optional fields change how the hit is bucketed on their
  * own, so they stay optional here too.
  */
-import { foldCase } from "./ferq";
+import { foldCase } from "./ferq.js";
 
 export type UtmFields = {
   url: string;

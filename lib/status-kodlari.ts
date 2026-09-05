@@ -7,7 +7,7 @@
  * Sections follow the code's leading digit, the same split RFC 9110 itself
  * uses.
  */
-import type { ReferenceRow, ReferenceSection } from "./reference";
+import type { ReferenceRow, ReferenceSection } from "./reference.js";
 
 export const statusKodlariSections: ReferenceSection[] = [
   {

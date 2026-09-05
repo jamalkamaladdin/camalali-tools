@@ -18,7 +18,7 @@
  * with the one fact the parser cannot know - whether the read was cut short -
  * so a partial file is reported as partial instead of as a small sitemap.
  */
-import { decodeEntities } from "./html";
+import { decodeEntities } from "./html.js";
 
 export type FeedKind = "sitemapindex" | "urlset" | "rss" | "atom" | "namelum";
 

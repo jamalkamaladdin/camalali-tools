@@ -18,7 +18,7 @@
  * decoded blob, not of the line that carried it.
  */
 
-import { md5Bytes, sha256Bytes } from "./hash";
+import { md5Bytes, sha256Bytes } from "./hash.js";
 
 export type SshKeyType =
   | "ssh-ed25519"

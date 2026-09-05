@@ -16,7 +16,7 @@
  * suffix must not travel: SHA-1 of a weak password is reversible by anybody
  * holding the same wordlist the breach index is built from.
  */
-import { sha1 } from "./hash";
+import { sha1 } from "./hash.js";
 
 /** The service splits its index at five hex characters. Nothing else is a valid query. */
 export const PREFIX_LENGTH = 5;

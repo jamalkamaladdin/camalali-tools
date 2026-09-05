@@ -15,8 +15,8 @@
  * draws these numbers and the check file in `scripts/tools-checks` runs them,
  * and neither should need the other.
  */
-import { formatNumber } from "../shared/format";
-import type { ReferenceRow, ReferenceSection } from "./reference";
+import { formatNumber } from "../shared/format.js";
+import type { ReferenceRow, ReferenceSection } from "./reference.js";
 
 /* ---------- data volume ---------- */
 

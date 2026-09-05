@@ -14,9 +14,14 @@
  * fixed page instead of to a live site that changes between two runs.
  *
  * A verdict has three states and never four. "Could not be measured" is not a
- * fourth state, it is a failure with an honest sentence — a report that
- * quietly drops the checks it could not run reads as a better report than it
- * is, and that is the one thing a report must never do.
+ * fourth state, and it is not silence either: a report that quietly drops the
+ * checks it could not run reads as a better report than it is, and that is the
+ * one thing a report must never do. Which of the three states an unmeasured
+ * row takes depends on whose side the absence is on. A missing robots.txt is
+ * the site's own answer and counts against it; a handshake this server could
+ * not complete is this server's answer, and charging the site for it is how
+ * this report once told camalali.com that its own healthy certificate had
+ * failed.
  *
  * The judgement itself is borrowed wherever a tool here already owns it:
  * `hsts.ts` reads the `max-age`, `qarisiq-mezmun.ts` finds the http
@@ -25,14 +30,14 @@
  * sitemap and `ssl.ts` phrases the expiry. Re-deciding any of those here would
  * mean two tools on the same site disagreeing about the same page.
  */
-import { attr, collectTags } from "./html";
-import { formatMaxAge, parseHstsHeader } from "./hsts";
-import { checkLength, DESCRIPTION_SOFT_LIMIT, TITLE_SOFT_LIMIT } from "./meta";
-import { extractOpenGraph } from "./og-onizleme";
-import { buildMixedContentReport } from "./qarisiq-mezmun";
-import { parseRobotsText } from "./robots-canli";
-import { parseSitemapDocument } from "./sitemap-yoxlayici";
-import { expiryVerdict } from "./ssl";
+import { attr, collectTags } from "./html.js";
+import { formatMaxAge, parseHstsHeader } from "./hsts.js";
+import { checkLength, DESCRIPTION_SOFT_LIMIT, TITLE_SOFT_LIMIT } from "./meta.js";
+import { extractOpenGraph } from "./og-onizleme.js";
+import { buildMixedContentReport } from "./qarisiq-mezmun.js";
+import { parseRobotsText } from "./robots-canli.js";
+import { parseSitemapDocument } from "./sitemap-yoxlayici.js";
+import { expiryVerdict } from "./ssl.js";
 
 export type CheckStatus = "kecdi" | "xeberdarliq" | "kecmedi";
 
@@ -76,6 +81,21 @@ export type HttpProbe = {
   location: string | null;
 };
 
+/**
+ * What the route managed to learn about the leaf certificate, or why it
+ * learned nothing.
+ *
+ * The failure arm is the whole point of the type. A certificate that expired
+ * last week and a handshake that never completed both leave this report
+ * without a date, and reading those two as one verdict is how a tool tells a
+ * site with eleven weeks left that its certificate is a problem. The reason
+ * travels with the failure so the row can say what actually happened instead
+ * of naming the likeliest cause and being wrong.
+ */
+export type CertificateReading =
+  | { ok: true; daysLeft: number; issuer: string }
+  | { ok: false; reason: string };
+
 /** One of the two extra files the report reads, fetched or explained away. */
 export type FetchedFile = {
   url: string;
@@ -103,7 +123,8 @@ export type SiteReportInput = {
   responseMs: number | null;
   /** Null when the address was already http and there was nothing to compare. */
   httpProbe: HttpProbe | null;
-  certificate: { daysLeft: number; issuer: string } | null;
+  /** Null when the address was http and there was no handshake to make. */
+  certificate: CertificateReading | null;
   robots: FetchedFile | null;
   sitemap: FetchedFile | null;
   checkedAt: string;
@@ -580,17 +601,33 @@ function checkCertificate(input: SiteReportInput, secure: boolean): SiteCheck {
     };
   }
 
-  const certificate = input.certificate;
-  if (certificate === null) {
+  const reading = input.certificate;
+
+  /*
+   * The handshake produced no date, which is not the same finding as a bad
+   * certificate and must not be printed as one.
+   *
+   * This row is a warning rather than a failure because the missing number is
+   * this server's, not the site's: an address that answers a browser in thirty
+   * milliseconds can still be one this machine has no route to, and a report
+   * that reads its own dead route as the site's expired certificate is worse
+   * than a report with a gap in it. The gap is stated instead, with the reason
+   * that produced it, and the row keeps a fix so it is neither hidden nor
+   * counted as a defect. A date that has actually passed is still a failure,
+   * two branches below.
+   */
+  if (reading === null || !reading.ok) {
+    const reason = reading === null ? "TLS əl sıxması aparılmadı." : reading.reason;
     return {
       ...base,
-      status: "kecmedi",
+      status: "xeberdarliq",
       value: null,
-      detail: "TLS əl sıxması baş tutmadı, ona görə sertifikatın müddəti oxunmadı.",
-      fix: "443 portunun açıq olduğunu və serverin sertifikat zəncirini tam göndərdiyini yoxla.",
+      detail: `${reason} Sertifikatın müddəti oxunmadı, ona görə bu sətir ölçülməmiş qalır: bu, sertifikatın pis olduğunu göstərmir.`,
+      fix: "443 portunun açıq olduğunu və serverin sertifikat zəncirini tam göndərdiyini yoxla, sonra ünvanı bir də yoxlat.",
     };
   }
 
+  const certificate = reading;
   const verdict = expiryVerdict(certificate.daysLeft);
   const value = `${certificate.daysLeft} gün · ${certificate.issuer}`;
 

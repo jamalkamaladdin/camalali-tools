@@ -83,7 +83,7 @@ function input(overrides: Partial<SiteReportInput> = {}): SiteReportInput {
     htmlTruncated: false,
     responseMs: 180,
     httpProbe: { reachable: true, status: 301, location: "https://numune.az/" },
-    certificate: { daysLeft: 74, issuer: "Let's Encrypt" },
+    certificate: { ok: true, daysLeft: 74, issuer: "Let's Encrypt" },
     robots: ROBOTS,
     sitemap: SITEMAP,
     checkedAt: "2026-09-04T09:00:00.000Z",
@@ -247,18 +247,43 @@ export const checks: CheckSuite = (check) => {
 
   /* 10. A certificate is a countdown, not a boolean: expired, expiring and
      healthy are three different sentences and two different verdicts. */
-  const expired = row({ certificate: { daysLeft: -3, issuer: "Let's Encrypt" } }, "sertifikat");
-  const expiring = row({ certificate: { daysLeft: 9, issuer: "Let's Encrypt" } }, "sertifikat");
-  const healthy = row({ certificate: { daysLeft: 60, issuer: "Let's Encrypt" } }, "sertifikat");
-  const unreadable = row({ certificate: null }, "sertifikat");
+  const expired = row({ certificate: { ok: true, daysLeft: -3, issuer: "Let's Encrypt" } }, "sertifikat");
+  const expiring = row({ certificate: { ok: true, daysLeft: 9, issuer: "Let's Encrypt" } }, "sertifikat");
+  const healthy = row({ certificate: { ok: true, daysLeft: 60, issuer: "Let's Encrypt" } }, "sertifikat");
   check(
-    "sayt-hesabati: sertifikat muddeti uc hala ayrilir, oxunmayan hal gizlenmir",
+    "sayt-hesabati: sertifikat muddeti uc hala ayrilir",
     expired.status === "kecmedi" &&
       expiring.status === "xeberdarliq" &&
       healthy.status === "kecdi" &&
-      unreadable.status === "kecmedi" &&
-      unreadable.fix !== null,
-    `bitib=${expired.status}, azalib=${expiring.status}, saglam=${healthy.status}, oxunmayan=${unreadable.status}`,
+      expired.fix !== null,
+    `bitib=${expired.status}, azalib=${expiring.status}, saglam=${healthy.status}`,
+  );
+
+  /*
+   * 10b. The row this report used to get exactly backwards, and the reason
+   * this file has a case for it.
+   *
+   * A handshake that never produced a date says nothing about the date. The
+   * first version read the two as one verdict, so every host this server
+   * could not reach on its first resolved address came back as a failed
+   * certificate check while the certificate itself had months left. The
+   * failing state has to stay reachable, though: an expiry that has actually
+   * passed is still a failure, which is why `expired` is asserted again here
+   * rather than only above.
+   */
+  const unreadable = row(
+    { certificate: { ok: false, reason: "TLS elaqesi qurulmadi (ETIMEDOUT)." } },
+    "sertifikat",
+  );
+  const noReading = row({ certificate: null }, "sertifikat");
+  check(
+    "sayt-hesabati: oxunmayan sertifikat kecmedi vermir, vaxti bitmis verir",
+    unreadable.status === "xeberdarliq" &&
+      noReading.status === "xeberdarliq" &&
+      unreadable.detail.includes("ETIMEDOUT") &&
+      unreadable.fix !== null &&
+      expired.status === "kecmedi",
+    `oxunmayan=${unreadable.status}, olculmemis=${noReading.status}, bitmis=${expired.status}, izah=${unreadable.detail}`,
   );
 
   /* 11. `frame-ancestors` in the CSP is the modern form and `X-Frame-Options`
@@ -368,7 +393,9 @@ export const checks: CheckSuite = (check) => {
      to agree with the counters underneath it in every one of the three
      shapes a report can take. */
   const allClean = buildSiteReport(input()).headline;
-  const mixed = buildSiteReport(input({ certificate: null, responseMs: 900 }));
+  const mixed = buildSiteReport(
+    input({ certificate: { ok: true, daysLeft: -3, issuer: "Let's Encrypt" }, responseMs: 900 }),
+  );
   check(
     "sayt-hesabati: yekun setri saylarla uzlasir",
     allClean.includes("hamısı") &&

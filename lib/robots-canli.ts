@@ -15,7 +15,7 @@
  * boundary logic is repeated with a line counter attached. The precedence
  * logic, which is the part that is easy to get subtly wrong, is not repeated.
  */
-import { pathMatchesRule } from "./robots";
+import { pathMatchesRule } from "./robots.js";
 
 export type RobotsGroup = {
   /** As written in the file, so the table shows the file's own casing. Comparison lowercases. */

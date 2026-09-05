@@ -28,7 +28,7 @@
  * single line, and every refused construct comes back as `{ ok: false }`
  * with a line and column rather than throwing.
  */
-import { formatJson, locate } from "./json";
+import { formatJson, locate } from "./json.js";
 
 export type JsonToTomlResult = { ok: true; output: string } | { ok: false; error: string };
 

@@ -17,6 +17,7 @@
     "noEmit": true
   },
   "include": [
+    "index.ts",
     "lib/**/*.ts",
     "components/**/*.tsx",
     "api/**/*.ts",

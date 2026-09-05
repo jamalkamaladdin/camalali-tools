@@ -1,7 +1,7 @@
 import { fail, guard, ok } from "../../lib/api-route";
 import { cached } from "../../lib/api-cache";
 import { buildSslReport, type SslReport } from "../../lib/ssl";
-import { inspectTls, resolveHost } from "../../lib/socket-probe";
+import { inspectTls, probeAcrossFamilies, resolveHost } from "../../lib/socket-probe";
 
 /*
  * The SSL certificate endpoint.
@@ -11,6 +11,11 @@ import { inspectTls, resolveHost } from "../../lib/socket-probe";
  * connection itself goes to the resolved address with the name carried
  * separately as SNI. `inspectTls` does the handshake; this file only decides
  * what to cache and how to shape the failure.
+ *
+ * Which resolved address is dialled is not this file's decision either.
+ * `probeAcrossFamilies` makes it, for the reason written above it: the first
+ * address is IPv6 on every dual-stack site, and a dead IPv6 route turned a
+ * valid certificate into a six-second timeout and a red page.
  */
 
 export const runtime = "nodejs";
@@ -32,10 +37,12 @@ export async function GET(request: Request) {
     const resolved = await resolveHost(raw);
     if (!resolved.ok) return resolved;
 
-    const tls = await inspectTls({ address: resolved.primary.address, servername: resolved.hostname, port: 443 });
-    if (!tls.ok) return tls;
+    const reached = await probeAcrossFamilies(resolved.addresses, ({ address }) =>
+      inspectTls({ address, servername: resolved.hostname, port: 443 }),
+    );
+    if (!reached.ok) return reached;
 
-    return { ok: true, report: buildSslReport(resolved.hostname, tls) };
+    return { ok: true, report: buildSslReport(resolved.hostname, reached.result) };
   });
 
   return result.ok ? ok(result.report) : fail(result.message, result.status);

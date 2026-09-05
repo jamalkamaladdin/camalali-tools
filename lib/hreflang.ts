@@ -13,7 +13,7 @@
  * A missing self-reference or a code pointing at two different URLs both
  * break that expectation silently; nothing 404s, the tag set is just wrong.
  */
-import { escapeHtmlAttribute } from "./meta";
+import { escapeHtmlAttribute } from "./meta.js";
 
 export type HreflangEntry = { code: string; url: string };
 

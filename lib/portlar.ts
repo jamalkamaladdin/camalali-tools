@@ -14,7 +14,7 @@
  * hold the network itself together, and the ports a developer's own tools
  * default to.
  */
-import type { ReferenceRow, ReferenceSection } from "./reference";
+import type { ReferenceRow, ReferenceSection } from "./reference.js";
 
 export const portlarSections: ReferenceSection[] = [
   { id: "veb", label: "Veb və proxy" },

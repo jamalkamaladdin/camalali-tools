@@ -25,7 +25,7 @@
  * `safe_load` implements) would produce a different value raises a warning
  * rather than leaving the difference silent.
  */
-import { formatJson, locate, type IndentOption } from "./json";
+import { formatJson, locate, type IndentOption } from "./json.js";
 
 export type { IndentOption };
 

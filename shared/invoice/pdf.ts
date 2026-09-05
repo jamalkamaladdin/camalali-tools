@@ -11,7 +11,7 @@
  * fontkit are ~330 KB of parsed JS and the two font files another ~210 KB; they
  * belong in a chunk that only downloads when the user actually asks for a PDF:
  *
- *     const { buildInvoicePdf } = await import("./pdf");
+ *     const { buildInvoicePdf } = await import("./pdf.js");
  */
 import fontkit from "@pdf-lib/fontkit";
 import {
@@ -23,10 +23,10 @@ import {
   type RGB,
 } from "pdf-lib";
 
-import { calculateInvoice, type InvoiceTotals } from "./calc";
-import { amountInAzWords, formatMoney, formatQuantity } from "./money";
-import { formatAzDate } from "../az-date";
-import type { Invoice, Party } from "./types";
+import { calculateInvoice, type InvoiceTotals } from "./calc.js";
+import { amountInAzWords, formatMoney, formatQuantity } from "./money.js";
+import { formatAzDate } from "../az-date.js";
+import type { Invoice, Party } from "./types.js";
 
 /* ------------------------------------------------------------------ fonts */
 

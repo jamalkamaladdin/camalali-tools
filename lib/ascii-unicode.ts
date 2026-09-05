@@ -17,7 +17,7 @@
  * file directly, and the reference rows are audited by the same
  * `auditReference` every other lookup table in the site runs.
  */
-import type { ReferenceRow, ReferenceSection } from "./reference";
+import type { ReferenceRow, ReferenceSection } from "./reference.js";
 
 export type CharInfo = {
   char: string;

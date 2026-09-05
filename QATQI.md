@@ -41,7 +41,7 @@ A tool is made of several files, tied together by the same `<slug>`:
   `api-route.ts`, `api-cache.ts` and (on the raw-socket tools)
   `socket-probe.ts` fences.
 - `tests/<slug>.mts`: the test set that runs with `pnpm test` and exercises the
-  functions in the `lib/` file. The whole repository holds 2335 test
+  functions in the `lib/` file. The whole repository holds 2350 test
   cases across 161 test files. The tool you take comes with its
   own test, and you can run it in your project unchanged.
 - The registry entry under `kateqoriya/`: the tool's name, description,
@@ -96,7 +96,7 @@ Hər alət bir neçə fayldan ibarətdir. Onlar eyni `<slug>` adı ilə bağlan�
   `safe-url.ts`, `safe-fetch.ts`, `api-route.ts`, `api-cache.ts`,
   (xam soket alətlərində) `socket-probe.ts` hasarlarına bağlıdır.
 - `tests/<slug>.mts`: `pnpm test` ilə işləyən və `lib/` faylının funksiyalarını
-  yoxlayan test dəsti. Bütün repoda 2335 test halı və 161 test faylı var.
+  yoxlayan test dəsti. Bütün repoda 2350 test halı və 161 test faylı var.
   Götürdüyün alət öz testi ilə gəlir. Onu öz layihəndə eynilə işlədə bilərsən.
 - `kateqoriya/` altında reyestr girişi: alətin adı, təsviri, açar sözləri və
   hansı kateqoriyaya düşdüyü.

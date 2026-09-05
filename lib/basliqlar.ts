@@ -17,7 +17,7 @@ export {
   parseIpv4,
   parseIpv6,
   type UrlCheck,
-} from "./safe-url";
+} from "./safe-url.js";
 
 /* ---------- header assessment ---------- */
 

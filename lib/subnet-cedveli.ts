@@ -26,7 +26,7 @@
  * with `BigInt`, never typed, because an IPv6 block's size stops fitting in
  * a normal number well before `/64`.
  */
-import type { ReferenceRow, ReferenceSection } from "./reference";
+import type { ReferenceRow, ReferenceSection } from "./reference.js";
 
 export const subnetCedveliSections: ReferenceSection[] = [
   {

@@ -21,7 +21,7 @@
  * written into a zone file. They are message types a resolver or a server
  * sends, not records a domain owner stores — each row says so.
  */
-import type { ReferenceRow, ReferenceSection } from "./reference";
+import type { ReferenceRow, ReferenceSection } from "./reference.js";
 
 export const dnsQeydTipleriSections: ReferenceSection[] = [
   { id: "esas", label: "Əsas" },

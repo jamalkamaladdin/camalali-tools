@@ -17,7 +17,7 @@
  * a ragged CSV row, a non-array JSON root) returns `{ ok: false }` rather
  * than throwing.
  */
-import { formatJson } from "./json";
+import { formatJson } from "./json.js";
 
 export type TableFormat = "markdown" | "html" | "csv" | "json";
 export type Align = "left" | "center" | "right" | null;

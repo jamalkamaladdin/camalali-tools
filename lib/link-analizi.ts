@@ -6,7 +6,7 @@
  * Pure functions over the tolerant scanner in `html.ts` — no DOM, so the same
  * code runs in the browser widget without a server round trip.
  */
-import { absoluteUrl, attr, collectTags, stripTags } from "./html";
+import { absoluteUrl, attr, collectTags, stripTags } from "./html.js";
 
 export type PageLink = {
   /** Exactly what the `href` attribute said, untouched. */

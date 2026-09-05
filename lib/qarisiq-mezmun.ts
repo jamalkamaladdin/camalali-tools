@@ -17,7 +17,7 @@
  * almost always a background image — is judged the same as `<img>` rather
  * than the same as `<script>`.
  */
-import { absoluteUrl, attr, collectTags } from "./html";
+import { absoluteUrl, attr, collectTags } from "./html.js";
 
 export type MixedContentKind =
   | "img"

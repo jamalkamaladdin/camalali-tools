@@ -8,7 +8,7 @@
  * to how apostrophes or capital-I case folding are handled lands in both at
  * once instead of drifting apart.
  */
-import { azLowerCase, DENSITY_STOPWORDS, tokenize } from "./acar-soz-sixligi";
+import { azLowerCase, DENSITY_STOPWORDS, tokenize } from "./acar-soz-sixligi.js";
 
 /*
  * A conservative Azerbaijani suffix stripper, not a real morphological

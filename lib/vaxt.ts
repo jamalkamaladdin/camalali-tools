@@ -9,7 +9,7 @@
  * silently producing a date fifty thousand years away.
  */
 
-import { AZ_WEEKDAYS, formatAzDateTime } from "../shared/az-date";
+import { AZ_WEEKDAYS, formatAzDateTime } from "../shared/az-date.js";
 
 export type TimestampUnit = "seconds" | "milliseconds";
 

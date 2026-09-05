@@ -14,7 +14,7 @@
  * mismatched close, more than one root, a malformed attribute — comes back
  * with the exact line and column rather than throwing.
  */
-import { locate } from "./json";
+import { locate } from "./json.js";
 
 export type XmlIndent = "2" | "4" | "tab";
 

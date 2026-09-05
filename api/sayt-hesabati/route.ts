@@ -3,10 +3,11 @@ import { cached } from "../../lib/api-cache";
 import { callerAddress, takeBurst, tooSoon } from "../../shared/rate-limit";
 import { fetchPublicText, publicAddressesOnly, type SafeText } from "../../lib/safe-fetch";
 import { normalizeTargetUrl } from "../../lib/safe-url";
-import { inspectTls, resolveHost } from "../../lib/socket-probe";
+import { inspectTls, probeAcrossFamilies, resolveHost } from "../../lib/socket-probe";
 import { parseRobotsText } from "../../lib/robots-canli";
 import {
   buildSiteReport,
+  type CertificateReading,
   type FetchedFile,
   type HttpProbe,
   type SiteReportPayload,
@@ -22,6 +23,9 @@ import {
  * certificate the fetch API does not expose. Five connections, named here so
  * the number cannot quietly grow — the fifth is a handshake rather than a
  * request, and it exists because there is no other way to read an expiry date.
+ * A sixth is possible and only in one shape: a dual-stack host whose first
+ * address has not answered the handshake in 250 ms gets its other family
+ * dialled alongside it, for the reason written above `readCertificate`.
  *
  * Two consequences follow from that budget.
  *
@@ -148,28 +152,42 @@ async function probeHttp(httpsUrl: string): Promise<HttpProbe & { url: string }>
 }
 
 /**
- * Reads the leaf certificate's remaining days.
+ * Reads the leaf certificate's remaining days, or says why it could not.
  *
  * `fetch` completes a handshake and then throws the certificate away, so the
- * one number this check needs is only reachable through a second connection.
- * A failure here is silent on purpose: the check turns a null into its own
- * sentence, and one unreachable handshake must not cost the other nineteen
- * rows.
+ * one number this check needs is only reachable through a second connection
+ * opened by hand. Opening it by hand is also how this check acquired the worst
+ * kind of bug: it dialled the first address in the resolver's order and
+ * nothing else, which on every dual-stack site is the IPv6 one, and where that
+ * route was advertised but dead the handshake timed out after six seconds. So
+ * the page loaded, nineteen rows were right, and the twentieth called a
+ * healthy certificate a failure.
+ *
+ * The fix now lives in `probeAcrossFamilies`, where the other four socket
+ * tools reach it too; the measurements that justify it are written there. This
+ * file keeps only the part that is its own: what to do with a failure. It is
+ * no longer silent and it is still not fatal. The reason is handed to the
+ * check, which states it, and one unreachable handshake must not cost the
+ * other nineteen rows.
  */
 async function readCertificate(
   hostname: string,
   port: number,
-): Promise<{ daysLeft: number; issuer: string } | null> {
+): Promise<CertificateReading> {
   const resolved = await resolveHost(hostname);
-  if (!resolved.ok) return null;
+  if (!resolved.ok) return { ok: false, reason: resolved.message };
 
-  const tls = await inspectTls({ address: resolved.primary.address, servername: hostname, port });
-  if (!tls.ok) return null;
+  const outcome = await probeAcrossFamilies(resolved.addresses, ({ address }) =>
+    inspectTls({ address, servername: hostname, port }),
+  );
+  if (!outcome.ok) return { ok: false, reason: outcome.message };
 
-  const leaf = tls.chain[0];
-  if (leaf === undefined) return null;
+  const leaf = outcome.result.chain[0];
+  if (leaf === undefined) {
+    return { ok: false, reason: "Server heç bir sertifikat göndərmədi." };
+  }
 
-  return { daysLeft: leaf.daysLeft, issuer: leaf.issuer };
+  return { ok: true, daysLeft: leaf.daysLeft, issuer: leaf.issuer };
 }
 
 /** The sitemap robots.txt declares, when it names one on the same host. */

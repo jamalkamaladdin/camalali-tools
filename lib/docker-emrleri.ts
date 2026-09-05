@@ -4,7 +4,7 @@
  * visitor is doing — running a container, building an image, freeing disk
  * space — rather than by Docker's own subcommand tree.
  */
-import type { ReferenceRow, ReferenceSection } from "./reference";
+import type { ReferenceRow, ReferenceSection } from "./reference.js";
 
 export const dockerEmrleriSections: ReferenceSection[] = [
   { id: "konteyner", label: "Konteyner" },

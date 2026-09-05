@@ -19,7 +19,7 @@
  * verbatim so the widget can show "this is roughly Tailwind's `shadow-md`"
  * without inventing a number.
  */
-import { formatRgb } from "./reng";
+import { formatRgb } from "./reng.js";
 
 export type ElevationLevel = 1 | 2 | 3 | 4 | 5 | 6;
 

@@ -15,7 +15,7 @@
  * why `pageUrl` is a parameter of all three entry points instead of being
  * dug out of the markup.
  */
-import { absoluteUrl, attr, collectTags, stripTags, type HtmlTag } from "./html";
+import { absoluteUrl, attr, collectTags, stripTags, type HtmlTag } from "./html.js";
 
 /** Every `og:`, `twitter:`, `article:` and `description` meta, first one wins. */
 export type OgData = Record<string, string>;

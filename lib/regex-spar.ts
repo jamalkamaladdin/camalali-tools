@@ -4,7 +4,7 @@
  * what it matches and a concrete pattern-plus-result example. React-free,
  * same shape as every other reference table's data file.
  */
-import type { ReferenceRow, ReferenceSection } from "./reference";
+import type { ReferenceRow, ReferenceSection } from "./reference.js";
 
 export const regexSparSections: ReferenceSection[] = [
   { id: "sinif", label: "Simvol sinifləri" },

@@ -10,7 +10,7 @@
  * being retyped per tool, and a route that forgets to call `guard` is a route
  * that does not compile against this module's own convention.
  */
-import { callerAddress, takeBurst, tooSoon } from "../shared/rate-limit";
+import { callerAddress, takeBurst, tooSoon } from "../shared/rate-limit.js";
 
 /** Generous enough to be usable, small enough that a scan is not worth running. */
 const BURST_LIMIT = 20;

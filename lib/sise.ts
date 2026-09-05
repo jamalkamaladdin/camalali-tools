@@ -16,7 +16,7 @@
  * `kolge.ts` — both tools take a HEX plus a separate 0-1 opacity because
  * that is how their sliders are actually wired.
  */
-import { formatRgb, parseHex } from "./reng";
+import { formatRgb, parseHex } from "./reng.js";
 
 export type GlassInput = {
   /** px, ≥0. 0 means "no blur" — the fill and border still read as glass. */

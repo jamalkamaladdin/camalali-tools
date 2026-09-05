@@ -20,7 +20,7 @@
  * round-trip: the directive order coming out never depends on the order a
  * visitor happened to toggle checkboxes in.
  */
-import { escapeHtmlAttribute } from "./meta";
+import { escapeHtmlAttribute } from "./meta.js";
 
 export type CspDirective =
   | "default-src"

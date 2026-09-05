@@ -14,7 +14,7 @@
  * handed, so `scripts/tools-checks/ptr.mts` can prove the comparison without
  * a resolver.
  */
-import { parseIpv4, parseIpv6 } from "./safe-url";
+import { parseIpv4, parseIpv6 } from "./safe-url.js";
 
 export type IpFamily = 4 | 6;
 

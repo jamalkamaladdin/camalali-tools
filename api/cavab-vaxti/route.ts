@@ -1,7 +1,7 @@
 import { fail, guard, ok } from "../../lib/api-route";
 import { cached } from "../../lib/api-cache";
 import { normalizeTargetUrl } from "../../lib/safe-url";
-import { measurePhases, resolveHost } from "../../lib/socket-probe";
+import { measurePhases, probeAcrossFamilies, resolveHost, type PhaseTiming } from "../../lib/socket-probe";
 import { buildBreakdown, type CavabVaxtiReport, type PhaseSample } from "../../lib/cavab-vaxti";
 
 /*
@@ -26,6 +26,15 @@ import { buildBreakdown, type CavabVaxtiReport, type PhaseSample } from "../../l
  * rather than looked up three times: a resolver answer does not meaningfully
  * change between two clicks, and re-querying it three times would measure the
  * resolver's caching, not the site.
+ *
+ * Which of the resolved addresses is measured is decided by the first sample,
+ * raced across the families by `probeAcrossFamilies`, and the other two
+ * samples then go to whichever address answered. This is not a refinement: on
+ * a dual-stack site the resolver's first address is the IPv6 one, and a dead
+ * IPv6 route made this tool report a site that loads in half a second as not
+ * responding at all. The family that was actually measured is carried into the
+ * report as `addressFamily`, because a visitor comparing two numbers deserves
+ * to know which protocol produced them.
  */
 
 export const runtime = "nodejs";
@@ -56,24 +65,25 @@ export async function GET(request: Request) {
     const resolved = await resolveHost(target.hostname);
     if (!resolved.ok) return { ok: false, message: resolved.message, status: resolved.status };
 
-    const samples: PhaseSample[] = [];
-    for (let attempt = 0; attempt < SAMPLE_COUNT; attempt += 1) {
-      const timing = await measurePhases({
-        address: resolved.primary.address,
-        hostname: target.hostname,
-        path,
-        secure,
-        dnsMs: resolved.ms,
-      });
-      if (!timing.ok) return { ok: false, message: timing.message, status: timing.status };
+    const sample = (timing: PhaseTiming): PhaseSample => ({
+      dnsMs: timing.dnsMs,
+      tcpMs: timing.tcpMs,
+      tlsMs: timing.tlsMs,
+      ttfbMs: timing.ttfbMs,
+      totalMs: timing.totalMs,
+    });
 
-      samples.push({
-        dnsMs: timing.dnsMs,
-        tcpMs: timing.tcpMs,
-        tlsMs: timing.tlsMs,
-        ttfbMs: timing.ttfbMs,
-        totalMs: timing.totalMs,
-      });
+    const measure = (address: string) =>
+      measurePhases({ address, hostname: target.hostname, path, secure, dnsMs: resolved.ms });
+
+    const reached = await probeAcrossFamilies(resolved.addresses, ({ address }) => measure(address));
+    if (!reached.ok) return { ok: false, message: reached.message, status: reached.status };
+
+    const samples: PhaseSample[] = [sample(reached.result)];
+    for (let attempt = 1; attempt < SAMPLE_COUNT; attempt += 1) {
+      const timing = await measure(reached.address);
+      if (!timing.ok) return { ok: false, message: timing.message, status: timing.status };
+      samples.push(sample(timing));
     }
 
     const breakdown = buildBreakdown(samples);
@@ -86,8 +96,8 @@ export async function GET(request: Request) {
       report: {
         hostname: target.hostname,
         url: target.url,
-        address: resolved.primary.address,
-        addressFamily: resolved.primary.family,
+        address: reached.address,
+        addressFamily: reached.family,
         secure,
         breakdown: breakdown.breakdown,
         checkedAt: new Date().toISOString(),

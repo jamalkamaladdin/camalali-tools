@@ -4,7 +4,7 @@
  * groups rather than git's own porcelain/plumbing split — a visitor comes
  * here mid-task ("how do I undo this"), not mid-manual.
  */
-import type { ReferenceRow, ReferenceSection } from "./reference";
+import type { ReferenceRow, ReferenceSection } from "./reference.js";
 
 export const gitEmrleriSections: ReferenceSection[] = [
   { id: "gundelik", label: "Gündəlik iş" },

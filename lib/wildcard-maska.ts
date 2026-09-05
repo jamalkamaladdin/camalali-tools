@@ -26,7 +26,7 @@
  * `/0` would otherwise come back as 255.255.255.255 — the opposite of an
  * empty mask.
  */
-import { parseIpv4 as parseIpv4Strict } from "./safe-url";
+import { parseIpv4 as parseIpv4Strict } from "./safe-url.js";
 
 const IPV4_BITS = 32;
 

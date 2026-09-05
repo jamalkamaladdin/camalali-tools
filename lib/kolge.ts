@@ -18,7 +18,7 @@
  * paths over the same shape, and a broken one shows up as a mismatch, not a
  * shared bug.
  */
-import { formatRgb, parseHex, parseRgbFunction, type Rgba } from "./reng";
+import { formatRgb, parseHex, parseRgbFunction, type Rgba } from "./reng.js";
 
 export type ShadowInput = {
   offsetX: number;

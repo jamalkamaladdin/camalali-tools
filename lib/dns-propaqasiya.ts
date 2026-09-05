@@ -25,7 +25,7 @@
  *   — `"not-synced"`. Collapsing the two into one "resolvers disagree"
  *   message would send somebody to wait out a TTL that was never the cause.
  */
-import { formatDuration } from "../shared/az-date";
+import { formatDuration } from "../shared/az-date.js";
 
 /** The seven types a visitor can ask about, in the order the widget lists them. */
 export const RECORD_TYPES = ["A", "AAAA", "CNAME", "MX", "TXT", "NS", "SOA"] as const;

@@ -11,7 +11,7 @@
  *
  * React-free on purpose: the check file drives everything below without a DOM.
  */
-import type { ReferenceRow, ReferenceSection } from "./reference";
+import type { ReferenceRow, ReferenceSection } from "./reference.js";
 
 /* The octal weights, named. They are the only numbers in this file that are
    not somebody's file mode. */

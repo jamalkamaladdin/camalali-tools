@@ -38,7 +38,7 @@
 import { lookup } from "node:dns/promises";
 import { connect as netConnect } from "node:net";
 import { connect as tlsConnect, type DetailedPeerCertificate } from "node:tls";
-import { isBlockedAddress } from "./safe-url";
+import { isBlockedAddress } from "./safe-url.js";
 
 /** Long enough for a slow handshake abroad, short enough that nobody leaves. */
 export const PROBE_TIMEOUT_MS = 6_000;
@@ -93,13 +93,14 @@ export function checkHostname(raw: string): NameCheck {
   return { ok: true, hostname };
 }
 
+/** One resolved address and the protocol family it belongs to. */
+export type HostAddress = { address: string; family: 4 | 6 };
+
 export type ResolvedHost = {
   ok: true;
   hostname: string;
   /** Every address the name answers with, in the resolver's own order. */
-  addresses: { address: string; family: 4 | 6 }[];
-  /** The one the probes will use: the first, which is what a client would pick. */
-  primary: { address: string; family: 4 | 6 };
+  addresses: HostAddress[];
   /** How long the lookup itself took, which is a result and not just overhead. */
   ms: number;
 };
@@ -130,8 +131,7 @@ export async function resolveHost(raw: string): Promise<ResolvedHost | ProbeFail
       };
     }
     const family = hostname.includes(":") ? (6 as const) : (4 as const);
-    const entry = { address: hostname, family };
-    return { ok: true, hostname, addresses: [entry], primary: entry, ms: 0 };
+    return { ok: true, hostname, addresses: [{ address: hostname, family }], ms: 0 };
   }
 
   if (!HOSTNAME.test(hostname)) {
@@ -169,7 +169,137 @@ export async function resolveHost(raw: string): Promise<ResolvedHost | ProbeFail
     family: entry.family === 6 ? (6 as const) : (4 as const),
   }));
 
-  return { ok: true, hostname, addresses, primary: addresses[0], ms };
+  return { ok: true, hostname, addresses, ms };
+}
+
+/*
+ * How long the first resolved address is tried alone before the other family
+ * is dialled alongside it.
+ *
+ * RFC 8305 calls this the connection attempt delay and puts it at 250 ms;
+ * undici uses the same number, and that is why `fetch` never shows the fault
+ * this layer used to have. Every tool built on `safe-fetch` races the families
+ * for free. Every tool that opens its own socket has to do it here.
+ */
+export const SECOND_FAMILY_DELAY_MS = 250;
+
+/**
+ * The first address of each family, in the resolver's own order.
+ *
+ * At most two, and deliberately not "every address the name answers with": a
+ * second A record fails for the same reason the first one did, so trying it
+ * buys nothing and turns one check into a small connection storm. What is
+ * worth a second attempt is the *other* protocol.
+ */
+export function oneAddressPerFamily(addresses: readonly HostAddress[]): HostAddress[] {
+  const seen = new Set<number>();
+  const picked: HostAddress[] = [];
+  for (const entry of addresses) {
+    if (seen.has(entry.family)) continue;
+    seen.add(entry.family);
+    picked.push(entry);
+  }
+  return picked;
+}
+
+type Attempt<T> = { target: HostAddress; result: T | ProbeFail };
+
+/** A generic value is `T | ProbeFail`; this is the only way to tell them apart. */
+function isFail(value: { ok: boolean }): value is ProbeFail {
+  return value.ok === false;
+}
+
+/**
+ * Resolves on the first attempt that worked, and waits for the rest only when
+ * none did.
+ *
+ * `Promise.all` would be the obvious shape and it is the wrong one: a dead
+ * address holds its socket until the probe timeout, so awaiting both after the
+ * other family has already answered puts those six seconds back into the
+ * answer in exchange for nothing. When both fail the verdict is the *first*
+ * address's failure, because that is the address a client would have used.
+ */
+function firstSuccess<T extends { ok: true }>(
+  leading: Promise<Attempt<T>>,
+  trailing: Promise<Attempt<T>>,
+): Promise<Attempt<T>> {
+  return new Promise((resolve) => {
+    let outstanding = 2;
+    const settle = (attempt: Attempt<T>) => {
+      if (!isFail(attempt.result)) {
+        resolve(attempt);
+        return;
+      }
+      outstanding -= 1;
+      if (outstanding === 0) void leading.then(resolve);
+    };
+    void leading.then(settle);
+    void trailing.then(settle);
+  });
+}
+
+export type FamilyReach<T> = { ok: true; address: string; family: 4 | 6; result: T } | ProbeFail;
+
+/**
+ * Runs one probe against a dual-stack host the way a browser would.
+ *
+ * This exists because of a fault that was measured rather than suspected.
+ * `resolveHost` returns the resolver's own order (`verbatim: true`), and on a
+ * machine with a global IPv6 address getaddrinfo sorts AAAA first. Every tool
+ * here used to take that first address and nothing else, so on every
+ * dual-stack site it dialled IPv6, and where the route was advertised but dead
+ * the socket sat until the six-second deadline and the tool reported a healthy
+ * site as broken. Measured on the production server: camalali.com over its
+ * first address 6029 ms and nothing, over its first A record 32 ms and an
+ * answer; example.com 6004 ms against 19 ms. `fetch` reached both hosts
+ * throughout, which is exactly why the fault stayed invisible for so long.
+ *
+ * The fix is what a client already does. The first address gets a head start;
+ * if it has not answered inside it, the other family is dialled *in parallel*
+ * rather than after it, so a working host still costs one connection and a
+ * dead route costs one extra instead of the whole timeout. Measured with the
+ * first address black-holed: 6008 ms waiting for both, 292 ms taking the first
+ * success, and the same result at the end of either.
+ *
+ * A failure is still a failure, and it is named rather than blamed on the
+ * site: the caller gets the first address's own message and says what could
+ * not be reached.
+ */
+export async function probeAcrossFamilies<T extends { ok: true }>(
+  addresses: readonly HostAddress[],
+  dial: (target: HostAddress) => Promise<T | ProbeFail>,
+  delayMs: number = SECOND_FAMILY_DELAY_MS,
+): Promise<FamilyReach<T>> {
+  const candidates = oneAddressPerFamily(addresses);
+  const first = candidates[0];
+  if (first === undefined) {
+    return { ok: false, message: "Bu ad heç bir IP ünvanına həll olunmur.", status: 400 };
+  }
+
+  const attempt = (target: HostAddress): Promise<Attempt<T>> =>
+    dial(target).then((result) => ({ target, result }));
+
+  const settle = (value: Attempt<T>): FamilyReach<T> =>
+    isFail(value.result)
+      ? value.result
+      : { ok: true, address: value.target.address, family: value.target.family, result: value.result };
+
+  const leading = attempt(first);
+  const second = candidates[1];
+  if (second === undefined) return settle(await leading);
+
+  /* The head start. `Promise.race` against a timer, so a host that answers on
+     its first address never pays for the second connection at all. */
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const headStart = new Promise<null>((resolve) => {
+    timer = setTimeout(() => resolve(null), delayMs);
+  });
+  const early = await Promise.race([leading, headStart]);
+  clearTimeout(timer);
+
+  if (early !== null && !isFail(early.result)) return settle(early);
+
+  return settle(await firstSuccess(leading, attempt(second)));
 }
 
 export type PortVerdict = "open" | "refused" | "timeout" | "unreachable";

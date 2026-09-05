@@ -11,7 +11,7 @@
  * and a broken document — an unclosed tag, a mismatched close, more than one
  * root — errors with a line and column instead of throwing past the caller.
  */
-import { formatJson, locate } from "./json";
+import { formatJson, locate } from "./json.js";
 
 export type JsonToXmlResult =
   | { ok: true; output: string }

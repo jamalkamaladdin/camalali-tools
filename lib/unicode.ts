@@ -15,7 +15,7 @@
  * Azerbaijani-letter usage count scoped to the characters actually typed
  * rather than a static reference row.
  */
-import { INSPECT_LIMIT, inspectText, textSummary, type CharInfo } from "./ascii-unicode";
+import { INSPECT_LIMIT, inspectText, textSummary, type CharInfo } from "./ascii-unicode.js";
 
 export { INSPECT_LIMIT, textSummary };
 export type { CharInfo };

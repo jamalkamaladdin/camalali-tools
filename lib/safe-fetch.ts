@@ -37,7 +37,7 @@
  */
 import { lookup } from "node:dns/promises";
 
-import { isBlockedAddress, normalizeTargetUrl } from "./safe-url";
+import { isBlockedAddress, normalizeTargetUrl } from "./safe-url.js";
 
 /** Longer than any reachable site needs, shorter than a visitor will wait. */
 const FETCH_TIMEOUT_MS = 8_000;

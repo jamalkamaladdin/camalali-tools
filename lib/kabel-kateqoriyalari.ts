@@ -22,7 +22,7 @@
  * leads, PoE's wattage at the switch versus the smaller wattage that
  * actually reaches the device.
  */
-import type { ReferenceRow, ReferenceSection } from "./reference";
+import type { ReferenceRow, ReferenceSection } from "./reference.js";
 
 export const kabelKateqoriyalariSections: ReferenceSection[] = [
   { id: "mis", label: "Mis kabel (twisted pair)" },

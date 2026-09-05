@@ -1,30 +1,744 @@
 {
-  "name": "camalali-tools",
+  "name": "zero-dep-devtools",
   "version": "1.0.0",
-  "private": false,
   "license": "MIT",
   "type": "module",
-  "description": "166 small developer tools generated from camalali.com: JWT decoder, cron parser, regex tester, Base64, hash, UUID, JSON formatter, DNS lookup, SSL checker, CIDR calculator, colour converter, QR code and more.",
-  "scripts": {
-    "test": "tsx tests/run.mts"
+  "description": "166 developer tools as one dependency free TypeScript library: JWT decoder, cron parser, regex tester, Base64, hash, UUID, JSON formatter, DNS lookup, SSL checker, CIDR calculator, colour converter, QR code and more.",
+  "keywords": [
+    "devtools",
+    "developer-tools",
+    "zero-dependency",
+    "typescript",
+    "jwt",
+    "cron",
+    "regex",
+    "base64",
+    "uuid",
+    "hash",
+    "json",
+    "yaml",
+    "csv",
+    "dns",
+    "cidr",
+    "color",
+    "qrcode",
+    "slug",
+    "utilities",
+    "browser"
+  ],
+  "homepage": "https://camalali.com/alet",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamalkamaladdin/camalali-tools.git"
   },
-  "dependencies": {
+  "bugs": {
+    "url": "https://github.com/jamalkamaladdin/camalali-tools/issues"
+  },
+  "author": "Jamal Kamaladdin",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./acar-soz-qruplasdirma": {
+      "types": "./dist/lib/acar-soz-qruplasdirma.d.ts",
+      "import": "./dist/lib/acar-soz-qruplasdirma.js"
+    },
+    "./acar-soz-sixligi": {
+      "types": "./dist/lib/acar-soz-sixligi.d.ts",
+      "import": "./dist/lib/acar-soz-sixligi.js"
+    },
+    "./ad-formati": {
+      "types": "./dist/lib/ad-formati.d.ts",
+      "import": "./dist/lib/ad-formati.js"
+    },
+    "./animasiya": {
+      "types": "./dist/lib/animasiya.d.ts",
+      "import": "./dist/lib/animasiya.js"
+    },
+    "./arxitektura": {
+      "types": "./dist/lib/arxitektura.d.ts",
+      "import": "./dist/lib/arxitektura.js"
+    },
+    "./asanliq": {
+      "types": "./dist/lib/asanliq.d.ts",
+      "import": "./dist/lib/asanliq.js"
+    },
+    "./ascii-unicode": {
+      "types": "./dist/lib/ascii-unicode.d.ts",
+      "import": "./dist/lib/ascii-unicode.js"
+    },
+    "./bant-genisliyi": {
+      "types": "./dist/lib/bant-genisliyi.d.ts",
+      "import": "./dist/lib/bant-genisliyi.js"
+    },
+    "./base64": {
+      "types": "./dist/lib/base64.d.ts",
+      "import": "./dist/lib/base64.js"
+    },
+    "./base64-fayl": {
+      "types": "./dist/lib/base64-fayl.d.ts",
+      "import": "./dist/lib/base64-fayl.js"
+    },
+    "./basic-auth": {
+      "types": "./dist/lib/basic-auth.d.ts",
+      "import": "./dist/lib/basic-auth.js"
+    },
+    "./basliq-strukturu": {
+      "types": "./dist/lib/basliq-strukturu.d.ts",
+      "import": "./dist/lib/basliq-strukturu.js"
+    },
+    "./basliqlar": {
+      "types": "./dist/lib/basliqlar.d.ts",
+      "import": "./dist/lib/basliqlar.js"
+    },
+    "./bcrypt": {
+      "types": "./dist/lib/bcrypt.d.ts",
+      "import": "./dist/lib/bcrypt.js"
+    },
+    "./cap-secimi": {
+      "types": "./dist/lib/cap-secimi.d.ts",
+      "import": "./dist/lib/cap-secimi.js"
+    },
+    "./cavab-vaxti": {
+      "types": "./dist/lib/cavab-vaxti.d.ts",
+      "import": "./dist/lib/cavab-vaxti.js"
+    },
+    "./cedvel": {
+      "types": "./dist/lib/cedvel.d.ts",
+      "import": "./dist/lib/cedvel.js"
+    },
+    "./chmod": {
+      "types": "./dist/lib/chmod.d.ts",
+      "import": "./dist/lib/chmod.js"
+    },
+    "./cidr-birlesdirme": {
+      "types": "./dist/lib/cidr-birlesdirme.d.ts",
+      "import": "./dist/lib/cidr-birlesdirme.js"
+    },
+    "./cors-yoxlama": {
+      "types": "./dist/lib/cors-yoxlama.d.ts",
+      "import": "./dist/lib/cors-yoxlama.js"
+    },
+    "./crates": {
+      "types": "./dist/lib/crates.d.ts",
+      "import": "./dist/lib/crates.js"
+    },
+    "./cron": {
+      "types": "./dist/lib/cron.d.ts",
+      "import": "./dist/lib/cron.js"
+    },
+    "./csp-qurucu": {
+      "types": "./dist/lib/csp-qurucu.d.ts",
+      "import": "./dist/lib/csp-qurucu.js"
+    },
+    "./css-sixisdirici": {
+      "types": "./dist/lib/css-sixisdirici.d.ts",
+      "import": "./dist/lib/css-sixisdirici.js"
+    },
+    "./csv": {
+      "types": "./dist/lib/csv.d.ts",
+      "import": "./dist/lib/csv.js"
+    },
+    "./curl-kod": {
+      "types": "./dist/lib/curl-kod.d.ts",
+      "import": "./dist/lib/curl-kod.js"
+    },
+    "./dmarc-oxucu": {
+      "types": "./dist/lib/dmarc-oxucu.d.ts",
+      "import": "./dist/lib/dmarc-oxucu.js"
+    },
+    "./dns": {
+      "types": "./dist/lib/dns.d.ts",
+      "import": "./dist/lib/dns.js"
+    },
+    "./dns-propaqasiya": {
+      "types": "./dist/lib/dns-propaqasiya.d.ts",
+      "import": "./dist/lib/dns-propaqasiya.js"
+    },
+    "./dns-qeyd-tipleri": {
+      "types": "./dist/lib/dns-qeyd-tipleri.d.ts",
+      "import": "./dist/lib/dns-qeyd-tipleri.js"
+    },
+    "./dnssec": {
+      "types": "./dist/lib/dnssec.d.ts",
+      "import": "./dist/lib/dnssec.js"
+    },
+    "./docker-emrleri": {
+      "types": "./dist/lib/docker-emrleri.d.ts",
+      "import": "./dist/lib/docker-emrleri.js"
+    },
+    "./docker-hub": {
+      "types": "./dist/lib/docker-hub.d.ts",
+      "import": "./dist/lib/docker-hub.js"
+    },
+    "./elcatanliq": {
+      "types": "./dist/lib/elcatanliq.d.ts",
+      "import": "./dist/lib/elcatanliq.js"
+    },
+    "./env": {
+      "types": "./dist/lib/env.d.ts",
+      "import": "./dist/lib/env.js"
+    },
+    "./escape": {
+      "types": "./dist/lib/escape.d.ts",
+      "import": "./dist/lib/escape.js"
+    },
+    "./exif": {
+      "types": "./dist/lib/exif.d.ts",
+      "import": "./dist/lib/exif.js"
+    },
+    "./favicon": {
+      "types": "./dist/lib/favicon.d.ts",
+      "import": "./dist/lib/favicon.js"
+    },
+    "./ferq": {
+      "types": "./dist/lib/ferq.d.ts",
+      "import": "./dist/lib/ferq.js"
+    },
+    "./flex-grid": {
+      "types": "./dist/lib/flex-grid.d.ts",
+      "import": "./dist/lib/flex-grid.js"
+    },
+    "./gecikme": {
+      "types": "./dist/lib/gecikme.d.ts",
+      "import": "./dist/lib/gecikme.js"
+    },
+    "./git-emrleri": {
+      "types": "./dist/lib/git-emrleri.d.ts",
+      "import": "./dist/lib/git-emrleri.js"
+    },
+    "./github": {
+      "types": "./dist/lib/github.d.ts",
+      "import": "./dist/lib/github.js"
+    },
+    "./go-modul": {
+      "types": "./dist/lib/go-modul.d.ts",
+      "import": "./dist/lib/go-modul.js"
+    },
+    "./hash": {
+      "types": "./dist/lib/hash.d.ts",
+      "import": "./dist/lib/hash.js"
+    },
+    "./herf-registri": {
+      "types": "./dist/lib/herf-registri.d.ts",
+      "import": "./dist/lib/herf-registri.js"
+    },
+    "./hmac": {
+      "types": "./dist/lib/hmac.d.ts",
+      "import": "./dist/lib/hmac.js"
+    },
+    "./hosting-tespiti": {
+      "types": "./dist/lib/hosting-tespiti.d.ts",
+      "import": "./dist/lib/hosting-tespiti.js"
+    },
+    "./hreflang": {
+      "types": "./dist/lib/hreflang.d.ts",
+      "import": "./dist/lib/hreflang.js"
+    },
+    "./hsts": {
+      "types": "./dist/lib/hsts.d.ts",
+      "import": "./dist/lib/hsts.js"
+    },
+    "./html-sixisdirici": {
+      "types": "./dist/lib/html-sixisdirici.d.ts",
+      "import": "./dist/lib/html-sixisdirici.js"
+    },
+    "./http-basliqlari": {
+      "types": "./dist/lib/http-basliqlari.d.ts",
+      "import": "./dist/lib/http-basliqlari.js"
+    },
+    "./ip": {
+      "types": "./dist/lib/ip.d.ts",
+      "import": "./dist/lib/ip.js"
+    },
+    "./ipv6": {
+      "types": "./dist/lib/ipv6.d.ts",
+      "import": "./dist/lib/ipv6.js"
+    },
+    "./js-sixisdirici": {
+      "types": "./dist/lib/js-sixisdirici.d.ts",
+      "import": "./dist/lib/js-sixisdirici.js"
+    },
+    "./json": {
+      "types": "./dist/lib/json.d.ts",
+      "import": "./dist/lib/json.js"
+    },
+    "./json-csv": {
+      "types": "./dist/lib/json-csv.d.ts",
+      "import": "./dist/lib/json-csv.js"
+    },
+    "./json-ferq": {
+      "types": "./dist/lib/json-ferq.d.ts",
+      "import": "./dist/lib/json-ferq.js"
+    },
+    "./json-tip": {
+      "types": "./dist/lib/json-tip.d.ts",
+      "import": "./dist/lib/json-tip.js"
+    },
+    "./json-toml": {
+      "types": "./dist/lib/json-toml.d.ts",
+      "import": "./dist/lib/json-toml.js"
+    },
+    "./json-xml": {
+      "types": "./dist/lib/json-xml.d.ts",
+      "import": "./dist/lib/json-xml.js"
+    },
+    "./jwt": {
+      "types": "./dist/lib/jwt.d.ts",
+      "import": "./dist/lib/jwt.js"
+    },
+    "./jwt-imza": {
+      "types": "./dist/lib/jwt-imza.d.ts",
+      "import": "./dist/lib/jwt-imza.js"
+    },
+    "./kabel-kateqoriyalari": {
+      "types": "./dist/lib/kabel-kateqoriyalari.d.ts",
+      "import": "./dist/lib/kabel-kateqoriyalari.js"
+    },
+    "./kanonik": {
+      "types": "./dist/lib/kanonik.d.ts",
+      "import": "./dist/lib/kanonik.js"
+    },
+    "./kesh": {
+      "types": "./dist/lib/kesh.d.ts",
+      "import": "./dist/lib/kesh.js"
+    },
+    "./kesh-basliqlari": {
+      "types": "./dist/lib/kesh-basliqlari.d.ts",
+      "import": "./dist/lib/kesh-basliqlari.js"
+    },
+    "./kesim": {
+      "types": "./dist/lib/kesim.d.ts",
+      "import": "./dist/lib/kesim.js"
+    },
+    "./kod-sekil": {
+      "types": "./dist/lib/kod-sekil.d.ts",
+      "import": "./dist/lib/kod-sekil.js"
+    },
+    "./kolge": {
+      "types": "./dist/lib/kolge.d.ts",
+      "import": "./dist/lib/kolge.js"
+    },
+    "./kolge-qati": {
+      "types": "./dist/lib/kolge-qati.d.ts",
+      "import": "./dist/lib/kolge-qati.js"
+    },
+    "./kunc": {
+      "types": "./dist/lib/kunc.d.ts",
+      "import": "./dist/lib/kunc.js"
+    },
+    "./link-analizi": {
+      "types": "./dist/lib/link-analizi.d.ts",
+      "import": "./dist/lib/link-analizi.js"
+    },
+    "./linux-emrleri": {
+      "types": "./dist/lib/linux-emrleri.d.ts",
+      "import": "./dist/lib/linux-emrleri.js"
+    },
+    "./llms-txt": {
+      "types": "./dist/lib/llms-txt.d.ts",
+      "import": "./dist/lib/llms-txt.js"
+    },
+    "./log-budcesi": {
+      "types": "./dist/lib/log-budcesi.d.ts",
+      "import": "./dist/lib/log-budcesi.js"
+    },
+    "./mail-basliq-analizi": {
+      "types": "./dist/lib/mail-basliq-analizi.d.ts",
+      "import": "./dist/lib/mail-basliq-analizi.js"
+    },
+    "./mail-qeydleri": {
+      "types": "./dist/lib/mail-qeydleri.d.ts",
+      "import": "./dist/lib/mail-qeydleri.js"
+    },
+    "./markdown": {
+      "types": "./dist/lib/markdown.d.ts",
+      "import": "./dist/lib/markdown.js"
+    },
+    "./menim-ip": {
+      "types": "./dist/lib/menim-ip.d.ts",
+      "import": "./dist/lib/menim-ip.js"
+    },
+    "./meta": {
+      "types": "./dist/lib/meta.d.ts",
+      "import": "./dist/lib/meta.js"
+    },
+    "./metn-statistikasi": {
+      "types": "./dist/lib/metn-statistikasi.d.ts",
+      "import": "./dist/lib/metn-statistikasi.js"
+    },
+    "./metn-temizleyici": {
+      "types": "./dist/lib/metn-temizleyici.d.ts",
+      "import": "./dist/lib/metn-temizleyici.js"
+    },
+    "./mime": {
+      "types": "./dist/lib/mime.d.ts",
+      "import": "./dist/lib/mime.js"
+    },
+    "./miqyas": {
+      "types": "./dist/lib/miqyas.d.ts",
+      "import": "./dist/lib/miqyas.js"
+    },
+    "./naxis": {
+      "types": "./dist/lib/naxis.d.ts",
+      "import": "./dist/lib/naxis.js"
+    },
+    "./novbe": {
+      "types": "./dist/lib/novbe.d.ts",
+      "import": "./dist/lib/novbe.js"
+    },
+    "./npm": {
+      "types": "./dist/lib/npm.d.ts",
+      "import": "./dist/lib/npm.js"
+    },
+    "./numune-metn": {
+      "types": "./dist/lib/numune-metn.d.ts",
+      "import": "./dist/lib/numune-metn.js"
+    },
+    "./og-onizleme": {
+      "types": "./dist/lib/og-onizleme.d.ts",
+      "import": "./dist/lib/og-onizleme.js"
+    },
+    "./og-sekil": {
+      "types": "./dist/lib/og-sekil.d.ts",
+      "import": "./dist/lib/og-sekil.js"
+    },
+    "./olcu-vahidleri": {
+      "types": "./dist/lib/olcu-vahidleri.d.ts",
+      "import": "./dist/lib/olcu-vahidleri.js"
+    },
+    "./oxunaqliq": {
+      "types": "./dist/lib/oxunaqliq.d.ts",
+      "import": "./dist/lib/oxunaqliq.js"
+    },
+    "./packagist": {
+      "types": "./dist/lib/packagist.d.ts",
+      "import": "./dist/lib/packagist.js"
+    },
+    "./palitra": {
+      "types": "./dist/lib/palitra.d.ts",
+      "import": "./dist/lib/palitra.js"
+    },
+    "./parol": {
+      "types": "./dist/lib/parol.d.ts",
+      "import": "./dist/lib/parol.js"
+    },
+    "./parol-sizmasi": {
+      "types": "./dist/lib/parol-sizmasi.d.ts",
+      "import": "./dist/lib/parol-sizmasi.js"
+    },
+    "./pdf-birlesdir": {
+      "types": "./dist/lib/pdf-birlesdir.d.ts",
+      "import": "./dist/lib/pdf-birlesdir.js"
+    },
+    "./pdf-bol": {
+      "types": "./dist/lib/pdf-bol.d.ts",
+      "import": "./dist/lib/pdf-bol.js"
+    },
+    "./pdf-nisan": {
+      "types": "./dist/lib/pdf-nisan.d.ts",
+      "import": "./dist/lib/pdf-nisan.js"
+    },
+    "./pdf-sehife": {
+      "types": "./dist/lib/pdf-sehife.d.ts",
+      "import": "./dist/lib/pdf-sehife.js"
+    },
+    "./portlar": {
+      "types": "./dist/lib/portlar.d.ts",
+      "import": "./dist/lib/portlar.js"
+    },
+    "./ptr": {
+      "types": "./dist/lib/ptr.d.ts",
+      "import": "./dist/lib/ptr.js"
+    },
+    "./pypi": {
+      "types": "./dist/lib/pypi.d.ts",
+      "import": "./dist/lib/pypi.js"
+    },
+    "./qarisiq-mezmun": {
+      "types": "./dist/lib/qarisiq-mezmun.d.ts",
+      "import": "./dist/lib/qarisiq-mezmun.js"
+    },
+    "./qiymetlendirici": {
+      "types": "./dist/lib/estimate.d.ts",
+      "import": "./dist/lib/estimate.js"
+    },
+    "./qr": {
+      "types": "./dist/lib/qr.d.ts",
+      "import": "./dist/lib/qr.js"
+    },
+    "./qr-oxuyucu": {
+      "types": "./dist/lib/qr-oxuyucu.d.ts",
+      "import": "./dist/lib/qr-oxuyucu.js"
+    },
+    "./qradient": {
+      "types": "./dist/lib/qradient.d.ts",
+      "import": "./dist/lib/qradient.js"
+    },
+    "./rate-limit": {
+      "types": "./dist/lib/rate-limit.d.ts",
+      "import": "./dist/lib/rate-limit.js"
+    },
+    "./regex": {
+      "types": "./dist/lib/regex.d.ts",
+      "import": "./dist/lib/regex.js"
+    },
+    "./regex-izahci": {
+      "types": "./dist/lib/regex-izahci.d.ts",
+      "import": "./dist/lib/regex-izahci.js"
+    },
+    "./regex-spar": {
+      "types": "./dist/lib/regex-spar.d.ts",
+      "import": "./dist/lib/regex-spar.js"
+    },
+    "./reng": {
+      "types": "./dist/lib/reng.d.ts",
+      "import": "./dist/lib/reng.js"
+    },
+    "./robots": {
+      "types": "./dist/lib/robots.d.ts",
+      "import": "./dist/lib/robots.js"
+    },
+    "./robots-canli": {
+      "types": "./dist/lib/robots-canli.d.ts",
+      "import": "./dist/lib/robots-canli.js"
+    },
+    "./rsa": {
+      "types": "./dist/lib/rsa.d.ts",
+      "import": "./dist/lib/rsa.js"
+    },
+    "./say-sistemi": {
+      "types": "./dist/lib/say-sistemi.d.ts",
+      "import": "./dist/lib/say-sistemi.js"
+    },
+    "./schema": {
+      "types": "./dist/lib/schema.d.ts",
+      "import": "./dist/lib/schema.js"
+    },
+    "./security-txt": {
+      "types": "./dist/lib/security-txt.d.ts",
+      "import": "./dist/lib/security-txt.js"
+    },
+    "./sekil": {
+      "types": "./dist/lib/sekil.d.ts",
+      "import": "./dist/lib/sekil.js"
+    },
+    "./sekil-pdf": {
+      "types": "./dist/lib/sekil-pdf.d.ts",
+      "import": "./dist/lib/sekil-pdf.js"
+    },
+    "./sekil-reng": {
+      "types": "./dist/lib/sekil-reng.d.ts",
+      "import": "./dist/lib/sekil-reng.js"
+    },
+    "./serp-onizleme": {
+      "types": "./dist/lib/serp-onizleme.d.ts",
+      "import": "./dist/lib/serp-onizleme.js"
+    },
+    "./shard": {
+      "types": "./dist/lib/shard.d.ts",
+      "import": "./dist/lib/shard.js"
+    },
+    "./sifreleme": {
+      "types": "./dist/lib/sifreleme.d.ts",
+      "import": "./dist/lib/sifreleme.js"
+    },
+    "./sise": {
+      "types": "./dist/lib/sise.d.ts",
+      "import": "./dist/lib/sise.js"
+    },
+    "./sitemap-qurucu": {
+      "types": "./dist/lib/sitemap-qurucu.d.ts",
+      "import": "./dist/lib/sitemap-qurucu.js"
+    },
+    "./sitemap-yoxlayici": {
+      "types": "./dist/lib/sitemap-yoxlayici.d.ts",
+      "import": "./dist/lib/sitemap-yoxlayici.js"
+    },
+    "./sixilma": {
+      "types": "./dist/lib/sixilma.d.ts",
+      "import": "./dist/lib/sixilma.js"
+    },
+    "./siyahi": {
+      "types": "./dist/lib/siyahi.d.ts",
+      "import": "./dist/lib/siyahi.js"
+    },
+    "./slug": {
+      "types": "./dist/lib/slug.d.ts",
+      "import": "./dist/lib/slug.js"
+    },
+    "./spf-yoxlayici": {
+      "types": "./dist/lib/spf-yoxlayici.d.ts",
+      "import": "./dist/lib/spf-yoxlayici.js"
+    },
+    "./sql": {
+      "types": "./dist/lib/sql.d.ts",
+      "import": "./dist/lib/sql.js"
+    },
+    "./ssh-parmaq-izi": {
+      "types": "./dist/lib/ssh-parmaq-izi.d.ts",
+      "import": "./dist/lib/ssh-parmaq-izi.js"
+    },
+    "./ssl": {
+      "types": "./dist/lib/ssl.d.ts",
+      "import": "./dist/lib/ssl.js"
+    },
+    "./status-kodlari": {
+      "types": "./dist/lib/status-kodlari.d.ts",
+      "import": "./dist/lib/status-kodlari.js"
+    },
+    "./subdomen": {
+      "types": "./dist/lib/subdomen.d.ts",
+      "import": "./dist/lib/subdomen.js"
+    },
+    "./subnet": {
+      "types": "./dist/lib/subnet.d.ts",
+      "import": "./dist/lib/subnet.js"
+    },
+    "./subnet-cedveli": {
+      "types": "./dist/lib/subnet-cedveli.d.ts",
+      "import": "./dist/lib/subnet-cedveli.js"
+    },
+    "./subnet-planlayici": {
+      "types": "./dist/lib/subnet-planlayici.d.ts",
+      "import": "./dist/lib/subnet-planlayici.js"
+    },
+    "./svg-optimallasdirici": {
+      "types": "./dist/lib/svg-optimallasdirici.d.ts",
+      "import": "./dist/lib/svg-optimallasdirici.js"
+    },
+    "./svg-png": {
+      "types": "./dist/lib/svg-png.d.ts",
+      "import": "./dist/lib/svg-png.js"
+    },
+    "./test-verilenleri": {
+      "types": "./dist/lib/test-verilenleri.d.ts",
+      "import": "./dist/lib/test-verilenleri.js"
+    },
+    "./tipoqrafiya": {
+      "types": "./dist/lib/tipoqrafiya.d.ts",
+      "import": "./dist/lib/tipoqrafiya.js"
+    },
+    "./tls-versiyalari": {
+      "types": "./dist/lib/tls-versiyalari.d.ts",
+      "import": "./dist/lib/tls-versiyalari.js"
+    },
+    "./toplu-meta": {
+      "types": "./dist/lib/toplu-meta.d.ts",
+      "import": "./dist/lib/toplu-meta.js"
+    },
+    "./totp": {
+      "types": "./dist/lib/totp.d.ts",
+      "import": "./dist/lib/totp.js"
+    },
+    "./ucbucaq": {
+      "types": "./dist/lib/ucbucaq.d.ts",
+      "import": "./dist/lib/ucbucaq.js"
+    },
+    "./unicode": {
+      "types": "./dist/lib/unicode.d.ts",
+      "import": "./dist/lib/unicode.js"
+    },
+    "./url": {
+      "types": "./dist/lib/url.d.ts",
+      "import": "./dist/lib/url.js"
+    },
+    "./utm": {
+      "types": "./dist/lib/utm.d.ts",
+      "import": "./dist/lib/utm.js"
+    },
+    "./uuid": {
+      "types": "./dist/lib/uuid.d.ts",
+      "import": "./dist/lib/uuid.js"
+    },
+    "./valyuta": {
+      "types": "./dist/lib/valyuta.d.ts",
+      "import": "./dist/lib/valyuta.js"
+    },
+    "./vaxt": {
+      "types": "./dist/lib/vaxt.d.ts",
+      "import": "./dist/lib/vaxt.js"
+    },
+    "./whois": {
+      "types": "./dist/lib/whois.d.ts",
+      "import": "./dist/lib/whois.js"
+    },
+    "./wifi-standartlari": {
+      "types": "./dist/lib/wifi-standartlari.d.ts",
+      "import": "./dist/lib/wifi-standartlari.js"
+    },
+    "./wildcard-maska": {
+      "types": "./dist/lib/wildcard-maska.d.ts",
+      "import": "./dist/lib/wildcard-maska.js"
+    },
+    "./xml": {
+      "types": "./dist/lib/xml.d.ts",
+      "import": "./dist/lib/xml.js"
+    },
+    "./yaml": {
+      "types": "./dist/lib/yaml.d.ts",
+      "import": "./dist/lib/yaml.js"
+    },
+    "./yonlendirme": {
+      "types": "./dist/lib/yonlendirme.d.ts",
+      "import": "./dist/lib/yonlendirme.js"
+    },
+    "./yonlendirme-zenciri": {
+      "types": "./dist/lib/yonlendirme-zenciri.d.ts",
+      "import": "./dist/lib/yonlendirme-zenciri.js"
+    },
+    "./yuklenme": {
+      "types": "./dist/lib/yuklenme.d.ts",
+      "import": "./dist/lib/yuklenme.js"
+    },
+    "./zone-fayl": {
+      "types": "./dist/lib/zone-fayl.d.ts",
+      "import": "./dist/lib/zone-fayl.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "tsx tests/run.mts",
+    "prepublishOnly": "npm run test && npm run build"
+  },
+  "peerDependencies": {
     "pdf-lib": "^1.17.1",
     "@pdf-lib/fontkit": "^1.1.1",
     "shiki": "^4.4.3"
   },
-  "peerDependencies": {
-    "react": "19.2.8",
-    "next": "16.3.3"
-  },
   "peerDependenciesMeta": {
-    "next": {
+    "pdf-lib": {
+      "optional": true
+    },
+    "@pdf-lib/fontkit": {
+      "optional": true
+    },
+    "shiki": {
       "optional": true
     }
   },
   "devDependencies": {
+    "@pdf-lib/fontkit": "^1.1.1",
     "@types/node": "^20",
     "@types/react": "^19",
+    "next": "16.3.3",
+    "pdf-lib": "^1.17.1",
+    "react": "19.2.8",
+    "shiki": "^4.4.3",
     "tailwindcss": "^4",
     "tsx": "^4.23.12",
     "typescript": "^5"

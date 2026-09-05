@@ -3,7 +3,7 @@ import { Resolver } from "node:dns/promises";
 import { fail, guard, ok } from "../../lib/api-route";
 import { cached } from "../../lib/api-cache";
 import { dnsErrorMessage } from "../../lib/dns";
-import { checkHostname, resolveHost } from "../../lib/socket-probe";
+import { checkHostname, oneAddressPerFamily, probeAcrossFamilies, resolveHost } from "../../lib/socket-probe";
 import {
   formatMxAnswer,
   isRecordType,
@@ -186,6 +186,15 @@ async function queryCachingResolvers(domain: string, type: RecordType): Promise<
  * other network tool on this site uses before opening a socket to an address
  * a stranger's DNS pointed at, so an NS record aimed at an internal address
  * is refused here exactly as it would be anywhere else.
+ *
+ * A nameserver with both an A and an AAAA record is queried through
+ * `probeAcrossFamilies` rather than on its first address alone. The first
+ * address is the IPv6 one on every dual-stack nameserver, and a dead IPv6
+ * route made this row report a healthy authoritative server as a timeout,
+ * which reads on the page as "the zone is not propagating" — a false alarm
+ * about somebody else's DNS. When neither family answers, the first address's
+ * own outcome is what the row shows, because that is the query a client would
+ * have made.
  */
 async function queryAuthoritativeResolvers(domain: string, type: RecordType): Promise<ResolverResult[]> {
   const bootstrap = new Resolver({ timeout: QUERY_TIMEOUT_MS, tries: 1 });
@@ -215,9 +224,48 @@ async function queryAuthoritativeResolvers(domain: string, type: RecordType): Pr
           message: resolved.message,
         };
       }
-      const address = resolved.primary.address;
-      const { outcome, ms } = await queryOne(address, domain, type);
-      return { id: `ns:${nsHost}`, label: nsHost, address, kind: "authoritative", ms, ...outcome };
+
+      /* Every address that was actually queried, so the row can still show the
+         real outcome when the race ends with nothing. `probeAcrossFamilies`
+         only reports a failure once every attempt it started has settled, so
+         by then this map holds them all. */
+      const tried = new Map<string, { outcome: QueryOutcome; ms: number }>();
+      const reached = await probeAcrossFamilies(resolved.addresses, async ({ address }) => {
+        const attempt = await queryOne(address, domain, type);
+        tried.set(address, attempt);
+        return attempt.outcome.status === "ok"
+          ? ({ ok: true, address } as const)
+          : ({
+              ok: false,
+              message: attempt.outcome.message ?? `«${nsHost}» bu ünvanda sorğuya cavab vermədi.`,
+              status: 502,
+            } as const);
+      });
+
+      const address = reached.ok ? reached.address : (oneAddressPerFamily(resolved.addresses)[0]?.address ?? "");
+      const attempt = tried.get(address);
+      if (attempt === undefined) {
+        return {
+          id: `ns:${nsHost}`,
+          label: nsHost,
+          address,
+          kind: "authoritative",
+          status: "error",
+          answers: [],
+          ttlSeconds: null,
+          ms: null,
+          message: reached.ok ? "Gözlənilməz xəta baş verdi." : reached.message,
+        };
+      }
+
+      return {
+        id: `ns:${nsHost}`,
+        label: nsHost,
+        address,
+        kind: "authoritative",
+        ms: attempt.ms,
+        ...attempt.outcome,
+      };
     }),
   );
 

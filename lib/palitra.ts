@@ -28,7 +28,7 @@ import {
   oklchToRgb,
   rgbToOklch,
   type Rgba,
-} from "./reng";
+} from "./reng.js";
 
 export type PaletteStepName =
   | "50"

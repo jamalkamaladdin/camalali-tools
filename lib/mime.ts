@@ -13,7 +13,7 @@
  * documents, images, audio and video, archives, fonts, and everything else
  * that moves data between programs rather than being opened by a person.
  */
-import type { ReferenceRow, ReferenceSection } from "./reference";
+import type { ReferenceRow, ReferenceSection } from "./reference.js";
 
 export const mimeSections: ReferenceSection[] = [
   { id: "metn", label: "Mətn və sənəd" },

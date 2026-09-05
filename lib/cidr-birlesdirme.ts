@@ -23,7 +23,7 @@
  * is the entire reason it is used here instead of the bitwise operator every
  * other 32-bit helper in this file relies on.
  */
-import { parseIpv4 } from "./safe-url";
+import { parseIpv4 } from "./safe-url.js";
 
 export const IPV4_PREFIX_MAX = 32;
 

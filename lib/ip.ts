@@ -16,8 +16,8 @@
  * domain apart from an address before the route decides whether it needs a
  * DNS resolution step at all.
  */
-import type { CymruOrigin, RdapInfo } from "./menim-ip";
-import { parseIpv4, parseIpv6 } from "./safe-url";
+import type { CymruOrigin, RdapInfo } from "./menim-ip.js";
+import { parseIpv4, parseIpv6 } from "./safe-url.js";
 
 /* ---------- address classification ---------- */
 

@@ -7,9 +7,9 @@
  * ship all sixty-three entries to the browser to print one heading. The
  * registry re-exports everything here, so no call site had to change.
  */
-import type { ToolGroup } from "./types";
+import type { ToolGroup } from "./types.js";
 
-export type { ToolGroup } from "./types";
+export type { ToolGroup } from "./types.js";
 
 export const groupLabels: Record<ToolGroup, string> = {
   biznes: "Biznes və sənəd",

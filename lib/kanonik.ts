@@ -12,7 +12,7 @@
  * regular expression, keeping every raw piece exactly as typed, and applies
  * each rule as an independent, skippable step over that decomposition.
  */
-import { escapeHtmlAttribute } from "./meta";
+import { escapeHtmlAttribute } from "./meta.js";
 
 export type CanonRule =
   | "scheme"

@@ -6,7 +6,7 @@
  * Pure functions over the tolerant scanner in `html.ts` — no DOM, so the same
  * code runs in the browser widget without a server round trip.
  */
-import { attr, collectTags, stripTags, type HtmlTag } from "./html";
+import { attr, collectTags, stripTags, type HtmlTag } from "./html.js";
 
 export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
